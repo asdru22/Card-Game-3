@@ -112,4 +112,13 @@
     <string name="ui_casual_game">Casual Game</string>
     <string name="ui_strategic_game">Strategic Game</string>
     <string name="ui_choose_card">CHOOSE YOUR CARD</string>
+    <string name="entity_cannoneer">Cannoneer</string>
+    <string name="ability_scattershot">Scattershot</string>
+    <string name="ability_scattershot_desc">Blast the target for %s%% damage and hit all other enemies for %s%% damage</string>
+    <string name="effect_bursting">Bursting</string>
+    <string name="effect_bursting_desc">When you take damage, deal %s damage to all enemies and remove this effect</string>
+    <string name="ability_prime">Prime</string>
+    <string name="ability_prime_desc">Apply %s to the target for %s turns</string>
+    <string name="ability_carpet_bomb">Carpet Bomb</string>
+    <string name="ability_carpet_bomb_desc">Fire %s shots, each targeting a random enemy for %s damage</string>
 </resources>

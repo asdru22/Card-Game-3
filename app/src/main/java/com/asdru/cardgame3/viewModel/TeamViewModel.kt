@@ -30,7 +30,7 @@ class TeamViewModel(
   val maxRage = 100f
 
   fun increaseRage(amount: Float) {
-    rage = (rage + amount).coerceAtMost(maxRage)
+    rage = (rage + 100).coerceAtMost(maxRage)
   }
 
   fun getAllTeamMembers(): List<EntityViewModel> {
@@ -39,6 +39,10 @@ class TeamViewModel(
 
   fun getAliveTeamMembers(): List<EntityViewModel> {
     return getAllTeamMembers().filter { it.isAlive }
+  }
+
+  fun getOtherAliveTeamMembers(entity: EntityViewModel): List<EntityViewModel> {
+    return getAliveTeamMembers().filter { it != entity }
   }
 
   fun getRandomAliveMember(): EntityViewModel {

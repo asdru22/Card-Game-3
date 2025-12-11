@@ -108,7 +108,16 @@
     <string name="ui_how_to_play">Come giocare</string>
     <string name="ui_how_to_play_desc">In questo gioco di combattimento a turni, il primo turno viene deciso casualmente. Durante il tuo turno, le carte possono usare abilità.  Le abilità attive si usano trascinando una carta verso un bersaglio nemico. Le abilità passive si usano trascinando una carta verso un alleato.  Per usare una passiva sulla carta stessa, trascinala verso l\'esterno e poi riportala indietro.  Dopo che tutte le tue carte hanno eseguito una di queste abilità, il tuo turno finisce e inizia quello dell\'altro giocatore. La barra della Rabbia si riempie gradualmente a ogni turno. Quando è piena, apparirà l\'icona di una fiamma. Trascina la fiamma su una carta per usare la sua Abilità Suprema.  Il giocatore che elimina tutte le carte avversarie per primo vince.  Tieni premuto su una carta per vedere le sue info, inclusi salute, danni, abilità, tratti ed effetti attivi. I tratti sono abilità permanenti che influenzano il gioco. Gli effetti di stato possono essere benefici o dannosi e hanno una durata che diminuisce a ogni turno. Tocca il nome di un effetto nella scheda informativa per vedere esattamente cosa fa.</string>
     <string name="ui_main_menu">Card Game 3</string>
-    <string name="ui_casual_game">Partita Casual</string>
+    <string name="ui_casual_game">Partita Semplice</string>
     <string name="ui_strategic_game">Partita Strategica</string>
     <string name="ui_choose_card">SCEGLI LA TUA CARTA</string>
+    <string name="entity_cannoneer">Cannoniere</string>
+    <string name="ability_scattershot">Tiro a Dispersione</string>
+    <string name="ability_scattershot_desc">Colpisci il bersaglio per il %s%% dei danni e tutti gli altri nemici per il %s%% dei danni</string>
+    <string name="effect_bursting">Esplosione</string>
+    <string name="effect_bursting_desc">Quando subisci danni, infliggi %s danni a tutti i nemici e rimuovi questo effetto</string>
+    <string name="ability_prime">Innesco</string>
+    <string name="ability_prime_desc">Applica %s al bersaglio per %s turni</string>
+    <string name="ability_carpet_bomb">Bombardamento a Tappeto</string>
+    <string name="ability_carpet_bomb_desc">Spara %s colpi, ognuno mirato a un nemico casuale per %s danni</string>
 </resources>

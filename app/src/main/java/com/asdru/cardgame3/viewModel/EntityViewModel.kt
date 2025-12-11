@@ -50,6 +50,7 @@ class EntityViewModel(
   val iconRes: Int = entity.iconRes
   val traits: List<Trait> get() = entity.traits
 
+  var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
 
   fun recalculateStats() {
     var newDamage = baseDamage
@@ -145,7 +146,7 @@ class EntityViewModel(
     }
   }
 
-  var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
+  // Apply damage
 
   suspend fun applyDamage(
     target: EntityViewModel,
