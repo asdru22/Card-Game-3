@@ -1,15 +1,17 @@
-package com.asdru.cardgame3.view.characterSelection
+package com.asdru.cardgame3.view.mainMenu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
@@ -20,10 +22,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,43 +35,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.entity.Entity
-import kotlin.reflect.full.createInstance
+import com.asdru.cardgame3.view.characterSelection.HowToPlayOverlay
 
 @Composable
-fun CharacterSelectionScreen(
-  onStartGame: (String, List<Entity>, String, List<Entity>) -> Unit
+fun MainMenuScreen(
+  onCasualGame: (String, String) -> Unit,
+  onStrategicGame: () -> Unit
 ) {
   var player1Name by remember { mutableStateOf("Player 1") }
   var player2Name by remember { mutableStateOf("Player 2") }
-  var showRulesP1 by remember { mutableStateOf(false) }
-  var showRulesP2 by remember { mutableStateOf(false) }
+  var showRules by remember { mutableStateOf(false) }
 
-  val p1Team = remember { mutableStateListOf<Entity>() }
-  val p2Team = remember { mutableStateListOf<Entity>() }
-
-  val availableCharacters = remember {
-    Entity::class.sealedSubclasses.map { it.createInstance() }
-  }
-
-  Column(
+  Box(
     modifier = Modifier
       .fillMaxSize()
       .background(Color(0xFF121212))
-      .padding(16.dp)
   ) {
-    Row(
+    Column(
       modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 16.dp),
-      verticalAlignment = Alignment.CenterVertically,
-      horizontalArrangement = Arrangement.spacedBy(16.dp)
+        .fillMaxSize()
+        .padding(32.dp),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
     ) {
+      Text(
+        text = stringResource(R.string.ui_main_menu),
+        fontSize = 48.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+        modifier = Modifier.padding(bottom = 48.dp)
+      )
+
       Row(
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(bottom = 16.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth(0.7f),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
       ) {
         OutlinedTextField(
@@ -90,42 +86,6 @@ fun CharacterSelectionScreen(
           modifier = Modifier.weight(1f)
         )
 
-        IconButton(onClick = { showRulesP1 = true }) {
-          Icon(
-            imageVector = Icons.AutoMirrored.Filled.Help,
-            contentDescription = "How to play",
-            tint = Color.White
-          )
-        }
-
-        Button(
-          onClick = {
-            onStartGame(player1Name, p1Team.toList(), player2Name, p2Team.toList())
-          },
-          enabled = p1Team.size == 3 && p2Team.size == 3,
-          colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF4CAF50),
-            disabledContainerColor = Color.DarkGray
-          ),
-          shape = RoundedCornerShape(8.dp),
-          modifier = Modifier.height(56.dp)
-        ) {
-          Text(
-            text = stringResource(R.string.ui_start),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (p1Team.size == 3 && p2Team.size == 3) Color.White else Color.Gray
-          )
-        }
-
-        IconButton(onClick = { showRulesP2 = true }) {
-          Icon(
-            imageVector = Icons.AutoMirrored.Filled.Help,
-            contentDescription = "How to play",
-            tint = Color.White
-          )
-        }
-
         OutlinedTextField(
           value = player2Name,
           onValueChange = { player2Name = it },
@@ -142,39 +102,63 @@ fun CharacterSelectionScreen(
           modifier = Modifier.weight(1f)
         )
       }
-    }
 
-    Row(
-      modifier = Modifier.fillMaxSize(),
-      horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-      Box(modifier = Modifier.weight(1f)) {
-        PlayerGridSection(
-          team = p1Team,
-          available = availableCharacters,
-        )
-        HowToPlayOverlay(
-          visible = showRulesP1,
-          onClose = { showRulesP1 = false }
-        )
+      Spacer(modifier = Modifier.height(32.dp))
+
+      Row(
+        horizontalArrangement = Arrangement.spacedBy(24.dp)
+      ) {
+        Button(
+          onClick = { onCasualGame(player1Name, player2Name) },
+          colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
+          shape = RoundedCornerShape(8.dp),
+          modifier = Modifier
+            .height(60.dp)
+            .width(200.dp)
+        ) {
+          Text(
+            text = stringResource(R.string.ui_casual_game),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+          )
+        }
+
+        Button(
+          onClick = onStrategicGame,
+          colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5)),
+          shape = RoundedCornerShape(8.dp),
+          modifier = Modifier
+            .height(60.dp)
+            .width(200.dp)
+        ) {
+          Text(
+            text = stringResource(R.string.ui_strategic_game),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+          )
+        }
       }
 
-      VerticalDivider(
-        modifier = Modifier.fillMaxHeight(),
-        color = Color.Gray.copy(alpha = 0.3f),
-        thickness = 1.dp
-      )
+      Spacer(modifier = Modifier.height(24.dp))
 
-      Box(modifier = Modifier.weight(1f)) {
-        PlayerGridSection(
-          team = p2Team,
-          available = availableCharacters,
-        )
-        HowToPlayOverlay(
-          visible = showRulesP2,
-          onClose = { showRulesP2 = false }
+      IconButton(
+        onClick = { showRules = true },
+        modifier = Modifier.size(48.dp)
+      ) {
+        Icon(
+          imageVector = Icons.AutoMirrored.Filled.Help,
+          contentDescription = "How to play",
+          tint = Color.Gray,
+          modifier = Modifier.fillMaxSize()
         )
       }
     }
+
+    HowToPlayOverlay(
+      visible = showRules,
+      onClose = { showRules = false }
+    )
   }
 }
