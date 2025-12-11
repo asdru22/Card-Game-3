@@ -22,7 +22,7 @@ class Robot : Entity(
     descriptionRes = R.string.ability_shock_attack_desc,
     formatArgs = listOf(Electrified.Spec, ACTIVE_DURATION)
   ) { source, target ->
-    target.addEffect(Electrified(ACTIVE_DURATION, source), source)
+    source.applyDamage(target, effects = listOf(Electrified(ACTIVE_DURATION, source)))
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_overload,

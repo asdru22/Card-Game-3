@@ -40,9 +40,9 @@ class Archer : Entity(
     source.applyDamage(
       randomEnemy,
       repeats = ULTIMATE_REPEATS,
-      delayTime = 150L
+      delayTime = 150L,
+      effects = listOf(Burning(ULTIMATE_BURN_DURATION))
     )
-    randomEnemy.addEffect(Burning(ULTIMATE_BURN_DURATION), source)
   }
 ) {
   private companion object {

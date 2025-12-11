@@ -40,7 +40,7 @@ import com.asdru.cardgame3.view.characterSelection.HowToPlayOverlay
 @Composable
 fun MainMenuScreen(
   onCasualGame: (String, String) -> Unit,
-  onStrategicGame: () -> Unit
+  onStrategicGame: (String, String) -> Unit
 ) {
   var player1Name by remember { mutableStateOf("Player 1") }
   var player2Name by remember { mutableStateOf("Player 2") }
@@ -106,7 +106,8 @@ fun MainMenuScreen(
       Spacer(modifier = Modifier.height(32.dp))
 
       Row(
-        horizontalArrangement = Arrangement.spacedBy(24.dp)
+        modifier = Modifier.fillMaxWidth(0.7f),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
       ) {
         Button(
           onClick = { onCasualGame(player1Name, player2Name) },
@@ -114,7 +115,7 @@ fun MainMenuScreen(
           shape = RoundedCornerShape(8.dp),
           modifier = Modifier
             .height(60.dp)
-            .width(200.dp)
+            .weight(1f)
         ) {
           Text(
             text = stringResource(R.string.ui_casual_game),
@@ -125,12 +126,12 @@ fun MainMenuScreen(
         }
 
         Button(
-          onClick = onStrategicGame,
+          onClick = { onStrategicGame(player1Name, player2Name) },
           colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5)),
           shape = RoundedCornerShape(8.dp),
           modifier = Modifier
             .height(60.dp)
-            .width(200.dp)
+            .weight(1f)
         ) {
           Text(
             text = stringResource(R.string.ui_strategic_game),

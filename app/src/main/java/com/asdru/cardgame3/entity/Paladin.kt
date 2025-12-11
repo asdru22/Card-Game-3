@@ -25,8 +25,7 @@ class Paladin : Entity(
       ACTIVE_DURATION
     )
   ) { source, target ->
-    source.applyDamage(target)
-    target.addEffect(Taunt(ACTIVE_DURATION), source)
+    source.applyDamage(target, effects = listOf(Taunt(ACTIVE_DURATION)))
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_guard,

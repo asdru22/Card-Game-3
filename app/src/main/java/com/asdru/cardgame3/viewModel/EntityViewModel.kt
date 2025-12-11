@@ -166,7 +166,8 @@ class EntityViewModel(
     amount: Float = damage,
     repeats: Int = 1,
     delayTime: Long = 400,
-    playAttackAnimation: Boolean = true
+    playAttackAnimation: Boolean = true,
+    effects: List<StatusEffect> = emptyList()
   ): Float {
     var totalDamage = 0f
 
@@ -188,6 +189,12 @@ class EntityViewModel(
       totalDamage += target.receiveDamage(calculatedDamage, source = this)
 
       if (repeats > 1) delay(delayTime)
+    }
+
+    if (target.isAlive && effects.isNotEmpty()) {
+      effects.forEach { effect ->
+        target.addEffect(effect, this)
+      }
     }
 
     if (playAttackAnimation && attackAnimOffset != null) {

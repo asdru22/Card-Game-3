@@ -312,7 +312,18 @@ class BattleViewModel(
     }
   }
 
+  private suspend fun processEndOfTurnEffects(team: Team) {
+    team.entities.filter { it.isAlive }.forEach { entity ->
+      entity.traits.forEach { trait ->
+        trait.onEndTurn(entity)
+      }
+    }
+  }
+
   private suspend fun advanceTurn() {
+    val currentTeam = if (isLeftTeamTurn) leftTeam else rightTeam
+    processEndOfTurnEffects(currentTeam)
+
     actionsTaken.clear()
     isLeftTeamTurn = !isLeftTeamTurn
 

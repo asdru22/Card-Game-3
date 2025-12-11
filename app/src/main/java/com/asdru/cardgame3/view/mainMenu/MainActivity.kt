@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +17,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.asdru.cardgame3.MainView
+import com.asdru.cardgame3.entity.Entity
 import com.asdru.cardgame3.entityFeatures.Team
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
 import com.asdru.cardgame3.viewModel.BattleViewModel
@@ -36,8 +38,8 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     window.attributes.layoutInDisplayCutoutMode =
       WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-    val windowInsetsController =
-      WindowCompat.getInsetsController(window, window.decorView)
+
+    val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
     windowInsetsController.systemBarsBehavior =
       WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
@@ -46,63 +48,78 @@ class MainActivity : ComponentActivity() {
 
     setContent {
       CardGame3Theme {
-        var currentScreen by remember { mutableStateOf(AppScreen.MENU) }
-        var p1Name by remember { mutableStateOf("") }
-        var p2Name by remember { mutableStateOf("") }
-
-        LaunchedEffect(battleViewModel.navigateToSelection) {
-          if (battleViewModel.navigateToSelection) {
-            currentScreen = AppScreen.MENU
-            battleViewModel.onNavigatedToSelection()
-          }
-        }
-
-        when (currentScreen) {
-          AppScreen.MENU -> {
-            MainMenuScreen(
-              onCasualGame = { name1, name2 ->
-                p1Name = name1
-                p2Name = name2
-                currentScreen = AppScreen.SELECTION
-              },
-              onStrategicGame = {
-                p1Name = p1Name.ifBlank { "Player 1" }
-                p2Name = p2Name.ifBlank { "Player 2" }
-                currentScreen = AppScreen.STRATEGIC_SELECTION
-              }
-            )
-          }
-          AppScreen.SELECTION -> {
-            CharacterSelectionScreen(
-              player1Name = p1Name,
-              player2Name = p2Name,
-              onStartGame = { p1Entities, p2Entities ->
-                val leftTeam = Team(p1Name, p1Entities.map { EntityViewModel(it) })
-                val rightTeam = Team(p2Name, p2Entities.map { EntityViewModel(it) })
-
-                battleViewModel.startGame(leftTeam, rightTeam)
-                currentScreen = AppScreen.GAME
-              }
-            )
-          }
-          AppScreen.STRATEGIC_SELECTION -> {
-            StrategicSelectionScreen(
-              player1Name = p1Name,
-              player2Name = p2Name,
-              onStartGame = { p1Entities, p2Entities ->
-                val leftTeam = Team(p1Name, p1Entities.map { EntityViewModel(it) })
-                val rightTeam = Team(p2Name, p2Entities.map { EntityViewModel(it) })
-
-                battleViewModel.startGame(leftTeam, rightTeam)
-                currentScreen = AppScreen.GAME
-              }
-            )
-          }
-          AppScreen.GAME -> {
-            mainView.Content()
-          }
-        }
+        CardGameApp(
+          battleViewModel = battleViewModel,
+          gameContent = { mainView.Content() }
+        )
       }
+    }
+  }
+}
+
+@Composable
+fun CardGameApp(
+  battleViewModel: BattleViewModel,
+  gameContent: @Composable () -> Unit
+) {
+  var currentScreen by remember { mutableStateOf(AppScreen.MENU) }
+  var p1Name by remember { mutableStateOf("Player 1") }
+  var p2Name by remember { mutableStateOf("Player 2") }
+
+  LaunchedEffect(battleViewModel.navigateToSelection) {
+    if (battleViewModel.navigateToSelection) {
+      currentScreen = AppScreen.MENU
+      battleViewModel.onNavigatedToSelection()
+    }
+  }
+
+  fun navigateToSelection(targetScreen: AppScreen, name1: String, name2: String) {
+    p1Name = name1.ifBlank { "Player 1" }
+    p2Name = name2.ifBlank { "Player 2" }
+    currentScreen = targetScreen
+  }
+
+  fun startGame(
+    p1Entities: List<Entity>,
+    p2Entities: List<Entity>
+  ) {
+    val leftTeam = Team(p1Name, p1Entities.map { EntityViewModel(it) })
+    val rightTeam = Team(p2Name, p2Entities.map { EntityViewModel(it) })
+    battleViewModel.startGame(leftTeam, rightTeam)
+    currentScreen = AppScreen.GAME
+  }
+
+  when (currentScreen) {
+    AppScreen.MENU -> {
+      MainMenuScreen(
+        onCasualGame = { n1, n2 ->
+          navigateToSelection(AppScreen.SELECTION, n1, n2)
+        },
+
+        onStrategicGame = { n1, n2 ->
+          navigateToSelection(AppScreen.STRATEGIC_SELECTION, n1, n2)
+        }
+      )
+    }
+
+    AppScreen.SELECTION -> {
+      CharacterSelectionScreen(
+        player1Name = p1Name,
+        player2Name = p2Name,
+        onStartGame = { p1, p2 -> startGame(p1, p2) }
+      )
+    }
+
+    AppScreen.STRATEGIC_SELECTION -> {
+      StrategicSelectionScreen(
+        player1Name = p1Name,
+        player2Name = p2Name,
+        onStartGame = { p1, p2 -> startGame(p1, p2) }
+      )
+    }
+
+    AppScreen.GAME -> {
+      gameContent()
     }
   }
 }

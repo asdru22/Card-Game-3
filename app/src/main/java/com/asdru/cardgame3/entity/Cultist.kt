@@ -20,8 +20,7 @@ class Cultist : Entity(
     descriptionRes = R.string.ability_bewitched_desc,
     formatArgs = listOf(Watched.Spec, ACTIVE_REPEATS)
   ) { source, target ->
-    source.applyDamage(target)
-    target.addEffect(Watched(ACTIVE_REPEATS), source)
+    source.applyDamage(target, effects = listOf(Watched(ACTIVE_REPEATS)))
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_reckoning,

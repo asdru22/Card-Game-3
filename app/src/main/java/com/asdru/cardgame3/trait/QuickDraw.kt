@@ -8,8 +8,8 @@ class QuickDraw : Trait {
   override val descriptionRes: Int = R.string.trait_quick_draw_desc
   override val formatArgs: List<Any> = listOf(DAMAGE)
 
-  override fun onDidReceiveDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float) {
-    owner.team?.increaseRage(DAMAGE)
+  override suspend fun onEndTurn(owner: EntityViewModel) {
+    owner.applyDamage(owner.getRandomEnemy(), DAMAGE)
   }
 
   companion object {
