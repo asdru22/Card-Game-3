@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.view
+package com.asdru.cardgame3.view.battle
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background

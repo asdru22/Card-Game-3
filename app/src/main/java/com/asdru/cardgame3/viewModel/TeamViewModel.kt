@@ -30,7 +30,7 @@ class TeamViewModel(
   val maxRage = 100f
 
   fun increaseRage(amount: Float) {
-    rage = (rage + 100).coerceAtMost(maxRage)
+    rage = (rage + amount).coerceAtMost(maxRage)
   }
 
   fun getAllTeamMembers(): List<EntityViewModel> {
