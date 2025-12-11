@@ -18,10 +18,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.asdru.cardgame3.MainView
 import com.asdru.cardgame3.entity.Entity
-import com.asdru.cardgame3.entityFeatures.Team
+import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
 import com.asdru.cardgame3.viewModel.BattleViewModel
-import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.TeamViewModel
 
 enum class AppScreen {
   MENU, SELECTION, STRATEGIC_SELECTION, GAME
@@ -83,9 +83,13 @@ fun CardGameApp(
     p1Entities: List<Entity>,
     p2Entities: List<Entity>
   ) {
-    val leftTeam = Team(p1Name, p1Entities.map { EntityViewModel(it) })
-    val rightTeam = Team(p2Name, p2Entities.map { EntityViewModel(it) })
-    battleViewModel.startGame(leftTeam, rightTeam)
+    val p1Team = Team(p1Name, p1Entities)
+    val p2Team = Team(p2Name, p2Entities)
+
+    val leftTeamVM = TeamViewModel(p1Team)
+    val rightTeamVM = TeamViewModel(p2Team)
+
+    battleViewModel.startGame(leftTeamVM, rightTeamVM)
     currentScreen = AppScreen.GAME
   }
 

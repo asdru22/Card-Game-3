@@ -3,9 +3,9 @@ package com.asdru.cardgame3.entity
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Precision
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.QuickDraw
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,13 +42,13 @@ class Rouge : Entity(
       ULTIMATE_ACTIVE_TIMES
     )
   ) { source, randomEnemy ->
-    val rangers = source.getAliveTeamMembers().filter { it.damageType == DamageType.Ranged }
+    val rangers = source.team.getAliveTeamMembers().filter { it.damageType == DamageType.Ranged }
 
     CoroutineScope(Dispatchers.Main).launch {
       repeat(ULTIMATE_ACTIVE_TIMES) {
         rangers.forEach { ranger ->
           delay(200)
-          val target = randomEnemy.getAliveTeamMembers().randomOrNull()
+          val target = randomEnemy.team.getAliveTeamMembers().randomOrNull()
           target?.let { ranger.entity.activeAbility.effect(ranger, target) }
         }
       }

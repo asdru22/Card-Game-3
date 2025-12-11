@@ -4,9 +4,9 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Strength
 import com.asdru.cardgame3.effect.Vanish
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Sidestep
 
 class Ninja : Entity(

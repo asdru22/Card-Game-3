@@ -3,9 +3,9 @@ package com.asdru.cardgame3.entity
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Watched
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Forsaken
 
 class Cultist : Entity(
@@ -27,7 +27,7 @@ class Cultist : Entity(
     descriptionRes = R.string.ability_reckoning_desc,
     formatArgs = listOf(PASSIVE_HEAL, PASSIVE_DAMAGE)
   ) { source, target ->
-    val watchedEnemies = target.getEnemies().filter { member ->
+    val watchedEnemies = target.team.getAliveEnemies().filter { member ->
       member.statusEffects.any { it is Watched }
     }
 
@@ -40,7 +40,7 @@ class Cultist : Entity(
     descriptionRes = R.string.ability_harvest_desc,
     formatArgs = listOf(ULTIMATE_MULTIPLIER, ULTIMATE_HEAL)
   ) { source, randomEnemy ->
-    val watchedDuration = randomEnemy.getAllTeamMembers().sumOf { member ->
+    val watchedDuration = source.team.getAliveEnemies().sumOf { member ->
       member.statusEffects.find { it is Watched }?.duration ?: 0
     }
     val dmgDealt = source.applyDamage(randomEnemy, watchedDuration * ULTIMATE_MULTIPLIER)

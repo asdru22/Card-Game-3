@@ -11,10 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.asdru.cardgame3.effect.StatusEffect
 import com.asdru.cardgame3.effect.Stunned
-import com.asdru.cardgame3.entityFeatures.DamageType
+import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.entity.Entity
-import com.asdru.cardgame3.entityFeatures.Popup
-import com.asdru.cardgame3.entityFeatures.Team
+import com.asdru.cardgame3.data.Popup
 import com.asdru.cardgame3.trait.Forsaken
 import com.asdru.cardgame3.trait.Trait
 import kotlinx.coroutines.delay
@@ -23,8 +22,7 @@ import kotlin.random.Random
 class EntityViewModel(
   val entity: Entity
 ) : ViewModel() {
-  var team: Team? = null
-
+  lateinit var team: TeamViewModel
   private var baseDamage = entity.initialStats.damage
 
   var damage by mutableFloatStateOf(baseDamage)
@@ -51,14 +49,6 @@ class EntityViewModel(
 
   val iconRes: Int = entity.iconRes
   val traits: List<Trait> get() = entity.traits
-
-  fun getAllTeamMembers(): List<EntityViewModel> {
-    return team?.entities ?: emptyList()
-  }
-
-  fun getAliveTeamMembers(): List<EntityViewModel> {
-    return getAllTeamMembers().filter { it.isAlive }
-  }
 
 
   fun recalculateStats() {
@@ -171,35 +161,37 @@ class EntityViewModel(
   ): Float {
     var totalDamage = 0f
 
-    if (playAttackAnimation) {
-      onGetAttackOffset?.invoke(target)?.let {
-        attackAnimOffset = it
+    try {
+      if (playAttackAnimation) {
+        onGetAttackOffset?.invoke(target)?.let {
+          attackAnimOffset = it
+          delay(200)
+        }
+      }
+
+      repeat(repeats) {
+        if (!target.isAlive || !isAlive) return totalDamage
+
+        var calculatedDamage = amount
+        traits.forEach { trait ->
+          calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
+        }
+
+        totalDamage += target.receiveDamage(calculatedDamage, source = this)
+
+        if (repeats > 1) delay(delayTime)
+      }
+
+      if (target.isAlive && isAlive && effects.isNotEmpty()) {
+        effects.forEach { effect ->
+          target.addEffect(effect, this)
+        }
+      }
+    } finally {
+      if (playAttackAnimation && attackAnimOffset != null) {
+        attackAnimOffset = null
         delay(200)
       }
-    }
-
-    repeat(repeats) {
-      if (!target.isAlive) return totalDamage
-
-      var calculatedDamage = amount
-      traits.forEach { trait ->
-        calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
-      }
-
-      totalDamage += target.receiveDamage(calculatedDamage, source = this)
-
-      if (repeats > 1) delay(delayTime)
-    }
-
-    if (target.isAlive && effects.isNotEmpty()) {
-      effects.forEach { effect ->
-        target.addEffect(effect, this)
-      }
-    }
-
-    if (playAttackAnimation && attackAnimOffset != null) {
-      attackAnimOffset = null
-      delay(200)
     }
 
     return totalDamage
@@ -214,38 +206,38 @@ class EntityViewModel(
   ): Float {
     var totalDamage = 0f
 
-    if (playAttackAnimation && targets.isNotEmpty()) {
-      onGetAttackOffset?.invoke(targets.random())?.let {
-        attackAnimOffset = it
+    try {
+      if (playAttackAnimation && targets.isNotEmpty()) {
+        onGetAttackOffset?.invoke(targets.random())?.let {
+          attackAnimOffset = it
+          delay(200)
+        }
+      }
+
+      repeat(repeats) {
+        if (!isAlive) return totalDamage
+
+        targets.forEach { target ->
+          totalDamage += applyDamage(
+            target,
+            amount,
+            repeats = 1,
+            delayTime = 0,
+            playAttackAnimation = false
+          )
+        }
+
+        if (repeats > 1) delay(delayTime)
+      }
+    } finally {
+      if (playAttackAnimation && attackAnimOffset != null) {
+        attackAnimOffset = null
         delay(200)
       }
     }
 
-    repeat(repeats) {
-      targets.forEach { target ->
-        totalDamage += applyDamage(target, amount, repeats = 1, delayTime = 0, playAttackAnimation = false)
-      }
-
-      if (repeats > 1) delay(delayTime)
-    }
-
-    if (playAttackAnimation && attackAnimOffset != null) {
-      attackAnimOffset = null
-      delay(200)
-    }
-
     return totalDamage
   }
-
-  fun getEnemies(): List<EntityViewModel> {
-    return team?.enemyTeam?.entities?.filter { it.isAlive } ?: emptyList()
-  }
-
-  fun getRandomEnemy(): EntityViewModel {
-    return getEnemies().random()
-  }
-
-
 
   suspend fun withTemporaryDamage(tempDamage: Float, block: suspend () -> Unit) {
     val originalDamage = damage

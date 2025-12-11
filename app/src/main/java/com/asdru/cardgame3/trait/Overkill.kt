@@ -9,7 +9,7 @@ class Overkill : Trait {
 
   override suspend fun onDidDealDamage(owner: EntityViewModel, target: EntityViewModel, amount: Float, overkill: Float) {
     if (overkill > 0f) {
-      val aliveTeammates = target.getAliveTeamMembers()
+      val aliveTeammates = target.team.getAliveTeamMembers()
       
       if (aliveTeammates.isNotEmpty()) {
         val damagePerTeammate = overkill / aliveTeammates.size

@@ -1,6 +1,6 @@
 package com.asdru.cardgame3.trait
 
-import com.asdru.cardgame3.entityFeatures.Translatable
+import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 interface Trait : Translatable {

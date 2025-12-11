@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.entityFeatures
+package com.asdru.cardgame3.data
 
 import android.content.Context
 import androidx.annotation.StringRes

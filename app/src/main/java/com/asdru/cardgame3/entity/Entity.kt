@@ -3,9 +3,9 @@ package com.asdru.cardgame3.entity
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Trait
 
 sealed class Entity(

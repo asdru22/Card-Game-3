@@ -52,7 +52,8 @@ fun BattleLayout(
       verticalAlignment = Alignment.CenterVertically
     ) {
 
-      viewModel.leftTeam.TeamColumn(
+      TeamColumn(
+        entities = viewModel.leftTeam.entities,
         alignment = Alignment.Start,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,
@@ -74,7 +75,8 @@ fun BattleLayout(
         modifier = Modifier.alpha(0.5f)
       )
 
-      viewModel.rightTeam.TeamColumn(
+      TeamColumn(
+        entities = viewModel.rightTeam.entities,
         alignment = Alignment.End,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,

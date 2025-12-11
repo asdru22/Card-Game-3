@@ -1,8 +1,8 @@
 package com.asdru.cardgame3.effect
 
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Translatable
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Strength(duration: Int) : StatusEffect(

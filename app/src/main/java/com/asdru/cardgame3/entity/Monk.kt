@@ -3,9 +3,9 @@ package com.asdru.cardgame3.entity
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.SpikedShield
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Ironclad
 
 class Monk : Entity(
@@ -20,7 +20,7 @@ class Monk : Entity(
     descriptionRes = R.string.ability_syphon_desc,
   ) { source, target ->
     val healAmount = source.applyDamage(target) / 3
-    source.getAliveTeamMembers().forEach { it.heal(healAmount, source) }
+    source.team.getAliveTeamMembers().forEach { it.heal(healAmount, source) }
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_iron_will,
@@ -40,7 +40,7 @@ class Monk : Entity(
     )
   ) { source, randomEnemy ->
     var effectsCleared = 0
-    source.getAliveTeamMembers().forEach { effectsCleared += it.clearAllEffects() }
+    source.team.getAliveTeamMembers().forEach { effectsCleared += it.clearAllEffects() }
     source.applyDamage(randomEnemy, effectsCleared * ULTIMATE_DAMAGE_MULTIPLIER)
   }
 ) {

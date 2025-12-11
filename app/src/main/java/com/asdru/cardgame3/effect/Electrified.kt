@@ -1,7 +1,7 @@
 package com.asdru.cardgame3.effect
 
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.entityFeatures.Translatable
+import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Electrified(
@@ -24,7 +24,7 @@ class Electrified(
       )
     target.removeEffect<Electrified>()
 
-    val potentialTargets = target.getAliveTeamMembers().filter { it != target }
+    val potentialTargets = target.team.getAliveTeamMembers().filter { it != target }
     val newTarget = potentialTargets.randomOrNull()
 
     if (newTarget != null && electrifiedDuration != null && electrifiedDuration > 0) {

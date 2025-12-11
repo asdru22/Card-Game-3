@@ -5,9 +5,9 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Protection
 import com.asdru.cardgame3.effect.SpikedShield
 import com.asdru.cardgame3.effect.Taunt
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Spite
 
 class Paladin : Entity(
@@ -46,8 +46,8 @@ class Paladin : Entity(
       Taunt.Spec,
       ULTIMATE_TAUNT_DURATION
     )
-  ) { source, randomEnemy ->
-    randomEnemy.getAliveTeamMembers().forEach { enemy ->
+  ) { source, _ ->
+    source.team.getAliveEnemies().forEach { enemy ->
       enemy.addEffect(Taunt(ULTIMATE_TAUNT_DURATION), source)
     }
     source.addEffect(SpikedShield(ULTIMATE_SHIELD_DURATION), source)

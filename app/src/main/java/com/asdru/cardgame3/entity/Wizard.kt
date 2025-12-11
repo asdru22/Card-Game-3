@@ -2,9 +2,9 @@ package com.asdru.cardgame3.entity
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Overkill
 
 class Wizard : Entity(
@@ -25,7 +25,7 @@ class Wizard : Entity(
       PASSIVE_DAMAGE_PERCENTAGE
     )
   ) { _, target ->
-    val enemies = target.getEnemies()
+    val enemies = target.team.getAliveEnemies()
     if (enemies.isNotEmpty()) {
       val randomEnemy = enemies.random()
       val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100
@@ -41,7 +41,7 @@ class Wizard : Entity(
       ULTIMATE_HEAL_AMOUNT
     )
   ) { source, _ ->
-    source.getAliveTeamMembers().forEach {
+    source.team.getAliveTeamMembers().forEach {
       it.heal(ULTIMATE_HEAL_AMOUNT)
       it.clearNegativeEffects()
     }

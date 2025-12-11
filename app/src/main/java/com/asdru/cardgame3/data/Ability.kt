@@ -1,8 +1,7 @@
-package com.asdru.cardgame3.entityFeatures
+package com.asdru.cardgame3.data
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.asdru.cardgame3.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 data class Ability(

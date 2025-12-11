@@ -59,7 +59,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.entityFeatures.Popup
+import com.asdru.cardgame3.data.Popup
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.launch
 

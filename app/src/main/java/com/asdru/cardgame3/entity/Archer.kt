@@ -4,9 +4,9 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Burning
 import com.asdru.cardgame3.effect.PainLink
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 
 class Archer : Entity(
   name = R.string.entity_archer,
@@ -20,7 +20,7 @@ class Archer : Entity(
     formatArgs = listOf(ACTIVE_REPEATS)
   ) { source, target ->
     source.applyDamageToTargets(
-      target.getAliveTeamMembers(),
+      target.team.getAliveEnemies(),
       repeats = ACTIVE_REPEATS,
       delayTime = 200L
     )

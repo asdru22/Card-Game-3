@@ -5,9 +5,9 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.effect.Electrified
 import com.asdru.cardgame3.effect.Overloaded
 import com.asdru.cardgame3.effect.Stunned
-import com.asdru.cardgame3.entityFeatures.Ability
-import com.asdru.cardgame3.entityFeatures.DamageType
-import com.asdru.cardgame3.entityFeatures.Stats
+import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.trait.Meltdown
 
 class Robot : Entity(
@@ -36,7 +36,7 @@ class Robot : Entity(
     descriptionRes = R.string.ability_shutdown_desc,
     formatArgs = listOf(Stunned.Spec, ULTIMATE_STUNNED_DURATION)
   ) { source, randomEnemy ->
-    randomEnemy.getAliveTeamMembers()
+    randomEnemy.team.getAliveTeamMembers()
       .filter { it.statusEffects.any { effect -> effect is Electrified } }
       .forEach { it.addEffect(Stunned(ULTIMATE_STUNNED_DURATION), source) }
   }

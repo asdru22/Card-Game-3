@@ -10,29 +10,18 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.asdru.cardgame3.data.DragState
+import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.effect.Taunt
 import com.asdru.cardgame3.effect.Vanish
-import com.asdru.cardgame3.entityFeatures.Team
-import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.data.Team
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-data class DragState(
-  val source: EntityViewModel,
-  val start: Offset,
-  val current: Offset
-)
-
-data class UltimateDragState(
-  val team: Team,
-  val start: Offset,
-  val current: Offset
-)
-
 class BattleViewModel(
-  initialLeftTeam: Team = Team("Blue", emptyList()),
-  initialRightTeam: Team = Team("Red", emptyList())
+  initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList())),
+  initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList()))
 ) : ViewModel() {
 
   var leftTeam by mutableStateOf(initialLeftTeam)
@@ -69,7 +58,7 @@ class BattleViewModel(
     navigateToSelection = false
   }
 
-  fun startGame(newLeftTeam: Team, newRightTeam: Team) {
+  fun startGame(newLeftTeam: TeamViewModel, newRightTeam: TeamViewModel) {
     leftTeam = newLeftTeam
     rightTeam = newRightTeam
 
@@ -99,7 +88,7 @@ class BattleViewModel(
     rightTeam.rage = 0f
   }
 
-  fun increaseRage(team: Team, amount: Float) {
+  fun increaseRage(team: TeamViewModel, amount: Float) {
     team.increaseRage(amount)
   }
 
@@ -129,14 +118,14 @@ class BattleViewModel(
     hoveredTarget = null
   }
 
-  private fun executeUltimate(team: Team, caster: EntityViewModel) {
+  private fun executeUltimate(team: TeamViewModel, caster: EntityViewModel) {
     if (isActionPlaying || winner != null) return
 
     viewModelScope.launch {
       isActionPlaying = true
       team.rage = 0f
       val enemies = if (team == leftTeam) rightTeam else leftTeam
-      val validTargets = enemies.entities.filter { it.isAlive }
+      val validTargets = enemies.aliveEntities
 
       if (validTargets.isNotEmpty()) {
         val randomEnemy = validTargets.random()
@@ -235,8 +224,8 @@ class BattleViewModel(
   }
 
   private fun checkWinCondition() {
-    val isLeftAlive = leftTeam.entities.any { it.isAlive }
-    val isRightAlive = rightTeam.entities.any { it.isAlive }
+    val isLeftAlive = leftTeam.aliveEntities.isNotEmpty()
+    val isRightAlive = rightTeam.aliveEntities.isNotEmpty()
 
     if (!isLeftAlive) {
       winner = rightTeam.name
@@ -245,7 +234,7 @@ class BattleViewModel(
     }
   }
 
-  private suspend fun processStartOfTurnEffects(team: Team) {
+  private suspend fun processStartOfTurnEffects(team: TeamViewModel) {
     team.entities.filter { it.isAlive }.forEach { entity ->
       entity.traits.forEach { trait ->
         trait.onStartTurn(entity)
@@ -269,7 +258,7 @@ class BattleViewModel(
     return isTurn && !actionsTaken.contains(entity) && entity.isAlive && !isActionPlaying && !entity.isStunned
   }
 
-  fun onUltimateDragStart(team: Team, offset: Offset) {
+  fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
     val isLeft = (team == leftTeam)
     if ((isLeft && isLeftTeamTurn) || (!isLeft && !isLeftTeamTurn)) {
       val hasNonStunnedMember = team.entities.any { it.isAlive && !it.isStunned }
@@ -312,7 +301,7 @@ class BattleViewModel(
     }
   }
 
-  private suspend fun processEndOfTurnEffects(team: Team) {
+  private suspend fun processEndOfTurnEffects(team: TeamViewModel) {
     team.entities.filter { it.isAlive }.forEach { entity ->
       entity.traits.forEach { trait ->
         trait.onEndTurn(entity)
