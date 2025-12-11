@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.asdru.cardgame3.view.team.RageBar
+import com.asdru.cardgame3.view.team.TeamColumn
 import com.asdru.cardgame3.viewModel.BattleViewModel
 
 @Composable

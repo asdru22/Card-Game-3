@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
 import com.asdru.cardgame3.data.Team
+import com.asdru.cardgame3.effect.Vanish
+import kotlin.collections.filter
 
 class TeamViewModel(
   val team: Team
@@ -31,10 +33,6 @@ class TeamViewModel(
     rage = (rage + amount).coerceAtMost(maxRage)
   }
 
-  fun getAliveEnemies(): List<EntityViewModel> {
-    return enemyTeam.aliveEntities
-  }
-
   fun getAllTeamMembers(): List<EntityViewModel> {
     return entities
   }
@@ -47,7 +45,17 @@ class TeamViewModel(
     return getAliveTeamMembers().random()
   }
 
-  fun getRandomAliveEnemy(): EntityViewModel {
+  fun getAliveEnemies(): List<EntityViewModel> {
+    return enemyTeam.aliveEntities
+  }
+
+  fun getTargetableEnemies(): List<EntityViewModel> {
+    return getAliveEnemies().filter { entity ->
+      entity.statusEffects.none { it is Vanish }
+    }
+  }
+
+  fun getRandomTargetableEnemy(): EntityViewModel {
     return getAliveEnemies().random()
   }
 

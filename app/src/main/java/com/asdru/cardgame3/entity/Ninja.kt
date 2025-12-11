@@ -51,6 +51,6 @@ class Ninja : Entity(
     const val DAMAGE = 10f
     const val ACTIVE_REPEATS = 3
     const val PASSIVE_DURATION = 3
-    const val ULTIMATE_DURATION = 3
+    const val ULTIMATE_DURATION = 2
   }
 }

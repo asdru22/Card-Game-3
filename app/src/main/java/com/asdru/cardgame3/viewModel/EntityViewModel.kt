@@ -81,6 +81,10 @@ class EntityViewModel(
     addPopup("$sign${amount.toInt()}", color, isStatus = false)
   }
 
+  inline fun applyTraits(action: (Trait) -> Unit) {
+    traits.forEach(action)
+  }
+
   suspend fun receiveDamage(amount: Float, source: EntityViewModel? = null): Float {
     var actualDamage = amount
 
@@ -88,7 +92,7 @@ class EntityViewModel(
       actualDamage = effect.modifyIncomingDamage(this, actualDamage, source)
     }
 
-    traits.forEach { trait ->
+    applyTraits { trait ->
       actualDamage = trait.modifyIncomingDamage(this, source, actualDamage)
     }
 
@@ -104,23 +108,15 @@ class EntityViewModel(
       addPopup(actualDamage, Color.Red)
 
       if (wasAlive && !isAlive) {
-        traits.forEach { trait ->
-          trait.onDidReceiveDamage(this, source, actualDamage)
-        }
-        traits.forEach { trait ->
-          trait.onDeath(this)
-        }
+        applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
+        applyTraits { it.onDeath(this) }
         clearAllEffects()
       } else if (isAlive) {
-        traits.forEach { trait ->
-          trait.onDidReceiveDamage(this, source, actualDamage)
-        }
+        applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
       }
 
-      source?.let { attacker ->
-        attacker.traits.forEach { trait ->
-          trait.onDidDealDamage(attacker, this, actualDamage, overkill)
-        }
+      source?.applyTraits { trait ->
+        trait.onDidDealDamage(source, this, actualDamage, overkill)
       }
     }
 
@@ -139,7 +135,7 @@ class EntityViewModel(
 
     repeat(repeats) {
       var actualHeal = amount
-      traits.forEach { trait ->
+      applyTraits { trait ->
         actualHeal = trait.modifyHeal(this, actualHeal)
       }
 
@@ -173,7 +169,7 @@ class EntityViewModel(
         if (!target.isAlive || !isAlive) return totalDamage
 
         var calculatedDamage = amount
-        traits.forEach { trait ->
+        applyTraits { trait ->
           calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
         }
 

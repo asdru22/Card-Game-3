@@ -47,7 +47,7 @@ class Paladin : Entity(
       ULTIMATE_TAUNT_DURATION
     )
   ) { source, _ ->
-    source.team.getAliveEnemies().forEach { enemy ->
+    source.team.getTargetableEnemies().forEach { enemy ->
       enemy.addEffect(Taunt(ULTIMATE_TAUNT_DURATION), source)
     }
     source.addEffect(SpikedShield(ULTIMATE_SHIELD_DURATION), source)

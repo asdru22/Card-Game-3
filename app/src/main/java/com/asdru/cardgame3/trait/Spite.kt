@@ -9,7 +9,7 @@ class Spite : Trait {
   override val formatArgs: List<Any> = listOf(RAGE_GAIN)
 
   override fun onDidReceiveDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float) {
-    owner.team?.increaseRage(RAGE_GAIN)
+    owner.team.increaseRage(RAGE_GAIN)
   }
 
   companion object {

@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.view
+package com.asdru.cardgame3.view.team
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

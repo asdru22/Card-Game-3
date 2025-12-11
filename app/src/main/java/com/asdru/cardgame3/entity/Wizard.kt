@@ -25,7 +25,7 @@ class Wizard : Entity(
       PASSIVE_DAMAGE_PERCENTAGE
     )
   ) { _, target ->
-    val enemies = target.team.getAliveEnemies()
+    val enemies = target.team.getTargetableEnemies()
     if (enemies.isNotEmpty()) {
       val randomEnemy = enemies.random()
       val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100
