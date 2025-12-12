@@ -20,7 +20,7 @@ class Archer : Entity(
     formatArgs = listOf(ACTIVE_REPEATS)
   ) { source, target ->
     source.applyDamageToTargets(
-      target.team.getAliveTeamMembers(),
+      target.team.getAliveMembers(),
       repeats = ACTIVE_REPEATS,
       delayTime = 200L
     )

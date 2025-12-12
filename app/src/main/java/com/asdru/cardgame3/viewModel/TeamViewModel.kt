@@ -33,20 +33,20 @@ class TeamViewModel(
     rage = (rage + amount).coerceAtMost(maxRage)
   }
 
-  fun getAllTeamMembers(): List<EntityViewModel> {
+  fun getAllMembers(): List<EntityViewModel> {
     return entities
   }
 
-  fun getAliveTeamMembers(): List<EntityViewModel> {
-    return getAllTeamMembers().filter { it.isAlive }
+  fun getAliveMembers(): List<EntityViewModel> {
+    return getAllMembers().filter { it.isAlive }
   }
 
-  fun getOtherAliveTeamMembers(entity: EntityViewModel): List<EntityViewModel> {
-    return getAliveTeamMembers().filter { it != entity }
+  fun getOtherAliveMembers(entity: EntityViewModel): List<EntityViewModel> {
+    return getAliveMembers().filter { it != entity }
   }
 
   fun getRandomAliveMember(): EntityViewModel {
-    return getAliveTeamMembers().random()
+    return getAliveMembers().random()
   }
 
   fun getAliveEnemies(): List<EntityViewModel> {

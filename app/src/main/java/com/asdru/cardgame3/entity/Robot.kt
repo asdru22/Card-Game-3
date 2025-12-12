@@ -36,7 +36,7 @@ class Robot : Entity(
     descriptionRes = R.string.ability_shutdown_desc,
     formatArgs = listOf(Stunned.Spec, ULTIMATE_STUNNED_DURATION)
   ) { source, randomEnemy ->
-    randomEnemy.team.getAliveTeamMembers()
+    randomEnemy.team.getAliveMembers()
       .filter { it.statusEffects.any { effect -> effect is Electrified } }
       .forEach { it.addEffect(Stunned(ULTIMATE_STUNNED_DURATION), source) }
   }

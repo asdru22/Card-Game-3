@@ -24,7 +24,7 @@ class Cannoneer : Entity(
   ) { source, target ->
     source.applyDamage(target, DAMAGE * ACTIVE_TARGET_MULTIPLIER / 100)
     source.applyDamageToTargets(
-      target.team.getOtherAliveTeamMembers(target),
+      target.team.getOtherAliveMembers(target),
       DAMAGE * ACTIVE_OTHER_MULTIPLIER / 100,
       playAttackAnimation = false
     )

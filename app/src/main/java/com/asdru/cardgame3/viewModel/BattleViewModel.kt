@@ -110,7 +110,11 @@ class BattleViewModel(
     val state = ultimateDragState
     val target = hoveredTarget
 
-    if (state != null && target != null && state.team.entities.contains(target)) {
+    if (
+      state != null &&
+      target != null &&
+      state.team.entities.contains(target)
+    ) {
       executeUltimate(state.team, target)
     }
 
@@ -235,7 +239,7 @@ class BattleViewModel(
   }
 
   private suspend fun processStartOfTurnEffects(team: TeamViewModel) {
-    team.entities.filter { it.isAlive }.forEach { entity ->
+    team.getAliveMembers().forEach { entity ->
       entity.traits.forEach { trait ->
         trait.onStartTurn(entity)
       }
@@ -255,13 +259,17 @@ class BattleViewModel(
     val isLeft = leftTeam.entities.contains(entity)
     val isRight = rightTeam.entities.contains(entity)
     val isTurn = (isLeft && isLeftTeamTurn) || (isRight && !isLeftTeamTurn)
-    return isTurn && !actionsTaken.contains(entity) && entity.isAlive && !isActionPlaying && !entity.isStunned
+    return isTurn &&
+        !actionsTaken.contains(entity)
+        && entity.isAlive
+        && !isActionPlaying
+        && !entity.isStunned
   }
 
   fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
     val isLeft = (team == leftTeam)
     if ((isLeft && isLeftTeamTurn) || (!isLeft && !isLeftTeamTurn)) {
-      val hasNonStunnedMember = team.entities.any { it.isAlive && !it.isStunned }
+      val hasNonStunnedMember = team.getAliveMembers().any { !it.isStunned }
       if (team.rage >= team.maxRage && !isActionPlaying && winner == null && hasNonStunnedMember) {
         ultimateDragState = UltimateDragState(team, offset, offset)
       }

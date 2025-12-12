@@ -42,13 +42,13 @@ class Rouge : Entity(
       ULTIMATE_ACTIVE_TIMES
     )
   ) { source, randomEnemy ->
-    val rangers = source.team.getAliveTeamMembers().filter { it.damageType == DamageType.Ranged }
+    val rangers = source.team.getAliveMembers().filter { it.damageType == DamageType.Ranged }
 
     CoroutineScope(Dispatchers.Main).launch {
       repeat(ULTIMATE_ACTIVE_TIMES) {
         rangers.forEach { ranger ->
           delay(200)
-          val target = randomEnemy.team.getAliveTeamMembers().randomOrNull()
+          val target = randomEnemy.team.getAliveMembers().randomOrNull()
           target?.let { ranger.entity.activeAbility.effect(ranger, target) }
         }
       }

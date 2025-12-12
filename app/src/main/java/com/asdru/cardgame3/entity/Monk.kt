@@ -20,7 +20,7 @@ class Monk : Entity(
     descriptionRes = R.string.ability_syphon_desc,
   ) { source, target ->
     val healAmount = source.applyDamage(target) / 3
-    source.team.getAliveTeamMembers().forEach { it.heal(healAmount, source) }
+    source.team.getAliveMembers().forEach { it.heal(healAmount, source) }
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_iron_will,
@@ -40,7 +40,7 @@ class Monk : Entity(
     )
   ) { source, randomEnemy ->
     var effectsCleared = 0
-    source.team.getAliveTeamMembers().forEach { effectsCleared += it.clearAllEffects() }
+    source.team.getAliveMembers().forEach { effectsCleared += it.clearAllEffects() }
     source.applyDamage(randomEnemy, effectsCleared * ULTIMATE_DAMAGE_MULTIPLIER)
   }
 ) {

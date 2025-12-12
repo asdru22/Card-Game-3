@@ -24,7 +24,7 @@ class Electrified(
       )
     target.removeEffect<Electrified>()
 
-    val potentialTargets = target.team.getAliveTeamMembers().filter { it != target }
+    val potentialTargets = target.team.getAliveMembers().filter { it != target }
     val newTarget = potentialTargets.randomOrNull()
 
     if (newTarget != null && electrifiedDuration != null && electrifiedDuration > 0) {

@@ -18,7 +18,7 @@ class Bursting(duration: Int) : StatusEffect(
     source: EntityViewModel?
   ): Float {
     owner.applyDamageToTargets(
-      source?.team?.getAliveTeamMembers() ?: emptyList(),
+      source?.team?.getAliveMembers() ?: emptyList(),
       BURSTING_DAMAGE,
       playAttackAnimation = false
     )
