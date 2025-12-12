@@ -20,7 +20,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -97,20 +96,10 @@ fun PlayerGridSection(
         Box(modifier = Modifier.fillMaxSize()) {
           val tempViewModel = remember(entity) { EntityViewModel(entity) }
 
-          CharacterInfoCard(viewModel = tempViewModel)
-
-          IconButton(
-            onClick = { infoCharacter = null },
-            modifier = Modifier
-              .align(Alignment.BottomEnd)
-              .padding(8.dp)
-          ) {
-            Icon(
-              imageVector = Icons.Default.Close,
-              contentDescription = "Close Info",
-              tint = Color.White
-            )
-          }
+          CharacterInfoCard(
+            viewModel = tempViewModel,
+            onClose = { infoCharacter = null }
+          )
         }
       }
     }

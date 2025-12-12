@@ -197,17 +197,18 @@ class BattleViewModel(
   }
 
   fun onDoubleTap(entity: EntityViewModel) {
-    println("Double tapped ${entity.name}")
+    selectedEntity = entity
+    showInfoDialog = true
+  }
+
+  fun closeInfoDialog() {
+    showInfoDialog = false
+    selectedEntity = null
   }
 
   fun onPressStatus(entity: EntityViewModel, isPressed: Boolean) {
-    if (isPressed) {
-      selectedEntity = entity
-      showInfoDialog = true
-    } else {
-      showInfoDialog = false
-      selectedEntity = null
-    }
+    // Logic for long press info removed as per request to use double tap
+    // Could add other press logic here if needed
   }
 
   fun getHighlightColor(entity: EntityViewModel): Color {

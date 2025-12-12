@@ -22,10 +22,13 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -41,14 +44,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.effect.StatusEffect
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.effect.StatusEffect
 import com.asdru.cardgame3.trait.Trait
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 
 @Composable
-fun CharacterInfoCard(viewModel: EntityViewModel, modifier: Modifier = Modifier) {
+fun CharacterInfoCard(
+  viewModel: EntityViewModel,
+  onClose: () -> Unit,
+  modifier: Modifier = Modifier
+) {
   val context = LocalContext.current
   Box(
     modifier = modifier
@@ -73,23 +80,94 @@ fun CharacterInfoCard(viewModel: EntityViewModel, modifier: Modifier = Modifier)
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.Start
       ) {
+
         Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceBetween,
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
           verticalAlignment = Alignment.CenterVertically
         ) {
 
-          DamageTypeChip(viewModel.damageType)
+          // 1. Close Button
+          IconButton(
+            onClick = onClose,
+            modifier = Modifier.size(32.dp)
+          ) {
+            Icon(
+              imageVector = Icons.Default.Close,
+              contentDescription = "Close",
+              tint = Color.White
+            )
+          }
 
+          Spacer(modifier = Modifier.width(8.dp))
+
+          // 2. Character Name
           Text(
             text = stringResource(viewModel.name),
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Start
           )
-          StatsView(viewModel)
 
+          // 3. Space (Pushes stats to the right)
+          Spacer(modifier = Modifier.weight(1f))
+
+          // 4. Health
+          Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+              painter = painterResource(id = R.drawable.health),
+              contentDescription = "Health",
+              tint = Color(0xFFEF5350),
+              modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+              text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
+              color = Color.White,
+              fontSize = 16.sp,
+              fontWeight = FontWeight.Bold
+            )
+          }
+
+          // 5. Vertical Separator
+          VerticalDivider(
+            modifier = Modifier
+              .padding(horizontal = 12.dp)
+              .fillMaxHeight(0.6f),
+            color = Color.Gray.copy(alpha = 0.5f),
+            thickness = 1.dp
+          )
+
+          // 6. Damage
+          Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+              painter = painterResource(id = R.drawable.attack_damage),
+              contentDescription = "Damage",
+              tint = Color(0xFFFFCA28),
+              modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+              text = "${viewModel.damage.toInt()}",
+              color = Color.White,
+              fontSize = 16.sp,
+              fontWeight = FontWeight.Bold
+            )
+          }
+
+          // 7. Vertical Separator
+          VerticalDivider(
+            modifier = Modifier
+              .padding(horizontal = 12.dp)
+              .fillMaxHeight(0.6f),
+            color = Color.Gray.copy(alpha = 0.5f),
+            thickness = 1.dp
+          )
+
+          // 8. Damage Type
+          DamageTypeChip(viewModel.damageType)
         }
 
         Spacer(modifier = Modifier.height(12.dp))

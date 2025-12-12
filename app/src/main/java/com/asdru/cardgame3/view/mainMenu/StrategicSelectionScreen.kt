@@ -19,9 +19,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -167,20 +165,10 @@ fun StrategicSelectionScreen(
         ) {
           val tempViewModel = remember(entity) { EntityViewModel(entity) }
 
-          CharacterInfoCard(viewModel = tempViewModel)
-
-          IconButton(
-            onClick = { infoCharacter = null },
-            modifier = Modifier
-              .align(Alignment.TopEnd)
-              .padding(8.dp)
-          ) {
-            Icon(
-              imageVector = Icons.Default.Close,
-              contentDescription = "Close Info",
-              tint = Color.White
-            )
-          }
+          CharacterInfoCard(
+            viewModel = tempViewModel,
+            onClose = { infoCharacter = null }
+          )
         }
       }
     }

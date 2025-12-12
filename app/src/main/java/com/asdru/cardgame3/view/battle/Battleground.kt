@@ -112,7 +112,10 @@ fun BattleScreen(viewModel: BattleViewModel) {
     }
 
     if (viewModel.showInfoDialog && viewModel.selectedEntity != null) {
-      CharacterInfoCard(viewModel.selectedEntity!!)
+      CharacterInfoCard(
+        viewModel = viewModel.selectedEntity!!,
+        onClose = { viewModel.closeInfoDialog() }
+      )
     }
 
     if (viewModel.winner != null) {
