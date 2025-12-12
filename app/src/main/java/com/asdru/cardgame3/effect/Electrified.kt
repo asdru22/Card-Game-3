@@ -6,7 +6,7 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Electrified(
   duration: Int, private val applier: EntityViewModel
-) : StatusEffect(
+) : com.asdru.cardgame3.effect.StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,

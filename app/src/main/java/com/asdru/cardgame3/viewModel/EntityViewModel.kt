@@ -16,6 +16,7 @@ import com.asdru.cardgame3.entity.Entity
 import com.asdru.cardgame3.data.Popup
 import com.asdru.cardgame3.trait.Forsaken
 import com.asdru.cardgame3.trait.Trait
+import com.asdru.cardgame3.view.weather.WeatherEvent
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -88,6 +89,10 @@ class EntityViewModel(
 
   suspend fun receiveDamage(amount: Float, source: EntityViewModel? = null): Float {
     var actualDamage = amount
+
+    onGetWeather?.invoke()?.let { weather ->
+      actualDamage = weather.modifyIncomingDamage(this, source, actualDamage)
+    }
 
     statusEffects.toList().forEach { effect ->
       actualDamage = effect.modifyIncomingDamage(this, actualDamage, source)
@@ -300,4 +305,6 @@ class EntityViewModel(
     }
     return effectsToRemove.size
   }
+
+  var onGetWeather: (() -> WeatherEvent?)? = null
 }

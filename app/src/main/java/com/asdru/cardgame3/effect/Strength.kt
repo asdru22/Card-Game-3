@@ -5,7 +5,7 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
-class Strength(duration: Int) : StatusEffect(
+class Strength(duration: Int) : com.asdru.cardgame3.effect.StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,

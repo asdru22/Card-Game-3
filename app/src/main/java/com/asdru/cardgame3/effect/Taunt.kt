@@ -4,7 +4,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 
 
-class Taunt(duration: Int) : StatusEffect(
+class Taunt(duration: Int) : com.asdru.cardgame3.effect.StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,

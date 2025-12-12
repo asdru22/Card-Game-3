@@ -7,7 +7,7 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 class PainLink(
   duration: Int,
   private val linkedTarget: EntityViewModel
-) : StatusEffect(
+) : com.asdru.cardgame3.effect.StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,

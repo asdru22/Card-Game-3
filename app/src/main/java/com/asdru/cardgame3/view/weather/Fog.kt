@@ -26,6 +26,6 @@ class Fog() : WeatherEvent(
   }
 
   private companion object {
-    const val DODGE_CHANCE = 10
+    const val DODGE_CHANCE = 5
   }
 }

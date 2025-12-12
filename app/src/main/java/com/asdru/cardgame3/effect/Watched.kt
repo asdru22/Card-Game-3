@@ -3,7 +3,7 @@ package com.asdru.cardgame3.effect
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 
-class Watched(duration: Int) : StatusEffect(
+class Watched(duration: Int) : com.asdru.cardgame3.effect.StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,

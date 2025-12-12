@@ -72,6 +72,10 @@ class BattleViewModel(
 
     val allEntities = leftTeam.entities + rightTeam.entities
     allEntities.forEach { entity ->
+      entity.onGetWeather = {
+        currentWeather
+      }
+
       entity.onGetAttackOffset = { target ->
         val sourceBounds = cardBounds[entity]
         val targetBounds = cardBounds[target]
