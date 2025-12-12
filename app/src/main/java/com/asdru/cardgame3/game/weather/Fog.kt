@@ -2,6 +2,7 @@ package com.asdru.cardgame3.game.weather
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
+import com.asdru.cardgame3.game.effect.Strength
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.random.Random
 

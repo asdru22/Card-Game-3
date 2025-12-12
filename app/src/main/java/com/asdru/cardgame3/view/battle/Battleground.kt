@@ -73,7 +73,6 @@ fun BattleScreen(viewModel: BattleViewModel) {
           .padding(top = 16.dp)
           .size(56.dp)
           .clip(CircleShape)
-          .background(Color.Black.copy(alpha = 0.6f))
           .border(2.dp, viewModel.currentWeather!!.color, CircleShape)
           .clickable { viewModel.showWeatherInfo = true },
       )
@@ -155,7 +154,7 @@ fun WeatherIcon(modifier: Modifier = Modifier, viewModel: BattleViewModel) {
     Icon(
       painter = painterResource(id = viewModel.currentWeather!!.iconRes),
       contentDescription = "Weather",
-      tint = Color.Unspecified,
+      tint = viewModel.currentWeather!!.color,
       modifier = Modifier.size(32.dp)
     )
   }

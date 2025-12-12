@@ -122,6 +122,6 @@
     <string name="ability_carpet_bomb">Carpet Bomb</string>
     <string name="ability_carpet_bomb_desc">Fire %s shots, each targeting a random enemy for %s damage</string>
     <string name="weather_fog">Fog</string>
-    <string name="weather_fog_desc">All attacks have a %s chance to miss</string>
+    <string name="weather_fog_desc">All attacks have a %s%% chance to miss</string>
     <string name="game_miss">Miss!</string>
 </resources>
