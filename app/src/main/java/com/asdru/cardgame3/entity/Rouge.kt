@@ -48,8 +48,12 @@ class Rouge : Entity(
       repeat(ULTIMATE_ACTIVE_TIMES) {
         rangers.forEach { ranger ->
           delay(200)
-          val target = randomEnemy.team.getAliveMembers().randomOrNull()
-          target?.let { ranger.entity.activeAbility.effect(ranger, target) }
+          if (ranger.isAlive) {
+            val target = randomEnemy.team.getAliveMembers().randomOrNull()
+            if (target != null) {
+              ranger.entity.activeAbility.effect(ranger, target)
+            }
+          }
         }
       }
     }

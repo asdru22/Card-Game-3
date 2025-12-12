@@ -9,7 +9,10 @@ class QuickDraw : Trait {
   override val formatArgs: List<Any> = listOf(DAMAGE)
 
   override suspend fun onEndTurn(owner: EntityViewModel) {
-    owner.applyDamage(owner.team.getRandomTargetableEnemy(), DAMAGE)
+    val target = owner.team.getRandomTargetableEnemy()
+    if (target != null) {
+      owner.applyDamage(target, DAMAGE)
+    }
   }
 
   companion object {

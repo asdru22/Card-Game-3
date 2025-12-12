@@ -45,8 +45,8 @@ class TeamViewModel(
     return getAliveMembers().filter { it != entity }
   }
 
-  fun getRandomAliveMember(): EntityViewModel {
-    return getAliveMembers().random()
+  fun getRandomAliveMember(): EntityViewModel? {
+    return getAliveMembers().randomOrNull()
   }
 
   fun getAliveEnemies(): List<EntityViewModel> {
@@ -59,8 +59,7 @@ class TeamViewModel(
     }
   }
 
-  fun getRandomTargetableEnemy(): EntityViewModel {
-    return getAliveEnemies().random()
+  fun getRandomTargetableEnemy(): EntityViewModel? {
+    return getTargetableEnemies().randomOrNull()
   }
-
 }

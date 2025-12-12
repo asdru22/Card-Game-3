@@ -9,7 +9,14 @@ class Meltdown : Trait {
   override val formatArgs: List<Any> = listOf(DEATH_DAMAGE)
 
   override suspend fun onDeath(owner: EntityViewModel) {
-    owner.applyDamageToTargets(owner.team.getAliveEnemies(), DEATH_DAMAGE)
+    val enemies = owner.team.getAliveEnemies()
+
+    if (enemies.isNotEmpty()) {
+      owner.applyDamageToTargets(
+        enemies,
+        DEATH_DAMAGE,
+      )
+    }
   }
 
   companion object {

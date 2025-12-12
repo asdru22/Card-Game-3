@@ -25,12 +25,14 @@ class Wizard : Entity(
       PASSIVE_DAMAGE_PERCENTAGE
     )
   ) { _, target ->
-    val enemies = target.team.getTargetableEnemies()
-    if (enemies.isNotEmpty()) {
-      val randomEnemy = enemies.random()
-      val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100
-      target.withTemporaryDamage(reducedDamage) {
-        target.entity.activeAbility.effect(target, randomEnemy)
+    if (target.isAlive) {
+      val enemies = target.team.getTargetableEnemies()
+      if (enemies.isNotEmpty()) {
+        val randomEnemy = enemies.random()
+        val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100
+        target.withTemporaryDamage(reducedDamage) {
+          target.entity.activeAbility.effect(target, randomEnemy)
+        }
       }
     }
   },
@@ -54,6 +56,5 @@ class Wizard : Entity(
     const val DAMAGE = 28f
     const val PASSIVE_DAMAGE_PERCENTAGE = 50
     const val ULTIMATE_HEAL_AMOUNT = 24f
-
   }
 }

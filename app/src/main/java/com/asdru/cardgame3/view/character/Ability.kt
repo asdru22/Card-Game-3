@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.EffectInfo
+import com.asdru.cardgame3.data.EffectPlaceholder
+import com.asdru.cardgame3.data.Translatable
 import kotlinx.coroutines.delay
 
 
@@ -78,35 +81,13 @@ fun CharacterAbility(context: Context, label: String, ability: Ability, color: C
       )
     }
 
-    val description = ability.getDescription(context)
-    val annotatedString = remember(description) {
-      buildAnnotatedString {
-        val pattern = "\\[\\[(.*?)\\|(.*?)\\|(.*?)]]".toRegex(RegexOption.DOT_MATCHES_ALL)
-        var lastIndex = 0
-        pattern.findAll(description).forEach { match ->
-          append(description.substring(lastIndex, match.range.first))
-
-          val effectName = match.groupValues[1]
-          val effectDesc = match.groupValues[2]
-          val isPositive = match.groupValues[3].toBoolean()
-
-          val effectColor = if (isPositive) Color(0xFF00D471) else Color(0xFFBD3BF5)
-
-          pushStringAnnotation(tag = "DESC", annotation = effectDesc)
-          withStyle(SpanStyle(color = effectColor, fontWeight = FontWeight.Bold)) {
-            append(effectName)
-          }
-          pop()
-
-          lastIndex = match.range.last + 1
-        }
-        append(description.substring(lastIndex))
-      }
-    }
-
-    val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-
     Box {
+      val (annotatedString, effectInfos) = remember(ability, context) {
+        buildAbilityText(ability, context)
+      }
+
+      val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
+
       Text(
         text = annotatedString,
         color = Color.LightGray,
@@ -114,15 +95,18 @@ fun CharacterAbility(context: Context, label: String, ability: Ability, color: C
         lineHeight = 14.sp,
         modifier = Modifier
           .padding(top = 4.dp)
-          .pointerInput(annotatedString) {
+          .pointerInput(effectInfos) {
             detectTapGestures { pos ->
               layoutResult.value?.let { layout ->
                 val offset = layout.getOffsetForPosition(pos)
-                val annotation = annotatedString
-                  .getStringAnnotations(tag = "DESC", start = offset, end = offset)
-                  .firstOrNull()
-                if (annotation != null) {
-                  popupControl = annotation.item to pos
+
+                // Find which effect was clicked
+                val clickedEffect = effectInfos.firstOrNull { effect ->
+                  offset in effect.startIndex until effect.endIndex
+                }
+
+                if (clickedEffect != null) {
+                  popupControl = clickedEffect.description to pos
                 }
               }
             }
@@ -155,4 +139,71 @@ fun CharacterAbility(context: Context, label: String, ability: Ability, color: C
       }
     }
   }
+}
+
+private fun buildAbilityText(
+  ability: Ability,
+  context: Context
+): Pair<androidx.compose.ui.text.AnnotatedString, List<EffectInfo>> {
+  val effectInfos = mutableListOf<EffectInfo>()
+
+  // Get the raw description template
+  val template = context.getString(ability.descriptionRes)
+
+  // Process format args to find Translatable objects
+  val processedArgs = ability.formatArgs.map { arg ->
+    if (arg is Translatable) {
+      // Create a placeholder that we'll replace with styled text
+      EffectPlaceholder(
+        name = context.getString(arg.nameRes),
+        description = context.getString(arg.descriptionRes, *arg.formatArgs.toTypedArray()),
+        isPositive = arg.isPositive
+      )
+    } else {
+      arg
+    }
+  }.toTypedArray()
+
+  // Format the string with placeholders
+  val formattedText = template.format(*processedArgs)
+
+  // Build annotated string
+  val annotatedString = buildAnnotatedString {
+    var textIndex = 0
+
+    while (textIndex < formattedText.length) {
+      // Check if we're at a placeholder
+      val placeholder = processedArgs.filterIsInstance<EffectPlaceholder>()
+        .firstOrNull { formattedText.startsWith(it.name, textIndex) }
+
+      if (placeholder != null) {
+        // Add styled effect name
+        val startIdx = length
+        val effectColor = if (placeholder.isPositive) Color(0xFF00D471) else Color(0xFFBD3BF5)
+
+        withStyle(SpanStyle(color = effectColor, fontWeight = FontWeight.Bold)) {
+          append(placeholder.name)
+        }
+
+        val endIdx = length
+        effectInfos.add(
+          EffectInfo(
+            name = placeholder.name,
+            description = placeholder.description,
+            isPositive = placeholder.isPositive,
+            startIndex = startIdx,
+            endIndex = endIdx
+          )
+        )
+
+        textIndex += placeholder.name.length
+      } else {
+        // Regular character
+        append(formattedText[textIndex])
+        textIndex++
+      }
+    }
+  }
+
+  return annotatedString to effectInfos
 }
