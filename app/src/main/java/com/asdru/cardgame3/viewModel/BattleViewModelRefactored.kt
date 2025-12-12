@@ -40,8 +40,10 @@ class BattleViewModelRefactored(
   }
 
   // UI State
-  var leftTeam by mutableStateOf<TeamViewModel?>(null)
-  var rightTeam by mutableStateOf<TeamViewModel?>(null)
+  lateinit var leftTeam: TeamViewModel
+    private set
+  lateinit var rightTeam: TeamViewModel
+    private set
 
   var dragState by mutableStateOf<DragState?>(null)
     private set
@@ -172,7 +174,7 @@ class BattleViewModelRefactored(
       isActionPlaying = true
       handleCardInteraction(source, target)
 
-      val sourceTeam = if (leftTeam!!.entities.contains(source)) leftTeam else rightTeam
+      val sourceTeam = if (leftTeam.entities.contains(source)) leftTeam else rightTeam
 
       increaseRage(sourceTeam, 10f)
 
@@ -186,7 +188,7 @@ class BattleViewModelRefactored(
         actionsTaken.add(source)
       }
 
-      val activeTeamEntities = if (isLeftTeamTurn) leftTeam!!.entities else rightTeam!!.entities
+      val activeTeamEntities = if (isLeftTeamTurn) leftTeam.entities else rightTeam.entities
 
       val capableEntities = activeTeamEntities.filter { it.isAlive && !it.isStunned }
 
@@ -199,13 +201,13 @@ class BattleViewModelRefactored(
   }
 
   private fun checkWinCondition() {
-    val isLeftAlive = leftTeam!!.aliveEntities.isNotEmpty()
-    val isRightAlive = rightTeam!!.aliveEntities.isNotEmpty()
+    val isLeftAlive = leftTeam.aliveEntities.isNotEmpty()
+    val isRightAlive = rightTeam.aliveEntities.isNotEmpty()
 
     if (!isLeftAlive) {
-      winner = rightTeam!!.name
+      winner = rightTeam.name
     } else if (!isRightAlive) {
-      winner = leftTeam!!.name
+      winner = leftTeam.name
     }
   }
 
@@ -226,8 +228,8 @@ class BattleViewModelRefactored(
 
     if (winner != null) return
 
-    val aliveMembers = nextTeam?.entities?.filter { it.isAlive }
-    if (aliveMembers?.isNotEmpty() == true && aliveMembers.all { it.isStunned }) {
+    val aliveMembers = nextTeam.entities.filter { it.isAlive }
+    if (aliveMembers.isNotEmpty() && aliveMembers.all { it.isStunned }) {
       advanceTurn()
     }
   }
@@ -257,8 +259,8 @@ class BattleViewModelRefactored(
   }
 
   private suspend fun handleCardInteraction(source: EntityViewModel, target: EntityViewModel) {
-    val sourceLeft = leftTeam?.entities?.contains(source)
-    val targetLeft = leftTeam?.entities?.contains(target)
+    val sourceLeft = leftTeam.entities.contains(source)
+    val targetLeft = leftTeam.entities.contains(target)
 
     val onSameTeam = sourceLeft == targetLeft
 
@@ -319,7 +321,7 @@ class BattleViewModelRefactored(
       isActionPlaying = true
       team.rage = 0f
       val enemies = if (team == leftTeam) rightTeam else leftTeam
-      val validTargets = enemies?.aliveEntities ?: emptyList()
+      val validTargets = enemies.aliveEntities
 
       if (validTargets.isNotEmpty()) {
         val randomEnemy = validTargets.random()
@@ -354,8 +356,8 @@ class BattleViewModelRefactored(
     val ultState = ultimateDragState
 
     if (draggingState != null && entity == hoveredTarget) {
-      val sourceLeft = leftTeam?.entities?.contains(draggingState.source) ?: false
-      val targetLeft = leftTeam?.entities?.contains(entity) ?: false
+      val sourceLeft = leftTeam.entities.contains(draggingState.source)
+      val targetLeft = leftTeam.entities.contains(entity)
       return if (sourceLeft == targetLeft) Color.Green else Color.Red
     }
 
@@ -368,8 +370,8 @@ class BattleViewModelRefactored(
 
   fun canEntityAct(entity: EntityViewModel): Boolean {
     if (winner != null) return false
-    val isLeft = leftTeam?.entities?.contains(entity) ?: false
-    val isRight = rightTeam?.entities?.contains(entity) ?: false
+    val isLeft = leftTeam.entities.contains(entity)
+    val isRight = rightTeam.entities.contains(entity)
     val isTurn = (isLeft && isLeftTeamTurn) || (isRight && !isLeftTeamTurn)
     return isTurn && !actionsTaken.contains(entity) && entity.isAlive
         && !isActionPlaying && !entity.isStunned
@@ -393,8 +395,8 @@ class BattleViewModelRefactored(
     winner = state.winner
 
     // Update rage
-    leftTeam?.let { it.rage = state.leftTeam.rage }
-    rightTeam?.let { it.rage = state.rightTeam.rage }
+    leftTeam.rage = state.leftTeam.rage
+    rightTeam.rage = state.rightTeam.rage
 
     // Sync entity states
     state.leftTeam.entities.forEach { entityState ->

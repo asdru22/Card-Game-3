@@ -33,12 +33,12 @@ fun BattleLayout(
 
     // Left Rage Bar
     RageBar(
-      rage = viewModel.leftTeam?.rage ?: 0f,
-      maxRage = viewModel.leftTeam?.maxRage ?: 100f,
+      rage = viewModel.leftTeam.rage,
+      maxRage = viewModel.leftTeam.maxRage,
       isTurn = viewModel.isLeftTeamTurn,
       isDragging = viewModel.ultimateDragState?.team == viewModel.leftTeam,
       onDragStart = { offset ->
-        viewModel.leftTeam?.let { team ->
+        viewModel.leftTeam.let { team ->
           viewModel.onUltimateDragStart(team, offset)
         }
       },
@@ -59,7 +59,7 @@ fun BattleLayout(
     ) {
 
       TeamColumn(
-        entities = viewModel.leftTeam?.entities ?: emptyList(),
+        entities = viewModel.leftTeam.entities,
         alignment = Alignment.Start,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,
@@ -82,7 +82,7 @@ fun BattleLayout(
       )
 
       TeamColumn(
-        entities = viewModel.rightTeam?.entities ?: emptyList(),
+        entities = viewModel.rightTeam.entities,
         alignment = Alignment.End,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,
@@ -99,12 +99,12 @@ fun BattleLayout(
 
     // Right Rage Bar
     RageBar(
-      rage = viewModel.rightTeam?.rage ?: 0f,
-      maxRage = viewModel.rightTeam?.maxRage ?: 100f,
+      rage = viewModel.rightTeam.rage,
+      maxRage = viewModel.rightTeam.maxRage,
       isTurn = !viewModel.isLeftTeamTurn,
       isDragging = viewModel.ultimateDragState?.team == viewModel.rightTeam,
       onDragStart = { offset ->
-        viewModel.rightTeam?.let { team ->
+        viewModel.rightTeam.let { team ->
           viewModel.onUltimateDragStart(team, offset)
         }
       },
