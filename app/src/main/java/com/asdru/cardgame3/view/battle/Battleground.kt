@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -64,6 +65,20 @@ fun BattleScreen(viewModel: BattleViewModel) {
 
     BattleLayout(viewModel, finalCardHeight, finalCardWidth)
 
+    if (viewModel.currentWeather != null) {
+      WeatherIcon(
+        viewModel = viewModel,
+        modifier = Modifier
+          .align(Alignment.TopCenter)
+          .padding(top = 16.dp)
+          .size(56.dp)
+          .clip(CircleShape)
+          .background(Color.Black.copy(alpha = 0.6f))
+          .border(2.dp, viewModel.currentWeather!!.color, CircleShape)
+          .clickable { viewModel.showWeatherInfo = true },
+      )
+    }
+
     viewModel.cardBounds.forEach { (entity, rect) ->
       entity.popups.forEach { popup ->
         key(popup.id) {
@@ -111,6 +126,13 @@ fun BattleScreen(viewModel: BattleViewModel) {
       }
     }
 
+    if (viewModel.showWeatherInfo && viewModel.currentWeather != null) {
+      WeatherInfoDialog(
+        weather = viewModel.currentWeather!!,
+        onClose = { viewModel.showWeatherInfo = false }
+      )
+    }
+
     if (viewModel.showInfoDialog && viewModel.selectedEntity != null) {
       CharacterInfoCard(
         viewModel = viewModel.selectedEntity!!,
@@ -124,6 +146,20 @@ fun BattleScreen(viewModel: BattleViewModel) {
   }
 }
 
+@Composable
+fun WeatherIcon(modifier: Modifier = Modifier, viewModel: BattleViewModel) {
+  Box(
+    modifier = modifier,
+    contentAlignment = Alignment.Center
+  ) {
+    Icon(
+      painter = painterResource(id = viewModel.currentWeather!!.iconRes),
+      contentDescription = "Weather",
+      tint = Color.Unspecified,
+      modifier = Modifier.size(32.dp)
+    )
+  }
+}
 
 @Composable
 fun Winner(viewModel: BattleViewModel) {

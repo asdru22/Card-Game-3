@@ -15,6 +15,7 @@ import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.effect.Taunt
 import com.asdru.cardgame3.effect.Vanish
 import com.asdru.cardgame3.data.Team
+import com.asdru.cardgame3.view.weather.WeatherEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -37,6 +38,10 @@ class BattleViewModel(
   var showInfoDialog by mutableStateOf(false)
   var selectedEntity by mutableStateOf<EntityViewModel?>(null)
 
+  var currentWeather by mutableStateOf<WeatherEvent?>(null)
+    private set
+  var showWeatherInfo by mutableStateOf(false)
+
   var isLeftTeamTurn by mutableStateOf(Random.nextBoolean())
     private set
   var isActionPlaying by mutableStateOf(false)
@@ -58,7 +63,7 @@ class BattleViewModel(
     navigateToSelection = false
   }
 
-  fun startGame(newLeftTeam: TeamViewModel, newRightTeam: TeamViewModel) {
+  fun startGame(newLeftTeam: TeamViewModel, newRightTeam: TeamViewModel, weatherEnabled: Boolean) {
     leftTeam = newLeftTeam
     rightTeam = newRightTeam
 
@@ -76,6 +81,14 @@ class BattleViewModel(
           null
         }
       }
+    }
+
+    currentWeather = if (weatherEnabled) {
+      WeatherEvent.getRandomWeather()?.also { weather ->
+        weather.onApply(this)
+      }
+    } else {
+      null
     }
 
     isLeftTeamTurn = Random.nextBoolean()
@@ -207,8 +220,7 @@ class BattleViewModel(
   }
 
   fun onPressStatus(entity: EntityViewModel, isPressed: Boolean) {
-    // Logic for long press info removed as per request to use double tap
-    // Could add other press logic here if needed
+
   }
 
   fun getHighlightColor(entity: EntityViewModel): Color {
@@ -240,6 +252,8 @@ class BattleViewModel(
   }
 
   private suspend fun processStartOfTurnEffects(team: TeamViewModel) {
+    currentWeather?.onStartTurn(this)
+
     team.getAliveMembers().forEach { entity ->
       entity.traits.forEach { trait ->
         trait.onStartTurn(entity)
@@ -311,6 +325,8 @@ class BattleViewModel(
   }
 
   private suspend fun processEndOfTurnEffects(team: TeamViewModel) {
+    currentWeather?.onEndTurn(this)
+
     team.entities.filter { it.isAlive }.forEach { entity ->
       entity.traits.forEach { trait ->
         trait.onEndTurn(entity)

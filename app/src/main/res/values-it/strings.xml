@@ -61,7 +61,7 @@
     <string name="ability_reckoning_desc">Cura il bersaglio di %s salute per ogni nemico Osservato, poi infligge %s danni a tutti i nemici Osservati</string>
     <string name="ability_harvest">Mietitura</string>
     <string name="ability_harvest_desc">Infligge danni a un nemico casuale pari a %s × durata totale di Osservato su tutti i nemici, poi cura se stesso per il %s%% del danno inflitto</string>
-    <string name="entity_monk">Monaco\n</string>
+    <string name="entity_monk">Monaco</string>
     <string name="trait_ironclad">Corazzato</string>
     <string name="trait_ironclad_desc">Ignora tutti i danni inferiori a %s</string>
     <string name="ability_syphon">Prosciugamento</string>

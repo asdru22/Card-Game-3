@@ -108,7 +108,7 @@ fun CharacterInfoCard(
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Start
+            textAlign = TextAlign.Center
           )
 
           // 3. Space (Pushes stats to the right)

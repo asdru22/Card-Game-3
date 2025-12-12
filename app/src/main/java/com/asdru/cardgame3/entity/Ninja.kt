@@ -47,7 +47,7 @@ class Ninja : Entity(
   damageType = DamageType.Melee
 ) {
   private companion object {
-    const val MAX_HEALTH = 240f
+    const val MAX_HEALTH = 180f
     const val DAMAGE = 10f
     const val ACTIVE_REPEATS = 3
     const val PASSIVE_DURATION = 3

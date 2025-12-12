@@ -39,7 +39,8 @@ fun CardGameApp(
 
   fun startGame(
     p1Entities: List<Entity>,
-    p2Entities: List<Entity>
+    p2Entities: List<Entity>,
+    weatherEnabled: Boolean
   ) {
     val p1Team = Team(p1Name, p1Entities)
     val p2Team = Team(p2Name, p2Entities)
@@ -47,7 +48,7 @@ fun CardGameApp(
     val leftTeamVM = TeamViewModel(p1Team)
     val rightTeamVM = TeamViewModel(p2Team)
 
-    battleViewModel.startGame(leftTeamVM, rightTeamVM)
+    battleViewModel.startGame(leftTeamVM, rightTeamVM, weatherEnabled)
     currentScreen = AppScreen.GAME
   }
 
@@ -68,7 +69,8 @@ fun CardGameApp(
       CharacterSelectionScreen(
         player1Name = p1Name,
         player2Name = p2Name,
-        onStartGame = { p1, p2 -> startGame(p1, p2) }
+        onBack = { currentScreen = AppScreen.MENU },
+        onStartGame = { p1, p2, weather -> startGame(p1, p2, weather) }
       )
     }
 
@@ -76,7 +78,8 @@ fun CardGameApp(
       StrategicSelectionScreen(
         player1Name = p1Name,
         player2Name = p2Name,
-        onStartGame = { p1, p2 -> startGame(p1, p2) }
+        onBack = { currentScreen = AppScreen.MENU },
+        onStartGame = { p1, p2, weather -> startGame(p1, p2, weather) }
       )
     }
 

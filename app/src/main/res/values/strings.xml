@@ -62,7 +62,7 @@
     <string name="ability_reckoning_desc">Heals the target by %s health for each Watched enemy, then deals %s damage to all Watched enemies</string>
     <string name="ability_harvest">Harvest</string>
     <string name="ability_harvest_desc">Deals damage to a random enemy equal to %s × total Watched duration across all enemies, then heals self for %s%% of damage dealt</string>
-    <string name="entity_monk">Monk\n</string>
+    <string name="entity_monk">Monk</string>
     <string name="trait_ironclad">Ironclad</string>
     <string name="trait_ironclad_desc">Ignores all damage below %s</string>
     <string name="ability_syphon">Syphon</string>
@@ -121,4 +121,7 @@
     <string name="ability_prime_desc">Apply %s to the target for %s turns</string>
     <string name="ability_carpet_bomb">Carpet Bomb</string>
     <string name="ability_carpet_bomb_desc">Fire %s shots, each targeting a random enemy for %s damage</string>
+    <string name="weather_fog">Fog</string>
+    <string name="weather_fog_desc">All attacks have a %s chance to miss</string>
+    <string name="game_miss">Miss!</string>
 </resources>

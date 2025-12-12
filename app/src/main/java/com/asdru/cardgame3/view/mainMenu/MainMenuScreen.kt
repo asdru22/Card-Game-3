@@ -1,5 +1,8 @@
 package com.asdru.cardgame3.view.mainMenu
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
@@ -30,12 +32,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.characterSelection.HowToPlayOverlay
+import androidx.core.net.toUri
 
 @Composable
 fun MainMenuScreen(
@@ -51,6 +56,13 @@ fun MainMenuScreen(
       .fillMaxSize()
       .background(Color(0xFF121212))
   ) {
+    IconRow(
+      Modifier
+        .align(Alignment.BottomStart)
+        .padding(16.dp),
+      LocalContext.current
+    )
+
     Column(
       modifier = Modifier
         .fillMaxSize()
@@ -161,5 +173,44 @@ fun MainMenuScreen(
       visible = showRules,
       onClose = { showRules = false }
     )
+  }
+}
+
+@Composable
+fun IconRow(modifier: Modifier = Modifier, context: Context) {
+  Row(
+    modifier = modifier,
+    horizontalArrangement = Arrangement.spacedBy(8.dp)
+
+  ) {
+    IconButton(
+      onClick = {
+        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/asdru22/Card-Game-3".toUri())
+        context.startActivity(intent)
+      },
+      modifier = Modifier.size(48.dp)
+    ) {
+      Icon(
+        painter = painterResource(id = R.drawable.icon_github),
+        contentDescription = "GitHub",
+        tint = Color.White,
+        modifier = Modifier.fillMaxSize()
+      )
+    }
+
+    IconButton(
+      onClick = {
+        val intent = Intent(Intent.ACTION_VIEW, "https://discord.gg/yR7MDch2zG".toUri())
+        context.startActivity(intent)
+      },
+      modifier = Modifier.size(48.dp)
+    ) {
+      Icon(
+        painter = painterResource(id = R.drawable.icon_discord),
+        contentDescription = "Join Discord",
+        tint = Color(0xFF5865F2),
+        modifier = Modifier.fillMaxSize()
+      )
+    }
   }
 }
