@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
 import com.asdru.cardgame3.data.Team
-import com.asdru.cardgame3.effect.Vanish
+import com.asdru.cardgame3.game.effect.Vanish
 import kotlin.collections.filter
 
 class TeamViewModel(

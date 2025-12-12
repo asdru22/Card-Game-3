@@ -1,0 +1,41 @@
+package com.asdru.cardgame3.game.effect
+
+import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.viewModel.EntityViewModel
+
+class SpikedShield(duration: Int) : StatusEffect(
+  nameRes = nameRes,
+  descriptionRes = descriptionRes,
+  iconRes = iconRes,
+  initialDuration = duration,
+  isPositive = isPositive,
+  formatArgs = formatArgs
+
+) {
+  override suspend fun modifyIncomingDamage(
+    owner: EntityViewModel,
+    currentDamage: Float,
+    source: EntityViewModel?
+  ): Float {
+    val multiplier = DAMAGE_REFLECTED / 100
+    val reducedDamage = currentDamage * (1 - multiplier)
+
+    if (source != null && source != owner && source.isAlive) {
+      val reflectedDamage = currentDamage * multiplier
+      source.receiveDamage(reflectedDamage, source = null)
+    }
+
+    return reducedDamage
+  }
+
+  companion object Spec : Translatable {
+    val iconRes = R.drawable.effect_spiked_shield
+    override val formatArgs = listOf(DAMAGE_REFLECTED)
+    override val nameRes = R.string.effect_spiked_shield
+    override val descriptionRes = R.string.effect_spiked_shield_desc
+
+    override val isPositive = true
+    private const val DAMAGE_REFLECTED = 20f
+  }
+}

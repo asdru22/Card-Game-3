@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.UltimateDragState
-import com.asdru.cardgame3.effect.Taunt
-import com.asdru.cardgame3.effect.Vanish
+import com.asdru.cardgame3.game.effect.Taunt
+import com.asdru.cardgame3.game.effect.Vanish
 import com.asdru.cardgame3.data.Team
-import com.asdru.cardgame3.view.weather.WeatherEvent
+import com.asdru.cardgame3.game.weather.WeatherEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random

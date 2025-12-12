@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.DamageType
-import com.asdru.cardgame3.effect.StatusEffect
-import com.asdru.cardgame3.trait.Trait
+import com.asdru.cardgame3.game.effect.StatusEffect
+import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 

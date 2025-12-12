@@ -9,14 +9,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.asdru.cardgame3.effect.StatusEffect
-import com.asdru.cardgame3.effect.Stunned
+import com.asdru.cardgame3.game.effect.StatusEffect
+import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.data.DamageType
-import com.asdru.cardgame3.entity.Entity
+import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.data.Popup
-import com.asdru.cardgame3.trait.Forsaken
-import com.asdru.cardgame3.trait.Trait
-import com.asdru.cardgame3.view.weather.WeatherEvent
+import com.asdru.cardgame3.game.trait.Forsaken
+import com.asdru.cardgame3.game.trait.Trait
+import com.asdru.cardgame3.game.weather.WeatherEvent
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 

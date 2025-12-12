@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
 import com.asdru.cardgame3.view.battle.BattleScreen
-import com.asdru.cardgame3.view.CardGameApp
+import com.asdru.cardgame3.view.mainMenu.CardGameApp
 import com.asdru.cardgame3.viewModel.BattleViewModel
 
 enum class AppScreen {

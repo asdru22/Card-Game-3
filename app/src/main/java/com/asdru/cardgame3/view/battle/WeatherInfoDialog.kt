@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.asdru.cardgame3.view.weather.WeatherEvent
+import com.asdru.cardgame3.game.weather.WeatherEvent
 
 @Composable
 fun WeatherInfoDialog(

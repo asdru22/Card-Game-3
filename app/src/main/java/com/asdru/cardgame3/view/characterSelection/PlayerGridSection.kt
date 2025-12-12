@@ -39,7 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.asdru.cardgame3.entity.Entity
+import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.character.CharacterInfoCard
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.reflect.full.createInstance
