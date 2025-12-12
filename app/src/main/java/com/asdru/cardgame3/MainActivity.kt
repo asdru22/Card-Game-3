@@ -11,9 +11,9 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
-import com.asdru.cardgame3.view.battle.BattleScreen
 import com.asdru.cardgame3.view.CardGameApp
-import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.view.battle.BattleScreen
+import com.asdru.cardgame3.viewModel.BattleViewModelRefactored
 
 enum class AppScreen {
   MENU, SELECTION, STRATEGIC_SELECTION, GAME
@@ -21,7 +21,7 @@ enum class AppScreen {
 
 class MainActivity : ComponentActivity() {
 
-  private val battleViewModel: BattleViewModel by viewModels()
+  private val battleViewModel: BattleViewModelRefactored by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,14 +34,12 @@ import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.character.CharacterInfoCard
-import com.asdru.cardgame3.viewModel.BattleViewModel
-import kotlin.collections.get
-import kotlin.math.roundToInt
-import androidx.compose.runtime.key
 import com.asdru.cardgame3.view.character.PopupView
+import com.asdru.cardgame3.viewModel.BattleViewModelRefactored
+import kotlin.math.roundToInt
 
 @Composable
-fun BattleScreen(viewModel: BattleViewModel) {
+fun BattleScreen(viewModel: BattleViewModelRefactored) {
   BoxWithConstraints(
     modifier = Modifier
       .fillMaxSize()
@@ -123,7 +122,7 @@ fun BattleScreen(viewModel: BattleViewModel) {
 
 
 @Composable
-fun Winner(viewModel: BattleViewModel) {
+fun Winner(viewModel: BattleViewModelRefactored) {
   Box(
     modifier = Modifier
       .fillMaxSize()

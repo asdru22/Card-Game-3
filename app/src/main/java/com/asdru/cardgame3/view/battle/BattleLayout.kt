@@ -17,11 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.view.team.RageBar
 import com.asdru.cardgame3.view.team.TeamColumn
-import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.BattleViewModelRefactored
 
 @Composable
 fun BattleLayout(
-  viewModel: BattleViewModel,
+  viewModel: BattleViewModelRefactored,
   finalCardHeight: Dp,
   finalCardWidth: Dp
 ) {
@@ -33,11 +33,15 @@ fun BattleLayout(
 
     // Left Rage Bar
     RageBar(
-      rage = viewModel.leftTeam.rage,
-      maxRage = viewModel.leftTeam.maxRage,
+      rage = viewModel.leftTeam?.rage ?: 0f,
+      maxRage = viewModel.leftTeam?.maxRage ?: 100f,
       isTurn = viewModel.isLeftTeamTurn,
       isDragging = viewModel.ultimateDragState?.team == viewModel.leftTeam,
-      onDragStart = { offset -> viewModel.onUltimateDragStart(viewModel.leftTeam, offset) },
+      onDragStart = { offset ->
+        viewModel.leftTeam?.let { team ->
+          viewModel.onUltimateDragStart(team, offset)
+        }
+      },
       onDrag = viewModel::onUltimateDrag,
       onDragEnd = viewModel::onUltimateDragEnd,
       modifier = Modifier
@@ -55,7 +59,7 @@ fun BattleLayout(
     ) {
 
       TeamColumn(
-        entities = viewModel.leftTeam.entities,
+        entities = viewModel.leftTeam?.entities ?: emptyList(),
         alignment = Alignment.Start,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,
@@ -78,7 +82,7 @@ fun BattleLayout(
       )
 
       TeamColumn(
-        entities = viewModel.rightTeam.entities,
+        entities = viewModel.rightTeam?.entities ?: emptyList(),
         alignment = Alignment.End,
         cardWidth = finalCardWidth,
         cardHeight = finalCardHeight,
@@ -95,11 +99,15 @@ fun BattleLayout(
 
     // Right Rage Bar
     RageBar(
-      rage = viewModel.rightTeam.rage,
-      maxRage = viewModel.rightTeam.maxRage,
+      rage = viewModel.rightTeam?.rage ?: 0f,
+      maxRage = viewModel.rightTeam?.maxRage ?: 100f,
       isTurn = !viewModel.isLeftTeamTurn,
       isDragging = viewModel.ultimateDragState?.team == viewModel.rightTeam,
-      onDragStart = { offset -> viewModel.onUltimateDragStart(viewModel.rightTeam, offset) },
+      onDragStart = { offset ->
+        viewModel.rightTeam?.let { team ->
+          viewModel.onUltimateDragStart(team, offset)
+        }
+      },
       onDrag = viewModel::onUltimateDrag,
       onDragEnd = viewModel::onUltimateDragEnd,
       modifier = Modifier

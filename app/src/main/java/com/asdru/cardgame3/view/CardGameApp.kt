@@ -12,12 +12,12 @@ import com.asdru.cardgame3.entity.Entity
 import com.asdru.cardgame3.view.mainMenu.CharacterSelectionScreen
 import com.asdru.cardgame3.view.mainMenu.MainMenuScreen
 import com.asdru.cardgame3.view.mainMenu.StrategicSelectionScreen
-import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.BattleViewModelRefactored
 import com.asdru.cardgame3.viewModel.TeamViewModel
 
 @Composable
 fun CardGameApp(
-  battleViewModel: BattleViewModel,
+  battleViewModel: BattleViewModelRefactored,
   gameContent: @Composable () -> Unit
 ) {
   var currentScreen by remember { mutableStateOf(AppScreen.MENU) }

@@ -26,7 +26,6 @@ class EntityViewModel(
   private var baseDamage = entity.initialStats.damage
 
   var damage by mutableFloatStateOf(baseDamage)
-    private set
 
   var health by mutableFloatStateOf(entity.initialStats.maxHealth)
   var maxHealth by mutableFloatStateOf(entity.initialStats.maxHealth)
