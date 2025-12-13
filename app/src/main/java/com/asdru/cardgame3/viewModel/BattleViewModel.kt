@@ -55,6 +55,22 @@ class BattleViewModel(
   private val actionsTaken = mutableStateListOf<EntityViewModel>()
   val cardBounds = mutableStateMapOf<EntityViewModel, Rect>()
 
+  var showExitDialog by mutableStateOf(false)
+
+
+  fun onExitClicked() {
+    showExitDialog = true
+  }
+
+  fun onExitConfirmed() {
+    showExitDialog = false
+    onRestartClicked()
+  }
+
+  fun onExitCancelled() {
+    showExitDialog = false
+  }
+
   fun onRestartClicked() {
     navigateToSelection = true
   }

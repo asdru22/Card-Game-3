@@ -120,4 +120,7 @@
     <string name="ability_prime_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_carpet_bomb">Bombardamento a Tappeto</string>
     <string name="ability_carpet_bomb_desc">Spara %s colpi, ognuno mirato a un nemico casuale per %s danni</string>
+    <string name="weather_fog">Nebbia</string>
+    <string name="weather_fog_desc">Tutti gli attacchi hanno il %s%% di probailità di mancare</string>
+    <string name="game_miss">Mancato!</string>
 </resources>

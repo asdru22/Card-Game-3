@@ -14,10 +14,15 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,6 +82,16 @@ fun BattleScreen(viewModel: BattleViewModel) {
           .clickable { viewModel.showWeatherInfo = true },
       )
     }
+
+    HomeButton(
+      Modifier
+        .align(Alignment.BottomCenter)
+        .padding(bottom = 16.dp)
+        .size(48.dp)
+        .background(Color.Black.copy(alpha = 0.5f), CircleShape)
+        .border(1.dp, Color.Gray, CircleShape),
+      viewModel
+    )
 
     viewModel.cardBounds.forEach { (entity, rect) ->
       entity.popups.forEach { popup ->
@@ -139,10 +154,71 @@ fun BattleScreen(viewModel: BattleViewModel) {
       )
     }
 
+    if (viewModel.showExitDialog) {
+      ExitConfirmationDialog(
+        onConfirm = { viewModel.onExitConfirmed() },
+        onDismiss = { viewModel.onExitCancelled() }
+      )
+    }
+
     if (viewModel.winner != null) {
       Winner(viewModel)
     }
   }
+}
+
+@Composable
+fun HomeButton(
+  modifier: Modifier = Modifier,
+  viewModel: BattleViewModel
+) {
+  IconButton(
+    onClick = { viewModel.onExitClicked() },
+    modifier = modifier
+  ) {
+    Icon(
+      imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+      contentDescription = "Exit Battle",
+      tint = Color.White
+    )
+  }
+}
+
+@Composable
+fun ExitConfirmationDialog(
+  onConfirm: () -> Unit,
+  onDismiss: () -> Unit
+) {
+  AlertDialog(
+    onDismissRequest = onDismiss,
+    containerColor = Color(0xFF2C2C2C),
+    title = {
+      Text(
+        text = "Return to Main Menu?",
+        color = Color.White,
+        fontWeight = FontWeight.Bold
+      )
+    },
+    text = {
+      Text(
+        text = "Any progress in this battle will be lost.",
+        color = Color.LightGray
+      )
+    },
+    confirmButton = {
+      Button(
+        onClick = onConfirm,
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB71C1C))
+      ) {
+        Text("Yes", color = Color.White)
+      }
+    },
+    dismissButton = {
+      TextButton(onClick = onDismiss) {
+        Text("No", color = Color.White)
+      }
+    }
+  )
 }
 
 @Composable
