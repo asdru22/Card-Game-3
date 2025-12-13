@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class BattleViewModel(
-  initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList())),
-  initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList()))
+  initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
+  initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false))
 ) : ViewModel() {
 
   var leftTeam by mutableStateOf(initialLeftTeam)
@@ -382,13 +382,52 @@ class BattleViewModel(
     if (onSameTeam) {
       if (source.isStunned) return
 
-      source.passiveAnimTrigger++
-      delay(150)
-      source.entity.passiveAbility.effect(source, target)
-      delay(150)
+      source.currentActiveCharges = 0
+
+      val ability = source.entity.passiveAbility
+
+      if (ability.charges > 1) {
+        source.currentPassiveCharges++
+        source.chargeAnimTrigger++
+        delay(300)
+
+        if (source.currentPassiveCharges >= ability.charges) {
+          delay(400)
+          source.currentPassiveCharges = 0
+
+          source.passiveAnimTrigger++
+          delay(150)
+          ability.effect(source, target)
+          delay(150)
+        }
+      } else {
+        source.passiveAnimTrigger++
+        delay(150)
+        ability.effect(source, target)
+        delay(150)
+      }
+
     } else {
-      source.entity.activeAbility.effect(source, target)
-      delay(200)
+      source.currentPassiveCharges = 0
+
+      val ability = source.entity.activeAbility
+
+      if (ability.charges > 1) {
+        source.currentActiveCharges++
+        source.chargeAnimTrigger++
+        delay(300)
+
+        if (source.currentActiveCharges >= ability.charges) {
+          delay(400)
+          source.currentActiveCharges = 0
+
+          ability.effect(source, target)
+          delay(200)
+        }
+      } else {
+        ability.effect(source, target)
+        delay(200)
+      }
     }
   }
 }

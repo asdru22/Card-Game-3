@@ -139,4 +139,6 @@
     <string name="ability_refactoring">Refactoring</string>
     <string name="ability_refactoring_desc">Converte tutti i potenziamenti nemici in depotenziamenti casuali che durano %s turni</string>
     <string name="ability_code_review_desc">Attacca il bersaglio e applica %s per %s turni</string>
+    <string name="weather_eruption">Eruzione</string>
+    <string name="weather_eruption_desc">Ogni squadra guadagna %s furia alla fine di un turno</string>
 </resources>

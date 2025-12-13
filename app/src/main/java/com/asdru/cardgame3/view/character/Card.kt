@@ -12,7 +12,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -31,7 +30,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -58,7 +56,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Popup
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.launch
@@ -87,6 +84,7 @@ fun CharacterCard(
 
   val scaleX = remember { Animatable(1f) }
   val scaleY = remember { Animatable(1f) }
+  val rotationZ = remember { Animatable(0f) }
 
   LaunchedEffect(viewModel.hitAnimTrigger) {
     if (viewModel.hitAnimTrigger > 0) {
@@ -110,10 +108,50 @@ fun CharacterCard(
     }
   }
 
+  LaunchedEffect(viewModel.chargeAnimTrigger) {
+    if (viewModel.chargeAnimTrigger > 0) {
+      launch {
+        rotationZ.animateTo(360f, tween(300))
+        rotationZ.snapTo(0f)
+      }
+    }
+  }
+
   Box(
     modifier = Modifier
       .width(width)
       .height(height)
+      .graphicsLayer {
+        this.translationX = animatedOffset.x
+        this.translationY = animatedOffset.y
+        this.scaleX = scaleX.value
+        this.scaleY = scaleY.value
+        this.rotationZ = rotationZ.value
+      }
+      .pointerInput(Unit) {
+        detectTapGestures(
+          onDoubleTap = { if (viewModel.isAlive) onDoubleTap(viewModel) },
+          onLongPress = { onPressStatus(viewModel, true) },
+          onPress = {
+            tryAwaitRelease()
+            onPressStatus(viewModel, false)
+          }
+        )
+      }
+      .pointerInput(Unit) {
+        detectDragGestures(
+          onDragStart = { offset -> onDragStart(viewModel, offset) },
+          onDrag = { change, dragAmount ->
+            change.consume()
+            onDrag(dragAmount)
+          },
+          onDragEnd = { onDragEnd() },
+          onDragCancel = { onDragEnd() }
+        )
+      }
+      .onGloballyPositioned { coordinates ->
+        onCardPositioned(viewModel, coordinates.boundsInRoot())
+      }
       .then(
         if (highlightColor != Color.Transparent) {
           Modifier.drawBehind {
@@ -124,7 +162,6 @@ fun CharacterCard(
               15.dp.toPx(),
               BlurMaskFilter.Blur.NORMAL
             )
-
             drawIntoCanvas { canvas ->
               canvas.drawOutline(
                 outline = cardShape.createOutline(size, layoutDirection, this),
@@ -139,52 +176,10 @@ fun CharacterCard(
       shape = cardShape,
       modifier = Modifier
         .fillMaxSize()
-        .graphicsLayer {
-          this.translationX = animatedOffset.x
-          this.translationY = animatedOffset.y
-          this.scaleX = scaleX.value
-          this.scaleY = scaleY.value
-        }
-        .onGloballyPositioned { coordinates ->
-          onCardPositioned(viewModel, coordinates.boundsInRoot())
-        }
         .then(
           if (canAct) Modifier.border(2.dp, Color.White, cardShape)
           else Modifier
-        )
-        .pointerInput(Unit) {
-          detectTapGestures(
-            onDoubleTap = {
-              if (viewModel.isAlive) {
-                onDoubleTap(viewModel)
-              }
-            },
-            onLongPress = {
-              onPressStatus(viewModel, true)
-            },
-            onPress = {
-              tryAwaitRelease()
-              onPressStatus(viewModel, false)
-            }
-          )
-        }
-        .pointerInput(Unit) {
-          detectDragGestures(
-            onDragStart = { offset ->
-              onDragStart(viewModel, offset)
-            },
-            onDrag = { change, dragAmount ->
-              change.consume()
-              onDrag(dragAmount)
-            },
-            onDragEnd = {
-              onDragEnd()
-            },
-            onDragCancel = {
-              onDragEnd()
-            }
-          )
-        },
+        ),
       colors = CardDefaults.cardColors(containerColor = Color(0xFF2D2D2D)),
       elevation = CardDefaults.cardElevation(8.dp)
     ) {
@@ -222,6 +217,65 @@ fun CharacterCard(
         }
       }
     }
+
+    val isLeftTeam = viewModel.team.team.left
+    val alignment = if (isLeftTeam) Alignment.CenterEnd else Alignment.CenterStart
+    val hasActiveCharges = viewModel.currentActiveCharges > 0
+    val hasPassiveCharges = viewModel.currentPassiveCharges > 0
+
+    if (hasActiveCharges || hasPassiveCharges) {
+      val xOffset = if (isLeftTeam) 10.dp else (-10).dp
+
+      Column(
+        modifier = Modifier
+          .align(alignment)
+          .offset(x = xOffset)
+          .clip(CircleShape)
+          .background(Color(0xFF171717))
+          .padding(vertical = 3.dp, horizontal = 3.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        if (hasActiveCharges) {
+          ChargeDots(
+            current = viewModel.currentActiveCharges,
+            max = viewModel.entity.activeAbility.charges,
+            activeColor = Color(0xFF66BB6A)
+          )
+        }
+
+        if (hasActiveCharges && hasPassiveCharges) {
+          Spacer(modifier = Modifier.height(4.dp))
+        }
+
+        if (hasPassiveCharges) {
+          ChargeDots(
+            current = viewModel.currentPassiveCharges,
+            max = viewModel.entity.passiveAbility.charges,
+            activeColor = Color(0xFF42A5F5)
+          )
+        }
+      }
+    }
+  }
+}
+
+@Composable
+fun ChargeDots(current: Int, max: Int, activeColor: Color) {
+  Column(
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center
+  ) {
+    repeat(max) { index ->
+      val isCharged = index < current
+      Box(
+        modifier = Modifier
+          .padding(vertical = 1.dp)
+          .size(12.dp)
+          .clip(CircleShape)
+          .background(if (isCharged) activeColor else Color(0xFF969696))
+      )
+    }
   }
 }
 
@@ -252,54 +306,6 @@ fun StatsBar(viewModel: EntityViewModel) {
           .fillMaxWidth(hpPercent)
           .fillMaxHeight()
           .background(barColor)
-      )
-    }
-  }
-}
-
-@Composable
-fun StatsView(viewModel: EntityViewModel) {
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    modifier = Modifier.height(IntrinsicSize.Min)
-  ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-      Icon(
-        painter = painterResource(id = R.drawable.health),
-        contentDescription = "Health",
-        tint = Color(0xFFEF5350),
-        modifier = Modifier.size(16.dp)
-      )
-      Spacer(modifier = Modifier.width(4.dp))
-      Text(
-        text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
-        color = Color.White,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold
-      )
-    }
-
-    VerticalDivider(
-      modifier = Modifier
-        .padding(horizontal = 12.dp)
-        .fillMaxHeight(0.6f),
-      color = Color.Gray.copy(alpha = 0.5f),
-      thickness = 1.dp
-    )
-
-    Row(verticalAlignment = Alignment.CenterVertically) {
-      Icon(
-        painter = painterResource(id = R.drawable.attack_damage),
-        contentDescription = "Damage",
-        tint = Color(0xFFFFCA28),
-        modifier = Modifier.size(16.dp)
-      )
-      Spacer(modifier = Modifier.width(4.dp))
-      Text(
-        text = "${viewModel.damage.toInt()}",
-        color = Color.White,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold
       )
     }
   }

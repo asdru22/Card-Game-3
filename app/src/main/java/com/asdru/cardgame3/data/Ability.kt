@@ -8,6 +8,7 @@ data class Ability(
   @get:StringRes override val nameRes: Int,
   @get:StringRes override val descriptionRes: Int,
   override val formatArgs: List<Any> = emptyList(),
+  val charges: Int = 1,
   private val onEffect: suspend (source: EntityViewModel, target: EntityViewModel) -> Unit
 ) : Translatable {
 
@@ -34,5 +35,4 @@ data class Ability(
     }
     return context.getString(descriptionRes, *processedArgs.toTypedArray())
   }
-
 }

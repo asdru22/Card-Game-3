@@ -32,6 +32,9 @@ class EntityViewModel(
   var health by mutableFloatStateOf(entity.initialStats.maxHealth)
   var maxHealth by mutableFloatStateOf(entity.initialStats.maxHealth)
 
+  var currentActiveCharges by mutableIntStateOf(0)
+  var currentPassiveCharges by mutableIntStateOf(0)
+  var chargeAnimTrigger by mutableIntStateOf(0)
   val statusEffects = mutableStateListOf<StatusEffect>()
   val popups = mutableStateListOf<Popup>()
   private var popupIdCounter = 0L

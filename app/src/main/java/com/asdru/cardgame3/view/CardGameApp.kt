@@ -42,8 +42,8 @@ fun CardGameApp(
     p2Entities: List<Entity>,
     weatherEnabled: Boolean
   ) {
-    val p1Team = Team(p1Name, p1Entities)
-    val p2Team = Team(p2Name, p2Entities)
+    val p1Team = Team(p1Name, p1Entities, true)
+    val p2Team = Team(p2Name, p2Entities, false)
 
     val leftTeamVM = TeamViewModel(p1Team)
     val rightTeamVM = TeamViewModel(p2Team)
