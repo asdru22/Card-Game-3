@@ -53,6 +53,8 @@ class EntityViewModel(
 
   var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
 
+  private var popupPlacementIndex = 0
+  private val popupSlots = listOf(0f, 30f, -30f, 50f, -50f)
   fun recalculateStats() {
     var newDamage = baseDamage
     statusEffects.forEach { effect ->
@@ -75,7 +77,13 @@ class EntityViewModel(
   }
 
   fun getXOffset(): Float {
-    return Random.nextInt(-20, 60).toFloat()
+    val baseOffset = popupSlots[popupPlacementIndex % popupSlots.size]
+
+    popupPlacementIndex++
+
+    val jitter = Random.nextInt(-5, 6).toFloat()
+
+    return baseOffset + jitter
   }
 
   fun addPopup(amount: Float, color: Color = Color.Red) {

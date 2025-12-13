@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.trait
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import kotlinx.coroutines.delay
 
 class Executioner : Trait {
   override val nameRes: Int = R.string.trait_executioner
@@ -16,7 +17,12 @@ class Executioner : Trait {
     overkill: Float
   ) {
     if (target.isAlive && target.health <= THRESHOLD) {
-      owner.addPopup(R.string.game_execute, Color.White)
+      delay(300)
+
+      target.addPopup(R.string.game_execute, Color.White)
+
+      delay(100)
+
       target.receiveDamage(
         amount = target.health,
         source = owner
