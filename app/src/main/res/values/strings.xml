@@ -140,4 +140,6 @@
     <string name="ability_refactoring">Refactoring</string>
     <string name="ability_refactoring_desc">Convert all enemy buffs into random debuffs that last %s turns</string>
     <string name="ability_code_review_desc">Attack the target and apply %s for %s turns</string>
+    <string name="weather_eruption">Eruption</string>
+    <string name="weather_eruption_desc">Every team gains %s rage at the end of a turn</string>
 </resources>
