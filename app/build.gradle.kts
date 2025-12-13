@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+  signingConfigs {
+    getByName("debug") {
+      storeFile = file("C:\\Users\\Ale\\Documents\\GitHub\\CardGame3\\cardgame3_keys")
+      storePassword = "asdru22"
+      keyAlias = "key0"
+      keyPassword = "asdru22"
+    }
+  }
   namespace = "com.asdru.cardgame3"
   compileSdk {
     version = release(36)
