@@ -141,4 +141,20 @@
     <string name="ability_code_review_desc">Attacca il bersaglio e applica %s per %s turni</string>
     <string name="weather_eruption">Eruzione</string>
     <string name="weather_eruption_desc">Ogni squadra guadagna %s furia alla fine di un turno</string>
+    <string name="trait_juggernaut">Titano</string>
+    <string name="trait_juggernaut_desc">Non può ricevere più di %s danni</string>
+    <string name="effect_defiance">Sfida</string>
+    <string name="effect_defiance_desc">Sopravvive con 1 salute quando riceve danni fatali</string>
+    <string name="ability_slam">Schianto</string>
+    <string name="ability_slam_desc">Danneggia e applica %s al bersaglio per %s turni. Carica: %s turni</string>
+    <string name="ability_distribution">Distribuzione</string>
+    <string name="ability_distribution_desc">Il bersaglio subisce il %s%% della sua salute massima come danno, ma tutti i nemici ricevono lo stesso danno</string>
+    <string name="ability_salvation">Salvezza</string>
+    <string name="ability_salvation_desc">Applica %s per %s turni all\'alleato con meno salute</string>
+    <string name="trait_firewall">Firewall</string>
+    <string name="trait_firewall_desc">Non può ricevere alcun effetto positivo o negativo</string>
+    <string name="game_firewall">Firewall!</string>
+    <string name="game_juggernaut">Titano!</string>
+    <string name="ui_share_via">Condividi con</string>
+    <string name="ui_share_game">Gioca a Card Game 3 su Android! Scaricalo qua: %s</string>
 </resources>

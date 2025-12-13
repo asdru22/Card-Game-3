@@ -15,9 +15,6 @@ import com.asdru.cardgame3.view.battle.BattleScreen
 import com.asdru.cardgame3.view.CardGameApp
 import com.asdru.cardgame3.viewModel.BattleViewModel
 
-enum class AppScreen {
-  MENU, SELECTION, STRATEGIC_SELECTION, GAME
-}
 
 class MainActivity : ComponentActivity() {
 

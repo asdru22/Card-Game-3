@@ -142,4 +142,21 @@
     <string name="ability_code_review_desc">Attack the target and apply %s for %s turns</string>
     <string name="weather_eruption">Eruption</string>
     <string name="weather_eruption_desc">Every team gains %s rage at the end of a turn</string>
+    <string name="trait_juggernaut">Juggernaut</string>
+    <string name="trait_juggernaut_desc">Cannot receive more than %s damage</string>
+    <string name="effect_defiance">Defiance</string>
+    <string name="effect_defiance_desc">Survives with 1 health when receiving fatal damage</string>
+    <string name="ability_slam">Slam</string>
+    <string name="ability_slam_desc">Damage and apply %s to the target for %s turns. Charge: %s turns</string>
+    <string name="ability_distribution">Distribution</string>
+    <string name="ability_distribution_desc">Target takes %s%% of their max health as damage, but all enemies receive the same damage</string>
+    <string name="ability_salvation">Salvation</string>
+    <string name="ability_salvation_desc">Apply %s for %s turns to the ally with the least health</string>
+    <string name="entity_smithie" translatable="false">Smithie</string>
+    <string name="trait_firewall">Firewall</string>
+    <string name="trait_firewall_desc">Cannot receive any positive or negative effects</string>
+    <string name="game_firewall">Firewall!</string>
+    <string name="game_juggernaut">Juggernaut!</string>
+    <string name="ui_share_via">Share via</string>
+    <string name="ui_share_game">Play Card Game 3 on Android! Download it here: %s</string>
 </resources>

@@ -267,14 +267,26 @@ class EntityViewModel(
     get() = statusEffects.any { it is Stunned }
 
   fun addEffect(effect: StatusEffect, source: EntityViewModel?) {
-    val existingEffect = statusEffects.find { it::class == effect::class }
+    var currentEffect: StatusEffect? = effect
+
+    for (trait in traits) {
+      if (currentEffect == null) break
+      currentEffect = trait.modifyIncomingEffect(this, currentEffect, source)
+    }
+
+    if (currentEffect == null) return
+
+    val finalEffect = currentEffect
+
+    val existingEffect = statusEffects.find { it::class == finalEffect::class }
+
     if (existingEffect != null) {
-      existingEffect.duration = effect.duration
+      existingEffect.duration = finalEffect.duration
       existingEffect.source = source
     } else {
-      effect.source = source
-      statusEffects.add(effect)
-      effect.onApply(this)
+      finalEffect.source = source
+      statusEffects.add(finalEffect)
+      finalEffect.onApply(this)
       recalculateStats()
     }
   }

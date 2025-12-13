@@ -2,7 +2,6 @@ package com.asdru.cardgame3.view.mainMenu
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -38,9 +38,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.characterSelection.HowToPlayOverlay
-import androidx.core.net.toUri
 
 @Composable
 fun MainMenuScreen(
@@ -56,11 +56,20 @@ fun MainMenuScreen(
       .fillMaxSize()
       .background(Color(0xFF121212))
   ) {
+    // Existing Bottom Left Icons
     IconRow(
       Modifier
         .align(Alignment.BottomStart)
         .padding(16.dp),
       LocalContext.current
+    )
+
+    // NEW: Share Button at Bottom Right
+    ShareButton(
+      modifier = Modifier
+        .align(Alignment.BottomEnd)
+        .padding(16.dp),
+      context = LocalContext.current
     )
 
     Column(
@@ -181,7 +190,6 @@ fun IconRow(modifier: Modifier = Modifier, context: Context) {
   Row(
     modifier = modifier,
     horizontalArrangement = Arrangement.spacedBy(8.dp)
-
   ) {
     IconButton(
       onClick = {
@@ -212,5 +220,31 @@ fun IconRow(modifier: Modifier = Modifier, context: Context) {
         modifier = Modifier.fillMaxSize()
       )
     }
+  }
+}
+
+@Composable
+fun ShareButton(modifier: Modifier = Modifier, context: Context) {
+  val gameUrl = "https://github.com/asdru22/Card-Game-3/releases"
+  val shareText = stringResource(R.string.ui_share_game, gameUrl)
+  val shareTitle = stringResource(R.string.ui_share_via)
+
+  IconButton(
+    onClick = {
+      val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        putExtra(Intent.EXTRA_TEXT, shareText)
+        type = "text/plain"
+      }
+      val shareIntent = Intent.createChooser(sendIntent, shareTitle)
+      context.startActivity(shareIntent)
+    },
+    modifier = modifier.size(48.dp)
+  ) {
+    Icon(
+      imageVector = Icons.Default.Share,
+      contentDescription = "Share Game",
+      tint = Color.White,
+      modifier = Modifier.fillMaxSize()
+    )
   }
 }

@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.game.trait
 
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 interface Trait : Translatable {
@@ -14,4 +15,6 @@ interface Trait : Translatable {
   suspend fun onDidDealDamage(owner: EntityViewModel, target: EntityViewModel, amount: Float, overkill: Float = 0f) {}
   fun onDidReceiveDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float) {}
   suspend fun onDeath(owner: EntityViewModel) {}
+  fun modifyIncomingEffect(owner: EntityViewModel, effect: StatusEffect, source: EntityViewModel?): StatusEffect? =
+    effect
 }

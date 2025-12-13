@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.asdru.cardgame3.AppScreen
+import com.asdru.cardgame3.data.AppScreen
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.characterSelection.CharacterSelectionScreen
