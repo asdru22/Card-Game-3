@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.view.characterSelection.HowToPlayOverlay
 
 @Composable
 fun MainMenuScreen(

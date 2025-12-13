@@ -130,7 +130,7 @@ fun RageBar(
       ) {
         if (!isDragging) {
           Icon(
-            painter = painterResource(id = R.drawable.ultimate),
+            painter = painterResource(id = R.drawable.icon_ultimate),
             contentDescription = null,
             tint = Color.Black,
             modifier = Modifier.size(56.dp)

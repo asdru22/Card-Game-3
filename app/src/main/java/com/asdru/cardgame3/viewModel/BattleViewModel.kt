@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.viewModel
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -16,7 +17,9 @@ import com.asdru.cardgame3.game.effect.Taunt
 import com.asdru.cardgame3.game.effect.Vanish
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.weather.WeatherEvent
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -57,12 +60,16 @@ class BattleViewModel(
 
   var showExitDialog by mutableStateOf(false)
 
+  var maxTurnTimeSeconds by mutableIntStateOf(0)
+  var currentTurnTimeSeconds by mutableIntStateOf(0)
+  private var timerJob: Job? = null
 
   fun onExitClicked() {
     showExitDialog = true
   }
 
   fun onExitConfirmed() {
+    stopTimer()
     showExitDialog = false
     onRestartClicked()
   }
@@ -79,10 +86,15 @@ class BattleViewModel(
     navigateToSelection = false
   }
 
-  fun startGame(newLeftTeam: TeamViewModel, newRightTeam: TeamViewModel, weatherEnabled: Boolean) {
+  fun startGame(
+    newLeftTeam: TeamViewModel,
+    newRightTeam: TeamViewModel,
+    weatherEnabled: Boolean,
+    turnTimer: Int
+  ) {
     leftTeam = newLeftTeam
     rightTeam = newRightTeam
-
+    maxTurnTimeSeconds = turnTimer
     leftTeam.enemyTeam = rightTeam
     rightTeam.enemyTeam = leftTeam
 
@@ -119,6 +131,72 @@ class BattleViewModel(
 
     leftTeam.rage = 0f
     rightTeam.rage = 0f
+
+    startTimer()
+  }
+
+  private fun startTimer() {
+    if (maxTurnTimeSeconds <= 0) return
+
+    timerJob?.cancel()
+    currentTurnTimeSeconds = maxTurnTimeSeconds
+
+    timerJob = viewModelScope.launch {
+      while (isActive && winner == null) {
+        delay(1000)
+        if (!isActionPlaying && !showInfoDialog && !showExitDialog && !showWeatherInfo) {
+          currentTurnTimeSeconds--
+          if (currentTurnTimeSeconds <= 0) {
+            triggerTimeoutAction()
+          }
+        }
+      }
+    }
+  }
+
+  private fun stopTimer() {
+    timerJob?.cancel()
+  }
+
+  private fun resetTimer() {
+    if (maxTurnTimeSeconds > 0) {
+      currentTurnTimeSeconds = maxTurnTimeSeconds
+    }
+  }
+
+  private fun triggerTimeoutAction() {
+    if (isActionPlaying || winner != null) return
+
+    val currentTeam = if (isLeftTeamTurn) leftTeam else rightTeam
+    val capableEntities =
+      currentTeam.entities.filter { it.isAlive && !it.isStunned && !actionsTaken.contains(it) }
+
+    if (capableEntities.isEmpty()) {
+      return
+    }
+
+    val source = capableEntities.random()
+
+    val useActive = Random.nextBoolean()
+
+    var target: EntityViewModel?
+
+    target = if (useActive) {
+      currentTeam.enemyTeam.getRandomTargetableEnemy()
+    } else {
+      currentTeam.getRandomAliveMember()
+    }
+
+    if (target == null) {
+      target =
+        if (useActive) currentTeam.entities.randomOrNull() else currentTeam.enemyTeam.entities.randomOrNull()
+    }
+
+    if (target != null && target.isAlive) {
+      dragState = null
+      hoveredTarget = null
+      executeInteraction(source, target)
+    }
   }
 
   fun increaseRage(team: TeamViewModel, amount: Float) {
@@ -314,6 +392,8 @@ class BattleViewModel(
   private fun executeInteraction(source: EntityViewModel, target: EntityViewModel) {
     if (isActionPlaying || winner != null) return
 
+    resetTimer()
+
     viewModelScope.launch {
       isActionPlaying = true
       handleCardInteraction(source, target)
@@ -360,6 +440,8 @@ class BattleViewModel(
 
     actionsTaken.clear()
     isLeftTeamTurn = !isLeftTeamTurn
+
+    resetTimer()
 
     val nextTeam = if (isLeftTeamTurn) leftTeam else rightTeam
     processStartOfTurnEffects(nextTeam)

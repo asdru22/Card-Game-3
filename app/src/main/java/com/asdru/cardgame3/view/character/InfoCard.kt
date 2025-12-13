@@ -117,7 +117,7 @@ fun CharacterInfoCard(
           // 4. Health
           Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-              painter = painterResource(id = R.drawable.health),
+              painter = painterResource(id = R.drawable.icon_health),
               contentDescription = "Health",
               tint = Color(0xFFEF5350),
               modifier = Modifier.size(16.dp)
@@ -143,7 +143,7 @@ fun CharacterInfoCard(
           // 6. Damage
           Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-              painter = painterResource(id = R.drawable.attack_damage),
+              painter = painterResource(id = R.drawable.icon_attack_damage),
               contentDescription = "Damage",
               tint = Color(0xFFFFCA28),
               modifier = Modifier.size(16.dp)

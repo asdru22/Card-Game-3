@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.view.characterSelection
+package com.asdru.cardgame3.view.mainMenu
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

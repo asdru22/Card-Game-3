@@ -44,11 +44,13 @@ fun CharacterSelectionScreen(
   player1Name: String,
   player2Name: String,
   onBack: () -> Unit,
-  onStartGame: (List<Entity>, List<Entity>, Boolean) -> Unit
+  onStartGame: (List<Entity>, List<Entity>, Boolean, Int) -> Unit
 ) {
   val p1Team = remember { mutableStateListOf<Entity>() }
   val p2Team = remember { mutableStateListOf<Entity>() }
   var isWeatherMode by remember { mutableStateOf(false) }
+
+  var timerSeconds by remember { mutableStateOf(0) }
 
   val availableCharacters = remember {
     Entity::class.sealedSubclasses.map { it.createInstance() }
@@ -60,7 +62,6 @@ fun CharacterSelectionScreen(
       .background(Color(0xFF121212))
       .padding(16.dp)
   ) {
-    // Top Row: P1 | Space | Back | Start | Weather | Space | P2
     Row(
       modifier = Modifier
         .fillMaxWidth()
@@ -93,7 +94,7 @@ fun CharacterSelectionScreen(
         // Start Button
         Button(
           onClick = {
-            onStartGame(p1Team.toList(), p2Team.toList(), isWeatherMode)
+            onStartGame(p1Team.toList(), p2Team.toList(), isWeatherMode, timerSeconds)
           },
           enabled = p1Team.size == 3 && p2Team.size == 3,
           colors = ButtonDefaults.buttonColors(
@@ -111,7 +112,7 @@ fun CharacterSelectionScreen(
           )
         }
 
-        // Weather Toggle Button
+        // Weather Toggle
         IconButton(
           onClick = { isWeatherMode = !isWeatherMode }
         ) {
@@ -121,6 +122,33 @@ fun CharacterSelectionScreen(
             tint = if (isWeatherMode) Color(0xFF2196F3) else Color.Gray,
             modifier = Modifier.size(24.dp)
           )
+        }
+
+        Button(
+          onClick = {
+            timerSeconds = when(timerSeconds) {
+              0 -> 10
+              10 -> 30
+              30 -> 60
+              else -> 0
+            }
+          },
+          colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+          contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+        ) {
+          Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(
+              painter = painterResource(id = R.drawable.icon_timer),
+              contentDescription = "Timer",
+              tint = if (timerSeconds > 0) Color(0xFFFF9800) else Color.Gray,
+              modifier = Modifier.size(20.dp)
+            )
+            Text(
+              text = if(timerSeconds > 0) "${timerSeconds}s" else "OFF",
+              color = if (timerSeconds > 0) Color(0xFFFF9800) else Color.Gray,
+              fontSize = 10.sp
+            )
+          }
         }
       }
 
