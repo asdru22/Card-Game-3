@@ -128,4 +128,16 @@
     <string name="weather_electric_storm_desc">%s%% chance each turn to strike a random chard with lightning for %s damage</string>
     <string name="effect_battery_level">Battery Level</string>
     <string name="effect_battery_level_desc">The current charge level of your device</string>
+    <string name="trait_executioner">Executioner</string>
+    <string name="trait_executioner_desc">If an attack leaves an enemy with %s health or less, it will instantly die</string>
+    <string name="game_execute">Executed!</string>
+    <string name="effect_judgement">Judgement</string>
+    <string name="effect_judgement_desc">Damage dealt by the effect applier to this target is increased by %s%%</string>
+    <string name="entity_the_magnet">The Magnet</string>
+    <string name="ability_code_review">Code Review</string>
+    <string name="ability_copy_my_code">Copy My Code</string>
+    <string name="ability_copy_my_code_desc">Force the target to perform your active ability on a random enemy</string>
+    <string name="ability_refactoring">Refactoring</string>
+    <string name="ability_refactoring_desc">Convert all enemy buffs into random debuffs that last %s turns</string>
+    <string name="ability_code_review_desc">Attack the target and apply %s for %s turns</string>
 </resources>

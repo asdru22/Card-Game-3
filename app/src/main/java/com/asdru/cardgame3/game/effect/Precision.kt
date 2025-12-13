@@ -21,7 +21,7 @@ class Precision(duration: Int) : StatusEffect(
 
   override fun modifyDamage(currentDamage: Float): Float {
     return if (ownerDamageType == DamageType.Ranged) {
-      currentDamage * ((100 + DAMAGE_INCREASE) / 100)
+      currentDamage * (1 + DAMAGE_INCREASE / 100f)
     } else {
       currentDamage
     }

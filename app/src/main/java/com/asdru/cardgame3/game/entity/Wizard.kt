@@ -29,7 +29,7 @@ class Wizard : Entity(
       val enemies = target.team.getTargetableEnemies()
       if (enemies.isNotEmpty()) {
         val randomEnemy = enemies.random()
-        val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100
+        val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100f
         target.withTemporaryDamage(reducedDamage) {
           target.entity.activeAbility.effect(target, randomEnemy)
         }

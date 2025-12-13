@@ -4,9 +4,9 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
-class PainLink(
+class Judgement(
   duration: Int,
-  private val linkedTarget: EntityViewModel
+  private val applier: EntityViewModel
 ) : StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
@@ -21,23 +21,21 @@ class PainLink(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    if (linkedTarget.isAlive && linkedTarget != owner && currentDamage >= 1f) {
-      val splitDamage = currentDamage * SPLIT_PERCENTAGE / 100f
-
-      linkedTarget.receiveDamage(splitDamage, source = source)
-
-      return splitDamage
+    if (applier.isAlive && source == applier) {
+      val new = currentDamage * (1 + DAMAGE_MULTIPLIER / 100f)
+      println("NEW" + new + "OLD "+ currentDamage)
+      return new
     }
     return currentDamage
   }
 
   companion object Spec : Translatable {
-    val iconRes = R.drawable.effect_pain_link
-    override val formatArgs = listOf(SPLIT_PERCENTAGE)
-    override val nameRes = R.string.effect_pain_link
-    override val descriptionRes = R.string.effect_pain_link_desc
+    val iconRes = R.drawable.effect_judgement
+    override val formatArgs = listOf(DAMAGE_MULTIPLIER)
+    override val nameRes = R.string.effect_judgement
+    override val descriptionRes = R.string.effect_judgement_desc
     override val isPositive = true
 
-    private const val SPLIT_PERCENTAGE = 50
+    private const val DAMAGE_MULTIPLIER = 30
   }
 }

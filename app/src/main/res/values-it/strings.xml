@@ -123,4 +123,20 @@
     <string name="weather_fog">Nebbia</string>
     <string name="weather_fog_desc">Tutti gli attacchi hanno il %s%% di probailità di mancare</string>
     <string name="game_miss">Mancato!</string>
+    <string name="weather_electric_storm">Tempesta Elettrica</string>
+    <string name="weather_electric_storm_desc">%s%% di probabilità ogni turno di colpire un personaggio casuale con un fulmine per %s danni</string>
+    <string name="effect_battery_level">Livello Batteria</string>
+    <string name="effect_battery_level_desc">Il livello di carica attuale del tuo dispositivo</string>
+    <string name="trait_executioner">Boia</string>
+    <string name="trait_executioner_desc">Se un attacco lascia un nemico con %s salute o meno, morirà istantaneamente</string>
+    <string name="game_execute">Giustiziato!</string>
+    <string name="effect_judgement">Giudizio</string>
+    <string name="effect_judgement_desc">I danni inflitti da chi ha applicato l\'effetto a questo bersaglio sono aumentati del %s%%</string>
+    <string name="entity_the_magnet">Il Magnete</string>
+    <string name="ability_code_review">Revisione Codice</string>
+    <string name="ability_copy_my_code">Copia il Mio Codice</string>
+    <string name="ability_copy_my_code_desc">Forza il bersaglio a eseguire la tua abilità attiva su un nemico casuale</string>
+    <string name="ability_refactoring">Refactoring</string>
+    <string name="ability_refactoring_desc">Converte tutti i potenziamenti nemici in depotenziamenti casuali che durano %s turni</string>
+    <string name="ability_code_review_desc">Attacca il bersaglio e applica %s per %s turni</string>
 </resources>

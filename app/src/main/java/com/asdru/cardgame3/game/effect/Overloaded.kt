@@ -14,7 +14,7 @@ class Overloaded(duration: Int) : StatusEffect(
 ) {
 
   override fun modifyDamage(currentDamage: Float): Float {
-    return currentDamage * ((100 + DAMAGE_INCREASE) / 100)
+    return currentDamage * (1f + DAMAGE_INCREASE / 100f)
   }
 
   override suspend fun modifyIncomingDamage(
@@ -22,7 +22,7 @@ class Overloaded(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    return currentDamage * ((100 + DAMAGE_INCREASE) / 100)
+    return currentDamage * (1f + DAMAGE_INCREASE / 100f)
   }
 
   companion object Spec : Translatable {

@@ -17,12 +17,13 @@ class Bursting(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
+    owner.removeEffect<Bursting>()
+
     owner.applyDamageToTargets(
       source?.team?.getAliveMembers() ?: emptyList(),
       BURSTING_DAMAGE,
       playAttackAnimation = false
     )
-    owner.removeEffect<Bursting>()
     return currentDamage
   }
 

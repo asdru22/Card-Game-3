@@ -17,7 +17,7 @@ class Protection(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    return currentDamage * ((100 - DAMAGE_REDUCTION_PERCENTAGE) / 100)
+    return currentDamage * (1 - DAMAGE_REDUCTION_PERCENTAGE / 100f)
   }
 
   companion object Spec : Translatable {
