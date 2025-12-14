@@ -71,7 +71,6 @@ fun CharacterCard(
   onDrag: (Offset) -> Unit,
   onDragEnd: () -> Unit,
   onDoubleTap: (EntityViewModel) -> Unit,
-  onPressStatus: (EntityViewModel, Boolean) -> Unit,
   highlightColor: Color = Color.Transparent
 ) {
   val cardShape = RoundedCornerShape(12.dp)
@@ -131,11 +130,6 @@ fun CharacterCard(
       .pointerInput(Unit) {
         detectTapGestures(
           onDoubleTap = { if (viewModel.isAlive) onDoubleTap(viewModel) },
-          onLongPress = { onPressStatus(viewModel, true) },
-          onPress = {
-            tryAwaitRelease()
-            onPressStatus(viewModel, false)
-          }
         )
       }
       .pointerInput(Unit) {

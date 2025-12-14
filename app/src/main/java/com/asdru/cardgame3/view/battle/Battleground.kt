@@ -150,8 +150,7 @@ fun BattleScreen(viewModel: BattleViewModel) {
     }
 
     if (
-      viewModel.maxTurnTimeSeconds > 0 &&
-      viewModel.currentTurnTimeSeconds <= 5 &&
+      viewModel.currentTurnTimeSeconds in 1..5 &&
       viewModel.winner == null
     ) {
       RemainingTime(viewModel.currentTurnTimeSeconds)
@@ -235,7 +234,7 @@ fun ModifiersRow(modifier: Modifier = Modifier, viewModel: BattleViewModel) {
       )
     }
 
-    if (viewModel.maxTurnTimeSeconds > 0) {
+    if (viewModel.currentTurnTimeSeconds > 0) {
       Spacer(modifier = Modifier.width(16.dp))
       Box(
         modifier = Modifier

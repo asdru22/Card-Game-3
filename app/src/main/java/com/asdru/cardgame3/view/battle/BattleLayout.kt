@@ -65,7 +65,6 @@ fun BattleLayout(
         onDrag = viewModel::onDrag,
         onDragEnd = viewModel::onDragEnd,
         onDoubleTap = viewModel::onDoubleTap,
-        onPressStatus = viewModel::onPressStatus,
         getHighlightColor = viewModel::getHighlightColor
       )
 
@@ -88,7 +87,6 @@ fun BattleLayout(
         onDrag = viewModel::onDrag,
         onDragEnd = viewModel::onDragEnd,
         onDoubleTap = viewModel::onDoubleTap,
-        onPressStatus = viewModel::onPressStatus,
         getHighlightColor = viewModel::getHighlightColor
       )
     }

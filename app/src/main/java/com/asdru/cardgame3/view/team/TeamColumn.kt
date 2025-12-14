@@ -25,7 +25,6 @@ fun TeamColumn(
   onDrag: (Offset) -> Unit,
   onDragEnd: () -> Unit,
   onDoubleTap: (EntityViewModel) -> Unit,
-  onPressStatus: (EntityViewModel, Boolean) -> Unit,
   getHighlightColor: (EntityViewModel) -> Color
 ) {
   Column(
@@ -44,7 +43,6 @@ fun TeamColumn(
         onDrag = onDrag,
         onDragEnd = onDragEnd,
         onDoubleTap = onDoubleTap,
-        onPressStatus = onPressStatus,
         highlightColor = getHighlightColor(entityVM)
       )
     }
