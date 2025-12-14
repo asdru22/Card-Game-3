@@ -6,6 +6,9 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.trait.Overkill
+import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.viewModel.heal
+import com.asdru.cardgame3.viewModel.withTemporaryDamage
 
 class Wizard : Entity(
   name = R.string.entity_wizard,
@@ -45,7 +48,7 @@ class Wizard : Entity(
   ) { source, _ ->
     source.team.getAliveMembers().forEach {
       it.heal(ULTIMATE_HEAL_AMOUNT)
-      it.clearNegativeEffects()
+      it.effectManager.clearNegative(it)
     }
   },
   damageType = DamageType.Magic,

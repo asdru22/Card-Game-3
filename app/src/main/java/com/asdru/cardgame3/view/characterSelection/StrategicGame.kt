@@ -64,7 +64,6 @@ fun StrategicSelectionScreen(
       modifier = Modifier.fillMaxSize(),
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      // Modular Header with Dynamic Turn Logic
       SelectionHeader(
         p1Name = player1Name,
         p2Name = player2Name,
@@ -92,7 +91,7 @@ fun StrategicSelectionScreen(
         }
       )
 
-      // Grid Section
+
       LazyVerticalGrid(
         columns = GridCells.Fixed(6),
         contentPadding = PaddingValues(16.dp),

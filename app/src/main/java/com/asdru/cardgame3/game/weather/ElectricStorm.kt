@@ -6,6 +6,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.system.BatteryMonitor
 import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.receiveDamage
 
 class ElectricStorm : WeatherEvent(
   nameRes = R.string.weather_electric_storm,

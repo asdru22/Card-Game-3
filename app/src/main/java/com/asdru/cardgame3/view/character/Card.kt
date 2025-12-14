@@ -212,7 +212,7 @@ fun CharacterCard(
 
         StatsBar(viewModel)
 
-        if (viewModel.statusEffects.isNotEmpty()) {
+        if (viewModel.effectManager.effects.isNotEmpty()) {
           ActiveEffects(viewModel)
         }
       }
@@ -320,7 +320,7 @@ fun ActiveEffects(viewModel: EntityViewModel) {
       .fillMaxWidth()
       .horizontalScroll(rememberScrollState())
   ) {
-    viewModel.statusEffects.forEach { effect ->
+    viewModel.effectManager.effects.forEach { effect ->
       Box(
         contentAlignment = Alignment.BottomEnd,
         modifier = Modifier

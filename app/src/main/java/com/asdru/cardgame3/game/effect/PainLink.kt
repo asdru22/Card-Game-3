@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.effect
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.receiveDamage
 
 class PainLink(
   duration: Int,

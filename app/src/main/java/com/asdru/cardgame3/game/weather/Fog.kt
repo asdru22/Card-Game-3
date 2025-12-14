@@ -2,7 +2,6 @@ package com.asdru.cardgame3.game.weather
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.game.effect.Strength
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.random.Random
 
@@ -20,7 +19,7 @@ class Fog() : WeatherEvent(
     amount: Float
   ): Float {
     if (Random.nextFloat() < (DODGE_CHANCE / 100)) {
-      owner.addPopup(R.string.game_miss)
+      owner.popupManager.add(R.string.game_miss)
       return 0f
     }
     return amount

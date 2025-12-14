@@ -3,331 +3,72 @@ package com.asdru.cardgame3.viewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.asdru.cardgame3.game.effect.StatusEffect
-import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.entity.Entity
-import com.asdru.cardgame3.data.Popup
-import com.asdru.cardgame3.game.trait.Forsaken
 import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.game.weather.WeatherEvent
-import kotlinx.coroutines.delay
-import kotlin.random.Random
+import com.asdru.cardgame3.manager.EntityEffectManager
+import com.asdru.cardgame3.manager.EntityPopupManager
 
 class EntityViewModel(
   val entity: Entity
 ) : ViewModel() {
+
+  val popupManager = EntityPopupManager()
+  val effectManager = EntityEffectManager(onEffectsChanged = { recalculateStats() })
+
   lateinit var team: TeamViewModel
+
   private var baseDamage = entity.initialStats.damage
 
   var damage by mutableFloatStateOf(baseDamage)
-    private set
+    internal set
 
   var health by mutableFloatStateOf(entity.initialStats.maxHealth)
   var maxHealth by mutableFloatStateOf(entity.initialStats.maxHealth)
 
   var currentActiveCharges by mutableIntStateOf(0)
   var currentPassiveCharges by mutableIntStateOf(0)
-  var chargeAnimTrigger by mutableIntStateOf(0)
-  val statusEffects = mutableStateListOf<StatusEffect>()
-  val popups = mutableStateListOf<Popup>()
-  private var popupIdCounter = 0L
 
-  // Animation States
   var attackAnimOffset by mutableStateOf<Offset?>(null)
   var hitAnimTrigger by mutableIntStateOf(0)
   var passiveAnimTrigger by mutableIntStateOf(0)
-
-  val isAlive: Boolean
-    get() = health > 0
-
-  val name: Int = entity.name
-  val color: Color = entity.color
-  val damageType: DamageType = entity.damageType
-
-  val iconRes: Int = entity.iconRes
-  val traits: List<Trait> get() = entity.traits
+  var chargeAnimTrigger by mutableIntStateOf(0)
 
   var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
 
-  private var popupPlacementIndex = 0
-  private val popupSlots = listOf(0f, 30f, -30f, 50f, -50f)
+  val isAlive: Boolean get() = health > 0
+  val name: Int = entity.name
+  val color: Color = entity.color
+  val damageType: DamageType = entity.damageType
+  val iconRes: Int = entity.iconRes
+  val traits: List<Trait> get() = entity.traits
+
+  var onGetWeather: (() -> WeatherEvent?)? = null
+
   fun recalculateStats() {
     var newDamage = baseDamage
-    statusEffects.forEach { effect ->
+    effectManager.effects.forEach { effect ->
       newDamage = effect.modifyDamage(newDamage)
     }
-
     damage = newDamage
-  }
-
-  fun addPopup(text: String, color: Color = Color.Red, isStatus: Boolean = true) {
-    val id = popupIdCounter++
-    val xOffset = getXOffset()
-    popups.add(Popup(id = id, text = text, color = color, xOffset = xOffset, isStatus = isStatus))
-  }
-
-  fun addPopup(textRes: Int, color: Color = Color.White) {
-    val id = popupIdCounter++
-    val xOffset = getXOffset()
-    popups.add(Popup(id = id, textRes = textRes, color = color, xOffset = xOffset, isStatus = true))
-  }
-
-  fun getXOffset(): Float {
-    val baseOffset = popupSlots[popupPlacementIndex % popupSlots.size]
-
-    popupPlacementIndex++
-
-    val jitter = Random.nextInt(-5, 6).toFloat()
-
-    return baseOffset + jitter
-  }
-
-  fun addPopup(amount: Float, color: Color = Color.Red) {
-    val sign = if (color == Color.Green) "+" else "-"
-    addPopup("$sign${amount.toInt()}", color, isStatus = false)
   }
 
   inline fun applyTraits(action: (Trait) -> Unit) {
     traits.forEach(action)
   }
 
-  suspend fun receiveDamage(amount: Float, source: EntityViewModel? = null): Float {
-    var actualDamage = amount
-
-    onGetWeather?.invoke()?.let { weather ->
-      actualDamage = weather.modifyIncomingDamage(this, source, actualDamage)
-    }
-
-    statusEffects.toList().forEach { effect ->
-      actualDamage = effect.modifyIncomingDamage(this, actualDamage, source)
-    }
-
-    applyTraits { trait ->
-      actualDamage = trait.modifyIncomingDamage(this, source, actualDamage)
-    }
-
-    if (actualDamage > 0) {
-      if (source != null) {
-        hitAnimTrigger++
-      }
-
-      val wasAlive = isAlive
-
-      val overkill = (actualDamage - health).coerceAtLeast(0f)
-      health = (health - actualDamage).coerceAtLeast(0f)
-      addPopup(actualDamage, Color.Red)
-
-      if (wasAlive && !isAlive) {
-        applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
-        applyTraits { it.onDeath(this) }
-        clearAllEffects()
-      } else if (isAlive) {
-        applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
-      }
-
-      source?.applyTraits { trait ->
-        trait.onDidDealDamage(source, this, actualDamage, overkill)
-      }
-    }
-
-    return actualDamage
-  }
-
-  suspend fun heal(
-    amount: Float,
-    source: EntityViewModel? = null,
-    repeats: Int = 1,
-    delayTime: Long = 400
-  ) {
-    if (traits.any { it is Forsaken } && source != this) {
-      return
-    }
-
-    repeat(repeats) {
-      var actualHeal = amount
-      applyTraits { trait ->
-        actualHeal = trait.modifyHeal(this, actualHeal)
-      }
-
-      health = (health + actualHeal).coerceAtMost(maxHealth)
-      addPopup(actualHeal, Color.Green)
-      if (repeats > 1) delay(delayTime)
-    }
-  }
-
-  // Apply damage
-
-  suspend fun applyDamage(
-    target: EntityViewModel,
-    amount: Float = damage,
-    repeats: Int = 1,
-    delayTime: Long = 400,
-    playAttackAnimation: Boolean = true,
-    effects: List<StatusEffect> = emptyList()
-  ): Float {
-    var totalDamage = 0f
-
-    try {
-      if (playAttackAnimation) {
-        onGetAttackOffset?.invoke(target)?.let {
-          attackAnimOffset = it
-          delay(200)
-        }
-      }
-
-      repeat(repeats) {
-        if (!target.isAlive || !isAlive) return totalDamage
-
-        var calculatedDamage = amount
-        applyTraits { trait ->
-          calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
-        }
-
-        totalDamage += target.receiveDamage(calculatedDamage, source = this)
-
-        if (repeats > 1) delay(delayTime)
-      }
-
-      if (target.isAlive && isAlive && effects.isNotEmpty()) {
-        effects.forEach { effect ->
-          target.addEffect(effect, this)
-        }
-      }
-    } finally {
-      if (playAttackAnimation && attackAnimOffset != null) {
-        attackAnimOffset = null
-        delay(200)
-      }
-    }
-
-    return totalDamage
-  }
-
-  suspend fun applyDamageToTargets(
-    targets: List<EntityViewModel>,
-    amount: Float = damage,
-    repeats: Int = 1,
-    delayTime: Long = 400,
-    playAttackAnimation: Boolean = true
-  ): Float {
-    var totalDamage = 0f
-
-    try {
-      if (playAttackAnimation && targets.isNotEmpty()) {
-        onGetAttackOffset?.invoke(targets.random())?.let {
-          attackAnimOffset = it
-          delay(200)
-        }
-      }
-
-      repeat(repeats) {
-        if (!isAlive) return totalDamage
-
-        targets.forEach { target ->
-          totalDamage += applyDamage(
-            target,
-            amount,
-            repeats = 1,
-            delayTime = 0,
-            playAttackAnimation = false
-          )
-        }
-
-        if (repeats > 1) delay(delayTime)
-      }
-    } finally {
-      if (playAttackAnimation && attackAnimOffset != null) {
-        attackAnimOffset = null
-        delay(200)
-      }
-    }
-
-    return totalDamage
-  }
-
-  suspend fun withTemporaryDamage(tempDamage: Float, block: suspend () -> Unit) {
-    val originalDamage = damage
-    damage = tempDamage
-    try {
-      block()
-    } finally {
-      damage = originalDamage
-    }
-  }
-
-  // EFFECTS
-  val isStunned: Boolean
-    get() = statusEffects.any { it is Stunned }
-
   fun addEffect(effect: StatusEffect, source: EntityViewModel?) {
-    var currentEffect: StatusEffect? = effect
-
-    for (trait in traits) {
-      if (currentEffect == null) break
-      currentEffect = trait.modifyIncomingEffect(this, currentEffect, source)
-    }
-
-    if (currentEffect == null) return
-
-    val finalEffect = currentEffect
-
-    val existingEffect = statusEffects.find { it::class == finalEffect::class }
-
-    if (existingEffect != null) {
-      existingEffect.duration = finalEffect.duration
-      existingEffect.source = source
-    } else {
-      finalEffect.source = source
-      statusEffects.add(finalEffect)
-      finalEffect.onApply(this)
-      recalculateStats()
-    }
+    effectManager.addEffect(effect, source, this)
   }
 
   fun removeEffect(effect: StatusEffect) {
-    effect.onVanish(this)
-    statusEffects.remove(effect)
-    recalculateStats()
+    effectManager.removeEffect(effect, this)
   }
-
-  inline fun <reified T : StatusEffect> removeEffect() {
-    val iterator = statusEffects.iterator()
-    while (iterator.hasNext()) {
-      val effect = iterator.next()
-      if (effect is T) {
-        effect.onVanish(this)
-        iterator.remove()
-      }
-    }
-    recalculateStats()
-  }
-
-  fun clearAllEffects(): Int {
-    return clearNegativeEffects() + clearPositiveEffects()
-  }
-
-  fun clearNegativeEffects(): Int {
-    val effectsToRemove = statusEffects.filter { !it.isPositive }
-    effectsToRemove.forEach { effect ->
-      removeEffect(effect)
-    }
-    return effectsToRemove.size
-  }
-
-  fun clearPositiveEffects(): Int {
-    val effectsToRemove = statusEffects.filter { it.isPositive }
-    effectsToRemove.forEach { effect ->
-      removeEffect(effect)
-    }
-    return effectsToRemove.size
-  }
-
-  var onGetWeather: (() -> WeatherEvent?)? = null
 }

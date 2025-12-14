@@ -2,6 +2,7 @@ package com.asdru.cardgame3.game.trait
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.applyDamageToTargets
 
 class Meltdown : Trait {
   override val nameRes: Int = R.string.trait_meltdown

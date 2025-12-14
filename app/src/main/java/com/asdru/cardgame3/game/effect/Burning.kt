@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.effect
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.receiveDamage
 
 class Burning(duration: Int) : StatusEffect(
   nameRes = nameRes,
@@ -14,7 +15,7 @@ class Burning(duration: Int) : StatusEffect(
 ) {
   override suspend fun onStartTurn(target: EntityViewModel) {
     val damage = target.maxHealth / HEALTH_PERCENTAGE
-    target.applyDamage(target, amount = damage)
+    target.receiveDamage(damage)
   }
 
   companion object Spec : Translatable {

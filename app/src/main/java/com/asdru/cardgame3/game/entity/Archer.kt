@@ -7,6 +7,8 @@ import com.asdru.cardgame3.game.effect.PainLink
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.viewModel.applyDamageToTargets
 
 class Archer : Entity(
   name = R.string.entity_archer,

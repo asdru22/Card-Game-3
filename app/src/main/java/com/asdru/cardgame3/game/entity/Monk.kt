@@ -2,11 +2,13 @@ package com.asdru.cardgame3.game.entity
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.game.trait.Ironclad
+import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.viewModel.heal
 
 class Monk : Entity(
   name = R.string.entity_monk,
@@ -40,7 +42,7 @@ class Monk : Entity(
     )
   ) { source, randomEnemy ->
     var effectsCleared = 0
-    source.team.getAliveMembers().forEach { effectsCleared += it.clearAllEffects() }
+    source.team.getAliveMembers().forEach { effectsCleared += it.effectManager.clearAll(it) }
     source.applyDamage(randomEnemy, effectsCleared * ULTIMATE_DAMAGE_MULTIPLIER)
   }
 ) {

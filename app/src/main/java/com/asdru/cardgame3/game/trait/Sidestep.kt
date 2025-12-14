@@ -15,7 +15,7 @@ class Sidestep : Trait {
     amount: Float
   ): Float {
     if (Random.nextFloat() < (DODGE_CHANCE / 100)) {
-      owner.addPopup(nameRes)
+      owner.popupManager.add(nameRes)
       return 0f
     }
     return amount

@@ -2,11 +2,12 @@ package com.asdru.cardgame3.game.entity
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.game.effect.Precision
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.game.effect.Precision
 import com.asdru.cardgame3.game.trait.QuickDraw
+import com.asdru.cardgame3.viewModel.applyDamage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

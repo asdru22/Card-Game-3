@@ -24,23 +24,18 @@ fun SelectionHeader(
   p2Color: Color = Color.Gray,
   p1Subtitle: String? = null,
   p2Subtitle: String? = null,
-  // We pass the specific control composable here
   controls: @Composable () -> Unit
 ) {
   Box(
     modifier = Modifier
       .fillMaxWidth()
       .padding(bottom = 16.dp)
-      .height(56.dp) // Fixed height to ensure alignment vertical center
+      .height(56.dp)
   ) {
-    // 1. The Controls (Z-Index 0)
-    // We let the controls fill the width so the "weights" inside the controls
-    // can calculate the true screen center.
     Box(modifier = Modifier.fillMaxSize()) {
       controls()
     }
 
-    // 2. Player 1 Info (Z-Index 1, Absolute Left)
     PlayerInfoColumn(
       name = p1Name,
       color = p1Color,
@@ -49,7 +44,6 @@ fun SelectionHeader(
       modifier = Modifier.align(Alignment.CenterStart)
     )
 
-    // 3. Player 2 Info (Z-Index 1, Absolute Right)
     PlayerInfoColumn(
       name = p2Name,
       color = p2Color,

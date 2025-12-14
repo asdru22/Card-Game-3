@@ -104,7 +104,7 @@ fun BattleScreen(viewModel: BattleViewModel) {
     )
 
     viewModel.cardBounds.forEach { (entity, rect) ->
-      entity.popups.forEach { popup ->
+      entity.popupManager.popups.forEach { popup ->
         key(popup.id) {
           Box(
             modifier = Modifier
@@ -114,7 +114,7 @@ fun BattleScreen(viewModel: BattleViewModel) {
               popup = popup,
               parentTranslation = Offset.Zero
             ) {
-              entity.popups.remove(popup)
+              entity.popupManager.popups.remove(popup)
             }
           }
         }

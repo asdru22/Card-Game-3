@@ -14,7 +14,7 @@ class Firewall : Trait {
     effect: StatusEffect,
     source: EntityViewModel?
   ): StatusEffect? {
-    owner.addPopup(R.string.game_firewall, Color.White)
+    owner.popupManager.add(R.string.game_firewall, Color.White)
     return null
   }
 }

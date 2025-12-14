@@ -169,7 +169,11 @@ class BattleViewModel(
 
     val currentTeam = if (isLeftTeamTurn) leftTeam else rightTeam
     val capableEntities =
-      currentTeam.entities.filter { it.isAlive && !it.isStunned && !actionsTaken.contains(it) }
+      currentTeam.entities.filter {
+        it.isAlive && !it.effectManager.isStunned && !actionsTaken.contains(
+          it
+        )
+      }
 
     if (capableEntities.isEmpty()) {
       return
@@ -210,7 +214,7 @@ class BattleViewModel(
 
       hoveredTarget = cardBounds.entries.firstOrNull { (entity, rect) ->
         entity.isAlive &&
-            !entity.isStunned
+            !entity.effectManager.isStunned
             && rect.contains(newPos)
             && current.team.entities.contains(entity)
       }?.key
@@ -275,11 +279,11 @@ class BattleViewModel(
         val isTargetLeft = leftTeam.entities.contains(entity)
         val isEnemy = isSourceLeft != isTargetLeft
 
-        if (isEnemy && entity.statusEffects.any { it is Vanish }) {
+        if (isEnemy && entity.effectManager.effects.any { it is Vanish }) {
           return@firstOrNull false
         }
 
-        val taunt = currentDrag.source.statusEffects.find { it is Taunt }
+        val taunt = currentDrag.source.effectManager.effects.find { it is Taunt }
         if (taunt != null && taunt.source?.isAlive == true) {
           if (isEnemy && entity != taunt.source) {
             return@firstOrNull false
@@ -357,7 +361,7 @@ class BattleViewModel(
         trait.onStartTurn(entity)
       }
 
-      val activeEffects = entity.statusEffects.toList()
+      val activeEffects = entity.effectManager.effects.toList()
       activeEffects.forEach { effect ->
         effect.onStartTurn(entity)
         if (effect.tick()) {
@@ -376,13 +380,13 @@ class BattleViewModel(
         !actionsTaken.contains(entity)
         && entity.isAlive
         && !isActionPlaying
-        && !entity.isStunned
+        && !entity.effectManager.isStunned
   }
 
   fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
     val isLeft = (team == leftTeam)
     if ((isLeft && isLeftTeamTurn) || (!isLeft && !isLeftTeamTurn)) {
-      val hasNonStunnedMember = team.getAliveMembers().any { !it.isStunned }
+      val hasNonStunnedMember = team.getAliveMembers().any { !it.effectManager.isStunned }
       if (team.rage >= team.maxRage && !isActionPlaying && winner == null && hasNonStunnedMember) {
         ultimateDragState = UltimateDragState(team, offset, offset)
       }
@@ -414,7 +418,9 @@ class BattleViewModel(
 
       val activeTeamEntities = if (isLeftTeamTurn) leftTeam.entities else rightTeam.entities
 
-      val capableEntities = activeTeamEntities.filter { it.isAlive && !it.isStunned }
+      val capableEntities = activeTeamEntities.filter {
+        it.isAlive && !it.effectManager.isStunned
+      }
 
       if (actionsTaken.containsAll(capableEntities)) {
         advanceTurn()
@@ -450,7 +456,7 @@ class BattleViewModel(
     if (winner != null) return
 
     val aliveMembers = nextTeam.entities.filter { it.isAlive }
-    if (aliveMembers.isNotEmpty() && aliveMembers.all { it.isStunned }) {
+    if (aliveMembers.isNotEmpty() && aliveMembers.all { it.effectManager.isStunned }) {
       advanceTurn()
     }
   }
@@ -462,7 +468,7 @@ class BattleViewModel(
     val onSameTeam = sourceLeft == targetLeft
 
     if (onSameTeam) {
-      if (source.isStunned) return
+      if (source.effectManager.isStunned) return
 
       source.currentActiveCharges = 0
 

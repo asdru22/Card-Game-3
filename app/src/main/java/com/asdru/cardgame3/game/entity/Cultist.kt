@@ -7,6 +7,9 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.trait.Forsaken
+import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.viewModel.applyDamageToTargets
+import com.asdru.cardgame3.viewModel.heal
 
 class Cultist : Entity(
   name = R.string.entity_cultist,
@@ -28,7 +31,7 @@ class Cultist : Entity(
     formatArgs = listOf(PASSIVE_HEAL, PASSIVE_DAMAGE)
   ) { source, target ->
     val watchedEnemies = target.team.getAliveEnemies().filter { member ->
-      member.statusEffects.any { it is Watched }
+      member.effectManager.effects.any { it is Watched }
     }
 
     target.heal(PASSIVE_HEAL * watchedEnemies.size, source)
@@ -41,7 +44,7 @@ class Cultist : Entity(
     formatArgs = listOf(ULTIMATE_MULTIPLIER, ULTIMATE_HEAL)
   ) { source, randomEnemy ->
     val watchedDuration = source.team.getAliveEnemies().sumOf { member ->
-      member.statusEffects.find { it is Watched }?.duration ?: 0
+      member.effectManager.effects.find { it is Watched }?.duration ?: 0
     }
     val dmgDealt = source.applyDamage(randomEnemy, watchedDuration * ULTIMATE_MULTIPLIER)
     source.heal(dmgDealt * ULTIMATE_HEAL / 100, source)

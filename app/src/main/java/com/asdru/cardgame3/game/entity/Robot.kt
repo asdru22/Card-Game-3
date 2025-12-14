@@ -2,13 +2,14 @@ package com.asdru.cardgame3.game.entity
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.game.effect.Electrified
-import com.asdru.cardgame3.game.effect.Overloaded
-import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.game.effect.Electrified
+import com.asdru.cardgame3.game.effect.Overloaded
+import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.game.trait.Meltdown
+import com.asdru.cardgame3.viewModel.applyDamage
 
 class Robot : Entity(
   name = R.string.entity_robot,
@@ -37,7 +38,7 @@ class Robot : Entity(
     formatArgs = listOf(Stunned.Spec, ULTIMATE_STUNNED_DURATION)
   ) { source, randomEnemy ->
     randomEnemy.team.getAliveMembers()
-      .filter { it.statusEffects.any { effect -> effect is Electrified } }
+      .filter { it.effectManager.effects.any { effect -> effect is Electrified } }
       .forEach { it.addEffect(Stunned(ULTIMATE_STUNNED_DURATION), source) }
   }
 ) {

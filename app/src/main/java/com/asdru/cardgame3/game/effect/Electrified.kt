@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.effect
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.applyDamage
 
 class Electrified(
   duration: Int, private val applier: EntityViewModel
@@ -19,10 +20,10 @@ class Electrified(
   override suspend fun onStartTurn(target: EntityViewModel) {
     target.applyDamage(target, amount = DAMAGE_AMOUNT)
     val electrifiedDuration =
-      target.statusEffects.find { it is Electrified }?.duration?.minus(
+      target.effectManager.effects.find { it is Electrified }?.duration?.minus(
         1
       )
-    target.removeEffect<Electrified>()
+    target.effectManager.removeEffect<Electrified>(target)
 
     val potentialTargets = target.team.getAliveMembers().filter { it != target }
     val newTarget = potentialTargets.randomOrNull()

@@ -207,7 +207,7 @@ fun CharacterInfoCard(
             )
           }
 
-          val hasEffects = viewModel.statusEffects.isNotEmpty()
+          val hasEffects = viewModel.effectManager.effects.isNotEmpty()
 
           if (viewModel.traits.isNotEmpty()) {
             VerticalDivider(
@@ -261,7 +261,7 @@ fun CharacterInfoCard(
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 6.dp)
               )
-              viewModel.statusEffects.forEach {
+              viewModel.effectManager.effects.forEach {
                 Effect(it, context)
               }
             }

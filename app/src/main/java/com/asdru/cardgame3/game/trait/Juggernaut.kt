@@ -14,7 +14,7 @@ class Juggernaut : Trait {
     source: EntityViewModel?,
     amount: Float
   ): Float {
-    owner.addPopup(R.string.game_juggernaut, Color.White)
+    owner.popupManager.add(R.string.game_juggernaut, Color.White)
     return amount.coerceIn(0f, MAX_DAMAGE_RECEIVED)
   }
 

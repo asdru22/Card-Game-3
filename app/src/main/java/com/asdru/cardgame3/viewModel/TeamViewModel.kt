@@ -55,7 +55,7 @@ class TeamViewModel(
 
   fun getTargetableEnemies(): List<EntityViewModel> {
     return getAliveEnemies().filter { entity ->
-      entity.statusEffects.none { it is Vanish }
+      entity.effectManager.effects.none { it is Vanish }
     }
   }
 
