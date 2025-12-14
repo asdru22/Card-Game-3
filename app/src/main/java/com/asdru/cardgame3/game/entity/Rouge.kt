@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Precision
 import com.asdru.cardgame3.game.trait.QuickDraw
@@ -20,6 +21,7 @@ class Rouge : Entity(
   color = Color(0xFFFF5722),
   damageType = DamageType.Ranged,
   traits = listOf(QuickDraw()),
+  radarStats = RadarStats(0.9f, 0.1f, 0.4f, 0.0f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_bullseye,
     descriptionRes = R.string.ability_bullseye_desc

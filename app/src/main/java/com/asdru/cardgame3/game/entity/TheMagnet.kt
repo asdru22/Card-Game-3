@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Judgement
 import com.asdru.cardgame3.game.effect.StatusEffect
@@ -17,6 +18,7 @@ class TheMagnet : Entity(
   color = Color(0xFF416C0E),
   damageType = DamageType.Melee,
   traits = listOf(Executioner()),
+  radarStats = RadarStats(0.6f, 0.2f, 0.1f, 0.8f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_code_review,
     descriptionRes = R.string.ability_code_review_desc,

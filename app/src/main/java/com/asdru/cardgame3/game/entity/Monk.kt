@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.game.trait.Ironclad
@@ -17,6 +18,7 @@ class Monk : Entity(
   color = Color(0xFFDA855D),
   damageType = DamageType.Magic,
   traits = listOf(Ironclad()),
+  radarStats = RadarStats(0.5f, 0.7f, 0.6f, 0.4f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_syphon,
     descriptionRes = R.string.ability_syphon_desc,

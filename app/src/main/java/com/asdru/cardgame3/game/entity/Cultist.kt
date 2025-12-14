@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Watched
 import com.asdru.cardgame3.game.trait.Forsaken
@@ -17,6 +18,7 @@ class Cultist : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFE91E63),
   damageType = DamageType.Magic,
+  radarStats = RadarStats(0.6f, 0.6f, 0.0f, 0.5f, 0.7f),
   traits = listOf(Forsaken()),
   activeAbility = Ability(
     nameRes = R.string.ability_bewitched,

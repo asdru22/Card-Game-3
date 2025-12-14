@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Burning
 import com.asdru.cardgame3.game.effect.PainLink
@@ -16,6 +17,7 @@ class Archer : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFF0893FF),
   damageType = DamageType.Ranged,
+  radarStats = RadarStats(0.8f, 0.3f, 0f, 0.5f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_arrow_rain,
     descriptionRes = R.string.ability_arrow_rain_desc,

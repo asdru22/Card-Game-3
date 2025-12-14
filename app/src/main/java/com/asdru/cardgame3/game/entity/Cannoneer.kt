@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Bursting
 import com.asdru.cardgame3.viewModel.applyDamage
@@ -16,6 +17,7 @@ class Cannoneer : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFF49BE00),
   damageType = DamageType.Ranged,
+  radarStats = RadarStats(0.9f, 0.2f, 0.3f, 0.1f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_scattershot,
     descriptionRes = R.string.ability_scattershot_desc,

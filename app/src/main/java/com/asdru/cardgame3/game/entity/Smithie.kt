@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Defiance
 import com.asdru.cardgame3.game.effect.Stunned
@@ -20,6 +21,7 @@ class Smithie : Entity(
   color = Color(0xFF107AD7),
   damageType = DamageType.Melee,
   traits = listOf(Juggernaut(), Firewall()),
+  radarStats = RadarStats(0.6f, 0.9f, 0.4f, 0.7f, 0.4f),
   activeAbility = Ability(
     nameRes = R.string.ability_slam,
     descriptionRes = R.string.ability_slam_desc,

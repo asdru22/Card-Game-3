@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.trait.Overkill
 import com.asdru.cardgame3.viewModel.BattleCombatLogic
@@ -16,6 +17,7 @@ class Wizard : Entity(
   iconRes = R.drawable.entity_wizard,
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFF9C27B0),
+  radarStats = RadarStats(0.7f, 0.1f, 0.5f, 0.2f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_zap,
     descriptionRes = R.string.ability_zap_desc,

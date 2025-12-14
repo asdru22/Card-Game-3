@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Protection
 import com.asdru.cardgame3.game.effect.SpikedShield
@@ -18,6 +19,7 @@ class Paladin : Entity(
   color = Color(0xFF8BC34A),
   damageType = DamageType.Melee,
   traits = listOf(Spite()),
+  radarStats = RadarStats(0.3f, 0.8f, 0.6f, 0.6f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_challenge,
     descriptionRes = R.string.ability_challenge_desc,

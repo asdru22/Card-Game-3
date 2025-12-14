@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Electrified
 import com.asdru.cardgame3.game.effect.Overloaded
@@ -18,6 +19,7 @@ class Robot : Entity(
   color = Color(0xFF44F7FD),
   damageType = DamageType.Magic,
   traits = listOf(Meltdown()),
+  radarStats = RadarStats(0.6f, 0.2f, 0.3f, 0.6f, 0.4f),
   activeAbility = Ability(
     nameRes = R.string.ability_shock_attack,
     descriptionRes = R.string.ability_shock_attack_desc,
