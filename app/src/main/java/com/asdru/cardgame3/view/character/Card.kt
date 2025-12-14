@@ -52,6 +52,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -365,18 +366,22 @@ fun PopupView(popup: Popup, parentTranslation: Offset, onComplete: () -> Unit) {
   }
 
   val displayText = if (popup.textRes != null) {
-    stringResource(id = popup.textRes) + "!"
+    stringResource(id = popup.textRes)
   } else {
-    popup.text
+    popup.text ?: ""
   }
 
   val fontSize = if (popup.isStatus) 14.sp else 28.sp
+
+  val fontStyle = if (popup.isStatus) FontStyle.Italic else FontStyle.Normal
+  val fontWeight = if (popup.isStatus) FontWeight.Normal else FontWeight.Bold
 
   Text(
     text = displayText,
     color = popup.color,
     fontSize = fontSize,
-    fontWeight = FontWeight.Bold,
+    fontStyle = fontStyle,
+    fontWeight = fontWeight,
     modifier = Modifier
       .graphicsLayer {
         translationX = parentTranslation.x

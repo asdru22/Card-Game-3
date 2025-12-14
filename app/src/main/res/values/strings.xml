@@ -97,7 +97,7 @@
     <string name="trait_meltdown_desc">Deal %s damage to all enemies before dying</string>
     <string name="effect_precision">Precision</string>
     <string name="effect_precision_desc">Ranged damage is increased by %s%%</string>
-    <string name="trait_quick_draw">Quick Draw</string>
+    <string name="trait_quick_draw">Sentry</string>
     <string name="trait_quick_draw_desc">Deal %s damage to a random enemy at the end of each turn</string>
     <string name="entity_rouge">Rouge</string>
     <string name="ability_bullseye" >Bullseye</string>
@@ -149,7 +149,7 @@
     <string name="ability_slam">Slam</string>
     <string name="ability_slam_desc">Damage and apply %s to the target for %s turns. Charge: %s turns</string>
     <string name="ability_distribution">Distribution</string>
-    <string name="ability_distribution_desc">Target takes %s%% of their max health as damage, but all enemies receive the same damage</string>
+    <string name="ability_distribution_desc">Target takes %s%% of their max health as damage, but all enemies receive the same damage. Charge: %s turns</string>
     <string name="ability_salvation">Salvation</string>
     <string name="ability_salvation_desc">Apply %s for %s turns to the ally with the least health</string>
     <string name="entity_smithie" translatable="false">Smithie</string>
@@ -159,4 +159,9 @@
     <string name="game_juggernaut">Juggernaut!</string>
     <string name="ui_share_via">Share via</string>
     <string name="ui_share_game">Play Card Game 3 on Android! Download it here: %s</string>
+    <string name="game_meltdown">Meltdown!</string>
+    <string name="game_overkill">Overkill!</string>
+    <string name="game_quick_draw">Sentry!</string>
+    <string name="game_dodge">Dodge!</string>
+    <string name="game_ironclad">Ironclad!</string>
 </resources>

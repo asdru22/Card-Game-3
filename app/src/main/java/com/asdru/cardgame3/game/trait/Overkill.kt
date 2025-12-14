@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.game.trait
 
+import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import com.asdru.cardgame3.viewModel.receiveDamage
@@ -13,6 +14,8 @@ class Overkill : Trait {
       val aliveTeammates = target.team.getAliveMembers()
       
       if (aliveTeammates.isNotEmpty()) {
+        owner.popupManager.add(R.string.game_overkill, Color.White)
+
         val damagePerTeammate = overkill / aliveTeammates.size
         
         aliveTeammates.forEach { teammate ->

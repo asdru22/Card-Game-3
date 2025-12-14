@@ -35,6 +35,7 @@ class Smithie : Entity(
   passiveAbility = Ability(
     nameRes = R.string.ability_distribution,
     descriptionRes = R.string.ability_distribution_desc,
+    charges = PASSIVE_CHARGE,
     formatArgs = listOf(
       PASSIVE_HEALTH_PERCENTAGE
     )
@@ -64,7 +65,8 @@ class Smithie : Entity(
     const val DAMAGE = 40f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGE = 3
-    const val PASSIVE_HEALTH_PERCENTAGE = 5
+    const val PASSIVE_CHARGE = 2
+    const val PASSIVE_HEALTH_PERCENTAGE = 7
     const val ULTIMATE_DURATION = 2
 
   }

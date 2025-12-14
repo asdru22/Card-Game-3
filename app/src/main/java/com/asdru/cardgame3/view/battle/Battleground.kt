@@ -108,7 +108,12 @@ fun BattleScreen(viewModel: BattleViewModel) {
         key(popup.id) {
           Box(
             modifier = Modifier
-              .offset { IntOffset(rect.center.x.toInt(), rect.center.y.toInt()) }
+              .offset {
+                IntOffset(
+                  rect.center.x.toInt(),
+                  rect.center.y.toInt() + popup.yOffset.toInt()
+                )
+              }
           ) {
             PopupView(
               popup = popup,

@@ -14,7 +14,7 @@ class Ironclad : Trait {
     amount: Float
   ): Float {
     if (amount <= DAMAGE_IGNORED) {
-      owner.popupManager.add(nameRes)
+      owner.popupManager.add(R.string.game_ironclad)
       return 0f
     }
     return amount

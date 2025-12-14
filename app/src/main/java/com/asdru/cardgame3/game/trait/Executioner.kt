@@ -18,8 +18,6 @@ class Executioner : Trait {
     overkill: Float
   ) {
     if (target.isAlive && target.health <= THRESHOLD) {
-      delay(300)
-
       target.popupManager.add(R.string.game_execute, Color.White)
 
       delay(100)

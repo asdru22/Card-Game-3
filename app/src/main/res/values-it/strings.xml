@@ -100,7 +100,7 @@
     <string name="ability_bullseye_desc">Colpisci il bersaglio</string>
     <string name="ability_take_aim">Prendi mira</string>
     <string name="trait_quick_draw_desc">Infliggi %s danno ad un nemico casuale al termine di ogni turno</string>
-    <string name="trait_quick_draw">Estrazione Rapida</string>
+    <string name="trait_quick_draw">Sentinella</string>
     <string name="entity_rouge">Furfante</string>
     <string name="ability_take_aim_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_barrage">Raffica</string>
@@ -148,7 +148,7 @@
     <string name="ability_slam">Schianto</string>
     <string name="ability_slam_desc">Danneggia e applica %s al bersaglio per %s turni. Carica: %s turni</string>
     <string name="ability_distribution">Distribuzione</string>
-    <string name="ability_distribution_desc">Il bersaglio subisce il %s%% della sua salute massima come danno, ma tutti i nemici ricevono lo stesso danno</string>
+    <string name="ability_distribution_desc">Il bersaglio subisce il %s%% della sua salute massima come danno, ma tutti i nemici ricevono lo stesso danno. Carica: %s turni</string>
     <string name="ability_salvation">Salvezza</string>
     <string name="ability_salvation_desc">Applica %s per %s turni all\'alleato con meno salute</string>
     <string name="trait_firewall">Firewall</string>
@@ -157,4 +157,9 @@
     <string name="game_juggernaut">Titano!</string>
     <string name="ui_share_via">Condividi con</string>
     <string name="ui_share_game">Gioca a Card Game 3 su Android! Scaricalo qua: %s</string>
+    <string name="game_meltdown">Fusione!</string>
+    <string name="game_quick_draw">Sentinella!</string>
+    <string name="game_dodge">Schivata!</string>
+    <string name="game_ironclad">Corazzato!</string>
+    <string name="game_overkill">Massacro!</string>
 </resources>

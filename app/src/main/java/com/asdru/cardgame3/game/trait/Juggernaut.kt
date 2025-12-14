@@ -14,8 +14,11 @@ class Juggernaut : Trait {
     source: EntityViewModel?,
     amount: Float
   ): Float {
-    owner.popupManager.add(R.string.game_juggernaut, Color.White)
-    return amount.coerceIn(0f, MAX_DAMAGE_RECEIVED)
+    if (amount > MAX_DAMAGE_RECEIVED) {
+      owner.popupManager.add(R.string.game_juggernaut, Color.White)
+      return MAX_DAMAGE_RECEIVED
+    }
+    return amount
   }
 
   companion object {
