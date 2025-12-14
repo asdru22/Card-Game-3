@@ -37,7 +37,8 @@ class Smithie : Entity(
     descriptionRes = R.string.ability_distribution_desc,
     charges = PASSIVE_CHARGE,
     formatArgs = listOf(
-      PASSIVE_HEALTH_PERCENTAGE
+      PASSIVE_HEALTH_PERCENTAGE,
+      PASSIVE_CHARGE
     )
   ) { source, target ->
     val damageAmount = target.maxHealth * PASSIVE_HEALTH_PERCENTAGE / 100f

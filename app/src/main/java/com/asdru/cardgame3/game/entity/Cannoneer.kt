@@ -6,9 +6,9 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Bursting
-import kotlinx.coroutines.delay
 import com.asdru.cardgame3.viewModel.applyDamage
 import com.asdru.cardgame3.viewModel.applyDamageToTargets
+import kotlinx.coroutines.delay
 
 class Cannoneer : Entity(
   name = R.string.entity_cannoneer,

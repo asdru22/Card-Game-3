@@ -36,11 +36,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -51,15 +56,9 @@ import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.character.CharacterInfoCard
-import com.asdru.cardgame3.viewModel.BattleViewModel
-import kotlin.collections.get
-import kotlin.math.roundToInt
-import androidx.compose.runtime.key
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.lerp
 import com.asdru.cardgame3.view.character.PopupView
+import com.asdru.cardgame3.viewModel.BattleViewModel
+import kotlin.math.roundToInt
 
 @Composable
 fun BattleScreen(viewModel: BattleViewModel) {

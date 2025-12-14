@@ -16,7 +16,28 @@ object BattleCombatLogic {
     }
   }
 
-  private suspend fun handleFriendlyInteraction(source: EntityViewModel, target: EntityViewModel) {
+  suspend fun performActiveAbility(source: EntityViewModel, target: EntityViewModel) {
+    source.currentPassiveCharges = 0
+    val ability = source.entity.activeAbility
+
+    if (ability.charges > 1) {
+      source.currentActiveCharges++
+      source.chargeAnimTrigger++
+      delay(300)
+
+      if (source.currentActiveCharges >= ability.charges) {
+        delay(400)
+        source.currentActiveCharges = 0
+        ability.effect(source, target)
+        delay(200)
+      }
+    } else {
+      ability.effect(source, target)
+      delay(200)
+    }
+  }
+
+  suspend fun performPassiveAbility(source: EntityViewModel, target: EntityViewModel) {
     if (source.effectManager.isStunned) return
 
     source.currentActiveCharges = 0
@@ -43,24 +64,11 @@ object BattleCombatLogic {
     }
   }
 
+  private suspend fun handleFriendlyInteraction(source: EntityViewModel, target: EntityViewModel) {
+    performPassiveAbility(source, target)
+  }
+
   private suspend fun handleHostileInteraction(source: EntityViewModel, target: EntityViewModel) {
-    source.currentPassiveCharges = 0
-    val ability = source.entity.activeAbility
-
-    if (ability.charges > 1) {
-      source.currentActiveCharges++
-      source.chargeAnimTrigger++
-      delay(300)
-
-      if (source.currentActiveCharges >= ability.charges) {
-        delay(400)
-        source.currentActiveCharges = 0
-        ability.effect(source, target)
-        delay(200)
-      }
-    } else {
-      ability.effect(source, target)
-      delay(200)
-    }
+    performActiveAbility(source, target)
   }
 }

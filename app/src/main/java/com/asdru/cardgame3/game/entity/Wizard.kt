@@ -6,6 +6,7 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.trait.Overkill
+import com.asdru.cardgame3.viewModel.BattleCombatLogic
 import com.asdru.cardgame3.viewModel.applyDamage
 import com.asdru.cardgame3.viewModel.heal
 import com.asdru.cardgame3.viewModel.withTemporaryDamage
@@ -28,16 +29,18 @@ class Wizard : Entity(
       PASSIVE_DAMAGE_PERCENTAGE
     )
   ) { _, target ->
-    if (target.isAlive) {
-      val enemies = target.team.getTargetableEnemies()
-      if (enemies.isNotEmpty()) {
-        val randomEnemy = enemies.random()
-        val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100f
-        target.withTemporaryDamage(reducedDamage) {
-          target.entity.activeAbility.effect(target, randomEnemy)
-        }
+    if (!target.isAlive) return@Ability
+    val enemies = target.team.getTargetableEnemies()
+
+    if (enemies.isNotEmpty()) {
+      val randomEnemy = enemies.random()
+      val reducedDamage = target.damage * PASSIVE_DAMAGE_PERCENTAGE / 100f
+
+      target.withTemporaryDamage(reducedDamage) {
+        BattleCombatLogic.performActiveAbility(target, randomEnemy)
       }
     }
+
   },
   ultimateAbility = Ability(
     nameRes = R.string.ability_blessing,
