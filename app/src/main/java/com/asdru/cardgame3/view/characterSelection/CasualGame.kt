@@ -70,7 +70,6 @@ fun CharacterSelectionScreen(
       }
     )
 
-    // Split Screen Grid Logic
     Row(
       modifier = Modifier.fillMaxSize(),
       horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -79,6 +78,7 @@ fun CharacterSelectionScreen(
         PlayerGridSection(
           team = p1Team,
           available = availableCharacters,
+          isLeft = true
         )
       }
 
@@ -92,6 +92,7 @@ fun CharacterSelectionScreen(
         PlayerGridSection(
           team = p2Team,
           available = availableCharacters,
+          isLeft = false
         )
       }
     }

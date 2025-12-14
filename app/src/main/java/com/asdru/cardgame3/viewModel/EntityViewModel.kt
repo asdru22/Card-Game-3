@@ -17,7 +17,8 @@ import com.asdru.cardgame3.manager.EntityEffectManager
 import com.asdru.cardgame3.manager.EntityPopupManager
 
 class EntityViewModel(
-  val entity: Entity
+  val entity: Entity,
+  val isLeftTeam: Boolean
 ) : ViewModel() {
 
   val popupManager = EntityPopupManager()

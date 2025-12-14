@@ -48,7 +48,8 @@ import kotlin.reflect.full.createInstance
 fun PlayerGridSection(
   team: MutableList<Entity>,
   available: List<Entity>,
-  color: Color = Color.White
+  color: Color = Color.White,
+  isLeft: Boolean // Added parameter to determine UI side
 ) {
   var infoCharacter by remember { mutableStateOf<Entity?>(null) }
 
@@ -94,7 +95,9 @@ fun PlayerGridSection(
     ) {
       infoCharacter?.let { entity ->
         Box(modifier = Modifier.fillMaxSize()) {
-          val tempViewModel = remember(entity) { EntityViewModel(entity) }
+          val tempViewModel = remember(entity) {
+            EntityViewModel(entity, isLeft)
+          }
 
           CharacterInfoCard(
             viewModel = tempViewModel,

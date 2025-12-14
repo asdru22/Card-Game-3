@@ -1,7 +1,6 @@
 package com.asdru.cardgame3.view.character
 
 import android.content.Context
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,12 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Fill
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,13 +50,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.DamageType
-import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlin.math.cos
-import kotlin.math.min
-import kotlin.math.sin
 
 @Composable
 fun CharacterInfoCard(
@@ -107,92 +96,108 @@ fun CharacterInfoCard(
             verticalAlignment = Alignment.CenterVertically
           ) {
 
-            IconButton(
-              onClick = onClose,
-              modifier = Modifier.size(32.dp)
-            ) {
-              Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = "Close",
-                tint = Color.White
+            // Define components as lambdas to reuse in conditional layout
+            val CloseButton = @Composable {
+              IconButton(
+                onClick = onClose,
+                modifier = Modifier.size(32.dp)
+              ) {
+                Icon(
+                  imageVector = Icons.Default.Close,
+                  contentDescription = "Close",
+                  tint = Color.White
+                )
+              }
+            }
+
+            val NameText = @Composable {
+              Text(
+                text = stringResource(viewModel.name),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
               )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(
-              text = stringResource(viewModel.name),
-              color = Color.White,
-              fontSize = 20.sp,
-              fontWeight = FontWeight.Bold,
-              textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            // Radar Button
-            Surface(
-              color = Color(0xFF2D2D2D),
-              shape = RoundedCornerShape(50),
-              modifier = Modifier
-                .clip(RoundedCornerShape(50))
-                .clickable { showRadarGraph = true }
-            ) {
-              Row(
-                verticalAlignment = Alignment.CenterVertically,
+            val StatsButton = @Composable {
+              Surface(
+                color = Color(0xFF2D2D2D),
+                shape = RoundedCornerShape(50),
                 modifier = Modifier
-                  .padding(horizontal = 12.dp, vertical = 6.dp)
-                  .height(IntrinsicSize.Min)
+                  .clip(RoundedCornerShape(50))
+                  .clickable { showRadarGraph = true }
               ) {
-                // Health
-                Icon(
-                  painter = painterResource(id = R.drawable.icon_health),
-                  contentDescription = "Health",
-                  tint = Color(0xFFEF5350),
-                  modifier = Modifier.size(16.dp)
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                  text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
-                  color = Color.White,
-                  fontSize = 14.sp,
-                  fontWeight = FontWeight.Bold
-                )
-
-                VerticalDivider(
+                Row(
+                  verticalAlignment = Alignment.CenterVertically,
                   modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .fillMaxHeight(0.7f),
-                  color = Color.Gray.copy(alpha = 0.3f),
-                  thickness = 1.dp
-                )
+                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                    .height(IntrinsicSize.Min)
+                ) {
+                  // Health
+                  Icon(
+                    painter = painterResource(id = R.drawable.icon_health),
+                    contentDescription = "Health",
+                    tint = Color(0xFFEF5350),
+                    modifier = Modifier.size(16.dp)
+                  )
+                  Spacer(modifier = Modifier.width(4.dp))
+                  Text(
+                    text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                  )
 
-                // Damage
-                Icon(
-                  painter = painterResource(id = R.drawable.icon_attack_damage),
-                  contentDescription = "Damage",
-                  tint = Color(0xFFFFCA28),
-                  modifier = Modifier.size(16.dp)
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                  text = "${viewModel.damage.toInt()}",
-                  color = Color.White,
-                  fontSize = 14.sp,
-                  fontWeight = FontWeight.Bold
-                )
+                  VerticalDivider(
+                    modifier = Modifier
+                      .padding(horizontal = 8.dp)
+                      .fillMaxHeight(0.7f),
+                    color = Color.Gray.copy(alpha = 0.3f),
+                    thickness = 1.dp
+                  )
 
-                VerticalDivider(
-                  modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .fillMaxHeight(0.7f),
-                  color = Color.Gray.copy(alpha = 0.3f),
-                  thickness = 1.dp
-                )
+                  // Damage
+                  Icon(
+                    painter = painterResource(id = R.drawable.icon_attack_damage),
+                    contentDescription = "Damage",
+                    tint = Color(0xFFFFCA28),
+                    modifier = Modifier.size(16.dp)
+                  )
+                  Spacer(modifier = Modifier.width(4.dp))
+                  Text(
+                    text = "${viewModel.damage.toInt()}",
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                  )
 
-                // Type
-                DamageTypeChip(viewModel.damageType)
+                  VerticalDivider(
+                    modifier = Modifier
+                      .padding(horizontal = 8.dp)
+                      .fillMaxHeight(0.7f),
+                    color = Color.Gray.copy(alpha = 0.3f),
+                    thickness = 1.dp
+                  )
+
+                  // Type
+                  DamageTypeChip(viewModel.damageType)
+                }
               }
+            }
+
+            if (viewModel.isLeftTeam) {
+              CloseButton()
+              Spacer(modifier = Modifier.width(8.dp))
+              NameText()
+              Spacer(modifier = Modifier.weight(1f))
+              StatsButton()
+            } else {
+              StatsButton()
+              Spacer(modifier = Modifier.weight(1f))
+              NameText()
+              Spacer(modifier = Modifier.width(8.dp))
+              CloseButton()
             }
           }
 
@@ -297,177 +302,13 @@ fun CharacterInfoCard(
         }
 
         if (showRadarGraph) {
-
-          Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Color(0xFF1E1E1E),
-            shape = RoundedCornerShape(12.dp)
-          ) {
-            Column(
-              modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-              horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-              // Overlay Header
-              Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-              ) {
-                Text(
-                  text = stringResource(viewModel.name),
-                  color = Color.White,
-                  fontSize = 20.sp,
-                  fontWeight = FontWeight.Bold
-                )
-                IconButton(
-                  onClick = { showRadarGraph = false },
-                  modifier = Modifier.size(32.dp)
-                ) {
-                  Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Close Stats",
-                    tint = Color.White
-                  )
-                }
-              }
-
-              Spacer(modifier = Modifier.height(16.dp))
-
-              // The Chart
-              Box(
-                modifier = Modifier
-                  .weight(1f)
-                  .fillMaxWidth(0.8f),
-                contentAlignment = Alignment.Center
-              ) {
-                RadarChart(
-                  stats = viewModel.entity.radarStats,
-                  color = viewModel.color,
-                  modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .aspectRatio(1f)
-                )
-              }
-            }
-          }
+          RadarCard(viewModel) { showRadarGraph = false }
         }
       }
     }
   }
 }
 
-@Composable
-fun RadarChart(
-  stats: RadarStats,
-  color: Color,
-  modifier: Modifier = Modifier
-) {
-  val labels = listOf("DMG", "SURV", "SUP", "CTRL", "CMPLX")
-  val values = listOf(
-    stats.damage,
-    stats.survivability,
-    stats.support,
-    stats.control,
-    stats.complexity
-  )
-
-  Box(modifier = modifier) {
-    Canvas(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-      val center = Offset(size.width / 2, size.height / 2)
-      val radius = min(size.width, size.height) / 2
-      val angleStep = (2 * Math.PI / 5).toFloat()
-
-      val gridColor = Color.Gray.copy(alpha = 0.3f)
-      for (i in 1..4) {
-        val r = radius * (i / 5f)
-        drawPath(
-          path = createPolygonPath(center, r, 5, angleStep),
-          color = gridColor,
-          style = Stroke(width = 1.dp.toPx())
-        )
-      }
-      // Outer border
-      drawPath(
-        path = createPolygonPath(center, radius, 5, angleStep),
-        color = Color.Gray,
-        style = Stroke(width = 2.dp.toPx())
-      )
-
-      // Draw Axes
-      for (i in 0 until 5) {
-        val angle = i * angleStep - Math.PI / 2
-        val end = Offset(
-          center.x + (radius * cos(angle)).toFloat(),
-          center.y + (radius * sin(angle)).toFloat()
-        )
-        drawLine(
-          color = gridColor,
-          start = center,
-          end = end,
-          strokeWidth = 1.dp.toPx()
-        )
-      }
-
-      // Draw Data Polygon
-      val dataPath = Path()
-      for (i in 0 until 5) {
-        val angle = i * angleStep - Math.PI / 2
-        val r = radius * values[i].coerceIn(0f, 1f)
-        val point = Offset(
-          center.x + (r * cos(angle)).toFloat(),
-          center.y + (r * sin(angle)).toFloat()
-        )
-        if (i == 0) dataPath.moveTo(point.x, point.y)
-        else dataPath.lineTo(point.x, point.y)
-      }
-      dataPath.close()
-
-      drawPath(
-        path = dataPath,
-        color = color.copy(alpha = 0.5f),
-        style = Fill
-      )
-      drawPath(
-        path = dataPath,
-        color = color,
-        style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
-      )
-    }
-
-
-    LabelsOverlay(labels)
-  }
-}
-
-private fun createPolygonPath(center: Offset, radius: Float, sides: Int, angleStep: Float): Path {
-  val path = Path()
-  for (i in 0 until sides) {
-    val angle = i * angleStep - Math.PI / 2
-    val x = center.x + (radius * cos(angle)).toFloat()
-    val y = center.y + (radius * sin(angle)).toFloat()
-    if (i == 0) path.moveTo(x, y) else path.lineTo(x, y)
-  }
-  path.close()
-  return path
-}
-
-@Composable
-fun LabelsOverlay(labels: List<String>) {
-  Box(modifier = Modifier.fillMaxSize()) {
-    // Top
-    Text(labels[0], color = Color.White, fontSize = 10.sp, modifier = Modifier.align(Alignment.TopCenter))
-    // Top Right
-    Text(labels[1], color = Color.White, fontSize = 10.sp, modifier = Modifier.align(Alignment.CenterEnd).padding(bottom = 60.dp))
-    // Bottom Right
-    Text(labels[2], color = Color.White, fontSize = 10.sp, modifier = Modifier.align(Alignment.BottomEnd).padding(bottom = 20.dp, end = 20.dp))
-    // Bottom Left
-    Text(labels[3], color = Color.White, fontSize = 10.sp, modifier = Modifier.align(Alignment.BottomStart).padding(bottom = 20.dp, start = 20.dp))
-    // Top Left
-    Text(labels[4], color = Color.White, fontSize = 10.sp, modifier = Modifier.align(Alignment.CenterStart).padding(bottom = 60.dp))
-  }
-}
 
 @Composable
 fun DamageTypeChip(

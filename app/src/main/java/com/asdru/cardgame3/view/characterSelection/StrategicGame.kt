@@ -135,7 +135,10 @@ fun StrategicSelectionScreen(
             .padding(32.dp),
           contentAlignment = Alignment.Center
         ) {
-          val tempViewModel = remember(entity) { EntityViewModel(entity) }
+          val tempViewModel = remember(entity, isP1Turn) {
+            EntityViewModel(entity, isP1Turn)
+          }
+
           CharacterInfoCard(
             viewModel = tempViewModel,
             onClose = { infoCharacter = null }
