@@ -171,4 +171,15 @@
     <string name="ability_phase_shift">Spostamento di Fase</string>
     <string name="ability_phase_shift_desc">Applica Svanimento a tutti i compagni di squadra per %s turni e curali del %s%% della loro salute massima</string>
     <string name="ability_delirium_desc">Lancia un incantesimo sul bersaglio e applica %s per %s turni</string>
+    <string name="effect_silenced">Silenziato</string>
+    <string name="effect_silenced_desc">Non può usare la propria abilità suprema</string>
+    <string name="ability_heckle">Scherno</string>
+    <string name="ability_heckle_desc">Lancia un pomodoro marcio sul bersaglio e applica %s per %s turni</string>
+    <string name="ability_chefs_surprise">Sorpresa dello Chef</string>
+    <string name="ability_chefs_surprise_desc">Applica al bersaglio %s effetti positivi casuali che durano %s turni</string>
+    <string name="effect_well_fed">Ben Nutrito</string>
+    <string name="effect_well_fed_desc">Aumenta i danni del %s%% e rigenera %s salute ogni turno</string>
+    <string name="ability_feast">Banchetto</string>
+    <string name="ability_feast_desc">Applica %s a tutti i compagni per %s turni</string>
+    <string name="entity_mr_kettle">Mr. Kettle</string>
 </resources>

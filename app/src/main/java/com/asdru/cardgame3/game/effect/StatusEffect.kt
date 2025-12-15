@@ -25,11 +25,13 @@ sealed class StatusEffect(
   open fun onVanish(target: EntityViewModel) {}
 
   open suspend fun onStartTurn(target: EntityViewModel) {}
+  open suspend fun onEndTurn(target: EntityViewModel) {}
 
   open fun modifyDamage(currentDamage: Float): Float = currentDamage
   open fun modifyActiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {
     return target
   }
+
   open fun modifyPassiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {
     return target
   }
@@ -47,17 +49,26 @@ sealed class StatusEffect(
 
   companion object {
 
-    fun getRandomPositive(duration: Int, applier: EntityViewModel? = null): StatusEffect? {
-      return getRandomEffect(duration, applier, checkPositive = true)
+    fun getRandomPositive(
+      duration: Int,
+      applier: EntityViewModel? = null,
+      target: EntityViewModel
+    ): StatusEffect? {
+      return getRandomEffect(duration, applier, target, checkPositive = true)
     }
 
-    fun getRandomNegative(duration: Int, applier: EntityViewModel? = null): StatusEffect? {
-      return getRandomEffect(duration, applier, checkPositive = false)
+    fun getRandomNegative(
+      duration: Int,
+      applier: EntityViewModel? = null,
+      target: EntityViewModel
+    ): StatusEffect? {
+      return getRandomEffect(duration, applier, target, checkPositive = false)
     }
 
     private fun getRandomEffect(
       duration: Int,
       applier: EntityViewModel?,
+      target: EntityViewModel,
       checkPositive: Boolean
     ): StatusEffect? {
       val subclasses = StatusEffect::class.sealedSubclasses
@@ -67,6 +78,15 @@ sealed class StatusEffect(
       val shuffledClasses = subclasses.shuffled()
 
       for (kClass in shuffledClasses) {
+
+        // 1. Check if the target already has an effect of this class type
+        // Assumption: 'target.effects' is the list of active StatusEffects on the entity
+        val alreadyHasEffect = target.effectManager.effects.any { it::class == kClass }
+
+        if (alreadyHasEffect) {
+          continue // Skip this effect and try the next one
+        }
+
         try {
           val constructor = kClass.primaryConstructor ?: continue
           val params = constructor.parameters
@@ -79,7 +99,6 @@ sealed class StatusEffect(
             }
 
             // Case 2: Constructor with Applier (duration: Int, applier: EntityViewModel)
-            // Only attempts this if an applier was actually provided to the function
             params.size == 2 &&
                 params[0].type.classifier == Int::class &&
                 params[1].type.classifier == EntityViewModel::class -> {
@@ -94,12 +113,13 @@ sealed class StatusEffect(
             else -> null
           }
 
+          // 2. Check if the instantiated effect matches the desired polarity (Positive/Negative)
           if (instance != null && instance.isPositive == checkPositive) {
             return instance
           }
 
         } catch (_: Exception) {
-          // If a specific class fails to instantiate (e.g. missing applier), skip it and try the next one
+          // If a specific class fails to instantiate, skip it and try the next one
           continue
         }
       }

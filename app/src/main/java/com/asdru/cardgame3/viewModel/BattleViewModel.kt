@@ -186,8 +186,13 @@ class BattleViewModel(
   fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
     val isLeft = (team == leftTeam)
     if ((isLeft && isLeftTeamTurn) || (!isLeft && !isLeftTeamTurn)) {
-      val hasNonStunnedMember = team.getAliveMembers().any { !it.effectManager.isStunned }
-      if (team.rage >= team.maxRage && !isActionPlaying && winner == null && hasNonStunnedMember) {
+      val memberCanPerformUltimate =
+        team.getAliveMembers().any { !it.effectManager.isStunned && !it.effectManager.isSilenced }
+      if (team.rage >= team.maxRage &&
+        !isActionPlaying &&
+        winner == null &&
+        memberCanPerformUltimate
+      ) {
         ultimateDragState = UltimateDragState(team, offset, offset)
       }
     }
@@ -330,8 +335,12 @@ class BattleViewModel(
 
   private suspend fun processEndOfTurnEffects(team: TeamViewModel) {
     currentWeather?.onEndTurn(this)
-    team.entities.filter { it.isAlive }.forEach { entity ->
+    team.getAliveMembers().forEach { entity ->
       entity.traits.forEach { it.onEndTurn(entity) }
+      val activeEffects = entity.effectManager.effects.toList()
+      activeEffects.forEach { effect ->
+        effect.onEndTurn(entity)
+      }
     }
   }
 

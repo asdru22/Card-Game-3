@@ -173,4 +173,15 @@
     <string name="ability_phase_shift">Phase Shift</string>
     <string name="ability_phase_shift_desc">Apply vanish to all teammates for %s turn and heal them for %s%% of their max health</string>
     <string name="ability_delirium_desc">Cast a spell on the target and apply %s for %s turns</string>
+    <string name="effect_silenced">Silenced</string>
+    <string name="effect_silenced_desc">Cannot use their ultimate ability</string>
+    <string name="ability_heckle">Heckle</string>
+    <string name="ability_heckle_desc">Throw a rotten tomato at the target and apply %s for %s turns</string>
+    <string name="ability_chefs_surprise">Chef\'s Surprise</string>
+    <string name="ability_chefs_surprise_desc">Apply %s random positive effects to the target that last %s turns</string>
+    <string name="effect_well_fed">Well Fed</string>
+    <string name="effect_well_fed_desc">Increases damage by %s%% and regenerates %s health each turn</string>
+    <string name="ability_feast">Feast</string>
+    <string name="ability_feast_desc">Apply %s to all teammates for %s turns</string>
+    <string name="entity_mr_kettle">Mr. Kettle</string>
 </resources>

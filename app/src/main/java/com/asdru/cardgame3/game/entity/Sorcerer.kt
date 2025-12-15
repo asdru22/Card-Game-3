@@ -7,6 +7,7 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Confusion
+import com.asdru.cardgame3.game.effect.Silenced
 import com.asdru.cardgame3.game.effect.Vanish
 import com.asdru.cardgame3.viewModel.applyDamage
 import com.asdru.cardgame3.viewModel.heal
@@ -27,7 +28,10 @@ class Sorcerer : Entity(
       ACTIVE_DURATION
     )
   ) { source, target ->
-    source.applyDamage(target, effects = listOf(Confusion(ACTIVE_DURATION)))
+    source.applyDamage(
+      target,
+      effects = listOf(Confusion(ACTIVE_DURATION))
+    )
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_fortification,
@@ -64,6 +68,6 @@ class Sorcerer : Entity(
     const val PASSIVE_HEAL_AMOUNT = 20f
     const val PASSIVE_CHARGES = 2
     const val ULTIMATE_DURATION = 1
-    const val ULTIMATE_HEAL_AMOUNT = 5f
+    const val ULTIMATE_HEAL_AMOUNT = 10f
   }
 }

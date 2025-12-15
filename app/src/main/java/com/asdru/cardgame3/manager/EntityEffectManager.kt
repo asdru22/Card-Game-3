@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.manager
 
 import androidx.compose.runtime.mutableStateListOf
+import com.asdru.cardgame3.game.effect.Silenced
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -12,6 +13,9 @@ class EntityEffectManager(
 
   val isStunned: Boolean
     get() = effects.any { it is Stunned }
+
+  val isSilenced: Boolean
+    get() = effects.any { it is Silenced }
 
   fun addEffect(effect: StatusEffect, source: EntityViewModel?, owner: EntityViewModel) {
     var currentEffect: StatusEffect? = effect

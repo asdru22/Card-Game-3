@@ -57,7 +57,8 @@ class TheMagnet : Entity(
       repeat(buffsRemovedCount) {
         val randomDebuff = StatusEffect.getRandomNegative(
           duration = ULTIMATE_EFFECT_DURATION,
-          applier = source
+          applier = source,
+          target = enemy
         )
 
         if (randomDebuff != null) {

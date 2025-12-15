@@ -48,9 +48,10 @@ object BattleTargetingHelper {
   ): EntityViewModel? {
     return cardBounds.entries.firstOrNull { (entity, rect) ->
       entity.isAlive &&
-          !entity.effectManager.isStunned
-          && rect.contains(newPos)
-          && teamEntities.contains(entity)
+          !entity.effectManager.isStunned &&
+          !entity.effectManager.isSilenced &&
+          rect.contains(newPos) &&
+          teamEntities.contains(entity)
     }?.key
   }
 }
