@@ -18,7 +18,7 @@ class Sorcerer : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFEE90FF),
   damageType = DamageType.Magic,
-  radarStats = RadarStats(0.7f, 0.1f, 0.5f, 0.2f, 0.3f),
+  radarStats = RadarStats(0.3f, 0.6f, 0.5f, 0.6f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_delirium,
     descriptionRes = R.string.ability_delirium_desc,

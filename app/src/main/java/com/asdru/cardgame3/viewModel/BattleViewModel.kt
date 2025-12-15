@@ -15,6 +15,7 @@ import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.game.weather.WeatherEvent
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -335,12 +336,16 @@ class BattleViewModel(
   }
 
   // --- Helpers ---
-  private fun checkWinCondition() {
+  private suspend fun checkWinCondition() {
     val isLeftAlive = leftTeam.aliveEntities.isNotEmpty()
     val isRightAlive = rightTeam.aliveEntities.isNotEmpty()
 
-    if (!isLeftAlive) winner = rightTeam.name
-    else if (!isRightAlive) winner = leftTeam.name
+    if (!isLeftAlive || !isRightAlive) {
+      delay(1000)
+
+      winner = if (!isLeftAlive) rightTeam.name
+      else leftTeam.name
+    }
   }
 
   fun canEntityAct(entity: EntityViewModel): Boolean {

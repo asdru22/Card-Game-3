@@ -165,7 +165,7 @@
     <string name="effect_confusion">Confusione</string>
     <string name="effect_confusion_desc">Le abilità attive hanno una probabilità del %s%% di essere usate sul bersaglio sbagliato</string>
     <string name="entity_sorcerer">Stregone</string>
-    <string name="ability_delirium">Lancia un incantesimo sul bersaglio e applica %s per %s turni</string>
+    <string name="ability_delirium">Delirio</string>
     <string name="ability_fortification">Fortificazione</string>
     <string name="ability_fortification_desc">Aumenta la salute massima del bersaglio del %s%% e curalo di %s. Carica: %s turni</string>
     <string name="ability_phase_shift">Spostamento di Fase</string>

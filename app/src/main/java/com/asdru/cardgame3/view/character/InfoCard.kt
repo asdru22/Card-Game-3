@@ -60,7 +60,6 @@ fun CharacterInfoCard(
   onClose: () -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val context = LocalContext.current
   var showRadarGraph by remember { mutableStateOf(false) }
 
   Box(
@@ -88,217 +87,17 @@ fun CharacterInfoCard(
           modifier = Modifier.padding(16.dp),
           horizontalAlignment = Alignment.Start
         ) {
-
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .height(IntrinsicSize.Min),
-            verticalAlignment = Alignment.CenterVertically
-          ) {
-
-            // Define components as lambdas to reuse in conditional layout
-            val CloseButton = @Composable {
-              IconButton(
-                onClick = onClose,
-                modifier = Modifier.size(32.dp)
-              ) {
-                Icon(
-                  imageVector = Icons.Default.Close,
-                  contentDescription = "Close",
-                  tint = Color.White
-                )
-              }
-            }
-
-            val NameText = @Composable {
-              Text(
-                text = stringResource(viewModel.name),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-              )
-            }
-
-            val StatsButton = @Composable {
-              Surface(
-                color = Color(0xFF2D2D2D),
-                shape = RoundedCornerShape(50),
-                modifier = Modifier
-                  .clip(RoundedCornerShape(50))
-                  .clickable { showRadarGraph = true }
-              ) {
-                Row(
-                  verticalAlignment = Alignment.CenterVertically,
-                  modifier = Modifier
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
-                    .height(IntrinsicSize.Min)
-                ) {
-                  // Health
-                  Icon(
-                    painter = painterResource(id = R.drawable.icon_health),
-                    contentDescription = "Health",
-                    tint = Color(0xFFEF5350),
-                    modifier = Modifier.size(16.dp)
-                  )
-                  Spacer(modifier = Modifier.width(4.dp))
-                  Text(
-                    text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
-                    color = Color.White,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
-                  )
-
-                  VerticalDivider(
-                    modifier = Modifier
-                      .padding(horizontal = 8.dp)
-                      .fillMaxHeight(0.7f),
-                    color = Color.Gray.copy(alpha = 0.3f),
-                    thickness = 1.dp
-                  )
-
-                  // Damage
-                  Icon(
-                    painter = painterResource(id = R.drawable.icon_attack_damage),
-                    contentDescription = "Damage",
-                    tint = Color(0xFFFFCA28),
-                    modifier = Modifier.size(16.dp)
-                  )
-                  Spacer(modifier = Modifier.width(4.dp))
-                  Text(
-                    text = "${viewModel.damage.toInt()}",
-                    color = Color.White,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
-                  )
-
-                  VerticalDivider(
-                    modifier = Modifier
-                      .padding(horizontal = 8.dp)
-                      .fillMaxHeight(0.7f),
-                    color = Color.Gray.copy(alpha = 0.3f),
-                    thickness = 1.dp
-                  )
-
-                  // Type
-                  DamageTypeChip(viewModel.damageType)
-                }
-              }
-            }
-
-            if (viewModel.isLeftTeam) {
-              CloseButton()
-              Spacer(modifier = Modifier.width(8.dp))
-              NameText()
-              Spacer(modifier = Modifier.weight(1f))
-              StatsButton()
-            } else {
-              StatsButton()
-              Spacer(modifier = Modifier.weight(1f))
-              NameText()
-              Spacer(modifier = Modifier.width(8.dp))
-              CloseButton()
-            }
-          }
+          CharacterInfoHeader(
+            viewModel = viewModel,
+            onClose = onClose,
+            onShowRadar = { showRadarGraph = true }
+          )
 
           Spacer(modifier = Modifier.height(12.dp))
           HorizontalDivider(thickness = 1.dp, color = Color.Gray.copy(alpha = 0.2f))
           Spacer(modifier = Modifier.height(12.dp))
 
-          // Abilities, Traits, Effects columns
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .height(IntrinsicSize.Min),
-            horizontalArrangement = Arrangement.SpaceBetween
-          ) {
-            Column(
-              modifier = Modifier
-                .weight(1f)
-                .padding(end = 8.dp)
-                .heightIn(max = 250.dp)
-                .verticalScroll(rememberScrollState())
-            ) {
-              CharacterAbility(
-                context = context,
-                label = stringResource(R.string.ui_active),
-                ability = viewModel.entity.activeAbility,
-                color = Color(0xFF66BB6A),
-              )
-              CharacterAbility(
-                context = context,
-                label = stringResource(R.string.ui_passive),
-                ability = viewModel.entity.passiveAbility,
-                color = Color(0xFF42A5F5)
-              )
-              CharacterAbility(
-                context = context,
-                label = stringResource(R.string.ui_ultimate),
-                ability = viewModel.entity.ultimateAbility,
-                color = Color(0xFFE91E63)
-              )
-            }
-
-            val hasEffects = viewModel.effectManager.effects.isNotEmpty()
-
-            if (viewModel.traits.isNotEmpty()) {
-              VerticalDivider(
-                modifier = Modifier
-                  .fillMaxHeight()
-                  .padding(vertical = 4.dp),
-                color = Color.Gray.copy(alpha = 0.2f),
-                thickness = 1.dp
-              )
-
-              Column(
-                modifier = Modifier
-                  .weight(1f)
-                  .padding(horizontal = 8.dp)
-                  .heightIn(max = 250.dp)
-                  .verticalScroll(rememberScrollState())
-              ) {
-                Text(
-                  text = stringResource(R.string.ui_traits),
-                  color = Color.Gray,
-                  fontSize = 11.sp,
-                  fontWeight = FontWeight.Bold,
-                  modifier = Modifier.padding(bottom = 6.dp)
-                )
-                viewModel.traits.forEach {
-                  Trait(it, context = context)
-                }
-              }
-            }
-
-            if (hasEffects) {
-              VerticalDivider(
-                modifier = Modifier
-                  .fillMaxHeight()
-                  .padding(vertical = 4.dp),
-                color = Color.Gray.copy(alpha = 0.2f),
-                thickness = 1.dp
-              )
-
-              Column(
-                modifier = Modifier
-                  .weight(1f)
-                  .padding(start = 8.dp)
-                  .heightIn(max = 250.dp)
-                  .verticalScroll(rememberScrollState())
-              ) {
-                Text(
-                  text = stringResource(R.string.ui_effects),
-                  color = Color.Gray,
-                  fontSize = 11.sp,
-                  fontWeight = FontWeight.Bold,
-                  modifier = Modifier.padding(bottom = 6.dp)
-                )
-                viewModel.effectManager.effects.forEach {
-                  Effect(it, context)
-                }
-              }
-            }
-          }
+          CharacterDetailsBody(viewModel)
         }
 
         if (showRadarGraph) {
@@ -307,6 +106,237 @@ fun CharacterInfoCard(
       }
     }
   }
+}
+
+@Composable
+private fun CharacterInfoHeader(
+  viewModel: EntityViewModel,
+  onClose: () -> Unit,
+  onShowRadar: () -> Unit
+) {
+  Row(
+    modifier = Modifier
+      .fillMaxWidth()
+      .height(IntrinsicSize.Min),
+    verticalAlignment = Alignment.CenterVertically
+  ) {
+    val closeBtn = @Composable { CloseButton(onClose) }
+    val nameTxt = @Composable { CharacterName(viewModel.name, onShowRadar) }
+    val statsPill = @Composable { CharacterStatsPill(viewModel, onShowRadar) }
+
+    if (viewModel.isLeftTeam) {
+      closeBtn()
+      Spacer(modifier = Modifier.width(8.dp))
+      nameTxt()
+      Spacer(modifier = Modifier.weight(1f))
+      statsPill()
+    } else {
+      statsPill()
+      Spacer(modifier = Modifier.weight(1f))
+      nameTxt()
+      Spacer(modifier = Modifier.width(8.dp))
+      closeBtn()
+    }
+  }
+}
+
+@Composable
+private fun CharacterName(
+  nameResId: Int,
+  onClick: () -> Unit
+) {
+  Text(
+    text = stringResource(nameResId),
+    color = Color.White,
+    fontSize = 20.sp,
+    fontWeight = FontWeight.Bold,
+    textAlign = TextAlign.Center,
+    modifier = Modifier
+      .clip(RoundedCornerShape(8.dp))
+      .clickable { onClick() }
+      .padding(horizontal = 8.dp, vertical = 4.dp)
+  )
+}
+
+@Composable
+private fun CharacterStatsPill(
+  viewModel: EntityViewModel,
+  onClick: () -> Unit
+) {
+  Surface(
+    color = Color(0xFF2D2D2D),
+    shape = RoundedCornerShape(50),
+    modifier = Modifier
+      .clip(RoundedCornerShape(50))
+      .clickable { onClick() }
+  ) {
+    Row(
+      verticalAlignment = Alignment.CenterVertically,
+      modifier = Modifier
+        .padding(horizontal = 12.dp, vertical = 6.dp)
+        .height(IntrinsicSize.Min)
+    ) {
+      // Health
+      Icon(
+        painter = painterResource(id = R.drawable.icon_health),
+        contentDescription = "Health",
+        tint = Color(0xFFEF5350),
+        modifier = Modifier.size(16.dp)
+      )
+      Spacer(modifier = Modifier.width(4.dp))
+      Text(
+        text = "${viewModel.health.toInt()}/${viewModel.maxHealth.toInt()}",
+        color = Color.White,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold
+      )
+
+      StatDivider()
+
+      // Damage
+      Icon(
+        painter = painterResource(id = R.drawable.icon_attack_damage),
+        contentDescription = "Damage",
+        tint = Color(0xFFFFCA28),
+        modifier = Modifier.size(16.dp)
+      )
+      Spacer(modifier = Modifier.width(4.dp))
+      Text(
+        text = "${viewModel.damage.toInt()}",
+        color = Color.White,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold
+      )
+
+      StatDivider()
+
+      DamageTypeChip(viewModel.damageType)
+    }
+  }
+}
+
+@Composable
+private fun CharacterDetailsBody(viewModel: EntityViewModel) {
+  val context = LocalContext.current
+
+  Row(
+    modifier = Modifier
+      .fillMaxWidth()
+      .height(IntrinsicSize.Min),
+    horizontalArrangement = Arrangement.SpaceBetween
+  ) {
+    Column(
+      modifier = Modifier
+        .weight(1f)
+        .padding(end = 8.dp)
+        .heightIn(max = 250.dp)
+        .verticalScroll(rememberScrollState())
+    ) {
+      CharacterAbility(
+        context = context,
+        label = stringResource(R.string.ui_active),
+        ability = viewModel.entity.activeAbility,
+        color = Color(0xFF66BB6A),
+      )
+      CharacterAbility(
+        context = context,
+        label = stringResource(R.string.ui_passive),
+        ability = viewModel.entity.passiveAbility,
+        color = Color(0xFF42A5F5)
+      )
+      CharacterAbility(
+        context = context,
+        label = stringResource(R.string.ui_ultimate),
+        ability = viewModel.entity.ultimateAbility,
+        color = Color(0xFFE91E63)
+      )
+    }
+
+    if (viewModel.traits.isNotEmpty()) {
+      SectionDivider()
+
+      Column(
+        modifier = Modifier
+          .weight(1f)
+          .padding(horizontal = 8.dp)
+          .heightIn(max = 250.dp)
+          .verticalScroll(rememberScrollState())
+      ) {
+        SectionHeader(stringResource(R.string.ui_traits))
+        viewModel.traits.forEach {
+          Trait(it, context = context)
+        }
+      }
+    }
+
+    if (viewModel.effectManager.effects.isNotEmpty()) {
+      SectionDivider()
+
+      Column(
+        modifier = Modifier
+          .weight(1f)
+          .padding(start = 8.dp)
+          .heightIn(max = 250.dp)
+          .verticalScroll(rememberScrollState())
+      ) {
+        SectionHeader(stringResource(R.string.ui_effects))
+        viewModel.effectManager.effects.forEach {
+          Effect(it, context)
+        }
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Small Helpers
+// -----------------------------------------------------------------------------
+
+@Composable
+private fun CloseButton(onClose: () -> Unit) {
+  IconButton(
+    onClick = onClose,
+    modifier = Modifier.size(32.dp)
+  ) {
+    Icon(
+      imageVector = Icons.Default.Close,
+      contentDescription = "Close",
+      tint = Color.White
+    )
+  }
+}
+
+@Composable
+private fun StatDivider() {
+  VerticalDivider(
+    modifier = Modifier
+      .padding(horizontal = 8.dp)
+      .fillMaxHeight(0.7f),
+    color = Color.Gray.copy(alpha = 0.3f),
+    thickness = 1.dp
+  )
+}
+
+@Composable
+private fun SectionDivider() {
+  VerticalDivider(
+    modifier = Modifier
+      .fillMaxHeight()
+      .padding(vertical = 4.dp),
+    color = Color.Gray.copy(alpha = 0.2f),
+    thickness = 1.dp
+  )
+}
+
+@Composable
+private fun SectionHeader(text: String) {
+  Text(
+    text = text,
+    color = Color.Gray,
+    fontSize = 11.sp,
+    fontWeight = FontWeight.Bold,
+    modifier = Modifier.padding(bottom = 6.dp)
+  )
 }
 
 
