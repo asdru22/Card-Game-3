@@ -32,7 +32,6 @@ class Precision(duration: Int) : StatusEffect(
     override val formatArgs = listOf(DAMAGE_INCREASE)
     override val nameRes = R.string.effect_precision
     override val descriptionRes = R.string.effect_precision_desc
-
     override val isPositive = true
     private const val DAMAGE_INCREASE = 30f
   }

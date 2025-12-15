@@ -17,6 +17,8 @@ object BattleCombatLogic {
   }
 
   suspend fun performActiveAbility(source: EntityViewModel, target: EntityViewModel) {
+    val finalTarget = source.effectManager.modifyActiveTarget(source, target)
+
     source.currentPassiveCharges = 0
     val ability = source.entity.activeAbility
 
@@ -28,16 +30,18 @@ object BattleCombatLogic {
       if (source.currentActiveCharges >= ability.charges) {
         delay(400)
         source.currentActiveCharges = 0
-        ability.effect(source, target)
+        ability.effect(source, finalTarget)
         delay(200)
       }
     } else {
-      ability.effect(source, target)
+      ability.effect(source, finalTarget)
       delay(200)
     }
   }
 
   suspend fun performPassiveAbility(source: EntityViewModel, target: EntityViewModel) {
+    val finalTarget = source.effectManager.modifyPassiveTarget(source, target)
+
     if (source.effectManager.isStunned) return
 
     source.currentActiveCharges = 0
@@ -53,13 +57,13 @@ object BattleCombatLogic {
         source.currentPassiveCharges = 0
         source.passiveAnimTrigger++
         delay(150)
-        ability.effect(source, target)
+        ability.effect(source, finalTarget)
         delay(150)
       }
     } else {
       source.passiveAnimTrigger++
       delay(150)
-      ability.effect(source, target)
+      ability.effect(source, finalTarget)
       delay(150)
     }
   }

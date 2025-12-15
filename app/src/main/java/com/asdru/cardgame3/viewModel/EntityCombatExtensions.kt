@@ -36,6 +36,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
       applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
       applyTraits { it.onDeath(this) }
       effectManager.clearAll(this)
+      resetCharges()
     } else if (isAlive) {
       applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
     }
@@ -166,4 +167,8 @@ suspend fun EntityViewModel.withTemporaryDamage(tempDamage: Float, block: suspen
   } finally {
     damage = originalDamage
   }
+}
+
+fun EntityViewModel.increaseMaxHealth(amount: Float) {
+  maxHealth += amount
 }

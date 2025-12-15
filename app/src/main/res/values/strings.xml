@@ -164,4 +164,13 @@
     <string name="game_quick_draw">Sentry!</string>
     <string name="game_dodge">Dodge!</string>
     <string name="game_ironclad">Ironclad!</string>
+    <string name="effect_confusion">Confusion</string>
+    <string name="effect_confusion_desc">Active abilities have a %s%% chance to be used on the wrong target</string>
+    <string name="entity_sorcerer">Sorcerer</string>
+    <string name="ability_delirium">Cast a spell on the target and apply %s for %s turns</string>
+    <string name="ability_fortification">Fortification</string>
+    <string name="ability_fortification_desc">Increase the target\'s max health by %s%% and heal them for %s. Charge: %s turns</string>
+    <string name="ability_phase_shift">Phase Shift</string>
+    <string name="ability_phase_shift_desc">Apply vanish to all teammates for %s turn and heal them for %s%% of their max health</string>
+    <string name="ability_delirium_desc">Cast a spell on the target and apply %s for %s turns</string>
 </resources>

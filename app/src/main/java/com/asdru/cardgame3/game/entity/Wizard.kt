@@ -17,6 +17,8 @@ class Wizard : Entity(
   iconRes = R.drawable.entity_wizard,
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFF9C27B0),
+  damageType = DamageType.Magic,
+  traits = listOf(Overkill()),
   radarStats = RadarStats(0.7f, 0.1f, 0.5f, 0.2f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_zap,
@@ -55,9 +57,7 @@ class Wizard : Entity(
       it.heal(ULTIMATE_HEAL_AMOUNT)
       it.effectManager.clearNegative(it)
     }
-  },
-  damageType = DamageType.Magic,
-  traits = listOf(Overkill())
+  }
 ) {
   private companion object {
     const val MAX_HEALTH = 150f

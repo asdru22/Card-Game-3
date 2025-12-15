@@ -67,9 +67,17 @@ class EntityViewModel(
 
   fun addEffect(effect: StatusEffect, source: EntityViewModel?) {
     effectManager.addEffect(effect, source, this)
+    if (effectManager.isStunned) {
+      resetCharges()
+    }
   }
 
   fun removeEffect(effect: StatusEffect) {
     effectManager.removeEffect(effect, this)
+  }
+
+  fun resetCharges(){
+    currentActiveCharges = 0
+    currentPassiveCharges = 0
   }
 }
