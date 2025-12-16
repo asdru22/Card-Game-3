@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,42 +50,37 @@ fun PlayerGridSection(
   team: MutableList<Entity>,
   available: List<Entity>,
   color: Color = Color.White,
-  isLeft: Boolean // Added parameter to determine UI side
+  isLeft: Boolean
 ) {
   var infoCharacter by remember { mutableStateOf<Entity?>(null) }
 
   Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-    AnimatedVisibility(
-      visible = infoCharacter == null,
-      enter = fadeIn(),
-      exit = fadeOut()
-    ) {
-      LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
-        contentPadding = PaddingValues(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxSize()
-      ) {
-        items(available) { entity ->
-          val isSelected = team.any { it::class == entity::class }
 
-          CharacterGridItem(
-            entity = entity,
-            isSelected = isSelected,
-            activeColor = color,
-            onSelect = {
-              val existing = team.find { it::class == entity::class }
-              if (existing != null) {
-                team.remove(existing)
-              } else if (team.size < 3) {
-                val newInstance = entity::class.createInstance()
-                team.add(newInstance)
-              }
-            },
-            onInfo = { infoCharacter = entity }
-          )
-        }
+    LazyVerticalGrid(
+      columns = GridCells.Fixed(3),
+      contentPadding = PaddingValues(4.dp),
+      horizontalArrangement = Arrangement.spacedBy(8.dp),
+      verticalArrangement = Arrangement.spacedBy(8.dp),
+      modifier = Modifier.fillMaxSize()
+    ) {
+      items(available) { entity ->
+        val isSelected = team.any { it::class == entity::class }
+
+        CharacterGridItem(
+          entity = entity,
+          isSelected = isSelected,
+          activeColor = color,
+          onSelect = {
+            val existing = team.find { it::class == entity::class }
+            if (existing != null) {
+              team.remove(existing)
+            } else if (team.size < 3) {
+              val newInstance = entity::class.createInstance()
+              team.add(newInstance)
+            }
+          },
+          onInfo = { infoCharacter = entity }
+        )
       }
     }
 
@@ -94,7 +90,13 @@ fun PlayerGridSection(
       exit = fadeOut()
     ) {
       infoCharacter?.let { entity ->
-        Box(modifier = Modifier.fillMaxSize()) {
+        // This Box acts as a "Scrim" to hide the grid behind the info card
+        Box(
+          modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF121212))
+            .clickable(enabled = true) { }
+        ) {
           val tempViewModel = remember(entity) {
             EntityViewModel(entity, isLeft)
           }

@@ -171,7 +171,7 @@
     <string name="ability_fortification">Fortification</string>
     <string name="ability_fortification_desc">Increase the target\'s max health by %s%% and heal them for %s. Charge: %s turns</string>
     <string name="ability_phase_shift">Phase Shift</string>
-    <string name="ability_phase_shift_desc">Apply vanish to all teammates for %s turn and heal them for %s%% of their max health</string>
+    <string name="ability_phase_shift_desc">Apply %s to all teammates for %s turn and heal them for %s%% of their max health</string>
     <string name="ability_delirium_desc">Cast a spell on the target and apply %s for %s turns</string>
     <string name="effect_silenced">Silenced</string>
     <string name="effect_silenced_desc">Cannot use their ultimate ability</string>

@@ -169,7 +169,7 @@
     <string name="ability_fortification">Fortificazione</string>
     <string name="ability_fortification_desc">Aumenta la salute massima del bersaglio del %s%% e curalo di %s. Carica: %s turni</string>
     <string name="ability_phase_shift">Spostamento di Fase</string>
-    <string name="ability_phase_shift_desc">Applica Svanimento a tutti i compagni di squadra per %s turni e curali del %s%% della loro salute massima</string>
+    <string name="ability_phase_shift_desc">Applica %s a tutti i compagni di squadra per %s turni e curali del %s%% della loro salute massima</string>
     <string name="ability_delirium_desc">Lancia un incantesimo sul bersaglio e applica %s per %s turni</string>
     <string name="effect_silenced">Silenziato</string>
     <string name="effect_silenced_desc">Non può usare la propria abilità suprema</string>

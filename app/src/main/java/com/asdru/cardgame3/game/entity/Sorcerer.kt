@@ -50,6 +50,7 @@ class Sorcerer : Entity(
     nameRes = R.string.ability_phase_shift,
     descriptionRes = R.string.ability_phase_shift_desc,
     formatArgs = listOf(
+      Vanish.Spec,
       ULTIMATE_DURATION,
       ULTIMATE_HEAL_AMOUNT
     )
