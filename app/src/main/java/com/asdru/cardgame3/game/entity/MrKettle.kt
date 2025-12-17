@@ -9,7 +9,7 @@ import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Silenced
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.effect.WellFed
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 
 class MrKettle : Entity(
   name = R.string.entity_mr_kettle,

@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.logic
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

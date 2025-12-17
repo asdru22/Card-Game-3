@@ -8,9 +8,9 @@ import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Watched
 import com.asdru.cardgame3.game.trait.Forsaken
-import com.asdru.cardgame3.viewModel.applyDamage
-import com.asdru.cardgame3.viewModel.applyDamageToTargets
-import com.asdru.cardgame3.viewModel.heal
+import com.asdru.cardgame3.helper.applyDamage
+import com.asdru.cardgame3.helper.applyDamageToTargets
+import com.asdru.cardgame3.helper.heal
 
 class Cultist : Entity(
   name = R.string.entity_cultist,

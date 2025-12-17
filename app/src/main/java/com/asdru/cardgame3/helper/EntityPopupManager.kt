@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.manager
+package com.asdru.cardgame3.helper
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.graphics.Color

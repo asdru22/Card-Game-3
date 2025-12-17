@@ -1,9 +1,10 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.helper
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Forsaken
+import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
 
 

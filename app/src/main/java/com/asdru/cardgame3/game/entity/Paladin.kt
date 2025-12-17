@@ -10,7 +10,7 @@ import com.asdru.cardgame3.game.effect.Protection
 import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.game.effect.Taunt
 import com.asdru.cardgame3.game.trait.Spite
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 
 class Paladin : Entity(
   name = R.string.entity_paladin,

@@ -13,8 +13,8 @@ import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.game.weather.WeatherEvent
-import com.asdru.cardgame3.manager.EntityEffectManager
-import com.asdru.cardgame3.manager.EntityPopupManager
+import com.asdru.cardgame3.helper.EntityEffectManager
+import com.asdru.cardgame3.helper.EntityPopupManager
 
 class EntityViewModel(
   val entity: Entity,

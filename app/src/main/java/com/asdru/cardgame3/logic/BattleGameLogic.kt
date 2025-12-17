@@ -1,7 +1,10 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.logic
 
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.game.weather.WeatherEvent
+import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.TeamViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -11,10 +14,10 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     // --- Initialization ---
 
     fun startGame(
-        newLeftTeam: TeamViewModel,
-        newRightTeam: TeamViewModel,
-        weatherEnabled: Boolean,
-        turnTimer: Int
+      newLeftTeam: TeamViewModel,
+      newRightTeam: TeamViewModel,
+      weatherEnabled: Boolean,
+      turnTimer: Int
     ) {
         vm.leftTeam = newLeftTeam
         vm.rightTeam = newRightTeam

@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.helper.receiveDamage
 import com.asdru.cardgame3.system.BatteryMonitor
 import com.asdru.cardgame3.viewModel.BattleViewModel
-import com.asdru.cardgame3.viewModel.receiveDamage
 
 class ElectricStorm : WeatherEvent(
   nameRes = R.string.weather_electric_storm,

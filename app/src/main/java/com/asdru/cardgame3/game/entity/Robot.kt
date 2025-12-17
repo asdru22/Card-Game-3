@@ -10,7 +10,7 @@ import com.asdru.cardgame3.game.effect.Electrified
 import com.asdru.cardgame3.game.effect.Overloaded
 import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.game.trait.Meltdown
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 
 class Robot : Entity(
   name = R.string.entity_robot,

@@ -9,7 +9,7 @@ import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Strength
 import com.asdru.cardgame3.game.effect.Vanish
 import com.asdru.cardgame3.game.trait.Sidestep
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 
 class Ninja : Entity(
   name = R.string.entity_ninja,

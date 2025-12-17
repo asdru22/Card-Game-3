@@ -1,5 +1,6 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.logic
 
+import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
 
 object BattleCombatLogic {

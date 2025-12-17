@@ -1,10 +1,14 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.logic
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.UltimateDragState
+import com.asdru.cardgame3.helper.BattleTargetingHelper
+import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.TeamViewModel
 
 class BattleInputHandler(private val vm: BattleViewModel) {
 
@@ -12,7 +16,7 @@ class BattleInputHandler(private val vm: BattleViewModel) {
 
     fun onDragStart(char: EntityViewModel, offset: Offset) {
         if (vm.gameLogic.canEntityAct(char)) {
-            val cardTopLeft = vm.cardBounds[char]?.topLeft ?: Offset.Zero
+            val cardTopLeft = vm.cardBounds[char]?.topLeft ?: Offset.Companion.Zero
             val globalStart = cardTopLeft + offset
             vm.dragState = DragState(char, globalStart, globalStart)
         }
@@ -55,11 +59,11 @@ class BattleInputHandler(private val vm: BattleViewModel) {
         val isLeft = (team == vm.leftTeam)
         // Check if it is this team's turn
         if ((isLeft && vm.isLeftTeamTurn) || (!isLeft && !vm.isLeftTeamTurn)) {
-            
-            val memberCanPerformUltimate = team.getAliveMembers().any { 
-                !it.effectManager.isStunned && !it.effectManager.isSilenced 
+
+            val memberCanPerformUltimate = team.getAliveMembers().any {
+                !it.effectManager.isStunned && !it.effectManager.isSilenced
             }
-            
+
             if (team.rage >= team.maxRage &&
                 !vm.isActionPlaying &&
                 vm.winner == null &&
@@ -75,8 +79,8 @@ class BattleInputHandler(private val vm: BattleViewModel) {
             val newPos = current.current + change
             vm.ultimateDragState = current.copy(current = newPos)
             vm.hoveredTarget = BattleTargetingHelper.findUltimateTarget(
-                newPos, 
-                current.team.entities, 
+                newPos,
+                current.team.entities,
                 vm.cardBounds
             )
         }
@@ -102,11 +106,11 @@ class BattleInputHandler(private val vm: BattleViewModel) {
         if (draggingState != null && entity == target) {
             val sourceLeft = vm.leftTeam.entities.contains(draggingState.source)
             val targetLeft = vm.leftTeam.entities.contains(entity)
-            return if (sourceLeft == targetLeft) Color.Green else Color.Red
+            return if (sourceLeft == targetLeft) Color.Companion.Green else Color.Companion.Red
         }
         if (ultState != null && entity == target) {
-            if (ultState.team.entities.contains(entity)) return Color.Cyan
+            if (ultState.team.entities.contains(entity)) return Color.Companion.Cyan
         }
-        return Color.Transparent
+        return Color.Companion.Transparent
     }
 }

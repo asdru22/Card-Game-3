@@ -9,7 +9,7 @@ import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Judgement
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Executioner
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 
 class TheMagnet : Entity(
   name = R.string.entity_the_magnet,

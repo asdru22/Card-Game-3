@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.manager
+package com.asdru.cardgame3.helper
 
 import androidx.compose.runtime.mutableStateListOf
 import com.asdru.cardgame3.game.effect.Silenced

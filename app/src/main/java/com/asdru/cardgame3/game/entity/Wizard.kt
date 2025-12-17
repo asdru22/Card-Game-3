@@ -7,10 +7,10 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.trait.Overkill
-import com.asdru.cardgame3.viewModel.BattleCombatLogic
-import com.asdru.cardgame3.viewModel.applyDamage
-import com.asdru.cardgame3.viewModel.heal
-import com.asdru.cardgame3.viewModel.withTemporaryDamage
+import com.asdru.cardgame3.helper.applyDamage
+import com.asdru.cardgame3.helper.heal
+import com.asdru.cardgame3.helper.withTemporaryDamage
+import com.asdru.cardgame3.logic.BattleCombatLogic
 
 class Wizard : Entity(
   name = R.string.entity_wizard,

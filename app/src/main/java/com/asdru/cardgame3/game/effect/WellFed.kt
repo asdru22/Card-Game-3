@@ -2,8 +2,8 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.helper.heal
 import com.asdru.cardgame3.viewModel.EntityViewModel
-import com.asdru.cardgame3.viewModel.heal
 
 class WellFed(duration: Int) : StatusEffect(
   nameRes = nameRes,

@@ -10,9 +10,9 @@ import com.asdru.cardgame3.game.effect.Defiance
 import com.asdru.cardgame3.game.effect.Stunned
 import com.asdru.cardgame3.game.trait.Firewall
 import com.asdru.cardgame3.game.trait.Juggernaut
-import com.asdru.cardgame3.viewModel.applyDamage
-import com.asdru.cardgame3.viewModel.applyDamageToTargets
-import com.asdru.cardgame3.viewModel.receiveDamage
+import com.asdru.cardgame3.helper.applyDamage
+import com.asdru.cardgame3.helper.applyDamageToTargets
+import com.asdru.cardgame3.helper.receiveDamage
 
 class Smithie : Entity(
   name = R.string.entity_smithie,

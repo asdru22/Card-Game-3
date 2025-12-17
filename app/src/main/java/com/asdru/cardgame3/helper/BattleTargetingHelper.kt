@@ -1,10 +1,11 @@
-package com.asdru.cardgame3.viewModel
+package com.asdru.cardgame3.helper
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.game.effect.Taunt
 import com.asdru.cardgame3.game.effect.Vanish
+import com.asdru.cardgame3.viewModel.EntityViewModel
 
 object BattleTargetingHelper {
 

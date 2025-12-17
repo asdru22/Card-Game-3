@@ -15,6 +15,10 @@ import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.game.weather.WeatherEvent
+import com.asdru.cardgame3.logic.BattleGameLogic
+import com.asdru.cardgame3.logic.BattleInputHandler
+import com.asdru.cardgame3.logic.BattleTimer
+
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
   initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false))

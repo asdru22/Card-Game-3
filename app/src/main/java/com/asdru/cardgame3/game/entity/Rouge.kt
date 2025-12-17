@@ -8,7 +8,7 @@ import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Precision
 import com.asdru.cardgame3.game.trait.QuickDraw
-import com.asdru.cardgame3.viewModel.applyDamage
+import com.asdru.cardgame3.helper.applyDamage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
