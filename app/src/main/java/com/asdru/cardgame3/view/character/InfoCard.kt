@@ -288,10 +288,6 @@ private fun CharacterDetailsBody(viewModel: EntityViewModel) {
   }
 }
 
-// -----------------------------------------------------------------------------
-// Small Helpers
-// -----------------------------------------------------------------------------
-
 @Composable
 private fun CloseButton(onClose: () -> Unit) {
   IconButton(

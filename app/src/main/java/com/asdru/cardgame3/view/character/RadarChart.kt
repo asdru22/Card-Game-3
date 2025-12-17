@@ -69,7 +69,7 @@ fun RadarCard(viewModel: EntityViewModel, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
       ) {
-        val NameComponent = @Composable {
+        val nameComponent = @Composable {
           Text(
             text = stringResource(viewModel.name),
             color = Color.White,
@@ -78,7 +78,7 @@ fun RadarCard(viewModel: EntityViewModel, onClick: () -> Unit) {
           )
         }
 
-        val CloseComponent = @Composable {
+        val closeComponent = @Composable {
           IconButton(
             onClick = onClick,
             modifier = Modifier.size(32.dp)
@@ -93,12 +93,12 @@ fun RadarCard(viewModel: EntityViewModel, onClick: () -> Unit) {
 
         if (viewModel.isLeftTeam) {
           // Left Player: Close button on Left
-          CloseComponent()
-          NameComponent()
+          closeComponent()
+          nameComponent()
         } else {
           // Right Player: Close button on Right
-          NameComponent()
-          CloseComponent()
+          nameComponent()
+          closeComponent()
         }
       }
 

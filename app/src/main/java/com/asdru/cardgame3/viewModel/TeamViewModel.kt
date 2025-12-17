@@ -3,6 +3,7 @@ package com.asdru.cardgame3.viewModel
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.effect.Vanish
@@ -13,6 +14,8 @@ class TeamViewModel(
   val name: String = team.name
   val entities: List<EntityViewModel> = team.entities.map { EntityViewModel(it, team.left) }
   lateinit var enemyTeam: TeamViewModel
+
+  var coins by mutableIntStateOf(team.coins)
 
   init {
     entities.forEach {

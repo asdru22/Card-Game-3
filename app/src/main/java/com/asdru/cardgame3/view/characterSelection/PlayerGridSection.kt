@@ -90,7 +90,6 @@ fun PlayerGridSection(
       exit = fadeOut()
     ) {
       infoCharacter?.let { entity ->
-        // This Box acts as a "Scrim" to hide the grid behind the info card
         Box(
           modifier = Modifier
             .fillMaxSize()
