@@ -12,6 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
+import com.asdru.cardgame3.data.ShopDataProvider
+import com.asdru.cardgame3.data.ShopDragState
+import com.asdru.cardgame3.data.ShopItem
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.game.weather.WeatherEvent
@@ -63,6 +66,32 @@ class BattleViewModel(
   internal val cardBounds = mutableStateMapOf<EntityViewModel, Rect>()
 
   var showExitDialog by mutableStateOf(false)
+
+
+  var isLeftShopOpen by mutableStateOf(false)
+  var isRightShopOpen by mutableStateOf(false)
+
+  var shopDragState by mutableStateOf<ShopDragState?>(null)
+    internal set
+
+  // Example Shop Items
+  val shopItems: List<ShopItem> = ShopDataProvider.getShopItems()
+  fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
+    inputHandler.onShopDragStart(item, isLeftTeam, offset)
+  }
+
+  fun onShopDrag(change: Offset) {
+    inputHandler.onShopDrag(change)
+  }
+
+  fun onShopDragEnd() {
+    inputHandler.onShopDragEnd()
+  }
+
+  fun toggleShop(isLeft: Boolean) {
+    if (isLeft) isLeftShopOpen = !isLeftShopOpen else isRightShopOpen = !isRightShopOpen
+  }
+
 
   // --- Timer Delegate ---
   var currentTurnTimeSeconds by mutableIntStateOf(0)

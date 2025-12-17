@@ -1,0 +1,189 @@
+package com.asdru.cardgame3.view.team
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.ShopItem
+
+@Composable
+fun Shop(
+  amount: Int,
+  isOpen: Boolean,
+  items: List<ShopItem>,
+  onToggle: () -> Unit,
+  onDragStart: (ShopItem, Offset) -> Unit,
+  onDrag: (Offset) -> Unit,
+  onDragEnd: () -> Unit
+) {
+  val shape = RoundedCornerShape(16.dp)
+
+  Box(
+    contentAlignment = Alignment.Center,
+    modifier = Modifier
+      .padding(bottom = 8.dp)
+      .width(72.dp)
+      .clip(shape)
+      .background(Color.Black.copy(alpha = 0.85f))
+      .border(1.dp, Color(0xFFFFD700), shape)
+      .animateContentSize(
+        animationSpec = spring(
+          dampingRatio = Spring.DampingRatioLowBouncy,
+          stiffness = Spring.StiffnessMedium
+        )
+      )
+      .clickable(
+        interactionSource = remember { MutableInteractionSource() },
+        indication = null
+      ) { onToggle() }
+  ) {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 8.dp)
+    ) {
+
+      // --- SHOP ITEMS (Expandable) ---
+      AnimatedVisibility(
+        visible = isOpen,
+        enter = expandVertically(expandFrom = Alignment.Bottom) + fadeIn(),
+        exit = shrinkVertically(shrinkTowards = Alignment.Bottom) + fadeOut()
+      ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+          items.forEach { item ->
+            ShopItemRow(
+              item = item,
+              canAfford = amount >= item.cost,
+              onDragStart = onDragStart,
+              onDrag = onDrag,
+              onDragEnd = onDragEnd
+            )
+            HorizontalDivider(
+              modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .padding(vertical = 6.dp),
+              color = Color.Gray.copy(alpha = 0.3f),
+              thickness = 1.dp
+            )
+          }
+          Spacer(modifier = Modifier.height(4.dp))
+        }
+      }
+
+      Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+      ) {
+        Icon(
+          painter = painterResource(id = R.drawable.icon_coins),
+          contentDescription = "Coins",
+          tint = Color(0xFFFFD700),
+          modifier = Modifier.size(20.dp)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+          text = "$amount",
+          color = Color.White,
+          fontWeight = FontWeight.Bold,
+          fontSize = 14.sp
+        )
+      }
+    }
+  }
+}
+
+@Composable
+fun ShopItemRow(
+  item: ShopItem,
+  canAfford: Boolean,
+  onDragStart: (ShopItem, Offset) -> Unit,
+  onDrag: (Offset) -> Unit,
+  onDragEnd: () -> Unit
+) {
+  var iconCenterGlobal by remember { mutableStateOf(Offset.Zero) }
+
+  Row(
+    verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.Center,
+    modifier = Modifier
+      .padding(vertical = 4.dp)
+      .onGloballyPositioned { coordinates ->
+        val size = coordinates.size
+        val position = coordinates.positionInRoot()
+        iconCenterGlobal = Offset(
+          x = position.x + size.width / 2f,
+          y = position.y + size.height / 2f
+        )
+      }
+      .pointerInput(canAfford) {
+        if (canAfford) {
+          detectDragGestures(
+            onDragStart = { onDragStart(item, iconCenterGlobal) },
+            onDrag = { change, dragAmount ->
+              change.consume()
+              onDrag(dragAmount)
+            },
+            onDragEnd = { onDragEnd() }
+          )
+        }
+      }
+  ) {
+    Icon(
+      painter = painterResource(id = item.iconRes),
+      contentDescription = item.name,
+      tint = if (canAfford) Color.White else Color.White.copy(alpha = 0.3f),
+      modifier = Modifier.size(24.dp)
+    )
+
+    Spacer(modifier = Modifier.width(4.dp))
+
+    Text(
+      text = "${item.cost}",
+      color = if (canAfford) Color(0xFFFFD700) else Color.Gray,
+      fontWeight = FontWeight.Bold,
+      fontSize = 12.sp
+    )
+  }
+}

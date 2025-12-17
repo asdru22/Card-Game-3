@@ -125,6 +125,34 @@ fun BattleScreen(viewModel: BattleViewModel) {
       }
     }
 
+    viewModel.shopDragState?.let { shopState ->
+      val iconSize = 48.dp
+      val density = LocalDensity.current
+      val iconSizePx = with(density) { iconSize.toPx() }
+
+      Box(
+        modifier = Modifier
+          .offset {
+            IntOffset(
+              x = (shopState.current.x - iconSizePx / 2).roundToInt(),
+              y = (shopState.current.y - iconSizePx / 2).roundToInt()
+            )
+          }
+          .size(iconSize)
+          .clip(CircleShape)
+          .background(Color(0xFFFFF176).copy(alpha = 0.8f))
+          .border(2.dp, Color(0xFFFFD700), CircleShape),
+        contentAlignment = Alignment.Center
+      ) {
+        Icon(
+          painter = painterResource(id = shopState.item.iconRes),
+          contentDescription = null,
+          tint = Color.Unspecified,
+          modifier = Modifier.size(32.dp)
+        )
+      }
+    }
+
     viewModel.ultimateDragState?.let { ultState ->
       val iconSize = 48.dp
       val density = LocalDensity.current
