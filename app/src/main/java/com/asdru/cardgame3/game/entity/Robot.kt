@@ -46,7 +46,7 @@ class Robot : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 180f
-    const val DAMAGE = 0f
+    const val DAMAGE = 6f
     const val ACTIVE_DURATION = 3
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_STUNNED_DURATION = 3

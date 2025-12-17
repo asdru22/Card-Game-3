@@ -29,7 +29,7 @@
     <string name="effect_burning_desc">Take %s%% of max health as damage</string>
     <string name="entity_wizard">Wizard</string>
     <string name="ability_zap">Zap</string>
-    <string name="ability_zap_desc">Lightning strikes the target</string>
+    <string name="ability_zap_desc">Lightning strikes the target. Charge: %s turns</string>
     <string name="ability_override">Override</string>
     <string name="ability_override_desc">Make the target use their active ability against a random enemy, dealing %s%% of their base damage</string>
     <string name="ability_blessing">Blessing</string>
@@ -53,7 +53,7 @@
     <string name="trait_spite_desc">Rage Bar increases by %s%% when hit</string>
     <string name="entity_cultist">Cultist</string>
     <string name="effect_watched">Watched</string>
-    <string name="effect_watched_desc">You feel like something bad is about to happen</string>
+    <string name="effect_watched_desc">Damage is decreased by %s%%</string>
     <string name="trait_forsaken">Forsaken</string>
     <string name="trait_forsaken_desc">Cannot be healed by allies</string>
     <string name="ability_bewitched">Bewitched</string>

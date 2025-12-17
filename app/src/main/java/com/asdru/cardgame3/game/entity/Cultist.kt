@@ -56,7 +56,7 @@ class Cultist : Entity(
     const val MAX_HEALTH = 200f
     const val DAMAGE = 8f
     const val ACTIVE_REPEATS = 3
-    const val PASSIVE_HEAL = 9f
+    const val PASSIVE_HEAL = 13f
     const val PASSIVE_DAMAGE = 21f
     const val ULTIMATE_MULTIPLIER = 7f
     const val ULTIMATE_HEAL = 50

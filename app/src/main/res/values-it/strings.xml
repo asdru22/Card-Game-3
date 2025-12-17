@@ -28,7 +28,7 @@
     <string name="effect_burning_desc">Subisce il %s%% della salute massima come danno</string>
     <string name="entity_wizard">Mago</string>
     <string name="ability_zap">Scossa</string>
-    <string name="ability_zap_desc">Un fulmine colpisce il bersaglio</string>
+    <string name="ability_zap_desc">Un fulmine colpisce il bersaglio. Carica: %s turni</string>
     <string name="ability_override">Dominio</string>
     <string name="ability_override_desc">Costringe il bersaglio a usare la sua abilità attiva contro un nemico casuale, infliggendo il %s%% del suo danno base</string>
     <string name="ability_blessing">Benedizione</string>
@@ -52,7 +52,7 @@
     <string name="trait_spite_desc">La Barra della Furia aumenta del %s%% quando colpito</string>
     <string name="entity_cultist">Cultista</string>
     <string name="effect_watched">Osservato</string>
-    <string name="effect_watched_desc">Senti che sta per accadere qualcosa di brutto</string>
+    <string name="effect_watched_desc">Danno ridotto del %s%%</string>
     <string name="trait_forsaken">Reietto</string>
     <string name="trait_forsaken_desc">Non può essere curato dagli alleati</string>
     <string name="ability_bewitched">Malocchio</string>

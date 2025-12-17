@@ -30,6 +30,6 @@ class Executioner : Trait {
   }
 
   companion object {
-    const val THRESHOLD = 9f
+    const val THRESHOLD = 6f
   }
 }

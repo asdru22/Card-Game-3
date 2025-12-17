@@ -27,6 +27,6 @@ class Sick(duration: Int) : StatusEffect(
     override val nameRes = R.string.effect_sick
     override val descriptionRes = R.string.effect_sick_desc
     override val isPositive = false
-    private const val HEALING_DECREASE = 50f
+    private const val HEALING_DECREASE = 70f
   }
 }

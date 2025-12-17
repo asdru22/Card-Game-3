@@ -23,6 +23,10 @@ class Wizard : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_zap,
     descriptionRes = R.string.ability_zap_desc,
+    formatArgs = listOf(
+      ACTIVE_CHARGES
+    ),
+    charges = ACTIVE_CHARGES,
   ) { source, target ->
     source.applyDamage(target)
   },
@@ -61,8 +65,9 @@ class Wizard : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 150f
-    const val DAMAGE = 28f
+    const val DAMAGE = 32f
+    const val ACTIVE_CHARGES = 2
     const val PASSIVE_DAMAGE_PERCENTAGE = 50
-    const val ULTIMATE_HEAL_AMOUNT = 24f
+    const val ULTIMATE_HEAL_AMOUNT = 11f
   }
 }

@@ -40,6 +40,6 @@ class Electrified(
     override val descriptionRes = R.string.effect_electrified_desc
     override val isPositive = false
 
-    private const val DAMAGE_AMOUNT = 12f
+    private const val DAMAGE_AMOUNT = 15f
   }
 }
