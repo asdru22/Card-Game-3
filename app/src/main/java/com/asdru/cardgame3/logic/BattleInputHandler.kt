@@ -168,6 +168,7 @@ class BattleInputHandler(private val vm: BattleViewModel) {
         state.item.onApply(target)
         // Deduct Coins
         team.coins -= state.item.cost
+        team.totalCoinsSpent += state.item.cost
       }
     }
 

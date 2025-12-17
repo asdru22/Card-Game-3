@@ -17,6 +17,11 @@ class TeamViewModel(
 
   var coins by mutableIntStateOf(team.coins)
 
+  var totalDamageDealt: Float = 0f
+  var totalHealing: Float = 0f
+  var totalEffectsApplied: Int = 0
+  var totalCoinsSpent: Int = 0
+
   init {
     entities.forEach {
       it.team = this

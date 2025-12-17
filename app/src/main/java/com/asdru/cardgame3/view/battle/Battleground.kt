@@ -375,38 +375,6 @@ fun WeatherIcon(modifier: Modifier = Modifier, viewModel: BattleViewModel) {
 }
 
 @Composable
-fun Winner(viewModel: BattleViewModel) {
-  Box(
-    modifier = Modifier
-      .fillMaxSize()
-      .background(Color.Black.copy(alpha = 0.85f))
-      .clickable(enabled = true) {},
-    contentAlignment = Alignment.Center
-  ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-      Text(
-        text = stringResource(R.string.ui_winner, viewModel.winner!!),
-        color = Color.Yellow,
-        fontSize = 48.sp,
-        fontWeight = FontWeight.Bold
-      )
-      Spacer(modifier = Modifier.height(16.dp))
-      Button(
-        onClick = { viewModel.onRestartClicked() },
-        colors = ButtonDefaults.buttonColors(
-          containerColor = Color.White,
-          contentColor = Color.Black
-        )
-      ) {
-        Text(
-          stringResource(R.string.ui_restart),
-        )
-      }
-    }
-  }
-}
-
-@Composable
 fun LineCanvas(dragStart: Offset, dragCurrent: Offset, color: Color) {
   Canvas(modifier = Modifier.fillMaxSize()) {
     drawLine(

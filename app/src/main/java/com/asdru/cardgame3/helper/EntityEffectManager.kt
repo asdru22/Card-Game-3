@@ -28,6 +28,10 @@ class EntityEffectManager(
 
     if (currentEffect == null) return
 
+    source?.team?.let { team ->
+      team.totalEffectsApplied++
+    }
+
     val finalEffect = currentEffect
     val existingEffect = effects.find { it::class == finalEffect::class }
 

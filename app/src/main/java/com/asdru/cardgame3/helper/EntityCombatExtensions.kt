@@ -62,8 +62,6 @@ suspend fun EntityViewModel.heal(
     return
   }
 
-
-
   repeat(repeats) {
     var actualHeal = amount
     applyTraits {
@@ -74,7 +72,10 @@ suspend fun EntityViewModel.heal(
       actualHeal = it.modifyIncomingHealing(this, actualHeal, source)
     }
 
-    health = (health + actualHeal).coerceAtMost(maxHealth)
+    val newHealth = (health + actualHeal).coerceAtMost(maxHealth)
+    val healDiff = newHealth - health
+    this.team.totalHealing += healDiff
+    health = newHealth
     popupManager.add(actualHeal, Color.Green)
     if (repeats > 1) delay(delayTime)
   }
@@ -127,7 +128,7 @@ suspend fun EntityViewModel.applyDamage(
       delay(200)
     }
   }
-
+  this.team.totalDamageDealt += totalDamage
   return totalDamage
 }
 
