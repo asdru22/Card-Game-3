@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.viewModel
 
 import androidx.compose.ui.graphics.Color
+import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Forsaken
 import kotlinx.coroutines.delay
@@ -56,13 +57,20 @@ suspend fun EntityViewModel.heal(
   delayTime: Long = 400
 ) {
   if (traits.any { it is Forsaken } && source != this) {
+    this.popupManager.add(R.string.game_forsaken)
     return
   }
 
+
+
   repeat(repeats) {
     var actualHeal = amount
-    applyTraits { trait ->
-      actualHeal = trait.modifyHeal(this, actualHeal)
+    applyTraits {
+      actualHeal = it.modifyHeal(this, actualHeal)
+    }
+
+    effectManager.effects.forEach {
+      actualHeal = it.modifyIncomingHealing(this, actualHeal, source)
     }
 
     health = (health + actualHeal).coerceAtMost(maxHealth)
@@ -77,7 +85,8 @@ suspend fun EntityViewModel.applyDamage(
   repeats: Int = 1,
   delayTime: Long = 400,
   playAttackAnimation: Boolean = true,
-  effects: List<StatusEffect> = emptyList()
+  effects: List<StatusEffect> = emptyList(),
+  rageDecrease: Float = 0f
 ): Float {
   var totalDamage = 0f
 
@@ -98,6 +107,10 @@ suspend fun EntityViewModel.applyDamage(
       }
 
       totalDamage += target.receiveDamage(calculatedDamage, source = this)
+
+      if (rageDecrease > 0f) {
+        target.team.decreaseRage(rageDecrease)
+      }
 
       if (repeats > 1) delay(delayTime)
     }
@@ -122,7 +135,9 @@ suspend fun EntityViewModel.applyDamageToTargets(
   amount: Float = damage,
   repeats: Int = 1,
   delayTime: Long = 400,
-  playAttackAnimation: Boolean = true
+  playAttackAnimation: Boolean = true,
+  effects: List<StatusEffect> = emptyList(),
+  rageDecrease: Float = 0f
 ): Float {
   var totalDamage = 0f
 
@@ -143,7 +158,9 @@ suspend fun EntityViewModel.applyDamageToTargets(
           amount,
           repeats = 1,
           delayTime = 0,
-          playAttackAnimation = false
+          playAttackAnimation = false,
+          effects = effects,
+          rageDecrease = rageDecrease
         )
       }
 

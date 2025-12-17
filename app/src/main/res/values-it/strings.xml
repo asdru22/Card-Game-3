@@ -182,4 +182,14 @@
     <string name="ability_feast">Banchetto</string>
     <string name="ability_feast_desc">Applica %s a tutti i compagni per %s turni</string>
     <string name="entity_mr_kettle">Mr. Kettle</string>
+    <string name="game_forsaken">Reietto!</string>
+    <string name="effect_sick">Ammalato</string>
+    <string name="effect_sick_desc">Cura ricevuta ridotta del %s%%</string>
+    <string name="entity_witch_doctor">Sciamano</string>
+    <string name="ability_shots">Iniezioni</string>
+    <string name="ability_shots_desc">Infliggi danno al nemico, ogni iniezione diminuisce la furia della squadra nemica di %s</string>
+    <string name="ability_vitamins">Vitamine</string>
+    <string name="ability_vitamins_desc">Aumenta la rabbia della propria squadra di %s e cura l\'alleato per %s</string>
+    <string name="ability_the_cure">La cura</string>
+    <string name="ability_the_cure_desc">Applica %s per %s turni e infliggi %s danno a tutti i nemici</string>
 </resources>

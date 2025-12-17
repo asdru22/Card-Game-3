@@ -184,4 +184,14 @@
     <string name="ability_feast">Feast</string>
     <string name="ability_feast_desc">Apply %s to all teammates for %s turns</string>
     <string name="entity_mr_kettle">Mr. Kettle</string>
+    <string name="game_forsaken">Forsaken!</string>
+    <string name="effect_sick">Sick</string>
+    <string name="effect_sick_desc">Incoming healing is reduced by %s%%</string>
+    <string name="entity_witch_doctor">Witch Doctor</string>
+    <string name="ability_shots">Shots</string>
+    <string name="ability_shots_desc">Deal damage %s times, each shot decreases the enemy\'s team rage by %s</string>
+    <string name="ability_vitamins">Vitamins</string>
+    <string name="ability_vitamins_desc">Increase team\'s rage by %s and heal the target for %s health</string>
+    <string name="ability_the_cure">The Cure</string>
+    <string name="ability_the_cure_desc">Apply %s for %s turns and deal %s damage to all enemies</string>
 </resources>

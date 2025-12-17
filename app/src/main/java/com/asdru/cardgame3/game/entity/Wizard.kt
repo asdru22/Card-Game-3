@@ -54,7 +54,7 @@ class Wizard : Entity(
     )
   ) { source, _ ->
     source.team.getAliveMembers().forEach {
-      it.heal(ULTIMATE_HEAL_AMOUNT)
+      it.heal(ULTIMATE_HEAL_AMOUNT, source)
       it.effectManager.clearNegative(it)
     }
   }

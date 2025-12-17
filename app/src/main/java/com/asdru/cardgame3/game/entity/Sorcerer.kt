@@ -42,9 +42,9 @@ class Sorcerer : Entity(
       PASSIVE_HEAL_AMOUNT,
       PASSIVE_CHARGES
     )
-  ) { _, target ->
+  ) { source, target ->
     target.increaseMaxHealth(target.maxHealth * PASSIVE_HEALTH_INCREASE / 100f)
-    target.heal(PASSIVE_HEAL_AMOUNT)
+    target.heal(PASSIVE_HEAL_AMOUNT, source)
   },
   ultimateAbility = Ability(
     nameRes = R.string.ability_phase_shift,
@@ -57,7 +57,7 @@ class Sorcerer : Entity(
   ) { source, _ ->
     source.team.getAliveMembers().forEach {
       it.addEffect(Vanish(ULTIMATE_DURATION), source)
-      it.heal(it.maxHealth * ULTIMATE_HEAL_AMOUNT / 100f)
+      it.heal(it.maxHealth * ULTIMATE_HEAL_AMOUNT / 100f, source)
     }
   },
 ) {

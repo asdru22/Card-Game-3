@@ -42,6 +42,13 @@ sealed class StatusEffect(
     source: EntityViewModel?
   ): Float = currentDamage
 
+
+  open suspend fun modifyIncomingHealing(
+    owner: EntityViewModel,
+    currentHealing: Float,
+    source: EntityViewModel?
+  ): Float = currentHealing
+
   fun tick(): Boolean {
     duration--
     return duration <= 0

@@ -31,6 +31,10 @@ class TeamViewModel(
     rage = (rage + amount).coerceAtMost(maxRage)
   }
 
+  fun decreaseRage(amount: Float) {
+    rage = (rage - amount).coerceAtLeast(0f)
+  }
+
   fun getAllMembers(): List<EntityViewModel> {
     return entities
   }
