@@ -16,7 +16,7 @@ class BattleInputHandler(private val vm: BattleViewModel) {
 
     fun onDragStart(char: EntityViewModel, offset: Offset) {
         if (vm.gameLogic.canEntityAct(char)) {
-            val cardTopLeft = vm.cardBounds[char]?.topLeft ?: Offset.Companion.Zero
+            val cardTopLeft = vm.cardBounds[char]?.topLeft ?: Offset.Zero
             val globalStart = cardTopLeft + offset
             vm.dragState = DragState(char, globalStart, globalStart)
         }
@@ -27,7 +27,6 @@ class BattleInputHandler(private val vm: BattleViewModel) {
             val newCurrent = currentDrag.current + change
             vm.dragState = currentDrag.copy(current = newCurrent)
 
-            // Delegate hit-testing logic
             vm.hoveredTarget = BattleTargetingHelper.findValidTarget(
                 dragState = currentDrag,
                 dragPosition = newCurrent,
@@ -41,8 +40,7 @@ class BattleInputHandler(private val vm: BattleViewModel) {
         val state = vm.dragState
         val target = vm.hoveredTarget
 
-        // Execute action via GameLogic
-        if (state != null && target != null && target.isAlive && vm.gameLogic.canEntityAct(state.source)) {
+       if (state != null && target != null && target.isAlive && vm.gameLogic.canEntityAct(state.source)) {
             vm.gameLogic.executeInteraction(state.source, target)
         }
         vm.dragState = null
@@ -57,7 +55,7 @@ class BattleInputHandler(private val vm: BattleViewModel) {
 
     fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
         val isLeft = (team == vm.leftTeam)
-        // Check if it is this team's turn
+
         if ((isLeft && vm.isLeftTeamTurn) || (!isLeft && !vm.isLeftTeamTurn)) {
 
             val memberCanPerformUltimate = team.getAliveMembers().any {
@@ -106,11 +104,11 @@ class BattleInputHandler(private val vm: BattleViewModel) {
         if (draggingState != null && entity == target) {
             val sourceLeft = vm.leftTeam.entities.contains(draggingState.source)
             val targetLeft = vm.leftTeam.entities.contains(entity)
-            return if (sourceLeft == targetLeft) Color.Companion.Green else Color.Companion.Red
+            return if (sourceLeft == targetLeft) Color.Green else Color.Red
         }
         if (ultState != null && entity == target) {
-            if (ultState.team.entities.contains(entity)) return Color.Companion.Cyan
+            if (ultState.team.entities.contains(entity)) return Color.Cyan
         }
-        return Color.Companion.Transparent
+        return Color.Transparent
     }
 }

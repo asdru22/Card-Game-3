@@ -9,7 +9,7 @@ class EntityPopupManager {
   val popups = mutableStateListOf<Popup>()
   private var popupIdCounter = 0L
 
-  // Counter to track stacking order
+
   private var stackIndex = 0
 
   fun add(text: String, color: Color = Color.Red, isStatus: Boolean = true) {
@@ -46,14 +46,10 @@ class EntityPopupManager {
   }
 
   private fun getStackingOffsets(): Pair<Float, Float> {
-    // 1. Vertical Stacking:
-    // Move up by 45 pixels for each new popup in the stack.
-    // Reset after 3 popups so they don't go too high.
+
     val verticalStep = -45f
     val yOffset = (stackIndex % 3) * verticalStep
 
-    // 2. Horizontal Jitter:
-    // Keep them mostly centered but add tiny random jitter for flavor
     val xOffset = Random.nextInt(-10, 11).toFloat()
 
     stackIndex++

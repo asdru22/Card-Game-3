@@ -70,7 +70,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
             val sourceLeft = vm.leftTeam.entities.contains(source)
             val targetLeft = vm.leftTeam.entities.contains(target)
             
-            // Invoke static combat logic
+
             BattleCombatLogic.executeCardInteraction(
                 source,
                 target,
@@ -134,7 +134,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         }
 
         if (target != null && target.isAlive) {
-            // Clear drag state just in case user was holding a card during timeout
+
             vm.dragState = null
             vm.hoveredTarget = null
             executeInteraction(source, target)
@@ -165,10 +165,9 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
         if (vm.winner != null) return
 
-        // If whole team is stunned, skip turn (recursive check)
         val aliveMembers = nextTeam.entities.filter { it.isAlive }
         if (aliveMembers.isNotEmpty() && aliveMembers.all { it.effectManager.isStunned }) {
-            delay(500) // Small delay for UX so it doesn't flash instantly
+            delay(500)
             advanceTurn()
         }
     }
