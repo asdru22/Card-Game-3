@@ -9,6 +9,7 @@ class Stunned(duration: Int) : StatusEffect(
   iconRes = iconRes,
   initialDuration = duration,
   isPositive = isPositive,
+  formatArgs = formatArgs
 ) {
   companion object Spec : Translatable {
     val iconRes = R.drawable.effect_stunned

@@ -14,7 +14,6 @@ class Electrified(
   initialDuration = duration,
   isPositive = isPositive,
   formatArgs = formatArgs
-
 ) {
 
   override suspend fun onStartTurn(target: EntityViewModel) {

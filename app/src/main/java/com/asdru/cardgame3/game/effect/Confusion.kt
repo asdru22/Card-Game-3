@@ -11,7 +11,8 @@ class Confusion(duration: Int) : StatusEffect(
   descriptionRes = descriptionRes,
   iconRes = iconRes,
   initialDuration = duration,
-  isPositive = isPositive
+  isPositive = isPositive,
+  formatArgs = formatArgs
 ) {
 
   override fun modifyActiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {

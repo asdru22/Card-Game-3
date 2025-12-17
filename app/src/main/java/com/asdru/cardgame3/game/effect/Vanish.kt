@@ -8,7 +8,8 @@ class Vanish(duration: Int) : StatusEffect(
   descriptionRes = descriptionRes,
   iconRes = iconRes,
   initialDuration = duration,
-  isPositive = isPositive
+  isPositive = isPositive,
+  formatArgs = formatArgs
 ) {
   companion object Spec : Translatable {
     val iconRes = R.drawable.effect_vanish
