@@ -18,8 +18,10 @@ import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.logic.BattleGameLogic
-import com.asdru.cardgame3.logic.BattleInputHandler
 import com.asdru.cardgame3.logic.BattleTimer
+import com.asdru.cardgame3.logic.inputHandler.CardInputHandler
+import com.asdru.cardgame3.logic.inputHandler.ShopInputHandler
+import com.asdru.cardgame3.logic.inputHandler.UltimateInputHandler
 
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
@@ -27,8 +29,11 @@ class BattleViewModel(
 ) : ViewModel() {
 
   // --- Components ---
-  // Handles Drag & Drop interactions
-  private val inputHandler = BattleInputHandler(this)
+
+  // 1. Instantiate the specific handlers directly
+  private val cardInputHandler = CardInputHandler(this)
+  private val ultimateInputHandler = UltimateInputHandler(this)
+  private val shopInputHandler = ShopInputHandler(this)
 
   // Handles Combat, Turns, and Win Conditions
   val gameLogic = BattleGameLogic(this)
@@ -70,19 +75,6 @@ class BattleViewModel(
   var shopDragState by mutableStateOf<ShopDragState?>(null)
     internal set
 
-  // Example Shop Items
-  fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
-    inputHandler.onShopDragStart(item, isLeftTeam, offset)
-  }
-
-  fun onShopDrag(change: Offset) {
-    inputHandler.onShopDrag(change)
-  }
-
-  fun onShopDragEnd() {
-    inputHandler.onShopDragEnd()
-  }
-
   // --- Timer Delegate ---
   var currentTurnTimeSeconds by mutableIntStateOf(0)
   var maxTurnTimeSeconds by mutableIntStateOf(0)
@@ -102,34 +94,49 @@ class BattleViewModel(
     gameLogic.startGame(newLeftTeam, newRightTeam, weatherEnabled, turnTimer)
   }
 
-  // --- UI/Input Events (Delegated) ---
+  // --- Card Events
 
   fun onDragStart(char: EntityViewModel, offset: Offset) {
-    inputHandler.onDragStart(char, offset)
+    cardInputHandler.onDragStart(char, offset)
   }
 
   fun onDrag(change: Offset) {
-    inputHandler.onDrag(change)
+    cardInputHandler.onDrag(change)
   }
 
   fun onDragEnd() {
-    inputHandler.onDragEnd()
+    cardInputHandler.onDragEnd()
   }
 
   fun onCardPositioned(entity: EntityViewModel, rect: Rect) {
-    inputHandler.onCardPositioned(entity, rect)
+    cardInputHandler.onCardPositioned(entity, rect)
   }
 
+  // --- Ultimate Events
+
   fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
-    inputHandler.onUltimateDragStart(team, offset)
+    ultimateInputHandler.onUltimateDragStart(team, offset)
   }
 
   fun onUltimateDrag(change: Offset) {
-    inputHandler.onUltimateDrag(change)
+    ultimateInputHandler.onUltimateDrag(change)
   }
 
   fun onUltimateDragEnd() {
-    inputHandler.onUltimateDragEnd()
+    ultimateInputHandler.onUltimateDragEnd()
+  }
+
+  // --- Shop Events (Delegated to ShopInputHandler) ---
+  fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
+    shopInputHandler.onShopDragStart(item, isLeftTeam, offset)
+  }
+
+  fun onShopDrag(change: Offset) {
+    shopInputHandler.onShopDrag(change)
+  }
+
+  fun onShopDragEnd() {
+    shopInputHandler.onShopDragEnd()
   }
 
   // --- Navigation & Dialogs ---
@@ -151,7 +158,6 @@ class BattleViewModel(
     navigateToSelection = true
     leftTeam.shop.reset()
     rightTeam.shop.reset()
-
   }
 
   fun onNavigatedToSelection() {
@@ -168,8 +174,10 @@ class BattleViewModel(
     selectedEntity = null
   }
 
-  // --- UI Helpers ---
   fun getHighlightColor(entity: EntityViewModel): Color {
-    return inputHandler.getHighlightColor(entity)
+    return cardInputHandler.getHighlightColor(entity)
+      ?: ultimateInputHandler.getHighlightColor(entity)
+      ?: shopInputHandler.getHighlightColor(entity)
+      ?: Color.Transparent
   }
 }
