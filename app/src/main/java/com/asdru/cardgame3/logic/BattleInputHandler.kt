@@ -3,14 +3,16 @@ package com.asdru.cardgame3.logic
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.ShopDragState
-import com.asdru.cardgame3.data.ShopItem
+import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.helper.BattleTargetingHelper
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import com.asdru.cardgame3.viewModel.TeamViewModel
+import kotlinx.coroutines.launch
 
 class BattleInputHandler(private val vm: BattleViewModel) {
 
@@ -165,7 +167,9 @@ class BattleInputHandler(private val vm: BattleViewModel) {
       // Double check target belongs to team and is alive
       if (target.team == team && target.isAlive) {
         // Apply Effect
-        state.item.onApply(target)
+        vm.viewModelScope.launch {
+          state.item.onApply(target)
+        }
         // Deduct Coins
         team.coins -= state.item.cost
         team.totalCoinsSpent += state.item.cost

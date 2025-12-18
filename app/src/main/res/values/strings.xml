@@ -194,4 +194,6 @@
     <string name="ability_vitamins_desc">Increase team\'s rage by %s and heal the target for %s health</string>
     <string name="ability_the_cure">The Cure</string>
     <string name="ability_the_cure_desc">Apply %s for %s turns and deal %s damage to all enemies</string>
+    <string name="item_healing_potion">Healing Potion</string>
+    <string name="item_healing_potion_desc">Restores %s health</string>
 </resources>

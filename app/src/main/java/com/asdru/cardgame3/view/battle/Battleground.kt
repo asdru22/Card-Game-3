@@ -211,6 +211,8 @@ fun BattleScreen(viewModel: BattleViewModel) {
 
     if (viewModel.winner != null) {
       Winner(viewModel)
+      viewModel.isLeftShopOpen = false
+      viewModel.isRightShopOpen = false
     }
   }
 }

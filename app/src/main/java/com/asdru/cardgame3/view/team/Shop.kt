@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.data.ShopItem
+import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.view.common.SmartDescriptionText
 
 @Composable

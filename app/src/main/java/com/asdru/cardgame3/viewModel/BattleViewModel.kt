@@ -12,12 +12,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
-import com.asdru.cardgame3.data.ShopDataProvider
 import com.asdru.cardgame3.data.ShopDragState
-import com.asdru.cardgame3.data.ShopItem
+import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.game.weather.WeatherEvent
+import com.asdru.cardgame3.helper.ShopDataProvider
 import com.asdru.cardgame3.logic.BattleGameLogic
 import com.asdru.cardgame3.logic.BattleInputHandler
 import com.asdru.cardgame3.logic.BattleTimer
