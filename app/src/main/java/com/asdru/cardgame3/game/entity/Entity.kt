@@ -7,6 +7,7 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.game.summon.Summon
 import com.asdru.cardgame3.game.trait.Trait
 
 sealed class Entity(
@@ -19,5 +20,7 @@ sealed class Entity(
   val passiveAbility: Ability,
   val activeAbility: Ability,
   val ultimateAbility: Ability,
-  val traits: List<Trait> = emptyList()
+  val traits: List<Trait> = emptyList(),
+  val hasSummon: Boolean = false,
+  val summon: Summon? = null
 )

@@ -44,6 +44,8 @@ class EntityViewModel(
 
   var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
 
+  val hasSummon: Boolean = entity.hasSummon
+
   val isAlive: Boolean get() = health > 0
   val name: Int = entity.name
   val color: Color = entity.color

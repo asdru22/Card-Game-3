@@ -28,6 +28,6 @@ class Gilded(duration: Int) : StatusEffect(
     override val descriptionRes = R.string.effect_gilded_desc
     override val isPositive = true
 
-    private const val COINS_GAINED = 1
+    private const val COINS_GAINED = 4
   }
 }
