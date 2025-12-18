@@ -30,6 +30,7 @@ class BattleViewModel(
   // --- Components ---
   // Handles Drag & Drop interactions
   private val inputHandler = BattleInputHandler(this)
+
   // Handles Combat, Turns, and Win Conditions
   val gameLogic = BattleGameLogic(this)
 
@@ -159,6 +160,8 @@ class BattleViewModel(
 
   fun onRestartClicked() {
     navigateToSelection = true
+    isRightShopOpen = false
+    isLeftShopOpen = false
   }
 
   fun onNavigatedToSelection() {

@@ -192,4 +192,14 @@
     <string name="ability_vitamins_desc">Aumenta la rabbia della propria squadra di %s e cura l\'alleato per %s</string>
     <string name="ability_the_cure">La cura</string>
     <string name="ability_the_cure_desc">Applica %s per %s turni e infliggi %s danno a tutti i nemici</string>
+    <string name="item_healing_potion">Pozione Curativa</string>
+    <string name="item_healing_potion_desc">Ripristina %s salute</string>
+    <string name="trait_greedy">Avido</string>
+    <string name="game_greedy">Avido!</string>
+    <string name="trait_greedy_desc">Ottieni %s monete extra alla fine di ogni turno</string>
+    <string name="ui_shop_cost">%s soldi</string>
+    <string name="ui_damage_dealt">Danno Inflitto</string>
+    <string name="ui_total_healing">Cura Totale</string>
+    <string name="ui_effects_applied">Effetti Applicati</string>
+    <string name="ui_coins_spent">Soldi Spesi</string>
 </resources>

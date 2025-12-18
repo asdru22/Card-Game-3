@@ -15,7 +15,7 @@ object BattleCombatLogic {
     } else {
       handleHostileInteraction(source, target)
     }
-    source.team.coins += 1
+    source.team.modifyCoins(1)
   }
 
   suspend fun performActiveAbility(source: EntityViewModel, target: EntityViewModel) {

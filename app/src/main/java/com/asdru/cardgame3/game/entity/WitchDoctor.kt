@@ -7,6 +7,7 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Sick
+import com.asdru.cardgame3.game.trait.Greedy
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 import com.asdru.cardgame3.helper.heal
@@ -17,6 +18,7 @@ class WitchDoctor : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFA27E3A),
   damageType = DamageType.Melee,
+  traits = listOf(Greedy()),
   radarStats = RadarStats(0.5f, 0.5f, 0.5f, 0.7f, 0.4f),
   activeAbility = Ability(
     nameRes = R.string.ability_shots,

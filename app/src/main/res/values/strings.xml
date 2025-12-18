@@ -196,4 +196,12 @@
     <string name="ability_the_cure_desc">Apply %s for %s turns and deal %s damage to all enemies</string>
     <string name="item_healing_potion">Healing Potion</string>
     <string name="item_healing_potion_desc">Restores %s health</string>
+    <string name="trait_greedy">Greedy</string>
+    <string name="game_greedy">Greedy!</string>
+    <string name="trait_greedy_desc">Gain %s extra coin at the end of each turn</string>
+    <string name="ui_shop_cost">%s coins</string>
+    <string name="ui_damage_dealt">Damage Dealt</string>
+    <string name="ui_total_healing">Total Healing</string>
+    <string name="ui_effects_applied">Effects Applied</string>
+    <string name="ui_coins_spent">Coins Spent</string>
 </resources>

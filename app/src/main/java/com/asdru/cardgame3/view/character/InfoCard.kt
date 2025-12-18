@@ -107,7 +107,6 @@ fun CharacterInfoCard(
     }
   }
 }
-
 @Composable
 private fun CharacterInfoHeader(
   viewModel: EntityViewModel,
@@ -121,19 +120,26 @@ private fun CharacterInfoHeader(
     verticalAlignment = Alignment.CenterVertically
   ) {
     val closeBtn = @Composable { CloseButton(onClose) }
-    val nameTxt = @Composable { CharacterName(viewModel.name, onShowRadar) }
+
+
+    val nameTxt = @Composable { modifier: Modifier ->
+      CharacterName(viewModel.name, onShowRadar, modifier)
+    }
+
     val statsPill = @Composable { CharacterStatsPill(viewModel, onShowRadar) }
 
     if (viewModel.isLeftTeam) {
       closeBtn()
       Spacer(modifier = Modifier.width(8.dp))
-      nameTxt()
-      Spacer(modifier = Modifier.weight(1f))
+
+      nameTxt(Modifier.weight(1f).padding(horizontal = 8.dp))
+
       statsPill()
     } else {
       statsPill()
-      Spacer(modifier = Modifier.weight(1f))
-      nameTxt()
+
+      nameTxt(Modifier.weight(1f).padding(horizontal = 8.dp))
+
       Spacer(modifier = Modifier.width(8.dp))
       closeBtn()
     }
@@ -143,7 +149,8 @@ private fun CharacterInfoHeader(
 @Composable
 private fun CharacterName(
   nameResId: Int,
-  onClick: () -> Unit
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier
 ) {
   Text(
     text = stringResource(nameResId),
@@ -151,7 +158,8 @@ private fun CharacterName(
     fontSize = 20.sp,
     fontWeight = FontWeight.Bold,
     textAlign = TextAlign.Center,
-    modifier = Modifier
+    lineHeight = 22.sp,
+    modifier = modifier
       .clip(RoundedCornerShape(8.dp))
       .clickable { onClick() }
       .padding(horizontal = 8.dp, vertical = 4.dp)

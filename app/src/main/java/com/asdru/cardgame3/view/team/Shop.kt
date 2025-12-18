@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -231,7 +232,7 @@ fun ShopItemDetail(item: ShopItem, onClose: () -> Unit) {
             fontSize = 18.sp
           )
           Text(
-            text = "${item.cost} Gold",
+            text = stringResource(R.string.ui_shop_cost, item.cost),
             color = Color(0xFFFFD700),
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold

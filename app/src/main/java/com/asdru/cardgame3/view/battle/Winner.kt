@@ -116,10 +116,9 @@ fun TeamResultItem(
     horizontalAlignment = Alignment.CenterHorizontally,
     modifier = Modifier.width(200.dp)
   ) {
-    // --- Player Name & Winner Badge ---
     Text(
       text = team.name,
-      color = if (isWinner) Color(0xFFFFD700) else Color.White, // Yellow if winner
+      color = if (isWinner) Color(0xFFFFD700) else Color.White,
       fontSize = 24.sp,
       fontWeight = FontWeight.Bold,
       maxLines = 1
@@ -135,18 +134,24 @@ fun TeamResultItem(
         modifier = Modifier.padding(top = 4.dp)
       )
     } else {
-      // Invisible spacer to keep alignment if needed, or just nothing
+
       Spacer(modifier = Modifier.height(20.dp))
     }
 
     Spacer(modifier = Modifier.height(24.dp))
 
     // --- Statistics ---
-    // Note: Ensure these properties exist in your TeamViewModel
-    StatRow(label = "Damage Dealt", value = "${team.totalDamageDealt}")
-    StatRow(label = "Total Healing", value = "${team.totalHealing}")
-    StatRow(label = "Effects Applied", value = "${team.totalEffectsApplied}")
-    StatRow(label = "Coins Spent", value = "${team.totalCoinsSpent}", iconRes = R.drawable.icon_coins)
+    StatRow(label = stringResource(R.string.ui_damage_dealt), value = "${team.totalDamageDealt}")
+    StatRow(label = stringResource(R.string.ui_total_healing), value = "${team.totalHealing}")
+    StatRow(
+      label = stringResource(R.string.ui_effects_applied),
+      value = "${team.totalEffectsApplied}"
+    )
+    StatRow(
+      label = stringResource(R.string.ui_coins_spent),
+      value = "${team.totalCoinsSpent}",
+      iconRes = R.drawable.icon_coins
+    )
   }
 }
 

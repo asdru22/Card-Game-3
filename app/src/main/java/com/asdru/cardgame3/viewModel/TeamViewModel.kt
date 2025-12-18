@@ -72,4 +72,8 @@ class TeamViewModel(
   fun getRandomTargetableEnemy(): EntityViewModel? {
     return getTargetableEnemies().randomOrNull()
   }
+
+  fun modifyCoins(amount: Int){
+    coins += amount
+  }
 }
