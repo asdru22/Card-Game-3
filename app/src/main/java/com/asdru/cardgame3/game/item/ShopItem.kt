@@ -7,7 +7,6 @@ import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 sealed class ShopItem(
-  val id: String,
   @get:StringRes override val nameRes: Int,
   @get:StringRes override val descriptionRes: Int,
   val cost: Int,

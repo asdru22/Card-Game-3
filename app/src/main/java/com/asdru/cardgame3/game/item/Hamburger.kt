@@ -6,7 +6,6 @@ import com.asdru.cardgame3.game.effect.WellFed
 private const val EFFECT_DURATION = 2
 
 object Hamburger : ShopItem(
-  id = "potion_small",
   nameRes = R.string.item_hamburger,
   descriptionRes = R.string.item_hamburger_desc,
   cost = 30,

@@ -6,7 +6,6 @@ import com.asdru.cardgame3.helper.heal
 private const val HEAL_AMOUNT = 15f
 
 object HealingPotion : ShopItem(
-  id = "potion_small",
   nameRes = R.string.item_healing_potion,
   descriptionRes = R.string.item_healing_potion_desc,
   cost = 20,

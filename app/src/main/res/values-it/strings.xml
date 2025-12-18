@@ -221,4 +221,10 @@
     <string name="ability_horn_of_retribution_desc">Applica %s al nemico con il danno base più alto per %s turni e ottieni %s rabbia. Se il nemico è %s, infliggi %s danni e ottieni %s rabbia extra</string>
     <string name="effect_weakness">Debolezza</string>
     <string name="effect_weakness_desc">Il danno base è ridotto del %s%%</string>
+    <string name="item_chili">Peperoncino</string>
+    <string name="item_chili_desc">Aumenta la rabbia della squadra del %s%%</string>
+    <string name="item_mirror">Specchio</string>
+    <string name="item_mirror_desc">Costringe l'utilizzatore a usare la propria abilità attiva su se stesso</string>
+    <string name="weather_golden_shower">Pioggia Dorata</string>
+    <string name="weather_golden_shower_desc">Ottieni %s moneta alla fine di ogni turno</string>
 </resources>

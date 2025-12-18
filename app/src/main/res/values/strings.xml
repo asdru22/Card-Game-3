@@ -223,4 +223,10 @@
     <string name="ability_horn_of_retribution_desc">Apply %s to the enemy with highest base damage for %s turns and gain %s rage. If the enemy is %s, deal %s damage and gain %s extra rage</string>
     <string name="effect_weakness">Weakness</string>
     <string name="effect_weakness_desc">Base damage is reduced by %s%%</string>
+    <string name="item_chili">Chili</string>
+    <string name="item_chili_desc">Increases team rage by %s%%</string>
+    <string name="item_mirror">Mirror</string>
+    <string name="item_mirror_desc">Makes the user cast its active ability on themself</string>
+    <string name="weather_golden_shower">Golden Shower</string>
+    <string name="weather_golden_shower_desc">Gain %s coin at the end of each turn</string>
 </resources>
