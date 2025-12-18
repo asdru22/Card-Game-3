@@ -1,11 +1,11 @@
 package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import kotlin.random.Random
 
-class Strength(duration: Int) : StatusEffect(
+class Blindness(duration: Int) : StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,
@@ -13,24 +13,27 @@ class Strength(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
+
   override fun modifyDamage(
     currentDamage: Float,
     owner: EntityViewModel?,
     target: EntityViewModel?
   ): Float {
-    return if (owner?.damageType == DamageType.Melee) {
-      currentDamage * (1 + DAMAGE_INCREASE / 100f)
-    } else {
-      currentDamage
+    if (Random.nextFloat() < (MISS_CHANCE / 100)) {
+      target?.popupManager?.add(R.string.game_miss)
+      return 0f
     }
+    return currentDamage
   }
 
   companion object Spec : Translatable {
-    val iconRes = R.drawable.effect_strength
-    override val formatArgs = listOf(DAMAGE_INCREASE)
-    override val nameRes = R.string.effect_strength
-    override val descriptionRes = R.string.effect_strength_desc
+    val iconRes = R.drawable.effect_blindness
+    override val formatArgs = listOf(MISS_CHANCE)
+    override val nameRes = R.string.effect_blindness
+    override val descriptionRes = R.string.effect_blindness_desc
     override val isPositive = true
-    private const val DAMAGE_INCREASE = 15f
+
+    private const val MISS_CHANCE = 50f
+
   }
 }

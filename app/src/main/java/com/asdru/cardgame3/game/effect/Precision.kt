@@ -19,7 +19,11 @@ class Precision(duration: Int) : StatusEffect(
     ownerDamageType = target.damageType
   }
 
-  override fun modifyDamage(currentDamage: Float): Float {
+  override fun modifyDamage(
+    currentDamage: Float,
+    owner: EntityViewModel?,
+    target: EntityViewModel?
+  ): Float {
     return if (ownerDamageType == DamageType.Ranged) {
       currentDamage * (1 + DAMAGE_INCREASE / 100f)
     } else {

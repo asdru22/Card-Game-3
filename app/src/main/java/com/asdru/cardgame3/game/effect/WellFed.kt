@@ -14,7 +14,11 @@ class WellFed(duration: Int) : StatusEffect(
   formatArgs = formatArgs
 ) {
 
-  override fun modifyDamage(currentDamage: Float): Float {
+  override fun modifyDamage(
+    currentDamage: Float,
+    owner: EntityViewModel?,
+    target: EntityViewModel?
+  ): Float {
     return currentDamage * (1f + DAMAGE_INCREASE / 100f)
   }
 

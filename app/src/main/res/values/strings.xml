@@ -204,4 +204,16 @@
     <string name="ui_total_healing">Total Healing</string>
     <string name="ui_effects_applied">Effects Applied</string>
     <string name="ui_coins_spent">Coins Spent</string>
+    <string name="item_antidote">Antidote</string>
+    <string name="item_antidote_desc">Removes all negative effects</string>
+    <string name="item_hamburger">Hamburger</string>
+    <string name="item_hamburger_desc">Apply %s for %s turns</string>
+    <string name="trait_furious">Furious</string>
+    <string name="trait_furious_desc">Damage scales up to +100% based on the team\'s current rage</string>
+    <string name="effect_blindness">Blindness</string>
+    <string name="effect_blindness_desc">%s chance for active abilities to miss</string>
+    <string name="effect_gilded">Gilded</string>
+    <string name="effect_gilded_desc">Gain %s coin when damaged</string>
+    <string name="effect_hypnotized">Hypnotized</string>
+    <string name="effect_hypnotized_desc">Can be controlled by the opposing player</string>
 </resources>

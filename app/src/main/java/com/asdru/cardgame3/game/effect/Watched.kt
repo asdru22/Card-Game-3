@@ -2,6 +2,7 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Watched(duration: Int) : StatusEffect(
   nameRes = nameRes,
@@ -11,7 +12,11 @@ class Watched(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
-  override fun modifyDamage(currentDamage: Float): Float {
+  override fun modifyDamage(
+    currentDamage: Float,
+    owner: EntityViewModel?,
+    target: EntityViewModel?
+  ): Float {
     return currentDamage * (1 - (DAMAGE_REDUCTION / 100))
   }
 

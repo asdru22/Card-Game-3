@@ -56,7 +56,7 @@ class EntityViewModel(
   fun recalculateStats() {
     var newDamage = baseDamage
     effectManager.effects.forEach { effect ->
-      newDamage = effect.modifyDamage(newDamage)
+      newDamage = effect.modifyDamage(newDamage, this, null)
     }
     damage = newDamage
   }
@@ -76,7 +76,7 @@ class EntityViewModel(
     effectManager.removeEffect(effect, this)
   }
 
-  fun resetCharges(){
+  fun resetCharges() {
     currentActiveCharges = 0
     currentPassiveCharges = 0
   }

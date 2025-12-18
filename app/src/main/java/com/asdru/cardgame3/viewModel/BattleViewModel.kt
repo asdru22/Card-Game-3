@@ -30,12 +30,10 @@ class BattleViewModel(
 
   // --- Components ---
 
-  // 1. Instantiate the specific handlers directly
   private val cardInputHandler = CardInputHandler(this)
   private val ultimateInputHandler = UltimateInputHandler(this)
   private val shopInputHandler = ShopInputHandler(this)
 
-  // Handles Combat, Turns, and Win Conditions
   val gameLogic = BattleGameLogic(this)
 
   // --- State Variables ---

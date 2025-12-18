@@ -4,7 +4,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
-class Overloaded(duration: Int) : StatusEffect(
+class Gilded(duration: Int) : StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,
@@ -12,29 +12,22 @@ class Overloaded(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
-
-  override fun modifyDamage(
-    currentDamage: Float,
-    owner: EntityViewModel?,
-    target: EntityViewModel?
-  ): Float {
-    return currentDamage * (1f + DAMAGE_INCREASE / 100f)
-  }
-
   override suspend fun modifyIncomingDamage(
     owner: EntityViewModel,
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    return currentDamage * (1f + DAMAGE_INCREASE / 100f)
+    owner.team.shop.modifyCoins(COINS_GAINED)
+    return currentDamage
   }
 
   companion object Spec : Translatable {
-    val iconRes = R.drawable.effect_overloaded
-    override val formatArgs = listOf(DAMAGE_INCREASE)
-    override val nameRes = R.string.effect_overloaded
-    override val descriptionRes = R.string.effect_overloaded_desc
+    val iconRes = R.drawable.effect_gilded
+    override val formatArgs = listOf(COINS_GAINED)
+    override val nameRes = R.string.effect_gilded
+    override val descriptionRes = R.string.effect_gilded_desc
     override val isPositive = true
-    private const val DAMAGE_INCREASE = 30f
+
+    private const val COINS_GAINED = 1
   }
 }
