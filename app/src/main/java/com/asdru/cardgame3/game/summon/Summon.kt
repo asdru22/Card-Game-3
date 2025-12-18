@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.Stats
 
-sealed class Entity(
+sealed class Summon(
   @field:StringRes val name: Int,
   @field:DrawableRes val iconRes: Int,
   val initialStats: Stats,
