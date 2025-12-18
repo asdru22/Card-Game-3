@@ -224,7 +224,7 @@
     <string name="item_chili">Peperoncino</string>
     <string name="item_chili_desc">Aumenta la rabbia della squadra del %s%%</string>
     <string name="item_mirror">Specchio</string>
-    <string name="item_mirror_desc">Costringe l'utilizzatore a usare la propria abilità attiva su se stesso</string>
+    <string name="item_mirror_desc">Costringe l\'utilizzatore a usare la propria abilità attiva su se stesso</string>
     <string name="weather_golden_shower">Pioggia Dorata</string>
     <string name="weather_golden_shower_desc">Ottieni %s moneta alla fine di ogni turno</string>
 </resources>
