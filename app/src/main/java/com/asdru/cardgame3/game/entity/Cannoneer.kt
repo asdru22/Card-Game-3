@@ -7,7 +7,6 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Bursting
-import com.asdru.cardgame3.game.effect.Hypnotized
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 import kotlinx.coroutines.delay
@@ -28,8 +27,7 @@ class Cannoneer : Entity(
     )
   ) { source, target ->
     source.applyDamage(
-      target,
-      DAMAGE * ACTIVE_TARGET_MULTIPLIER / 100
+      target, DAMAGE * ACTIVE_TARGET_MULTIPLIER / 100
     )
     source.applyDamageToTargets(
       target.team.getOtherAliveMembers(target),

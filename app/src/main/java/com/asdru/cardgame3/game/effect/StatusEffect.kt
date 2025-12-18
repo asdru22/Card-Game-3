@@ -42,6 +42,11 @@ sealed class StatusEffect(
     source: EntityViewModel?
   ): Float = currentDamage
 
+  open suspend fun modifyOutgoingDamage(
+    owner: EntityViewModel,
+    currentDamage: Float,
+    target: EntityViewModel?
+  ): Float = currentDamage
 
   open suspend fun modifyIncomingHealing(
     owner: EntityViewModel,

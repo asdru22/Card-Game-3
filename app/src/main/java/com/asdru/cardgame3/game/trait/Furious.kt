@@ -12,6 +12,6 @@ class Furious : Trait {
     target: EntityViewModel,
     amount: Float
   ): Float {
-    return owner.damage * owner.team.rage / 100f
+    return owner.damage * (1 + owner.team.rage / 100f)
   }
 }

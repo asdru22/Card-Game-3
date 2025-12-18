@@ -210,10 +210,17 @@
     <string name="item_hamburger_desc">Apply %s for %s turns</string>
     <string name="trait_furious">Furious</string>
     <string name="trait_furious_desc">Damage scales up to +100% based on the team\'s current rage</string>
-    <string name="effect_blindness">Blindness</string>
-    <string name="effect_blindness_desc">%s chance for active abilities to miss</string>
+    <string name="effect_blinded">Blinded</string>
+    <string name="effect_blinded_desc">%s chance for active abilities to miss</string>
     <string name="effect_gilded">Gilded</string>
     <string name="effect_gilded_desc">Gain %s coin when damaged</string>
-    <string name="effect_hypnotized">Hypnotized</string>
-    <string name="effect_hypnotized_desc">Can be controlled by the opposing player</string>
+    <string name="entity_unicorn">Unicorn</string>
+    <string name="ability_light_beam">Light Beam</string>
+    <string name="ability_light_beam_desc">Deal damage and apply %s to the target for %s turn. Charge: %s turns</string>
+    <string name="ability_golden_touch">Golden Touch</string>
+    <string name="ability_golden_touch_desc">Apply %s to the target for %s turns</string>
+    <string name="ability_horn_of_retribution">Horn of Retribution</string>
+    <string name="ability_horn_of_retribution_desc">Apply %s to the enemy with highest base damage for %s turns and gain %s rage. If the enemy is %s, deal %s damage and gain %s extra rage</string>
+    <string name="effect_weakness">Weakness</string>
+    <string name="effect_weakness_desc">Base damage is reduced by %s%%</string>
 </resources>

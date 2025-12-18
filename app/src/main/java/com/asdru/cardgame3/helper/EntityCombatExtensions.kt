@@ -108,6 +108,11 @@ suspend fun EntityViewModel.applyDamage(
         calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
       }
 
+      effectManager.effects.forEach {
+        calculatedDamage = it.modifyOutgoingDamage(this,calculatedDamage, target)
+
+      }
+
       totalDamage += target.receiveDamage(calculatedDamage, source = this)
 
       if (rageDecrease > 0f) {

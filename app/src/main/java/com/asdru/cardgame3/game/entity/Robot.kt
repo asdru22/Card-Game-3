@@ -40,7 +40,7 @@ class Robot : Entity(
     formatArgs = listOf(Stunned.Spec, ULTIMATE_STUNNED_DURATION)
   ) { source, randomEnemy ->
     randomEnemy.team.getAliveMembers()
-      .filter { it.effectManager.effects.any { effect -> effect is Electrified } }
+      .filter { it.effectManager.hasEffect<Electrified>() }
       .forEach { it.addEffect(Stunned(ULTIMATE_STUNNED_DURATION), source) }
   }
 ) {

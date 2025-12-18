@@ -5,7 +5,7 @@ import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.random.Random
 
-class Blindness(duration: Int) : StatusEffect(
+class Blinded(duration: Int) : StatusEffect(
   nameRes = nameRes,
   descriptionRes = descriptionRes,
   iconRes = iconRes,
@@ -14,26 +14,27 @@ class Blindness(duration: Int) : StatusEffect(
   formatArgs = formatArgs
 ) {
 
-  override fun modifyDamage(
+  override suspend fun modifyOutgoingDamage(
+    owner: EntityViewModel,
     currentDamage: Float,
-    owner: EntityViewModel?,
     target: EntityViewModel?
   ): Float {
     if (Random.nextFloat() < (MISS_CHANCE / 100)) {
-      target?.popupManager?.add(R.string.game_miss)
+      owner.popupManager.add(R.string.game_miss)
       return 0f
     }
     return currentDamage
   }
 
-  companion object Spec : Translatable {
-    val iconRes = R.drawable.effect_blindness
-    override val formatArgs = listOf(MISS_CHANCE)
-    override val nameRes = R.string.effect_blindness
-    override val descriptionRes = R.string.effect_blindness_desc
-    override val isPositive = true
 
-    private const val MISS_CHANCE = 50f
+  companion object Spec : Translatable {
+    val iconRes = R.drawable.effect_blinded
+    override val formatArgs = listOf(MISS_CHANCE)
+    override val nameRes = R.string.effect_blinded
+    override val descriptionRes = R.string.effect_blinded_desc
+    override val isPositive = false
+
+    private const val MISS_CHANCE = 70f
 
   }
 }

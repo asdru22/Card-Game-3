@@ -99,4 +99,8 @@ class EntityEffectManager(
     }
     return effectsToRemove.size
   }
+
+  inline fun <reified T : StatusEffect> hasEffect(): Boolean {
+    return effects.any { it is T }
+  }
 }

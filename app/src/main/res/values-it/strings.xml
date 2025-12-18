@@ -202,4 +202,23 @@
     <string name="ui_total_healing">Cura Totale</string>
     <string name="ui_effects_applied">Effetti Applicati</string>
     <string name="ui_coins_spent">Soldi Spesi</string>
+    <string name="item_antidote">Antidoto</string>
+    <string name="item_antidote_desc">Rimuove tutti gli effetti negativi</string>
+    <string name="item_hamburger">Hamburger</string>
+    <string name="item_hamburger_desc">Applica %s per %s turni</string>
+    <string name="trait_furious">Furioso</string>
+    <string name="trait_furious_desc">Il danno aumenta fino al +100% in base alla rabbia attuale della squadra</string>
+    <string name="effect_blinded">Accecato</string>
+    <string name="effect_blinded_desc">%s di probabilità che le abilità attive falliscano</string>
+    <string name="effect_gilded">Dorato</string>
+    <string name="effect_gilded_desc">Ottieni %s moneta quando subisci danni</string>
+    <string name="entity_unicorn">Unicorno</string>
+    <string name="ability_light_beam">Raggio di Luce</string>
+    <string name="ability_light_beam_desc">Infliggi danni e applica %s al bersaglio per %s turno. Carica: %s turni</string>
+    <string name="ability_golden_touch">Tocco Dorato</string>
+    <string name="ability_golden_touch_desc">Applica %s al bersaglio per %s turni</string>
+    <string name="ability_horn_of_retribution">Corno della Retribuzione</string>
+    <string name="ability_horn_of_retribution_desc">Applica %s al nemico con il danno base più alto per %s turni e ottieni %s rabbia. Se il nemico è %s, infliggi %s danni e ottieni %s rabbia extra</string>
+    <string name="effect_weakness">Debolezza</string>
+    <string name="effect_weakness_desc">Il danno base è ridotto del %s%%</string>
 </resources>
