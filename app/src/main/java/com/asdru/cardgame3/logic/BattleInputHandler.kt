@@ -127,11 +127,12 @@ class BattleInputHandler(private val vm: BattleViewModel) {
   fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
     val team = if (isLeftTeam) vm.leftTeam else vm.rightTeam
 
-    // 1. Check turns (Optional: Remove if you want to allow shopping during enemy turn)
     val isMyTurn = (isLeftTeam && vm.isLeftTeamTurn) || (!isLeftTeam && !vm.isLeftTeamTurn)
 
-    // 2. Check Coins
-    if (isMyTurn && team.coins >= item.cost && vm.winner == null && !vm.isActionPlaying) {
+    if (isMyTurn &&
+      team.shop.canAfford(item.cost) &&
+      vm.winner == null &&
+      !vm.isActionPlaying) {
       vm.shopDragState = ShopDragState(
         item = item,
         teamIsLeft = isLeftTeam,
@@ -146,12 +147,11 @@ class BattleInputHandler(private val vm: BattleViewModel) {
       val newPos = current.current + change
       vm.shopDragState = current.copy(current = newPos)
 
-      // Only highlight FRIENDLY units
       val friendlyEntities = if (current.teamIsLeft) vm.leftTeam.entities else vm.rightTeam.entities
 
       vm.hoveredTarget = BattleTargetingHelper.findUltimateTarget(
         newPos,
-        friendlyEntities, // Restrict to own team
+        friendlyEntities,
         vm.cardBounds
       )
     }
@@ -164,20 +164,18 @@ class BattleInputHandler(private val vm: BattleViewModel) {
     if (state != null && target != null) {
       val team = if (state.teamIsLeft) vm.leftTeam else vm.rightTeam
 
-      // Double check target belongs to team and is alive
       if (target.team == team && target.isAlive) {
-        // Apply Effect
-        vm.viewModelScope.launch {
-          state.item.onApply(target)
+
+        if (team.shop.trySpend(state.item.cost)) {
+          vm.viewModelScope.launch {
+            state.item.onApply(target)
+          }
+          team.totalCoinsSpent += state.item.cost
         }
-        // Deduct Coins
-        team.coins -= state.item.cost
-        team.totalCoinsSpent += state.item.cost
       }
     }
 
     vm.shopDragState = null
     vm.hoveredTarget = null
   }
-
 }

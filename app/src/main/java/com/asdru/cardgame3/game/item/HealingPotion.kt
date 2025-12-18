@@ -9,7 +9,7 @@ object HealingPotion : ShopItem(
   id = "potion_small",
   nameRes = R.string.item_healing_potion,
   descriptionRes = R.string.item_healing_potion_desc,
-  cost = 8,
+  cost = 20,
   iconRes = R.drawable.item_healing_potion,
   formatArgs = listOf(HEAL_AMOUNT),
   onApply = {

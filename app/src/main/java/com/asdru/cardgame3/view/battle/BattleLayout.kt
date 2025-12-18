@@ -59,7 +59,7 @@ fun BattleLayout(
       verticalAlignment = Alignment.CenterVertically
     ) {
 
-      // --- LEFT GROUP (Team + Coin) ---
+      // --- LEFT GROUP (Team + Shop) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         TeamColumn(
           entities = viewModel.leftTeam.entities,
@@ -77,16 +77,12 @@ fun BattleLayout(
 
         Spacer(modifier = Modifier.width(12.dp))
 
-        // Left Coin Pill (Aligned Bottom)
         Box(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.BottomCenter
         ) {
           Shop(
-            amount = viewModel.leftTeam.coins,
-            isOpen = viewModel.isLeftShopOpen,
-            items = viewModel.shopItems,
-            onToggle = { viewModel.toggleShop(isLeft = true) },
+            viewModel = viewModel.leftTeam.shop,
             onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
             onDrag = viewModel::onShopDrag,
             onDragEnd = viewModel::onShopDragEnd
@@ -103,18 +99,14 @@ fun BattleLayout(
         modifier = Modifier.alpha(0.5f)
       )
 
-      // --- RIGHT GROUP (Coin + Team) ---
+      // --- RIGHT GROUP (Shop + Team) ---
       Row(modifier = Modifier.fillMaxHeight()) {
-        // Right Coin Pill (Aligned Bottom)
         Box(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.BottomCenter
         ) {
           Shop(
-            amount = viewModel.rightTeam.coins,
-            isOpen = viewModel.isRightShopOpen,
-            items = viewModel.shopItems,
-            onToggle = { viewModel.toggleShop(isLeft = false) },
+            viewModel = viewModel.rightTeam.shop,
             onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
             onDrag = viewModel::onShopDrag,
             onDragEnd = viewModel::onShopDragEnd

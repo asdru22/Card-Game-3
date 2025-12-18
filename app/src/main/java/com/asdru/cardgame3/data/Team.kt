@@ -5,6 +5,5 @@ import com.asdru.cardgame3.game.entity.Entity
 data class Team(
   val name: String,
   val entities: List<Entity>,
-  val left: Boolean,
-  val coins: Int = 10
+  val left: Boolean
 )

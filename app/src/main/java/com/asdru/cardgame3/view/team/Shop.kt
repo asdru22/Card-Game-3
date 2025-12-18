@@ -33,13 +33,11 @@ import androidx.compose.ui.window.Dialog
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.view.common.SmartDescriptionText
+import com.asdru.cardgame3.viewModel.ShopViewModel
 
 @Composable
 fun Shop(
-  amount: Int,
-  isOpen: Boolean,
-  items: List<ShopItem>,
-  onToggle: () -> Unit,
+  viewModel: ShopViewModel,
   onDragStart: (ShopItem, Offset) -> Unit,
   onDrag: (Offset) -> Unit,
   onDragEnd: () -> Unit
@@ -79,15 +77,15 @@ fun Shop(
     ) {
 
       AnimatedVisibility(
-        visible = isOpen,
+        visible = viewModel.isOpen,
         enter = expandVertically(expandFrom = Alignment.Bottom) + fadeIn(),
         exit = shrinkVertically(shrinkTowards = Alignment.Bottom) + fadeOut()
       ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-          items.forEach { item ->
+          viewModel.items.forEach { item ->
             ShopItemRow(
               item = item,
-              canAfford = amount >= item.cost,
+              canAfford = viewModel.canAfford(item.cost),
               onDragStart = onDragStart,
               onDrag = onDrag,
               onDragEnd = onDragEnd,
@@ -113,7 +111,7 @@ fun Shop(
           .clickable(
             interactionSource = remember { MutableInteractionSource() },
             indication = null
-          ) { onToggle() }
+          ) { viewModel.toggle() }
           .padding(4.dp)
       ) {
         Icon(
@@ -124,7 +122,7 @@ fun Shop(
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-          text = "$amount",
+          text = "${viewModel.coins}",
           color = Color.White,
           fontWeight = FontWeight.Bold,
           fontSize = 14.sp

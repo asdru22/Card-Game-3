@@ -13,11 +13,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.data.ShopDragState
-import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
+import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.game.weather.WeatherEvent
-import com.asdru.cardgame3.helper.ShopDataProvider
 import com.asdru.cardgame3.logic.BattleGameLogic
 import com.asdru.cardgame3.logic.BattleInputHandler
 import com.asdru.cardgame3.logic.BattleTimer
@@ -68,15 +67,10 @@ class BattleViewModel(
 
   var showExitDialog by mutableStateOf(false)
 
-
-  var isLeftShopOpen by mutableStateOf(false)
-  var isRightShopOpen by mutableStateOf(false)
-
   var shopDragState by mutableStateOf<ShopDragState?>(null)
     internal set
 
   // Example Shop Items
-  val shopItems: List<ShopItem> = ShopDataProvider.getShopItems()
   fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
     inputHandler.onShopDragStart(item, isLeftTeam, offset)
   }
@@ -88,11 +82,6 @@ class BattleViewModel(
   fun onShopDragEnd() {
     inputHandler.onShopDragEnd()
   }
-
-  fun toggleShop(isLeft: Boolean) {
-    if (isLeft) isLeftShopOpen = !isLeftShopOpen else isRightShopOpen = !isRightShopOpen
-  }
-
 
   // --- Timer Delegate ---
   var currentTurnTimeSeconds by mutableIntStateOf(0)
@@ -160,8 +149,9 @@ class BattleViewModel(
 
   fun onRestartClicked() {
     navigateToSelection = true
-    isRightShopOpen = false
-    isLeftShopOpen = false
+    leftTeam.shop.reset()
+    rightTeam.shop.reset()
+
   }
 
   fun onNavigatedToSelection() {
