@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.character.CharacterInfoCard
 import com.asdru.cardgame3.view.character.PopupView
+import com.asdru.cardgame3.view.character.SummonInfoCard
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import kotlin.math.roundToInt
 
@@ -196,6 +197,13 @@ fun BattleScreen(viewModel: BattleViewModel) {
       CharacterInfoCard(
         viewModel = viewModel.selectedEntity!!,
         onClose = { viewModel.closeInfoDialog() }
+      )
+    }
+
+    if (viewModel.selectedSummon != null) {
+      SummonInfoCard(
+        viewModel = viewModel.selectedSummon!!,
+        onClose = { viewModel.closeSummonInfo() }
       )
     }
 

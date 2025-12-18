@@ -229,4 +229,5 @@
     <string name="item_mirror_desc">Makes the user cast its active ability on themself</string>
     <string name="weather_golden_shower">Golden Shower</string>
     <string name="weather_golden_shower_desc">Gain %s coin at the end of each turn</string>
+    <string name="ui_action">Action</string>
 </resources>

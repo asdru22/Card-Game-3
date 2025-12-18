@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.asdru.cardgame3.view.character.SummonCard
 import com.asdru.cardgame3.view.team.RageBar
 import com.asdru.cardgame3.view.team.Shop
 import com.asdru.cardgame3.view.team.TeamColumn
@@ -93,7 +94,8 @@ fun BattleLayout(
               cardWidth = finalCardWidth,
               modifier = Modifier
                 .fillMaxHeight()
-                .padding(bottom = 70.dp)
+                .padding(bottom = 70.dp),
+              viewModel
             )
           }
 
@@ -125,7 +127,8 @@ fun BattleLayout(
               cardWidth = finalCardWidth,
               modifier = Modifier
                 .fillMaxHeight()
-                .padding(bottom = 70.dp)
+                .padding(bottom = 70.dp),
+              viewModel
             )
           }
 
@@ -174,7 +177,8 @@ fun BattleLayout(
 fun SummonsColumn(
   entities: List<EntityViewModel>,
   cardWidth: Dp,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
+  viewModel: BattleViewModel
 ) {
   Column(
     modifier = modifier,
@@ -188,7 +192,11 @@ fun SummonsColumn(
           .size(cardWidth),
         contentAlignment = Alignment.Center
       ) {
-        if (entity.hasSummon) {
+        if (entity.activeSummon != null) {
+          SummonCard(
+            viewModel = entity.activeSummon!!,
+            onDoubleTap = { viewModel.onSummonDoubleTap(it) })
+        } else if (entity.hasSummon) {
           SummonSlot()
         }
       }

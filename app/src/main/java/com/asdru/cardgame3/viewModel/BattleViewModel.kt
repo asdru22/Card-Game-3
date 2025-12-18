@@ -23,13 +23,20 @@ import com.asdru.cardgame3.logic.inputHandler.CardInputHandler
 import com.asdru.cardgame3.logic.inputHandler.ShopInputHandler
 import com.asdru.cardgame3.logic.inputHandler.UltimateInputHandler
 
+// --- NEW: Phase Enum ---
+enum class BattlePhase {
+  ENTITIES_LEFT,
+  ENTITIES_RIGHT,
+  SUMMONS_LEFT,
+  SUMMONS_RIGHT
+}
+
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
   initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false))
 ) : ViewModel() {
 
   // --- Components ---
-
   private val cardInputHandler = CardInputHandler(this)
   private val ultimateInputHandler = UltimateInputHandler(this)
   private val shopInputHandler = ShopInputHandler(this)
@@ -39,6 +46,13 @@ class BattleViewModel(
   // --- State Variables ---
   var leftTeam by mutableStateOf(initialLeftTeam)
   var rightTeam by mutableStateOf(initialRightTeam)
+
+  // --- NEW: Phase State ---
+  var currentPhase by mutableStateOf(BattlePhase.ENTITIES_LEFT)
+
+  // Helper to keep UI compatible (RageBar, etc.)
+  var isLeftTeamTurn by mutableStateOf(true)
+    internal set
 
   var dragState by mutableStateOf<DragState?>(null)
     internal set
@@ -50,12 +64,13 @@ class BattleViewModel(
   var showInfoDialog by mutableStateOf(false)
   var selectedEntity by mutableStateOf<EntityViewModel?>(null)
 
+  // For Summon Info
+  var selectedSummon by mutableStateOf<SummonViewModel?>(null)
+  var roundStarterIsLeft by mutableStateOf(true)
   var currentWeather by mutableStateOf<WeatherEvent?>(null)
     internal set
   var showWeatherInfo by mutableStateOf(false)
 
-  var isLeftTeamTurn by mutableStateOf(true)
-    internal set
   var isActionPlaying by mutableStateOf(false)
     internal set
   var winner by mutableStateOf<String?>(null)
@@ -64,7 +79,6 @@ class BattleViewModel(
   var navigateToSelection by mutableStateOf(false)
     internal set
 
-  // Internal lists for logic tracking
   internal val actionsTaken = mutableStateListOf<EntityViewModel>()
   internal val cardBounds = mutableStateMapOf<EntityViewModel, Rect>()
 
@@ -92,8 +106,7 @@ class BattleViewModel(
     gameLogic.startGame(newLeftTeam, newRightTeam, weatherEnabled, turnTimer)
   }
 
-  // --- Card Events
-
+  // --- Card Events ---
   fun onDragStart(char: EntityViewModel, offset: Offset) {
     cardInputHandler.onDragStart(char, offset)
   }
@@ -110,8 +123,7 @@ class BattleViewModel(
     cardInputHandler.onCardPositioned(entity, rect)
   }
 
-  // --- Ultimate Events
-
+  // --- Ultimate Events ---
   fun onUltimateDragStart(team: TeamViewModel, offset: Offset) {
     ultimateInputHandler.onUltimateDragStart(team, offset)
   }
@@ -124,7 +136,7 @@ class BattleViewModel(
     ultimateInputHandler.onUltimateDragEnd()
   }
 
-  // --- Shop Events (Delegated to ShopInputHandler) ---
+  // --- Shop Events ---
   fun onShopDragStart(item: ShopItem, isLeftTeam: Boolean, offset: Offset) {
     shopInputHandler.onShopDragStart(item, isLeftTeam, offset)
   }
@@ -135,6 +147,15 @@ class BattleViewModel(
 
   fun onShopDragEnd() {
     shopInputHandler.onShopDragEnd()
+  }
+
+  // --- Summon Events ---
+  fun onSummonDoubleTap(summon: SummonViewModel) {
+    selectedSummon = summon
+  }
+
+  fun closeSummonInfo() {
+    selectedSummon = null
   }
 
   // --- Navigation & Dialogs ---

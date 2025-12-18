@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.entity.Entity
+import com.asdru.cardgame3.game.summon.Summon
 import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.helper.EntityEffectManager
@@ -37,14 +38,18 @@ class EntityViewModel(
   var currentActiveCharges by mutableIntStateOf(0)
   var currentPassiveCharges by mutableIntStateOf(0)
 
+  var activeSummon by mutableStateOf<SummonViewModel?>(null)
+    internal set
+
+  val hasSummon: Boolean = entity.hasSummon
+
+  // --- Animation State ---
   var attackAnimOffset by mutableStateOf<Offset?>(null)
   var hitAnimTrigger by mutableIntStateOf(0)
   var passiveAnimTrigger by mutableIntStateOf(0)
   var chargeAnimTrigger by mutableIntStateOf(0)
 
   var onGetAttackOffset: ((EntityViewModel) -> Offset?)? = null
-
-  val hasSummon: Boolean = entity.hasSummon
 
   val isAlive: Boolean get() = health > 0
   val name: Int = entity.name
@@ -54,6 +59,14 @@ class EntityViewModel(
   val traits: List<Trait> get() = entity.traits
 
   var onGetWeather: (() -> WeatherEvent?)? = null
+
+  fun performSummon(summonData: Summon, target: EntityViewModel?) {
+    activeSummon = SummonViewModel(summonData, this, target)
+  }
+
+  fun dismissSummon() {
+    activeSummon = null
+  }
 
   fun recalculateStats() {
     var newDamage = baseDamage
