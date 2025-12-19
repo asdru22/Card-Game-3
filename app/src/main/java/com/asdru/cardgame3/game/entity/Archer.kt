@@ -8,7 +8,6 @@ import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Burning
 import com.asdru.cardgame3.game.effect.PainLink
-import com.asdru.cardgame3.game.summon.TestSummon
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 
@@ -30,7 +29,6 @@ class Archer : Entity(
       repeats = ACTIVE_REPEATS,
       delayTime = 200L
     )
-    source.performSummon(TestSummon(), target)
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_cover,
