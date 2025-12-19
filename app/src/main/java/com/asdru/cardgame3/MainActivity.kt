@@ -9,8 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
 import com.asdru.cardgame3.view.MainMenu
+import com.asdru.cardgame3.view.battle.BattleScreen
+import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.TeamViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -29,7 +33,10 @@ class MainActivity : ComponentActivity() {
 
     setContent {
       CardGame3Theme {
-        MainMenu()
+        BattleScreen(BattleViewModel(
+          TeamViewModel(Team()),
+          TeamViewModel()
+        ))
       }
     }
   }
