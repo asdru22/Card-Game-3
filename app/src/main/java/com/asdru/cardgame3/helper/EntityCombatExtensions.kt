@@ -33,11 +33,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
     popupManager.add(actualDamage, Color.Red)
 
     if (wasAlive && !isAlive) {
-      applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
-      onEntityDeathTrait(this)
-      applyTraits { it.onDeath(this) }
-      effectManager.clearAll(this)
-      resetCharges()
+      onDeath(source, actualDamage)
     } else if (isAlive) {
       applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
     }
@@ -50,12 +46,23 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
   return actualDamage
 }
 
+suspend fun EntityViewModel.onDeath(
+  source: EntityViewModel?,
+  actualDamage: Float
+) {
+  applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
+  onEntityDeathTrait(this)
+  applyTraits { it.onDeath(this) }
+  effectManager.clearAll(this)
+  resetCharges()
+}
+
 private suspend fun onEntityDeathTrait(deadEntity: EntityViewModel) {
   val allEntities = deadEntity.team.run {
     getAliveMembers() + getAliveEnemies()
   }
   allEntities.forEach {
-    it.applyTraits { trait -> trait.onEntityDeath(deadEntity, it) }
+    it.applyTraits { trait -> trait.onEntityDeath(it, deadEntity) }
   }
 }
 

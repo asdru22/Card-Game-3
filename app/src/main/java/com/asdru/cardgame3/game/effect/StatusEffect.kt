@@ -23,7 +23,7 @@ sealed class StatusEffect(
 
   open fun onApply(target: EntityViewModel) {}
   open fun onRemove(target: EntityViewModel) {}
-  open fun onExpire(target: EntityViewModel) {}
+  open suspend fun onExpire(target: EntityViewModel) {}
 
   open suspend fun onStartTurn(target: EntityViewModel) {}
   open suspend fun onEndTurn(target: EntityViewModel) {}

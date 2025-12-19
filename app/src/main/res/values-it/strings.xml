@@ -229,4 +229,15 @@
     <string name="weather_golden_shower_desc">Ottieni %s moneta alla fine di ogni turno</string>
     <string name="trait_undead">Non-morto</string>
     <string name="trait_undead_desc">Torna in vita con il %s%% della salute massima dopo la morte. Carica: %s turni</string>
+    <string name="trait_reaper">Mietitore</string>
+    <string name="trait_reaper_desc">Guarisci di %s ogni volta che un\'entità muore</string>
+    <string name="effect_expiration">Scadenza</string>
+    <string name="effect_expiration_desc">Muori quando l\'effetto scade</string>
+    <string name="entity_ghost">Fantasma</string>
+    <string name="ability_spook">Spavento</string>
+    <string name="ability_spook_desc">Infligge danni a tutti i nemici</string>
+    <string name="ability_dissolve">Dissolvimento</string>
+    <string name="ability_dissolve_desc">Applica %s al bersaglio per %s turno. Carica: %s turni</string>
+    <string name="ability_death_mark">Marchio della Morte</string>
+    <string name="ability_death_mark_desc">Applica %s al nemico con la salute più bassa per %s turni</string>
 </resources>

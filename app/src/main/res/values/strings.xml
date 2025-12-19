@@ -235,4 +235,11 @@
     <string name="trait_reaper_desc">Heal for %s every time an entity dies</string>
     <string name="effect_expiration">Expiration</string>
     <string name="effect_expiration_desc">Die when the effect expires</string>
+    <string name="entity_ghost">Ghost</string>
+    <string name="ability_spook">Spook</string>
+    <string name="ability_spook_desc">Deal damage to all enemies</string>
+    <string name="ability_dissolve">Dissolve</string>
+    <string name="ability_dissolve_desc">Apply %s to the target for %s turn. Charge: %s turns</string>
+    <string name="ability_death_mark">Death Mark</string>
+    <string name="ability_death_mark_desc">Apply %s to the enemy with lowest health for %s turns</string>
 </resources>

@@ -62,7 +62,7 @@ class EntityEffectManager(
     return currentTarget
   }
 
-  fun expireEffect(effect: StatusEffect, owner: EntityViewModel) {
+  suspend fun expireEffect(effect: StatusEffect, owner: EntityViewModel) {
     effect.onExpire(owner)
     removeEffect(effect, owner)
   }

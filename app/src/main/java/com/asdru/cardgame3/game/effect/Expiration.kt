@@ -2,6 +2,7 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.helper.onDeath
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Expiration(duration: Int) : StatusEffect(
@@ -12,8 +13,9 @@ class Expiration(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
-  override fun onExpire(target: EntityViewModel) {
+  override suspend fun onExpire(target: EntityViewModel) {
     target.health = 0f
+    target.onDeath(null,0f)
   }
 
   companion object Spec : Translatable {

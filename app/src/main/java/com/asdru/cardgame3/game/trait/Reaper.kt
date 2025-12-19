@@ -14,7 +14,7 @@ class Reaper : Trait {
     entity: EntityViewModel
   ) {
     if (owner == entity) return
-    owner.heal(HEAL_AMOUNT)
+    owner.heal(HEAL_AMOUNT, owner)
   }
 
   companion object {

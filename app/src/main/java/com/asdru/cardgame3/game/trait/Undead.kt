@@ -29,7 +29,7 @@ class Undead : Trait {
   }
   
   companion object {
-    private const val HEALTH_REVIVE_PERCENTAGE = 50f
+    private const val HEALTH_REVIVE_PERCENTAGE = 30f
     private const val MAX_CHARGES = 3
   }
 }

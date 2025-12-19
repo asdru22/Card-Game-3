@@ -74,10 +74,6 @@ class EntityViewModel(
     }
   }
 
-  fun removeEffect(effect: StatusEffect) {
-    effectManager.removeEffect(effect, this)
-  }
-
   fun resetCharges() {
     currentActiveCharges = 0
     currentPassiveCharges = 0
