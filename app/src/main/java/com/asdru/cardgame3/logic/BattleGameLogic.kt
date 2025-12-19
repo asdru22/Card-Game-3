@@ -174,12 +174,16 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     private suspend fun processStartOfTurnEffects(team: TeamViewModel) {
         vm.currentWeather?.onStartTurn(vm)
-        team.getAliveMembers().forEach { entity ->
-            entity.traits.forEach { it.onStartTurn(entity) }
-            val activeEffects = entity.effectManager.effects.toList()
-            activeEffects.forEach { effect ->
-                effect.onStartTurn(entity)
-                if (effect.tick()) entity.removeEffect(effect)
+        team.getAllMembers().forEach { entity ->
+            if (entity.isAlive) {
+                entity.traits.forEach { it.onStartTurn(entity) }
+                val activeEffects = entity.effectManager.effects.toList()
+                activeEffects.forEach { effect ->
+                    effect.onStartTurn(entity)
+                    if (effect.tick()) entity.removeEffect(effect)
+                }
+            } else {
+                entity.traits.forEach { it.onStartTurnDead(entity) }
             }
         }
     }

@@ -227,4 +227,6 @@
     <string name="item_mirror_desc">Costringe l\'utilizzatore a usare la propria abilità attiva su se stesso</string>
     <string name="weather_golden_shower">Pioggia Dorata</string>
     <string name="weather_golden_shower_desc">Ottieni %s moneta alla fine di ogni turno</string>
+    <string name="trait_undead">Non-morto</string>
+    <string name="trait_undead_desc">Torna in vita con il %s%% della salute massima dopo la morte. Carica: %s turni</string>
 </resources>

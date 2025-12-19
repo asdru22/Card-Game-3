@@ -3,6 +3,7 @@ package com.asdru.cardgame3.viewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
@@ -36,6 +37,7 @@ class EntityViewModel(
 
   var currentActiveCharges by mutableIntStateOf(0)
   var currentPassiveCharges by mutableIntStateOf(0)
+  var traitCharges = mutableStateMapOf<String, Int>()
 
   var attackAnimOffset by mutableStateOf<Offset?>(null)
   var hitAnimTrigger by mutableIntStateOf(0)

@@ -252,6 +252,36 @@ fun CharacterCard(
         }
       }
     }
+
+    // Trait Charges (Opposite Side)
+    val traitsWithCharges = viewModel.traits.filter { it.maxCharges > 0 }
+    if (traitsWithCharges.isNotEmpty() && !viewModel.isAlive) {
+      val oppositeAlignment = if (isLeftTeam) Alignment.CenterStart else Alignment.CenterEnd
+      val xOffsetTrait = if (isLeftTeam) (-10).dp else 10.dp
+
+      Column(
+        modifier = Modifier
+          .align(oppositeAlignment)
+          .offset(x = xOffsetTrait)
+          .clip(CircleShape)
+          .background(Color(0xFF171717))
+          .padding(vertical = 3.dp, horizontal = 3.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        traitsWithCharges.forEachIndexed { index, trait ->
+           ChargeDots(
+             current = viewModel.traitCharges[trait.id] ?: 0,
+             max = trait.maxCharges,
+             activeColor = Color(0xFF9C27B0)
+           )
+           
+           if (index < traitsWithCharges.size - 1) {
+             Spacer(modifier = Modifier.height(4.dp))
+           }
+        }
+      }
+    }
   }
 }
 

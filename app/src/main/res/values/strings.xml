@@ -229,4 +229,6 @@
     <string name="item_mirror_desc">Makes the user cast its active ability on themself</string>
     <string name="weather_golden_shower">Golden Shower</string>
     <string name="weather_golden_shower_desc">Gain %s coin at the end of each turn</string>
+    <string name="trait_undead">Undead</string>
+    <string name="trait_undead_desc">Come back to life with %s%% max health after dying. Charge: %s turns</string>
 </resources>
