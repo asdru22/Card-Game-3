@@ -63,7 +63,8 @@ fun Shop(
   viewModel: ShopViewModel,
   onDragStart: (ShopItem, Offset) -> Unit,
   onDrag: (Offset) -> Unit,
-  onDragEnd: () -> Unit
+  onDragEnd: () -> Unit,
+  modifier: Modifier = Modifier
 ) {
   val shape = RoundedCornerShape(16.dp)
   var selectedItem by remember { mutableStateOf<ShopItem?>(null) }
@@ -79,7 +80,7 @@ fun Shop(
 
   Box(
     contentAlignment = Alignment.Center,
-    modifier = Modifier
+    modifier = modifier
       .padding(bottom = 8.dp)
       .width(72.dp)
       .clip(shape)

@@ -34,4 +34,20 @@ sealed class ShopItem(
     }
     return context.getString(descriptionRes, *processedArgs.toTypedArray())
   }
+
+  class TotemRepairItem(cost: Int) : ShopItem(
+    nameRes = com.asdru.cardgame3.R.string.totem_repair_name,
+    descriptionRes = com.asdru.cardgame3.R.string.totem_repair_desc,
+    cost = cost,
+    iconRes = com.asdru.cardgame3.R.drawable.entity_the_magnet,
+    onApply = { entity ->
+      entity.team.totem?.let { totem ->
+        if (!totem.isAlive) {
+          totem.currentHealth = totem.maxHealth
+          entity.team.shop.isTotemDestroyed = false
+        }
+      }
+    }
+  )
 }
+

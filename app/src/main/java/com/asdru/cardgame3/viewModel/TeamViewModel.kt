@@ -3,6 +3,7 @@ package com.asdru.cardgame3.viewModel
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.effect.Vanish
@@ -15,6 +16,18 @@ class TeamViewModel(
   lateinit var enemyTeam: TeamViewModel
 
   val shop = ShopViewModel()
+  var totem: TotemViewModel? by mutableStateOf(null)
+
+  fun onTeamDamage(amount: Float) {
+    if (amount > 0) {
+      totem?.takeDamage(amount)
+      shop.isTotemDestroyed = totem?.isAlive == false
+    }
+  }
+
+  fun updateShopState() {
+    shop.isTotemDestroyed = totem?.isAlive == false
+  }
 
   var totalDamageDealt: Float = 0f
   var totalHealing: Float = 0f

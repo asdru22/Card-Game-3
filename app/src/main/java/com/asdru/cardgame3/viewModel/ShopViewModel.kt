@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.viewModel
 
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -15,7 +16,16 @@ class ShopViewModel() {
   var isOpen by mutableStateOf(false)
     private set
 
-  val items: List<ShopItem> = ShopDataProvider.getShopItems()
+  var isTotemDestroyed by mutableStateOf(false)
+
+  val items: List<ShopItem> by derivedStateOf {
+    val standardItems = ShopDataProvider.getShopItems()
+    if (isTotemDestroyed) {
+      standardItems + ShopItem.TotemRepairItem(15)
+    } else {
+      standardItems
+    }
+  }
 
   fun toggle() {
     isOpen = !isOpen

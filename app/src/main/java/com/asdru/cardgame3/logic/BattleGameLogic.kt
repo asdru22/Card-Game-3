@@ -5,6 +5,7 @@ import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import com.asdru.cardgame3.viewModel.TeamViewModel
+import com.asdru.cardgame3.viewModel.TotemViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -23,6 +24,17 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.rightTeam = newRightTeam
     vm.leftTeam.enemyTeam = vm.rightTeam
     vm.rightTeam.enemyTeam = vm.leftTeam
+
+    // TODO: remove this test code
+    val testTotem = com.asdru.cardgame3.game.totem.Totem(
+      com.asdru.cardgame3.R.string.app_name, 
+      com.asdru.cardgame3.R.drawable.entity_the_magnet, 
+      50f
+    )
+    vm.leftTeam.totem = TotemViewModel(testTotem)
+    vm.rightTeam.totem = TotemViewModel(testTotem)
+    vm.leftTeam.updateShopState()
+    vm.rightTeam.updateShopState()
 
     setupEntityCallbacks(vm.leftTeam.entities + vm.rightTeam.entities)
 

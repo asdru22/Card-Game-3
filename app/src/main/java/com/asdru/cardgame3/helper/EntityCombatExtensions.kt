@@ -31,6 +31,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
 
     health = (health - actualDamage).coerceAtLeast(0f)
     popupManager.add(actualDamage, Color.Red)
+    team.onTeamDamage(actualDamage)
 
     if (wasAlive && !isAlive) {
       onDeath(source, actualDamage)

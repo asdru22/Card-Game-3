@@ -59,7 +59,7 @@ fun BattleLayout(
       verticalAlignment = Alignment.CenterVertically
     ) {
 
-      // --- LEFT GROUP (Team + Shop) ---
+      // --- LEFT GROUP (Team + Shop + Totem) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         TeamColumn(
           entities = viewModel.leftTeam.entities,
@@ -79,14 +79,20 @@ fun BattleLayout(
 
         Box(
           modifier = Modifier.fillMaxHeight(),
-          contentAlignment = Alignment.BottomCenter
+          contentAlignment = Alignment.Center
         ) {
-          Shop(
-            viewModel = viewModel.leftTeam.shop,
-            onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
-            onDrag = viewModel::onShopDrag,
-            onDragEnd = viewModel::onShopDragEnd
-          )
+           TotemView(
+             totemVm = viewModel.leftTeam.totem,
+             modifier = Modifier.align(Alignment.Center)
+           )
+
+           Shop(
+             viewModel = viewModel.leftTeam.shop,
+             onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
+             onDrag = viewModel::onShopDrag,
+             onDragEnd = viewModel::onShopDragEnd,
+             modifier = Modifier.align(Alignment.BottomCenter)
+           )
         }
       }
 
@@ -99,18 +105,24 @@ fun BattleLayout(
         modifier = Modifier.alpha(0.5f)
       )
 
-      // --- RIGHT GROUP (Shop + Team) ---
+      // --- RIGHT GROUP (Totem + Shop + Team) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         Box(
           modifier = Modifier.fillMaxHeight(),
-          contentAlignment = Alignment.BottomCenter
+          contentAlignment = Alignment.Center
         ) {
-          Shop(
-            viewModel = viewModel.rightTeam.shop,
-            onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
-            onDrag = viewModel::onShopDrag,
-            onDragEnd = viewModel::onShopDragEnd
-          )
+           TotemView(
+             totemVm = viewModel.rightTeam.totem,
+             modifier = Modifier.align(Alignment.Center)
+           )
+
+           Shop(
+             viewModel = viewModel.rightTeam.shop,
+             onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
+             onDrag = viewModel::onShopDrag,
+             onDragEnd = viewModel::onShopDragEnd,
+             modifier = Modifier.align(Alignment.BottomCenter)
+           )
         }
 
         Spacer(modifier = Modifier.width(12.dp))
