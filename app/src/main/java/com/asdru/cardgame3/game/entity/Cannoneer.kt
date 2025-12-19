@@ -84,7 +84,7 @@ class Cannoneer : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 110f
-    const val DAMAGE = 30f
+    const val DAMAGE = 28f
     const val ACTIVE_TARGET_MULTIPLIER = 100
     const val ACTIVE_OTHER_MULTIPLIER = 30
     const val PASSIVE_DURATION = 3

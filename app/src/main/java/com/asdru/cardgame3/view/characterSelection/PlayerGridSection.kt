@@ -138,7 +138,7 @@ fun CharacterGridItem(
           painter = painterResource(id = entity.iconRes),
           tint = entity.color,
           contentDescription = stringResource(id = entity.name),
-          modifier = Modifier.size(60.dp),
+          modifier = Modifier.size(90.dp),
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
