@@ -80,6 +80,16 @@ fun BattleScreen(viewModel: BattleViewModel) {
       LineCanvas(dragState.start, lineEnd, Color.White)
     }
 
+    viewModel.totemDragState?.let { totemState ->
+      val lineEnd =
+        if (viewModel.hoveredTarget != null && viewModel.cardBounds.contains(viewModel.hoveredTarget)) {
+          viewModel.cardBounds[viewModel.hoveredTarget]!!.center
+        } else {
+          totemState.current
+        }
+      LineCanvas(totemState.start, lineEnd, Color.White)
+    }
+
     BattleLayout(viewModel, finalCardHeight, finalCardWidth)
 
     ModifiersRow(

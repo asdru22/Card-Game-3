@@ -58,7 +58,9 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.isActionPlaying = false
     vm.winner = null
     vm.actionsTaken.clear()
+    vm.totemActionsTaken.clear()
     vm.cardBounds.clear()
+    vm.totemBounds.clear()
     vm.leftTeam.rage = 0f
     vm.rightTeam.rage = 0f
     vm.maxTurnTimeSeconds = turnTimer
@@ -182,6 +184,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     processEndOfTurnEffects(currentTeam)
 
     vm.actionsTaken.clear()
+    vm.totemActionsTaken.clear()
     vm.isLeftTeamTurn = !vm.isLeftTeamTurn
     vm.battleTimer.reset()
 
@@ -238,6 +241,34 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         !vm.isActionPlaying &&
         !entity.effectManager.isStunned
   }
+
+  fun canTotemAct(totem: TotemViewModel): Boolean {
+    if (vm.winner != null) return false
+    val isLeft = vm.leftTeam.totem == totem
+    val isRight = vm.rightTeam.totem == totem
+    val isTurn = (isLeft && vm.isLeftTeamTurn) || (isRight && !vm.isLeftTeamTurn)
+    return isTurn &&
+        !vm.totemActionsTaken.contains(totem) &&
+        totem.isAlive &&
+        !vm.isActionPlaying
+  }
+
+  fun executeTotemInteraction(source: TotemViewModel, target: EntityViewModel) {
+      if (vm.isActionPlaying || vm.winner != null) return
+      vm.battleTimer.reset()
+
+      vm.viewModelScope.launch {
+        vm.isActionPlaying = true
+
+        source.ability.effect(source, target)
+
+        if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
+
+        checkWinCondition()
+        checkWeatherChange()
+        vm.isActionPlaying = false
+      }
+    }
 
   private suspend fun checkWinCondition() {
     val isLeftAlive = vm.leftTeam.aliveEntities.isNotEmpty()

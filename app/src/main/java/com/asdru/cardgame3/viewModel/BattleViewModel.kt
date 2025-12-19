@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.DragState
+import com.asdru.cardgame3.data.TotemDragState
 import com.asdru.cardgame3.data.ShopDragState
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.UltimateDragState
@@ -21,6 +22,7 @@ import com.asdru.cardgame3.logic.BattleGameLogic
 import com.asdru.cardgame3.logic.BattleTimer
 import com.asdru.cardgame3.logic.inputHandler.CardInputHandler
 import com.asdru.cardgame3.logic.inputHandler.ShopInputHandler
+import com.asdru.cardgame3.logic.inputHandler.TotemInputHandler
 import com.asdru.cardgame3.logic.inputHandler.UltimateInputHandler
 
 class BattleViewModel(
@@ -33,6 +35,7 @@ class BattleViewModel(
   private val cardInputHandler = CardInputHandler(this)
   private val ultimateInputHandler = UltimateInputHandler(this)
   private val shopInputHandler = ShopInputHandler(this)
+  private val totemInputHandler = TotemInputHandler(this)
 
   val gameLogic = BattleGameLogic(this)
 
@@ -43,6 +46,8 @@ class BattleViewModel(
   var dragState by mutableStateOf<DragState?>(null)
     internal set
   var ultimateDragState by mutableStateOf<UltimateDragState?>(null)
+    internal set
+  var totemDragState by mutableStateOf<TotemDragState?>(null)
     internal set
 
   var hoveredTarget by mutableStateOf<EntityViewModel?>(null)
@@ -70,7 +75,9 @@ class BattleViewModel(
 
   // Internal lists for logic tracking
   internal val actionsTaken = mutableStateListOf<EntityViewModel>()
+  internal val totemActionsTaken = mutableStateListOf<TotemViewModel>()
   internal val cardBounds = mutableStateMapOf<EntityViewModel, Rect>()
+  internal val totemBounds = mutableStateMapOf<TotemViewModel, Rect>()
 
   var showExitDialog by mutableStateOf(false)
 
@@ -190,10 +197,23 @@ class BattleViewModel(
     selectedTotem = null
   }
 
+  fun onTotemDragStart(totem: TotemViewModel, offset: Offset) {
+    totemInputHandler.onTotemDragStart(totem, offset)
+  }
+
+  fun onTotemDrag(change: Offset) {
+    totemInputHandler.onTotemDrag(change)
+  }
+
+  fun onTotemDragEnd() {
+    totemInputHandler.onTotemDragEnd()
+  }
+
   fun getHighlightColor(entity: EntityViewModel): Color {
     return cardInputHandler.getHighlightColor(entity)
       ?: ultimateInputHandler.getHighlightColor(entity)
       ?: shopInputHandler.getHighlightColor(entity)
+      ?: totemInputHandler.getHighlightColor(entity)
       ?: Color.Transparent
   }
 }

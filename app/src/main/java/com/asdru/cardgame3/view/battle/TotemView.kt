@@ -24,10 +24,20 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.ui.input.pointer.pointerInput
 import com.asdru.cardgame3.viewModel.TotemViewModel
 
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
+
 @Composable
 fun TotemView(
   totemVm: TotemViewModel?,
   onDoubleTap: (TotemViewModel) -> Unit,
+  onDragStart: (TotemViewModel, Offset) -> Unit = { _, _ -> },
+  onDrag: (Offset) -> Unit = {},
+  onDragEnd: () -> Unit = {},
+  onPositioned: (Rect) -> Unit = {},
   modifier: Modifier = Modifier
 ) {
   val shape = RoundedCornerShape(12.dp)
@@ -39,9 +49,23 @@ fun TotemView(
         .clip(shape)
         .background(Color(0xFF424242))
         .border(2.dp, Color.White, shape)
+        .onGloballyPositioned { coordinates ->
+           onPositioned(coordinates.boundsInRoot())
+        }
         .pointerInput(Unit) {
           detectTapGestures(
             onDoubleTap = { onDoubleTap(totemVm) }
+          )
+        }
+        .pointerInput(Unit) {
+          detectDragGestures(
+            onDragStart = { offset -> onDragStart(totemVm, offset) },
+            onDrag = { change, dragAmount ->
+              change.consume()
+              onDrag(dragAmount)
+            },
+            onDragEnd = { onDragEnd() },
+            onDragCancel = { onDragEnd() }
           )
         },
       contentAlignment = Alignment.Center
