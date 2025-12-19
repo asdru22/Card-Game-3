@@ -12,7 +12,6 @@ import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 
 class Archer : Entity(
-  hasSummon = true,
   name = R.string.entity_archer,
   iconRes = R.drawable.entity_archer,
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),

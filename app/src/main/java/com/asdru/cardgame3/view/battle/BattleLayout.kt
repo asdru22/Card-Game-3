@@ -1,25 +1,19 @@
 package com.asdru.cardgame3.view.battle
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -28,7 +22,6 @@ import com.asdru.cardgame3.view.team.RageBar
 import com.asdru.cardgame3.view.team.Shop
 import com.asdru.cardgame3.view.team.TeamColumn
 import com.asdru.cardgame3.viewModel.BattleViewModel
-import com.asdru.cardgame3.viewModel.EntityViewModel
 
 @Composable
 fun BattleLayout(
@@ -36,14 +29,13 @@ fun BattleLayout(
   finalCardHeight: Dp,
   finalCardWidth: Dp
 ) {
-  val isShopActive = viewModel.shopDragState != null
-
   Row(
     modifier = Modifier.fillMaxSize(),
     horizontalArrangement = Arrangement.SpaceBetween,
     verticalAlignment = Alignment.CenterVertically
   ) {
 
+    // Left Rage Bar
     RageBar(
       rage = viewModel.leftTeam.rage,
       maxRage = viewModel.leftTeam.maxRage,
@@ -57,6 +49,7 @@ fun BattleLayout(
         .padding(start = 40.dp, top = 24.dp, bottom = 24.dp)
     )
 
+    // Center Game Area
     Row(
       modifier = Modifier
         .weight(1f)
@@ -66,6 +59,7 @@ fun BattleLayout(
       verticalAlignment = Alignment.CenterVertically
     ) {
 
+      // --- LEFT GROUP (Team + Shop) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         TeamColumn(
           entities = viewModel.leftTeam.entities,
@@ -87,16 +81,6 @@ fun BattleLayout(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.BottomCenter
         ) {
-          if (!isShopActive) {
-            SummonsColumn(
-              entities = viewModel.leftTeam.entities,
-              cardWidth = finalCardWidth,
-              modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = 70.dp)
-            )
-          }
-
           Shop(
             viewModel = viewModel.leftTeam.shop,
             onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
@@ -106,6 +90,7 @@ fun BattleLayout(
         }
       }
 
+      // --- VS TEXT ---
       Text(
         text = "VS",
         color = Color.Gray,
@@ -114,21 +99,12 @@ fun BattleLayout(
         modifier = Modifier.alpha(0.5f)
       )
 
+      // --- RIGHT GROUP (Shop + Team) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         Box(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.BottomCenter
         ) {
-          if (!isShopActive) {
-            SummonsColumn(
-              entities = viewModel.rightTeam.entities,
-              cardWidth = finalCardWidth,
-              modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = 70.dp)
-            )
-          }
-
           Shop(
             viewModel = viewModel.rightTeam.shop,
             onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
@@ -155,6 +131,7 @@ fun BattleLayout(
       }
     }
 
+    // Right Rage Bar
     RageBar(
       rage = viewModel.rightTeam.rage,
       maxRage = viewModel.rightTeam.maxRage,
@@ -167,56 +144,5 @@ fun BattleLayout(
         .fillMaxHeight()
         .padding(end = 40.dp, top = 24.dp, bottom = 24.dp)
     )
-  }
-}
-
-@Composable
-fun SummonsColumn(
-  entities: List<EntityViewModel>,
-  cardWidth: Dp,
-  modifier: Modifier = Modifier
-) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.SpaceEvenly,
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    entities.forEach { entity ->
-      Box(
-        modifier = Modifier
-          .width(cardWidth)
-          .size(cardWidth),
-        contentAlignment = Alignment.Center
-      ) {
-        if (entity.hasSummon) {
-          SummonSlot()
-        }
-      }
-    }
-  }
-}
-
-@Composable
-fun SummonSlot() {
-  val stroke = Stroke(
-    width = 4f,
-    pathEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 20f), 0f)
-  )
-  val cornerRadius = 12.dp
-
-  Box(
-    modifier = Modifier
-      .fillMaxSize()
-      .alpha(0.3f),
-    contentAlignment = Alignment.Center
-  ) {
-    Canvas(modifier = Modifier.fillMaxSize()) {
-      drawRoundRect(
-        color = Color.Gray,
-        size = this.size,
-        style = stroke,
-        cornerRadius = CornerRadius(cornerRadius.toPx(), cornerRadius.toPx())
-      )
-    }
   }
 }
