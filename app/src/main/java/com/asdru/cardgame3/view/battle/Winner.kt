@@ -141,8 +141,8 @@ fun TeamResultItem(
     Spacer(modifier = Modifier.height(24.dp))
 
     // --- Statistics ---
-    StatRow(label = stringResource(R.string.ui_damage_dealt), value = "${team.totalDamageDealt}")
-    StatRow(label = stringResource(R.string.ui_total_healing), value = "${team.totalHealing}")
+    StatRow(label = stringResource(R.string.ui_damage_dealt), value = "${team.totalDamageDealt.toInt()}")
+    StatRow(label = stringResource(R.string.ui_total_healing), value = "${team.totalHealing.toInt()}")
     StatRow(
       label = stringResource(R.string.ui_effects_applied),
       value = "${team.totalEffectsApplied}"

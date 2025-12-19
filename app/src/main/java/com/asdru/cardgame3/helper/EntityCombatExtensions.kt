@@ -1,9 +1,7 @@
 package com.asdru.cardgame3.helper
 
 import androidx.compose.ui.graphics.Color
-import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.effect.StatusEffect
-import com.asdru.cardgame3.game.trait.Forsaken
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
 
@@ -36,6 +34,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
 
     if (wasAlive && !isAlive) {
       applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
+      onEntityDeathTrait(this)
       applyTraits { it.onDeath(this) }
       effectManager.clearAll(this)
       resetCharges()
@@ -51,21 +50,25 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
   return actualDamage
 }
 
+private suspend fun onEntityDeathTrait(deadEntity: EntityViewModel) {
+  val allEntities = deadEntity.team.run {
+    getAliveMembers() + getAliveEnemies()
+  }
+  allEntities.forEach {
+    it.applyTraits { trait -> trait.onEntityDeath(deadEntity, it) }
+  }
+}
+
 suspend fun EntityViewModel.heal(
   amount: Float,
   source: EntityViewModel? = null,
   repeats: Int = 1,
   delayTime: Long = 400
 ) {
-  if (traits.any { it is Forsaken } && source != this) {
-    this.popupManager.add(R.string.game_forsaken)
-    return
-  }
-
   repeat(repeats) {
     var actualHeal = amount
     applyTraits {
-      actualHeal = it.modifyHeal(this, actualHeal)
+      actualHeal = it.modifyHeal(this, source, actualHeal)
     }
 
     effectManager.effects.forEach {
@@ -76,7 +79,7 @@ suspend fun EntityViewModel.heal(
     val healDiff = newHealth - health
     this.team.totalHealing += healDiff
     health = newHealth
-    popupManager.add(actualHeal, Color.Green)
+    if (actualHeal > 0) popupManager.add(actualHeal, Color.Green)
     if (repeats > 1) delay(delayTime)
   }
 }
@@ -109,7 +112,7 @@ suspend fun EntityViewModel.applyDamage(
       }
 
       effectManager.effects.forEach {
-        calculatedDamage = it.modifyOutgoingDamage(this,calculatedDamage, target)
+        calculatedDamage = it.modifyOutgoingDamage(this, calculatedDamage, target)
 
       }
 

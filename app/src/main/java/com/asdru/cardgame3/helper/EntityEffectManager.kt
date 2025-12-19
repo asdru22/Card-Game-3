@@ -62,8 +62,13 @@ class EntityEffectManager(
     return currentTarget
   }
 
+  fun expireEffect(effect: StatusEffect, owner: EntityViewModel) {
+    effect.onExpire(owner)
+    removeEffect(effect, owner)
+  }
+
   fun removeEffect(effect: StatusEffect, owner: EntityViewModel) {
-    effect.onVanish(owner)
+    effect.onRemove(owner)
     effects.remove(effect)
     onEffectsChanged()
   }
@@ -73,7 +78,7 @@ class EntityEffectManager(
     while (iterator.hasNext()) {
       val effect = iterator.next()
       if (effect is T) {
-        effect.onVanish(owner)
+        effect.onRemove(owner)
         iterator.remove()
       }
     }

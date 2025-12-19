@@ -232,7 +232,7 @@ fun CharacterCard(
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
         if (hasActiveCharges) {
-          ChargeDots(
+          ChargeIndicator(
             current = viewModel.currentActiveCharges,
             max = viewModel.entity.activeAbility.charges,
             activeColor = Color(0xFF66BB6A)
@@ -244,7 +244,7 @@ fun CharacterCard(
         }
 
         if (hasPassiveCharges) {
-          ChargeDots(
+          ChargeIndicator(
             current = viewModel.currentPassiveCharges,
             max = viewModel.entity.passiveAbility.charges,
             activeColor = Color(0xFF42A5F5)
@@ -253,7 +253,6 @@ fun CharacterCard(
       }
     }
 
-    // Trait Charges (Opposite Side)
     val traitsWithCharges = viewModel.traits.filter { it.maxCharges > 0 }
     if (traitsWithCharges.isNotEmpty() && !viewModel.isAlive) {
       val oppositeAlignment = if (isLeftTeam) Alignment.CenterStart else Alignment.CenterEnd
@@ -270,7 +269,7 @@ fun CharacterCard(
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
         traitsWithCharges.forEachIndexed { index, trait ->
-           ChargeDots(
+           ChargeIndicator(
              current = viewModel.traitCharges[trait.id] ?: 0,
              max = trait.maxCharges,
              activeColor = Color(0xFF9C27B0)
@@ -286,19 +285,24 @@ fun CharacterCard(
 }
 
 @Composable
-fun ChargeDots(current: Int, max: Int, activeColor: Color) {
+fun ChargeIndicator(current: Int, max: Int, activeColor: Color) {
+  val inactiveColor = Color(0xFF505050)
   Column(
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center
+    modifier = Modifier
+      .width(10.dp)
+      .height((12 * max).dp.coerceAtLeast(12.dp))
+      .clip(RoundedCornerShape(50))
+      .background(Color.Black)
+      .border(1.dp, Color(0xFF333333), RoundedCornerShape(50)),
+    verticalArrangement = Arrangement.spacedBy(1.dp)
   ) {
     repeat(max) { index ->
-      val isCharged = index < current
+      val isCharged = current > (max - 1 - index)
       Box(
         modifier = Modifier
-          .padding(vertical = 1.dp)
-          .size(12.dp)
-          .clip(CircleShape)
-          .background(if (isCharged) activeColor else Color(0xFF969696))
+          .weight(1f)
+          .fillMaxWidth()
+          .background(if (isCharged) activeColor else inactiveColor)
       )
     }
   }

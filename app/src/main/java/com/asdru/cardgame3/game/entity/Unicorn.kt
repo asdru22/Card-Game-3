@@ -7,15 +7,11 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Blinded
-import com.asdru.cardgame3.game.effect.Electrified
 import com.asdru.cardgame3.game.effect.Gilded
-import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.effect.Weakness
-import com.asdru.cardgame3.game.effect.WellFed
 import com.asdru.cardgame3.game.trait.Executioner
 import com.asdru.cardgame3.game.trait.Furious
 import com.asdru.cardgame3.helper.applyDamage
-import kotlin.collections.filter
 
 class Unicorn : Entity(
   name = R.string.entity_unicorn,

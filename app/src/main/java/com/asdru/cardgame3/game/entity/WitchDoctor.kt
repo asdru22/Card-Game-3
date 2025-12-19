@@ -64,13 +64,13 @@ class WitchDoctor : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 160f
-    const val DAMAGE = 5f
+    const val DAMAGE = 4f
     const val ACTIVE_REPEATS = 5
     const val RAGE_DECREASE = 0.7f
 
     const val PASSIVE_RAGE_INCREASE = 3f
     const val PASSIVE_HEAL_AMOUNT = 6f
-    const val ULTIMATE_DURATION = 4
+    const val ULTIMATE_DURATION = 2
     const val ULTIMATE_DAMAGE_AMOUNT = 10f
   }
 }

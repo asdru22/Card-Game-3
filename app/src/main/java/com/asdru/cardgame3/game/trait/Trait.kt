@@ -12,7 +12,7 @@ interface Trait : Translatable {
   fun modifyIncomingDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float): Float =
     amount
 
-  fun modifyHeal(owner: EntityViewModel, amount: Float): Float = amount
+  fun modifyHeal(owner: EntityViewModel, source: EntityViewModel?, amount: Float): Float = amount
   fun onStartTurn(owner: EntityViewModel) {}
   suspend fun onEndTurn(owner: EntityViewModel) {}
   suspend fun onDidDealDamage(
@@ -32,5 +32,6 @@ interface Trait : Translatable {
   ): StatusEffect? = effect
 
   fun onStartTurnDead(owner: EntityViewModel) {}
+  suspend fun onEntityDeath(owner: EntityViewModel, entity: EntityViewModel) {}
   val maxCharges: Int get() = 0
 }

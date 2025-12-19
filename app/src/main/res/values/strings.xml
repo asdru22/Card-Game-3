@@ -231,4 +231,8 @@
     <string name="weather_golden_shower_desc">Gain %s coin at the end of each turn</string>
     <string name="trait_undead">Undead</string>
     <string name="trait_undead_desc">Come back to life with %s%% max health after dying. Charge: %s turns</string>
+    <string name="trait_reaper">Reaper</string>
+    <string name="trait_reaper_desc">Heal for %s every time an entity dies</string>
+    <string name="effect_expiration">Expiration</string>
+    <string name="effect_expiration_desc">Die when the effect expires</string>
 </resources>
