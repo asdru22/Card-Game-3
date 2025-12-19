@@ -29,6 +29,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.currentWeather = if (weatherEnabled) {
       WeatherEvent.getRandomWeather()?.also { it.onApply(vm) }
     } else null
+    vm.weatherActionCounter = 0
+    vm.weatherChangeThreshold = Random.nextInt(3, 9)
 
     vm.isLeftTeamTurn = Random.nextBoolean()
     vm.isActionPlaying = false
@@ -85,6 +87,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         if (!vm.actionsTaken.contains(source)) vm.actionsTaken.add(source)
         checkTurnAdvance()
       }
+      checkWeatherChange()
       vm.isActionPlaying = false
     }
   }
@@ -103,6 +106,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         caster.entity.ultimateAbility.effect(caster, randomEnemy)
       }
       checkWinCondition()
+      checkWeatherChange()
       vm.isActionPlaying = false
     }
   }
@@ -220,6 +224,24 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     if (!isLeftAlive || !isRightAlive) {
       delay(1000)
       vm.winner = if (!isLeftAlive) vm.rightTeam.name else vm.leftTeam.name
+    }
+  }
+
+  private fun checkWeatherChange() {
+    if (vm.currentWeather == null) return
+
+    vm.weatherActionCounter++
+    if (vm.weatherActionCounter >= vm.weatherChangeThreshold) {
+      if (vm.showWeatherInfo) vm.showWeatherInfo = false
+
+      val newWeather = WeatherEvent.getRandomWeather()
+      if (newWeather != null) {
+        vm.currentWeather = newWeather
+        newWeather.onApply(vm)
+
+        vm.weatherActionCounter = 0
+        vm.weatherChangeThreshold = Random.nextInt(3, 9)
+      }
     }
   }
 }

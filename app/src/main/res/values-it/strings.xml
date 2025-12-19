@@ -106,7 +106,6 @@
     <string name="ability_barrage">Raffica</string>
     <string name="ability_barrage_desc">Tutti gli alleati a distanza eseguono la loro abilità attiva %s volte su nemici casuali</string>
     <string name="ui_how_to_play">Come giocare</string>
-    <string name="ui_how_to_play_desc">In questo gioco di combattimento a turni, il primo turno viene deciso casualmente. Durante il tuo turno, le carte possono usare abilità.  Le abilità attive si usano trascinando una carta verso un bersaglio nemico. Le abilità passive si usano trascinando una carta verso un alleato.  Per usare una passiva sulla carta stessa, trascinala verso l\'esterno e poi riportala indietro.  Dopo che tutte le tue carte hanno eseguito una di queste abilità, il tuo turno finisce e inizia quello dell\'altro giocatore. La barra della Rabbia si riempie gradualmente a ogni turno. Quando è piena, apparirà l\'icona di una fiamma. Trascina la fiamma su una carta per usare la sua Abilità Suprema.  Il giocatore che elimina tutte le carte avversarie per primo vince.  Tieni premuto su una carta per vedere le sue info, inclusi salute, danni, abilità, tratti ed effetti attivi. I tratti sono abilità permanenti che influenzano il gioco. Gli effetti di stato possono essere benefici o dannosi e hanno una durata che diminuisce a ogni turno. Tocca il nome di un effetto nella scheda informativa per vedere esattamente cosa fa.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Partita Semplice</string>
     <string name="ui_strategic_game">Partita Strategica</string>
@@ -240,4 +239,24 @@
     <string name="ability_dissolve_desc">Applica %s al bersaglio per %s turno. Carica: %s turni</string>
     <string name="ability_death_mark">Marchio della Morte</string>
     <string name="ability_death_mark_desc">Applica %s al nemico con la salute più bassa per %s turni</string>
+    <string name="ui_htp_overview">Panoramica</string>
+    <string name="ui_htp_abilities">Abilità</string>
+    <string name="ui_htp_abilities_desc">Ogni personaggio ha 3 abilità. L\'abilità attiva si usa trascinando la carta attaccante su una carta avversaria e rilasciando quando appare la tinta rossa.\nLe abilità passive si usano sugli alleati trascinando e rilasciando quando appare la tinta verde.\nPer far eseguire a un personaggio la sua abilità attiva su se stesso, trascina la selezione fuori e poi di nuovo sulla carta che agisce. Smetti di trascinare quando non sei sopra una carta per annullare l\'azione.\nLe abilità supreme possono essere usate quando la barra della furia è piena, trascinando la fiamma sul personaggio di cui vuoi usare la suprema. Quando appare un contorno ciano, significa che rilasciare la fiamma su quel personaggio gli farà eseguire la sua suprema.</string>
+    <string name="ui_htp_rage">Furia</string>
+    <string name="ui_htp_rage_desc">Ogni squadra ha una barra della furia che aumenta del 5%% dopo che un giocatore esegue un\'abilità attiva o passiva.\nLa furia può essere influenzata da altri fattori come eventi meteorologici o tratti.\nQuando la barra della furia è piena inizierà a pulsare e apparirà l\'icona della fiamma usata per eseguire le abilità supreme.</string>
+    <string name="ui_htp_effects">Effetti</string>
+    <string name="ui_htp_effects_desc">Gli effetti influenzano il comportamento di un personaggio e durano un certo numero di turni.\nGli effetti positivi sono mostrati in verde, quelli negativi in viola.</string>
+    <string name="ui_htp_traits">Tratti</string>
+    <string name="ui_htp_traits_desc">I tratti sono simili agli effetti, tranne per il fatto che sono legati a specifici personaggi e non possono essere applicati o rimossi.\nPossono essere benefici o limitare il potere di un personaggio.</string>
+    <string name="ui_htp_character_info">Dettagli Personaggio</string>
+    <string name="ui_htp_character_info_desc">"Tocca due volte una carta per vedere i suoi dettagli.\nCliccare sul nome o sulle statistiche aprirà un menu radar che visualizza i punti di forza e debolezza del personaggio.\nLa scheda informativa mostra anche abilità, tratti ed effetti attivi correnti del personaggio.\nSe la descrizione dell\'abilità di un personaggio contiene un effetto, tocca il testo per vedere cosa fa l\'effetto. "</string>
+    <string name="ui_htp_charges">Cariche</string>
+    <string name="ui_htp_charges_desc">Alcune abilità e tratti hanno cariche, il che significa che non possono essere eseguiti immediatamente e si caricheranno invece quando usati su un personaggio.\nLe cariche delle abilità si resettano quando si passa tra abilità passive e attive.\nLe cariche attive sono visualizzate da barre verdi, le cariche passive sono blu e le cariche dei tratti sono viola.</string>
+    <string name="ui_htp_tab_general">Generale</string>
+    <string name="ui_htp_tab_shop">Negozio</string>
+    <string name="ui_htp_tab_weather">Meteo</string>
+    <string name="ui_htp_tab_timed">Modalità a Tempo</string>
+    <string name="ui_htp_shop_desc">Quando un personaggio esegue un\'abilità, la sua squadra guadagna 3 monete. Monete aggiuntive possono essere ottenute da altri eventi di gioco come tratti ed effetti.\nLe monete possono essere spese al negozio solo durante il tuo turno. Compra un oggetto trascinandolo e rilasciandolo sul personaggio su cui vuoi usarlo.</string>
+    <string name="ui_htp_weather_desc">Abilitando il meteo, un modificatore meteorologico casuale si verifica durante la battaglia, garantendo a una squadra effetti positivi o negativi uguali.</string>
+    <string name="ui_htp_timed_desc">In Modalità a Tempo, hai un tempo limitato per fare le tue mosse ogni turno.\nSe non fai nulla, un personaggio casuale userà la sua abilità attiva o passiva su un personaggio casuale.</string>
 </resources>

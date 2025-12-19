@@ -56,8 +56,6 @@ class Ghost : Entity(
     const val DAMAGE = 8f
     const val PASSIVE_DURATION = 1
     const val PASSIVE_CHARGES = 2
-
     const val ULTIMATE_EFFECT_DURATION = 3
-
   }
 }

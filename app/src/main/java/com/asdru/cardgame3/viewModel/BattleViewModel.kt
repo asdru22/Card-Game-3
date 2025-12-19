@@ -52,6 +52,10 @@ class BattleViewModel(
 
   var currentWeather by mutableStateOf<WeatherEvent?>(null)
     internal set
+  var weatherActionCounter by mutableIntStateOf(0)
+    internal set
+  var weatherChangeThreshold by mutableIntStateOf(0)
+    internal set
   var showWeatherInfo by mutableStateOf(false)
 
   var isLeftTeamTurn by mutableStateOf(true)
