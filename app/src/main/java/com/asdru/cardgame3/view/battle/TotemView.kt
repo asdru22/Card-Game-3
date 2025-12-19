@@ -20,66 +20,77 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.asdru.cardgame3.game.totem.TotemViewModel
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.input.pointer.pointerInput
+import com.asdru.cardgame3.viewModel.TotemViewModel
 
 @Composable
 fun TotemView(
   totemVm: TotemViewModel?,
+  onDoubleTap: (TotemViewModel) -> Unit,
   modifier: Modifier = Modifier
 ) {
   val shape = RoundedCornerShape(12.dp)
-  
+
   if (totemVm != null && totemVm.isAlive) {
-      Box(
-        modifier = modifier
-          .size(80.dp) // Increased size
-          .clip(shape)
-          .background(Color(0xFF424242))
-          .border(2.dp, Color.White, shape),
-        contentAlignment = Alignment.Center
+    Box(
+      modifier = modifier
+        .size(80.dp) // Increased size
+        .clip(shape)
+        .background(Color(0xFF424242))
+        .border(2.dp, Color.White, shape)
+        .pointerInput(Unit) {
+          detectTapGestures(
+            onDoubleTap = { onDoubleTap(totemVm) }
+          )
+        },
+      contentAlignment = Alignment.Center
+    ) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
       ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        Icon(
+          painter = painterResource(id = totemVm.totem.iconRes),
+          contentDescription = null,
+          tint = Color.Unspecified,
+          modifier = Modifier.size(48.dp) // Increased icon size
+        )
+
+        // Health Bar
+        val hp = totemVm.currentHealth
+        val maxHp = totemVm.maxHealth
+        val hpPercent = (hp / maxHp).coerceIn(0f, 1f)
+
+        val barColor = when {
+          hpPercent > 0.5f -> Color(0xFF4CAF50)
+          hpPercent > 0.2f -> Color(0xFFFFC107)
+          else -> Color(0xFFF44336)
+        }
+
+        Box(
+          modifier = Modifier
+            .padding(top = 4.dp)
+            .size(width = 60.dp, height = 6.dp)
+            .clip(RoundedCornerShape(3.dp))
+            .background(Color.Black.copy(alpha = 0.6f))
         ) {
-            Icon(
-              painter = painterResource(id = totemVm.totem.iconRes),
-              contentDescription = null,
-              tint = Color.Unspecified,
-              modifier = Modifier.size(48.dp) // Increased icon size
-            )
-            
-            // Health Bar
-            val hp = totemVm.currentHealth
-            val maxHp = totemVm.maxHealth
-            val hpPercent = (hp / maxHp).coerceIn(0f, 1f)
-            
-             val barColor = when {
-              hpPercent > 0.5f -> Color(0xFF4CAF50)
-              hpPercent > 0.2f -> Color(0xFFFFC107)
-              else -> Color(0xFFF44336)
-            }
-            
-            Box(
-              modifier = Modifier
-                .padding(top = 4.dp)
-                .size(width = 60.dp, height = 6.dp)
-                .clip(RoundedCornerShape(3.dp))
-                .background(Color.Black.copy(alpha = 0.6f))
-            ) {
-              Box(
-                modifier = Modifier
-                  .fillMaxWidth(hpPercent)
-                  .fillMaxHeight()
-                  .background(barColor)
-              )
-            }
+          Box(
+            modifier = Modifier
+              .fillMaxWidth(hpPercent)
+              .fillMaxHeight()
+              .background(barColor)
+          )
         }
       }
+    }
   } else {
     val stroke = Stroke(
-       width = 4f,
-       pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+      width = 4f,
+      pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(
+        floatArrayOf(10f, 10f),
+        0f
+      )
     )
 
     Box(
@@ -88,15 +99,15 @@ fun TotemView(
         .clip(shape)
         .background(Color(0xFF2C2C2C).copy(alpha = 0.5f))
         .drawBehind {
-           drawRoundRect(
-             color = Color.Gray,
-             style = stroke,
-             cornerRadius = androidx.compose.ui.geometry.CornerRadius(12.dp.toPx())
-           )
+          drawRoundRect(
+            color = Color.Gray,
+            style = stroke,
+            cornerRadius = androidx.compose.ui.geometry.CornerRadius(12.dp.toPx())
+          )
         },
       contentAlignment = Alignment.Center
     ) {
-         // Empty
+      // Empty
     }
   }
 }

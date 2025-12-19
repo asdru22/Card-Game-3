@@ -199,6 +199,13 @@ fun BattleScreen(viewModel: BattleViewModel) {
       )
     }
 
+    if (viewModel.showTotemInfoDialog && viewModel.selectedTotem != null) {
+        TotemInfoCard(
+            viewModel = viewModel.selectedTotem!!,
+            onClose = { viewModel.closeTotemInfoDialog() }
+        )
+    }
+
     if (viewModel.showExitDialog) {
       ExitConfirmationDialog(
         onConfirm = { viewModel.onExitConfirmed() },

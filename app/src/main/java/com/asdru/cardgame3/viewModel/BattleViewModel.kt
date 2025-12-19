@@ -176,6 +176,20 @@ class BattleViewModel(
     selectedEntity = null
   }
 
+  // --- Totem Dialog ---
+  var showTotemInfoDialog by mutableStateOf(false)
+  var selectedTotem by mutableStateOf<TotemViewModel?>(null)
+
+  fun onTotemDoubleTap(totem: TotemViewModel) {
+    selectedTotem = totem
+    showTotemInfoDialog = true
+  }
+
+  fun closeTotemInfoDialog() {
+    showTotemInfoDialog = false
+    selectedTotem = null
+  }
+
   fun getHighlightColor(entity: EntityViewModel): Color {
     return cardInputHandler.getHighlightColor(entity)
       ?: ultimateInputHandler.getHighlightColor(entity)

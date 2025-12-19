@@ -1,0 +1,4 @@
+<resources>
+    <string name="totem_ability_magnet_pull_name">Attrazione Magnetica</string>
+    <string name="totem_ability_magnet_pull_desc">Attira un nemico casuale davanti a sé.</string>
+</resources>

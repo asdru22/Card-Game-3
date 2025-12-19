@@ -1,6 +1,10 @@
 package com.asdru.cardgame3.logic
 
 import androidx.lifecycle.viewModelScope
+import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.game.totem.Totem
+import com.asdru.cardgame3.game.totem.TotemAbility
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -26,10 +30,16 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.rightTeam.enemyTeam = vm.leftTeam
 
     // TODO: remove this test code
-    val testTotem = com.asdru.cardgame3.game.totem.Totem(
-      com.asdru.cardgame3.R.string.app_name, 
-      com.asdru.cardgame3.R.drawable.entity_the_magnet, 
-      50f
+    val testTotem = Totem(
+      R.string.entity_the_magnet,
+      R.drawable.entity_the_magnet,
+      Stats(50f, 5f),
+      TotemAbility(
+        R.string.totem_ability_magnet_pull_name,
+        R.string.totem_ability_magnet_pull_desc
+      ) { sourceTotem, target ->
+        // Implementation pending
+      }
     )
     vm.leftTeam.totem = TotemViewModel(testTotem)
     vm.rightTeam.totem = TotemViewModel(testTotem)

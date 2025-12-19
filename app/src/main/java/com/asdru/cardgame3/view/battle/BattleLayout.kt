@@ -83,6 +83,7 @@ fun BattleLayout(
         ) {
            TotemView(
              totemVm = viewModel.leftTeam.totem,
+             onDoubleTap = viewModel::onTotemDoubleTap,
              modifier = Modifier.align(Alignment.Center)
            )
 
@@ -113,6 +114,7 @@ fun BattleLayout(
         ) {
            TotemView(
              totemVm = viewModel.rightTeam.totem,
+             onDoubleTap = viewModel::onTotemDoubleTap,
              modifier = Modifier.align(Alignment.Center)
            )
 
