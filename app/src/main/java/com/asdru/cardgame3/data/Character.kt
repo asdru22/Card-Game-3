@@ -4,11 +4,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 
-class Character(
+open class Character(
   val radarStats: RadarStats,
   val passiveAbility: Ability,
   val activeAbility: Ability,
   val ultimateAbility: Ability,
+  val damageType: DamageType,
   @StringRes name: Int,
   @DrawableRes iconRes: Int,
   initialStats: Stats,

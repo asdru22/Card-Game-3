@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 
-class Summon(
+open class Summon(
   val ability: SummonAbility,
   @StringRes name: Int,
   @DrawableRes iconRes: Int,

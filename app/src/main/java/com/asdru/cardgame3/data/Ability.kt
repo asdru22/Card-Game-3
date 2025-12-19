@@ -2,6 +2,7 @@ package com.asdru.cardgame3.data
 
 import android.content.Context
 import androidx.annotation.StringRes
+import com.asdru.cardgame3.viewModel.CharacterViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 open class Ability(
@@ -9,10 +10,10 @@ open class Ability(
   @get:StringRes override val descriptionRes: Int,
   override val formatArgs: List<Any> = emptyList(),
   val charges: Int = 1,
-  protected val onEffect: suspend (source: EntityViewModel, target: EntityViewModel) -> Unit
+  protected val onEffect: suspend (source: CharacterViewModel, target: EntityViewModel) -> Unit
 ) : Translatable {
 
-  suspend fun effect(source: EntityViewModel, target: EntityViewModel) {
+  suspend fun effect(source: CharacterViewModel, target: EntityViewModel) {
     onEffect(source, target)
   }
 
