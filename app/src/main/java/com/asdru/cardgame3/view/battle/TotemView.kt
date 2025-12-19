@@ -33,6 +33,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 @Composable
 fun TotemView(
   totemVm: TotemViewModel?,
+  canUseAbility: Boolean = false,
   onDoubleTap: (TotemViewModel) -> Unit,
   onDragStart: (TotemViewModel, Offset) -> Unit = { _, _ -> },
   onDrag: (Offset) -> Unit = {},
@@ -48,7 +49,7 @@ fun TotemView(
         .size(80.dp) // Increased size
         .clip(shape)
         .background(Color(0xFF424242))
-        .border(2.dp, Color.White, shape)
+        .then(if (canUseAbility) Modifier.border(2.dp, Color.White, shape) else Modifier)
         .onGloballyPositioned { coordinates ->
            onPositioned(coordinates.boundsInRoot())
         }

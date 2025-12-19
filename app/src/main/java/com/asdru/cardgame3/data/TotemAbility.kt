@@ -1,8 +1,7 @@
-package com.asdru.cardgame3.game.totem
+package com.asdru.cardgame3.data
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import com.asdru.cardgame3.viewModel.TotemViewModel
 

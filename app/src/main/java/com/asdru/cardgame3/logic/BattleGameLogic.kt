@@ -3,8 +3,8 @@ package com.asdru.cardgame3.logic
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Stats
+import com.asdru.cardgame3.data.TotemAbility
 import com.asdru.cardgame3.game.totem.Totem
-import com.asdru.cardgame3.game.totem.TotemAbility
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -34,11 +34,17 @@ class BattleGameLogic(private val vm: BattleViewModel) {
       R.string.entity_the_magnet,
       R.drawable.entity_the_magnet,
       Stats(50f, 5f),
-      TotemAbility(
+      activeAbility = TotemAbility(
         R.string.totem_ability_magnet_pull_name,
         R.string.totem_ability_magnet_pull_desc
       ) { sourceTotem, target ->
-        // Implementation pending
+        // Active (Enemy) Implementation pending
+      },
+      passiveAbility = TotemAbility(
+        R.string.totem_ability_magnet_pull_name, // You might want different names/descs in real implementation
+        R.string.totem_ability_magnet_pull_desc
+      ) { sourceTotem, target ->
+        // Passive (Friendly) Implementation pending
       }
     )
     vm.leftTeam.totem = TotemViewModel(testTotem)
@@ -260,7 +266,14 @@ class BattleGameLogic(private val vm: BattleViewModel) {
       vm.viewModelScope.launch {
         vm.isActionPlaying = true
 
-        source.ability.effect(source, target)
+        val isSourceLeft = vm.leftTeam.totem == source
+        val isTargetLeft = vm.leftTeam.entities.contains(target)
+
+        if (isSourceLeft == isTargetLeft) {
+          source.passiveAbility.effect(source, target)
+        } else {
+          source.activeAbility.effect(source, target)
+        }
 
         if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
 

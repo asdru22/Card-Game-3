@@ -81,23 +81,25 @@ fun BattleLayout(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.Center
         ) {
-           TotemView(
-             totemVm = viewModel.leftTeam.totem,
-             onDoubleTap = viewModel::onTotemDoubleTap,
-             onDragStart = viewModel::onTotemDragStart,
-             onDrag = viewModel::onTotemDrag,
-             onDragEnd = viewModel::onTotemDragEnd,
-             onPositioned = { rect -> viewModel.totemBounds[viewModel.leftTeam.totem!!] = rect },
-             modifier = Modifier.align(Alignment.Center)
-           )
+          TotemView(
+            totemVm = viewModel.leftTeam.totem,
+            canUseAbility = viewModel.leftTeam.totem?.let { viewModel.gameLogic.canTotemAct(it) }
+              ?: false,
+            onDoubleTap = viewModel::onTotemDoubleTap,
+            onDragStart = viewModel::onTotemDragStart,
+            onDrag = viewModel::onTotemDrag,
+            onDragEnd = viewModel::onTotemDragEnd,
+            onPositioned = { rect -> viewModel.totemBounds[viewModel.leftTeam.totem!!] = rect },
+            modifier = Modifier.align(Alignment.Center)
+          )
 
-           Shop(
-             viewModel = viewModel.leftTeam.shop,
-             onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
-             onDrag = viewModel::onShopDrag,
-             onDragEnd = viewModel::onShopDragEnd,
-             modifier = Modifier.align(Alignment.BottomCenter)
-           )
+          Shop(
+            viewModel = viewModel.leftTeam.shop,
+            onDragStart = { item, offset -> viewModel.onShopDragStart(item, true, offset) },
+            onDrag = viewModel::onShopDrag,
+            onDragEnd = viewModel::onShopDragEnd,
+            modifier = Modifier.align(Alignment.BottomCenter)
+          )
         }
       }
 
@@ -116,23 +118,25 @@ fun BattleLayout(
           modifier = Modifier.fillMaxHeight(),
           contentAlignment = Alignment.Center
         ) {
-           TotemView(
-             totemVm = viewModel.rightTeam.totem,
-             onDoubleTap = viewModel::onTotemDoubleTap,
-             onDragStart = viewModel::onTotemDragStart,
-             onDrag = viewModel::onTotemDrag,
-             onDragEnd = viewModel::onTotemDragEnd,
-             onPositioned = { rect -> viewModel.totemBounds[viewModel.rightTeam.totem!!] = rect },
-             modifier = Modifier.align(Alignment.Center)
-           )
+          TotemView(
+            totemVm = viewModel.rightTeam.totem,
+            canUseAbility = viewModel.rightTeam.totem?.let { viewModel.gameLogic.canTotemAct(it) }
+              ?: false,
+            onDoubleTap = viewModel::onTotemDoubleTap,
+            onDragStart = viewModel::onTotemDragStart,
+            onDrag = viewModel::onTotemDrag,
+            onDragEnd = viewModel::onTotemDragEnd,
+            onPositioned = { rect -> viewModel.totemBounds[viewModel.rightTeam.totem!!] = rect },
+            modifier = Modifier.align(Alignment.Center)
+          )
 
-           Shop(
-             viewModel = viewModel.rightTeam.shop,
-             onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
-             onDrag = viewModel::onShopDrag,
-             onDragEnd = viewModel::onShopDragEnd,
-             modifier = Modifier.align(Alignment.BottomCenter)
-           )
+          Shop(
+            viewModel = viewModel.rightTeam.shop,
+            onDragStart = { item, offset -> viewModel.onShopDragStart(item, false, offset) },
+            onDrag = viewModel::onShopDrag,
+            onDragEnd = viewModel::onShopDragEnd,
+            modifier = Modifier.align(Alignment.BottomCenter)
+          )
         }
 
         Spacer(modifier = Modifier.width(12.dp))
