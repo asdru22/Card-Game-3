@@ -6,19 +6,13 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.asdru.cardgame3.ui.theme.CardGame3Theme
-import com.asdru.cardgame3.view.CardGameApp
-import com.asdru.cardgame3.view.battle.BattleScreen
-import com.asdru.cardgame3.viewModel.BattleViewModel
-
+import com.asdru.cardgame3.view.MainMenu
 
 class MainActivity : ComponentActivity() {
-
-  private val battleViewModel: BattleViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -35,10 +29,7 @@ class MainActivity : ComponentActivity() {
 
     setContent {
       CardGame3Theme {
-        CardGameApp(
-          battleViewModel = battleViewModel,
-          gameContent = { BattleScreen(battleViewModel) }
-        )
+        MainMenu()
       }
     }
   }

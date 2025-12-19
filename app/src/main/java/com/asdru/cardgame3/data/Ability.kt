@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.annotation.StringRes
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
-data class Ability(
+open class Ability(
   @get:StringRes override val nameRes: Int,
   @get:StringRes override val descriptionRes: Int,
   override val formatArgs: List<Any> = emptyList(),
   val charges: Int = 1,
-  private val onEffect: suspend (source: EntityViewModel, target: EntityViewModel) -> Unit
+  protected val onEffect: suspend (source: EntityViewModel, target: EntityViewModel) -> Unit
 ) : Translatable {
 
   suspend fun effect(source: EntityViewModel, target: EntityViewModel) {
@@ -27,7 +27,6 @@ data class Ability(
         val descArgs = arg.formatArgs.toTypedArray()
         val desc = context.getString(arg.descriptionRes, *descArgs)
         val isPositive = arg.isPositive
-
         "[[$name|$desc|$isPositive]]"
       } else {
         arg
