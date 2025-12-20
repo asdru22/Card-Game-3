@@ -36,6 +36,6 @@ class SpikedShield(duration: Int) : StatusEffect(
     override val nameRes = R.string.effect_spiked_shield
     override val descriptionRes = R.string.effect_spiked_shield_desc
     override val isPositive = true
-    private const val DAMAGE_REFLECTED = 20f
+    private const val DAMAGE_REFLECTED = 35f
   }
 }
