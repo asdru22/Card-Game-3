@@ -19,11 +19,16 @@ class ShopViewModel() {
   var isTotemDestroyed by mutableStateOf(false)
 
   val items: List<ShopItem> by derivedStateOf {
-    val standardItems = ShopDataProvider.getShopItems()
+    ShopDataProvider.getShopItems()
+  }
+
+  val totemItems: List<ShopItem.TotemItem> by derivedStateOf {
     if (isTotemDestroyed) {
-      standardItems + ShopItem.TotemRepairItem(15)
+      com.asdru.cardgame3.helper.TotemDataProvider.getAvailableTotems().map {
+        ShopItem.TotemItem(it, 15)
+      }
     } else {
-      standardItems
+      emptyList()
     }
   }
 

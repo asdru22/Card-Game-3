@@ -26,7 +26,7 @@ class TeamViewModel(
   }
 
   fun updateShopState() {
-    shop.isTotemDestroyed = totem?.isAlive == false
+    shop.isTotemDestroyed = totem?.isAlive != true
   }
 
   var totalDamageDealt: Float = 0f

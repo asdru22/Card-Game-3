@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -68,13 +69,25 @@ fun Shop(
 ) {
   val shape = RoundedCornerShape(16.dp)
   var selectedItem by remember { mutableStateOf<ShopItem?>(null) }
+  val hasTotems = viewModel.totemItems.isNotEmpty()
+  val boxWidth by androidx.compose.animation.core.animateDpAsState(
+    targetValue = if (viewModel.isOpen && hasTotems) 150.dp else 72.dp,
+    label = "shopWidth"
+  )
 
   if (selectedItem != null) {
     Dialog(onDismissRequest = { selectedItem = null }) {
-      ShopItemDetail(
-        item = selectedItem!!,
-        onClose = { selectedItem = null }
-      )
+      if (selectedItem is ShopItem.TotemItem) {
+        com.asdru.cardgame3.view.battle.TotemInfoCard(
+          viewModel = com.asdru.cardgame3.viewModel.TotemViewModel((selectedItem as ShopItem.TotemItem).totem),
+          onClose = { selectedItem = null }
+        )
+      } else {
+        ShopItemDetail(
+          item = selectedItem!!,
+          onClose = { selectedItem = null }
+        )
+      }
     }
   }
 
@@ -82,7 +95,7 @@ fun Shop(
     contentAlignment = Alignment.Center,
     modifier = modifier
       .padding(bottom = 8.dp)
-      .width(72.dp)
+      .requiredWidth(boxWidth)
       .clip(shape)
       .background(Color.Black.copy(alpha = 0.85f))
       .border(1.dp, Color(0xFFFFD700), shape)
@@ -105,25 +118,59 @@ fun Shop(
         enter = expandVertically(expandFrom = Alignment.Bottom) + fadeIn(),
         exit = shrinkVertically(shrinkTowards = Alignment.Bottom) + fadeOut()
       ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-          viewModel.items.forEach { item ->
-            ShopItemRow(
-              item = item,
-              canAfford = viewModel.canAfford(item.cost),
-              onDragStart = onDragStart,
-              onDrag = onDrag,
-              onDragEnd = onDragEnd,
-              onShowInfo = { selectedItem = item }
-            )
-            HorizontalDivider(
-              modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .padding(vertical = 6.dp),
-              color = Color.Gray.copy(alpha = 0.3f),
-              thickness = 1.dp
-            )
-          }
-          Spacer(modifier = Modifier.height(4.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.weight(1f)
+            ) {
+              viewModel.items.forEach { item ->
+                ShopItemRow(
+                  item = item,
+                  canAfford = viewModel.canAfford(item.cost),
+                  onDragStart = onDragStart,
+                  onDrag = onDrag,
+                  onDragEnd = onDragEnd,
+                  onShowInfo = { selectedItem = item }
+                )
+                HorizontalDivider(
+                  modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .padding(vertical = 6.dp),
+                  color = Color.Gray.copy(alpha = 0.3f),
+                  thickness = 1.dp
+                )
+              }
+              Spacer(modifier = Modifier.height(4.dp))
+            }
+
+            if (hasTotems) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.weight(1f)
+                ) {
+                  viewModel.totemItems.forEach { item ->
+                    ShopItemRow(
+                      item = item,
+                      canAfford = viewModel.canAfford(item.cost),
+                      onDragStart = onDragStart,
+                      onDrag = onDrag,
+                      onDragEnd = onDragEnd,
+                      onShowInfo = { selectedItem = item }
+                    )
+                    HorizontalDivider(
+                      modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .padding(vertical = 6.dp),
+                      color = Color.Gray.copy(alpha = 0.3f),
+                      thickness = 1.dp
+                    )
+                  }
+                  Spacer(modifier = Modifier.height(4.dp))
+                }
+            }
         }
       }
 

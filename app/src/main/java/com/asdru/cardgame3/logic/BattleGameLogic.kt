@@ -29,26 +29,6 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.leftTeam.enemyTeam = vm.rightTeam
     vm.rightTeam.enemyTeam = vm.leftTeam
 
-    // TODO: remove this test code
-    val testTotem = Totem(
-      R.string.entity_the_magnet,
-      R.drawable.entity_the_magnet,
-      Stats(50f, 5f),
-      activeAbility = TotemAbility(
-        R.string.totem_ability_magnet_pull_name,
-        R.string.totem_ability_magnet_pull_desc
-      ) { sourceTotem, target ->
-        // Active (Enemy) Implementation pending
-      },
-      passiveAbility = TotemAbility(
-        R.string.totem_ability_magnet_pull_name, // You might want different names/descs in real implementation
-        R.string.totem_ability_magnet_pull_desc
-      ) { sourceTotem, target ->
-        // Passive (Friendly) Implementation pending
-      }
-    )
-    vm.leftTeam.totem = TotemViewModel(testTotem)
-    vm.rightTeam.totem = TotemViewModel(testTotem)
     vm.leftTeam.updateShopState()
     vm.rightTeam.updateShopState()
 

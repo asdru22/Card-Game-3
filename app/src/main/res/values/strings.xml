@@ -262,4 +262,5 @@
     <string name="ui_htp_shop_desc">When a character performs an ability, their team gains 3 coins. Additional coins can be obtained from other game events like traits and effects.\nCoins can be spent at the shop during only in your turn. Buy an item by dragging it and releasing it onto the character you want to use it on.</string>
     <string name="ui_htp_weather_desc">By enabling weather, a random weather modifier occurs during battle, granting a team with equal positive or negative effects.</string>
     <string name="ui_htp_timed_desc">In Timed Mode, you have a limited amount of time to make your moves each turn.\nIf you don\'t do anything, a random character will use its active or passive ability on a random character.</string>
+    <string name="ui_shop_totem_purchase_desc">Purchase this Totem to replace your destroyed one.</string>
 </resources>

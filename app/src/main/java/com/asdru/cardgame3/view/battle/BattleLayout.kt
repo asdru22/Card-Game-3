@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.asdru.cardgame3.view.team.RageBar
 import com.asdru.cardgame3.view.team.Shop
 import com.asdru.cardgame3.view.team.TeamColumn
@@ -78,7 +79,10 @@ fun BattleLayout(
         Spacer(modifier = Modifier.width(12.dp))
 
         Box(
-          modifier = Modifier.fillMaxHeight(),
+          modifier = Modifier
+            .fillMaxHeight()
+            .width(80.dp)
+            .zIndex(1f),
           contentAlignment = Alignment.Center
         ) {
           TotemView(
@@ -115,7 +119,10 @@ fun BattleLayout(
       // --- RIGHT GROUP (Totem + Shop + Team) ---
       Row(modifier = Modifier.fillMaxHeight()) {
         Box(
-          modifier = Modifier.fillMaxHeight(),
+          modifier = Modifier
+            .fillMaxHeight()
+            .width(80.dp)
+            .zIndex(1f),
           contentAlignment = Alignment.Center
         ) {
           TotemView(
