@@ -1,7 +1,4 @@
 <resources>
-    <string name="damage_type_ranged">A Distanza</string>
-    <string name="damage_type_magic">Magico</string>
-    <string name="damage_type_melee">Mischia</string>
     <string name="entity_ninja">Ninja</string>
     <string name="ability_slash">Fendente</string>
     <string name="ability_slash_desc">Esegue %s colpi rapidi</string>
@@ -78,7 +75,6 @@
     <string name="ui_restart">Riavvia</string>
     <string name="ui_effects">Effetti</string>
     <string name="ui_player_name">Nome Giocatore %s</string>
-    <string name="ui_winner">%s vince!</string>
     <string name="entity_robot">Robot</string>
     <string name="ability_shock_attack">Attacco Shock</string>
     <string name="ability_shock_attack_desc">Applica %s al bersaglio per %s turni</string>
@@ -105,7 +101,7 @@
     <string name="ability_take_aim_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_barrage">Raffica</string>
     <string name="ability_barrage_desc">Tutti gli alleati a distanza eseguono la loro abilità attiva %s volte su nemici casuali</string>
-    <string name="ui_how_to_play">Come giocare</string>
+    <string name="ui_htp_overview_desc">In questo gioco di combattimento a turni, il tuo obiettivo è sconfiggere tutte le carte del tuo avversario. Scegli carte che si combinano bene tra loro o che sono forti contro quelle scelte dal tuo avversario. Il giocatore che inizia viene deciso casualmente e potrà usare le abilità del proprio personaggio. Una volta eseguite tutte le azioni possibili, inizierà il turno dell\'altro giocatore.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Partita Semplice</string>
     <string name="ui_strategic_game">Partita Strategica</string>
@@ -259,4 +255,13 @@
     <string name="ui_htp_shop_desc">Quando un personaggio esegue un\'abilità, la sua squadra guadagna 3 monete. Monete aggiuntive possono essere ottenute da altri eventi di gioco come tratti ed effetti.\nLe monete possono essere spese al negozio solo durante il tuo turno. Compra un oggetto trascinandolo e rilasciandolo sul personaggio su cui vuoi usarlo.</string>
     <string name="ui_htp_weather_desc">Abilitando il meteo, un modificatore meteorologico casuale si verifica durante la battaglia, garantendo a una squadra effetti positivi o negativi uguali.</string>
     <string name="ui_htp_timed_desc">In Modalità a Tempo, hai un tempo limitato per fare le tue mosse ogni turno.\nSe non fai nulla, un personaggio casuale userà la sua abilità attiva o passiva su un personaggio casuale.</string>
+    <string name="tability_purr">Fusa</string>
+    <string name="tability_purr_desc">Cura il bersaglio per %s vita</string>
+    <string name="totem_cat">Gatto</string>
+    <string name="tability_scratch">Graffio</string>
+    <string name="tability_scratch_desc">Attacca il bersaglio %s volte danneggiandolo per %s</string>
+    <string name="ui_turn">Turno di %s</string>
+    <string name="ui_round">Round %s</string>
+    <string name="ui_htp_tab_totems">Totem</string>
+    <string name="ui_htp_totems_desc">I totem sono carte personaggio più semplici che possono essere acquistate nel negozio.\nLa tua squadra può avere un solo totem alla volta. Se un totem viene distrutto, puoi acquistarne un altro nel negozio.\nI totem possono eseguire abilità attive e passive, ma non possono eseguire ultimate, avere effetti o tratti.\nI totem non possono essere presi di mira dalle abilità, ma perdono salute quando un qualsiasi membro della squadra subisce danni. Non rigenerano salute se un membro della squadra viene curato.</string>
 </resources>

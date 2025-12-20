@@ -37,6 +37,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.weatherChangeThreshold = Random.nextInt(3, 9)
 
     vm.isLeftTeamTurn = Random.nextBoolean()
+    vm.startingTeamIsLeft = vm.isLeftTeamTurn
+    vm.roundCount = 1
     vm.isActionPlaying = false
     vm.winner = null
     vm.actionsTaken.clear()
@@ -173,6 +175,9 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.actionsTaken.clear()
     vm.totemActionsTaken.clear()
     vm.isLeftTeamTurn = !vm.isLeftTeamTurn
+    if (vm.isLeftTeamTurn == vm.startingTeamIsLeft) {
+      vm.roundCount++
+    }
     vm.battleTimer.reset()
 
     val nextTeam = if (vm.isLeftTeamTurn) vm.leftTeam else vm.rightTeam

@@ -102,7 +102,7 @@
     <string name="ability_take_aim_desc">Apply %s to the target for %s turns</string>
     <string name="ability_barrage">Barrage</string>
     <string name="ability_barrage_desc">All ranged teammates perform their active ability %s times on random enemies</string>
-    <string name="ui_htp_overview_desc">In this turn based fighting game, your goal is to defeat all of your opponent\'s  cards. Pick cards that synergize together or are strong agaisnt the ones your opponent picked.\nThe starting player is decided randomy and will be able to use their character\'s abilities. Once all possible actions have been performed, the other player\'s turn will start.</string>
+    <string name="ui_htp_overview_desc">In this turn based fighting game, your goal is to defeat all of your opponent\'s  cards. Pick cards that synergize together or are strong agaisnt the ones your opponent picked. The starting player is decided randomy and will be able to use their character\'s abilities. Once all possible actions have been performed, the other player\'s turn will start.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Casual Game</string>
     <string name="ui_strategic_game">Strategic Game</string>
@@ -257,10 +257,14 @@
     <string name="ui_htp_shop_desc">When a character performs an ability, their team gains 3 coins. Additional coins can be obtained from other game events like traits and effects.\nCoins can be spent at the shop during only in your turn. Buy an item by dragging it and releasing it onto the character you want to use it on.</string>
     <string name="ui_htp_weather_desc">By enabling weather, a random weather modifier occurs during battle, granting a team with equal positive or negative effects.</string>
     <string name="ui_htp_timed_desc">In Timed Mode, you have a limited amount of time to make your moves each turn.\nIf you don\'t do anything, a random character will use its active or passive ability on a random character.</string>
-    <string name="ui_shop_totem_purchase_desc">Purchase this Totem to replace your destroyed one.</string>
     <string name="tability_purr">Purr</string>
     <string name="tability_purr_desc">Heal the target for %s health</string>
     <string name="totem_cat">Cat</string>
     <string name="tability_scratch">Scratch</string>
     <string name="tability_scratch_desc">Attack the target %s times and deal %s damage</string>
+    <string name="ui_turn">%s\'s turn</string>
+    <string name="ui_round">Round %s</string>
+    <string name="empty" translatable="false" />
+    <string name="ui_htp_tab_totems">Totems</string>
+    <string name="ui_htp_totems_desc">Totems are simpler character cards that can be purchased at the shop.\nYour team can only have one totem at a time. If a totem is destroyed, you can buy another one at the shop.\nTotems can perform active and passive abilities, but cannot perform ultimates, have effects or traits.\nTotems cannot be targeted by abilities, but loose health when any team member takes damage. They do not regenerate health if a team member is healed.</string>
 </resources>

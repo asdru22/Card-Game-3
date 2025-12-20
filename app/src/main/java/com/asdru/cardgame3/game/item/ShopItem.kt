@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.item
 import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.game.totem.Totem
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -39,7 +40,7 @@ sealed class ShopItem(
 
   class TotemItem(val totem: Totem, cost: Int) : ShopItem(
     nameRes = totem.name,
-    descriptionRes = com.asdru.cardgame3.R.string.ui_shop_totem_purchase_desc,
+    descriptionRes = R.string.empty,
     cost = cost,
     iconRes = totem.iconRes,
     onApply = { entity ->

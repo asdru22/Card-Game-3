@@ -73,6 +73,11 @@ class BattleViewModel(
   var navigateToSelection by mutableStateOf(false)
     internal set
 
+  var roundCount by mutableIntStateOf(1)
+    internal set
+  var startingTeamIsLeft by mutableStateOf(true)
+    internal set
+
   // Internal lists for logic tracking
   internal val actionsTaken = mutableStateListOf<EntityViewModel>()
   internal val totemActionsTaken = mutableStateListOf<TotemViewModel>()
