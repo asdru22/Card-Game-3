@@ -20,7 +20,6 @@ class EntityEffectManager(
   fun addEffect(effect: StatusEffect, source: EntityViewModel?, owner: EntityViewModel) {
     var currentEffect: StatusEffect? = effect
 
-    // Apply traits that might modify incoming effects (Resistances, etc.)
     for (trait in owner.traits) {
       if (currentEffect == null) break
       currentEffect = trait.modifyIncomingEffect(owner, currentEffect, source)
@@ -67,10 +66,18 @@ class EntityEffectManager(
     removeEffect(effect, owner)
   }
 
-  fun removeEffect(effect: StatusEffect, owner: EntityViewModel) {
-    effect.onRemove(owner)
-    effects.remove(effect)
-    onEffectsChanged()
+  fun getRandomPositiveEffect(): StatusEffect? {
+    return effects.filter { it.isPositive }.randomOrNull()
+  }
+
+  fun removeEffect(effect: StatusEffect, owner: EntityViewModel): StatusEffect? {
+    if (effects.contains(effect)) {
+      effect.onRemove(owner)
+      effects.remove(effect)
+      onEffectsChanged()
+      return effect
+    }
+    return null
   }
 
   inline fun <reified T : StatusEffect> removeEffect(owner: EntityViewModel) {

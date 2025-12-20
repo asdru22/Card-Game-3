@@ -20,8 +20,8 @@ class ShopViewModel(
     private set
 
   val isTotemDestroyed by derivedStateOf {
-     val totem = totemProvider()
-     totem?.isAlive != true
+    val totem = totemProvider()
+    totem?.isAlive != true
   }
 
   val items: List<ShopItem> by derivedStateOf {
@@ -43,12 +43,19 @@ class ShopViewModel(
   }
 
 
-  fun modifyCoins(amount: Int) {
+  fun addCoins(amount: Int): Int {
     coins += amount
+    return coins
+  }
+
+  fun removeCoins(amount: Int): Int {
+    val actualRemoved = amount.coerceAtMost(coins)
+    coins -= actualRemoved
+    return actualRemoved
   }
 
   fun onEndOfTurn() {
-    modifyCoins(3)
+    addCoins(3)
   }
 
   fun reset() {

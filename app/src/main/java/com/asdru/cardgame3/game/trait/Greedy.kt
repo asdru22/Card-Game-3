@@ -10,7 +10,7 @@ class Greedy : Trait {
   override val formatArgs: List<Any> = listOf(COINS_GAINED)
 
   override suspend fun onEndTurn(owner: EntityViewModel) {
-    owner.team.shop.modifyCoins(COINS_GAINED)
+    owner.team.shop.addCoins(COINS_GAINED)
     owner.popupManager.add(R.string.game_greedy, Color.White)
   }
 

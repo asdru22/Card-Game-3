@@ -284,4 +284,16 @@
     <string name="tability_feral_bite_desc">Deal %s damage, that scales with the team\'s rage</string>
     <string name="tability_bite">Bite</string>
     <string name="tability_bite_desc">Increase team\'s rage by %s</string>
+    <string name="totem_flask">Flask</string>
+    <string name="tability_purify">Purify</string>
+    <string name="tability_dispel">Dispel</string>
+    <string name="tability_dispel_desc">Remove all of the target\'s positive effects</string>
+    <string name="tability_purify_desc">Clear all negative effects from the target</string>
+    <string name="ability_pickpocket">Pickpocket</string>
+    <string name="ability_pickpocket_desc">Steal up to %s coins from the enemy team</string>
+    <string name="ability_stash">Stash</string>
+    <string name="entity_thief">Thief</string>
+    <string name="ability_stash_desc">Target\'s team gains %s coins</string>
+    <string name="ability_heist">Heist</string>
+    <string name="ability_heist_desc">Steal a random positive effect from all enemies. If an enemy doesn\'t have a positive effect, steal %s coins instead</string>
 </resources>

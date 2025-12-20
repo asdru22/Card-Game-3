@@ -13,8 +13,8 @@ class GoldenShower : WeatherEvent(
 ) {
 
   override suspend fun onEndTurn(viewModel: BattleViewModel) {
-    viewModel.rightTeam.shop.modifyCoins(COIN_AMOUNT)
-    viewModel.leftTeam.shop.modifyCoins(COIN_AMOUNT)
+    viewModel.rightTeam.shop.addCoins(COIN_AMOUNT)
+    viewModel.leftTeam.shop.addCoins(COIN_AMOUNT)
   }
 
   private companion object {

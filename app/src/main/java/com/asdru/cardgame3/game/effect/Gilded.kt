@@ -17,7 +17,7 @@ class Gilded(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    owner.team.shop.modifyCoins(COINS_GAINED)
+    owner.team.shop.addCoins(COINS_GAINED)
     return currentDamage
   }
 

@@ -281,4 +281,16 @@
     <string name="tability_feral_bite_desc">Infliggi %s danni, che aumentano in base alla furia della squadra</string>
     <string name="tability_bite">Morso</string>
     <string name="tability_bite_desc">Aumenta la furia della squadra di %s</string>
+    <string name="totem_flask">Fiala</string>
+    <string name="tability_purify">Purificare</string>
+    <string name="tability_dispel">Dissipare</string>
+    <string name="tability_dispel_desc">Rimuove tutti gli effetti positivi del bersaglio</string>
+    <string name="tability_purify_desc">Rimuove tutti gli effetti negativi dal bersaglio</string>
+    <string name="ability_pickpocket">Borseggio</string>
+    <string name="ability_pickpocket_desc">Ruba fino a %s monete alla squadra nemica</string>
+    <string name="ability_stash">Nascondiglio</string>
+    <string name="entity_thief">Ladro</string>
+    <string name="ability_stash_desc">La squadra del bersaglio guadagna %s monete</string>
+    <string name="ability_heist">Rapina</string>
+    <string name="ability_heist_desc">Ruba un effetto positivo casuale da tutti i nemici. Se un nemico non ha effetti positivi, ruba %s monete invece</string>
 </resources>
