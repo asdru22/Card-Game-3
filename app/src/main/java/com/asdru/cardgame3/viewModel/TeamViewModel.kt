@@ -15,18 +15,17 @@ class TeamViewModel(
   val entities: List<EntityViewModel> = team.entities.map { EntityViewModel(it, team.left) }
   lateinit var enemyTeam: TeamViewModel
 
-  val shop = ShopViewModel()
+  val shop = ShopViewModel { totem }
   var totem: TotemViewModel? by mutableStateOf(null)
 
   fun onTeamDamage(amount: Float) {
     if (amount > 0) {
       totem?.takeDamage(amount)
-      shop.isTotemDestroyed = totem?.isAlive == false
     }
   }
 
   fun updateShopState() {
-    shop.isTotemDestroyed = totem?.isAlive != true
+     // Shop state is now derived from totem health
   }
 
   var totalDamageDealt: Float = 0f

@@ -158,9 +158,14 @@ class BattleGameLogic(private val vm: BattleViewModel) {
   // --- Turn Management ---
 
   private suspend fun checkTurnAdvance() {
-    val activeTeamEntities = if (vm.isLeftTeamTurn) vm.leftTeam.entities else vm.rightTeam.entities
+    val activeTeam = if (vm.isLeftTeamTurn) vm.leftTeam else vm.rightTeam
+    val activeTeamEntities = activeTeam.entities
     val capableEntities = activeTeamEntities.filter { it.isAlive && !it.effectManager.isStunned }
-    if (vm.actionsTaken.containsAll(capableEntities)) {
+    
+    val totem = activeTeam.totem
+    val canTotemAct = totem != null && totem.isAlive && !vm.totemActionsTaken.contains(totem)
+
+    if (vm.actionsTaken.containsAll(capableEntities) && !canTotemAct) {
       advanceTurn()
     }
   }
@@ -256,6 +261,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         }
 
         if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
+        checkTurnAdvance()
 
         checkWinCondition()
         checkWeatherChange()

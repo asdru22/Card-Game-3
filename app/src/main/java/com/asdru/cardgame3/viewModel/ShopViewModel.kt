@@ -8,7 +8,9 @@ import androidx.compose.runtime.setValue
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.helper.ShopDataProvider
 
-class ShopViewModel() {
+class ShopViewModel(
+  val totemProvider: () -> TotemViewModel? = { null }
+) {
 
   var coins by mutableIntStateOf(30)
     private set
@@ -16,7 +18,10 @@ class ShopViewModel() {
   var isOpen by mutableStateOf(false)
     private set
 
-  var isTotemDestroyed by mutableStateOf(false)
+  val isTotemDestroyed by derivedStateOf {
+     val totem = totemProvider()
+     totem?.isAlive != true
+  }
 
   val items: List<ShopItem> by derivedStateOf {
     ShopDataProvider.getShopItems()

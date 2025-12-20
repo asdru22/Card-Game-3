@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.data.TotemAbility
 
-open class Totem(
+sealed class Totem(
   @param:StringRes val name: Int,
   @param:DrawableRes val iconRes: Int,
   val initialStats: Stats,

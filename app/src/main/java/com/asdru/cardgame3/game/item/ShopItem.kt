@@ -42,7 +42,6 @@ sealed class ShopItem(
     iconRes = totem.iconRes,
     onApply = { entity ->
       entity.team.totem = com.asdru.cardgame3.viewModel.TotemViewModel(totem)
-      entity.team.updateShopState()
     }
   )
 }

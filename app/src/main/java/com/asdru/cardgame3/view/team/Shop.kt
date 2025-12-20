@@ -76,7 +76,16 @@ fun Shop(
   )
 
   if (selectedItem != null) {
-    Dialog(onDismissRequest = { selectedItem = null }) {
+    val dialogProperties = if (selectedItem is ShopItem.TotemItem) {
+      androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)
+    } else {
+      androidx.compose.ui.window.DialogProperties()
+    }
+
+    Dialog(
+      onDismissRequest = { selectedItem = null },
+      properties = dialogProperties
+    ) {
       if (selectedItem is ShopItem.TotemItem) {
         com.asdru.cardgame3.view.battle.TotemInfoCard(
           viewModel = com.asdru.cardgame3.viewModel.TotemViewModel((selectedItem as ShopItem.TotemItem).totem),
