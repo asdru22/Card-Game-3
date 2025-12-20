@@ -267,4 +267,21 @@
     <string name="empty" translatable="false" />
     <string name="ui_htp_tab_totems">Totems</string>
     <string name="ui_htp_totems_desc">Totems are simpler character cards that can be purchased at the shop.\nYour team can only have one totem at a time. If a totem is destroyed, you can buy another one at the shop.\nTotems can perform active and passive abilities, but cannot perform ultimates, have effects or traits.\nTotems cannot be targeted by abilities, but loose health when any team member takes damage. They do not regenerate health if a team member is healed.</string>
+    <string name="totem_cake">Cake</string>
+    <string name="tability_candle_fire">Candle Fire</string>
+    <string name="tability_candle_fire_desc">Apply %s to the target for %s turn</string>
+    <string name="tability_yum">Yum</string>
+    <string name="tability_yum_desc">Apply %s to the target for %s turn</string>
+    <string name="effect_vampirism">Vampirism</string>
+    <string name="effect_vampirism_desc">Heal for %s%% of the damage dealt</string>
+    <string name="totem_bat">Bat</string>
+    <string name="tability_viral_charge">Viral Charge</string>
+    <string name="tability_viral_charge_desc">Deal %s damage and apply %s to the target for %s turns</string>
+    <string name="tability_leech">Leech</string>
+    <string name="tability_leech_desc">Apply %s to the target for %s turns</string>
+    <string name="totem_rat">Rat</string>
+    <string name="tability_feral_bite">Feral Bite</string>
+    <string name="tability_feral_bite_desc">Deal %s damage, that scales with the team\'s rage</string>
+    <string name="tability_bite">Bite</string>
+    <string name="tability_bite_desc">Increase team\'s rage by %s</string>
 </resources>

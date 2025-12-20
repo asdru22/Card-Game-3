@@ -264,4 +264,21 @@
     <string name="ui_round">Round %s</string>
     <string name="ui_htp_tab_totems">Totem</string>
     <string name="ui_htp_totems_desc">I totem sono carte personaggio più semplici che possono essere acquistate nel negozio.\nLa tua squadra può avere un solo totem alla volta. Se un totem viene distrutto, puoi acquistarne un altro nel negozio.\nI totem possono eseguire abilità attive e passive, ma non possono eseguire ultimate, avere effetti o tratti.\nI totem non possono essere presi di mira dalle abilità, ma perdono salute quando un qualsiasi membro della squadra subisce danni. Non rigenerano salute se un membro della squadra viene curato.</string>
+    <string name="totem_cake">Torta</string>
+    <string name="tability_candle_fire">Fuoco di Candela</string>
+    <string name="tability_candle_fire_desc">Applica %s al bersaglio per %s turno</string>
+    <string name="tability_yum">Gnam</string>
+    <string name="tability_yum_desc">Applica %s al bersaglio per %s turno</string>
+    <string name="effect_vampirism">Vampirismo</string>
+    <string name="effect_vampirism_desc">Cura per il %s%% del danno inflitto</string>
+    <string name="totem_bat">Pipistrello</string>
+    <string name="tability_viral_charge">Carica Virale</string>
+    <string name="tability_viral_charge_desc">Infliggi %s danni e applica %s al bersaglio per %s turni</string>
+    <string name="tability_leech">Sanguisuga</string>
+    <string name="tability_leech_desc">Applica %s al bersaglio per %s turni</string>
+    <string name="totem_rat">Ratto</string>
+    <string name="tability_feral_bite">Morso Ferino</string>
+    <string name="tability_feral_bite_desc">Infliggi %s danni, che aumentano in base alla furia della squadra</string>
+    <string name="tability_bite">Morso</string>
+    <string name="tability_bite_desc">Aumenta la furia della squadra di %s</string>
 </resources>

@@ -6,14 +6,14 @@ import com.asdru.cardgame3.helper.heal
 import com.asdru.cardgame3.helper.receiveDamage
 import kotlinx.coroutines.delay
 
-private const val DAMAGE_AMOUNT = 8f
+private const val DAMAGE_AMOUNT = 6f
 private const val ACTIVE_REPEATS = 3
-private const val HEAL_AMOUNT = 21f
+private const val HEAL_AMOUNT = 18f
 
 object Cat : Totem(
   name = R.string.totem_cat,
   iconRes = R.drawable.totem_cat,
-  initialHealth = 250f,
+  initialHealth = 210f,
   cost = 40,
   activeAbility = TotemAbility(
     nameRes = R.string.tability_scratch,

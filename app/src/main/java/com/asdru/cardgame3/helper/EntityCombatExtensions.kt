@@ -122,7 +122,12 @@ suspend fun EntityViewModel.applyDamage(
 
       }
 
+
       totalDamage += target.receiveDamage(calculatedDamage, source = this)
+
+      effectManager.effects.forEach {
+        it.postDamageDealt(this, target, totalDamage)
+      }
 
       if (rageDecrease > 0f) {
         target.team.decreaseRage(rageDecrease)

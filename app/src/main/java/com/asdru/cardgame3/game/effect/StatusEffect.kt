@@ -28,9 +28,21 @@ sealed class StatusEffect(
   open suspend fun onStartTurn(target: EntityViewModel) {}
   open suspend fun onEndTurn(target: EntityViewModel) {}
 
-  open fun modifyDamage(currentDamage: Float, owner: EntityViewModel?, target: EntityViewModel?): Float = currentDamage
+  open fun modifyDamage(
+    currentDamage: Float,
+    owner: EntityViewModel?,
+    target: EntityViewModel?
+  ): Float = currentDamage
+
   open fun modifyActiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {
     return target
+  }
+
+  open suspend fun postDamageDealt(
+    owner: EntityViewModel,
+    target: EntityViewModel,
+    amount: Float
+  ) {
   }
 
   open fun modifyPassiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {
