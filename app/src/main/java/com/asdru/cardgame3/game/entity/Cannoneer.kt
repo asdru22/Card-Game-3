@@ -86,7 +86,7 @@ class Cannoneer : Entity(
     const val MAX_HEALTH = 110f
     const val DAMAGE = 28f
     const val ACTIVE_TARGET_MULTIPLIER = 100
-    const val ACTIVE_OTHER_MULTIPLIER = 30
+    const val ACTIVE_OTHER_MULTIPLIER = 20
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_TIMES = 6
     const val ULTIMATE_DAMAGE = 12f
