@@ -64,7 +64,7 @@ class MrKettle : Entity(
     const val MAX_HEALTH = 190f
     const val DAMAGE = 16f
     const val ACTIVE_DURATION = 2
-    const val PASSIVE_EFFECT_NUMBER = 2
+    const val PASSIVE_EFFECT_NUMBER = 1
     const val PASSIVE_EFFECT_DURATION = 2
     const val ULTIMATE_EFFECT_DURATION = 2
   }
