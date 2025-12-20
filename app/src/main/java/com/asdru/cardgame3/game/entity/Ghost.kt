@@ -53,7 +53,7 @@ class Ghost : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 140f
-    const val DAMAGE = 8f
+    const val DAMAGE = 10f
     const val PASSIVE_DURATION = 1
     const val PASSIVE_CHARGES = 2
     const val ULTIMATE_EFFECT_DURATION = 3
