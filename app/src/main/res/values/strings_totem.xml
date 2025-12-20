@@ -1,4 +1,0 @@
-<resources>
-    <string name="totem_repair_name">Repair Totem</string>
-    <string name="totem_repair_desc">Restores the destroyed Totem to full health.</string>
-</resources>

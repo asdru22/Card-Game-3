@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Card Game 3</string>
-    <string name="damage_type_ranged">Ranged</string>
-    <string name="damage_type_magic">Magic</string>
-    <string name="damage_type_melee">Melee</string>
     <string name="entity_ninja">Ninja</string>
     <string name="ability_slash">Slash</string>
     <string name="ability_slash_desc">Performs %s rapid strikes</string>
@@ -79,7 +76,6 @@
     <string name="ui_restart">Restart</string>
     <string name="ui_effects">Effects</string>
     <string name="ui_player_name">Player %s Name</string>
-    <string name="ui_winner">%s wins!</string>
     <string name="entity_robot">Robot</string>
     <string name="ability_shock_attack">Shock Attack</string>
     <string name="ability_shock_attack_desc">Apply %s to the target for %s turns</string>
@@ -106,7 +102,6 @@
     <string name="ability_take_aim_desc">Apply %s to the target for %s turns</string>
     <string name="ability_barrage">Barrage</string>
     <string name="ability_barrage_desc">All ranged teammates perform their active ability %s times on random enemies</string>
-    <string name="ui_how_to_play">How to play</string>
     <string name="ui_htp_overview_desc">In this turn based fighting game, your goal is to defeat all of your opponent\'s  cards. Pick cards that synergize together or are strong agaisnt the ones your opponent picked.\nThe starting player is decided randomy and will be able to use their character\'s abilities. Once all possible actions have been performed, the other player\'s turn will start.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Casual Game</string>
@@ -263,4 +258,9 @@
     <string name="ui_htp_weather_desc">By enabling weather, a random weather modifier occurs during battle, granting a team with equal positive or negative effects.</string>
     <string name="ui_htp_timed_desc">In Timed Mode, you have a limited amount of time to make your moves each turn.\nIf you don\'t do anything, a random character will use its active or passive ability on a random character.</string>
     <string name="ui_shop_totem_purchase_desc">Purchase this Totem to replace your destroyed one.</string>
+    <string name="tability_purr">Purr</string>
+    <string name="tability_purr_desc">Heal the target for %s health</string>
+    <string name="totem_cat">Cat</string>
+    <string name="tability_scratch">Scratch</string>
+    <string name="tability_scratch_desc">Attack the target %s times and deal %s damage</string>
 </resources>

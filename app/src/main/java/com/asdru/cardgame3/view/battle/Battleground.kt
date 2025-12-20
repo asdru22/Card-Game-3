@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.view.character.CharacterInfoCard
 import com.asdru.cardgame3.view.character.PopupView
+import com.asdru.cardgame3.view.totem.TotemInfoCard
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import kotlin.math.roundToInt
 
@@ -210,10 +211,10 @@ fun BattleScreen(viewModel: BattleViewModel) {
     }
 
     if (viewModel.showTotemInfoDialog && viewModel.selectedTotem != null) {
-        TotemInfoCard(
-            viewModel = viewModel.selectedTotem!!,
-            onClose = { viewModel.closeTotemInfoDialog() }
-        )
+      TotemInfoCard(
+        viewModel = viewModel.selectedTotem!!,
+        onClose = { viewModel.closeTotemInfoDialog() }
+      )
     }
 
     if (viewModel.showExitDialog) {

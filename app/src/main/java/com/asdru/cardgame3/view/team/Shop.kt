@@ -57,7 +57,9 @@ import androidx.compose.ui.window.Dialog
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.view.common.SmartDescriptionText
+import com.asdru.cardgame3.view.totem.TotemInfoCard
 import com.asdru.cardgame3.viewModel.ShopViewModel
+import com.asdru.cardgame3.viewModel.TotemViewModel
 
 @Composable
 fun Shop(
@@ -87,8 +89,8 @@ fun Shop(
       properties = dialogProperties
     ) {
       if (selectedItem is ShopItem.TotemItem) {
-        com.asdru.cardgame3.view.battle.TotemInfoCard(
-          viewModel = com.asdru.cardgame3.viewModel.TotemViewModel((selectedItem as ShopItem.TotemItem).totem),
+        TotemInfoCard(
+          viewModel = TotemViewModel((selectedItem as ShopItem.TotemItem).totem),
           onClose = { selectedItem = null }
         )
       } else {

@@ -9,10 +9,10 @@ data class TotemAbility(
   @get:StringRes override val nameRes: Int,
   @get:StringRes override val descriptionRes: Int,
   override val formatArgs: List<Any> = emptyList(),
-  private val onEffect: suspend (source: TotemViewModel, target: EntityViewModel?) -> Unit
+  private val onEffect: suspend (source: TotemViewModel, target: EntityViewModel) -> Unit
 ) : Translatable {
 
-  suspend fun effect(source: TotemViewModel, target: EntityViewModel?) {
+  suspend fun effect(source: TotemViewModel, target: EntityViewModel) {
     onEffect(source, target)
   }
 

@@ -13,8 +13,6 @@ class TotemInputHandler(private val vm: BattleViewModel) {
   fun onTotemDragStart(totem: TotemViewModel, offset: Offset) {
     if (vm.gameLogic.canTotemAct(totem)) {
       val totemTopLeft = vm.totemBounds[totem]?.topLeft ?: Offset.Zero
-      // The offset received from detectDragGestures (onDragStart) is relative to the element.
-      // So element position + offset = global start.
       val globalStart = totemTopLeft + offset
       vm.totemDragState = TotemDragState(totem, globalStart, globalStart)
     }
@@ -40,7 +38,7 @@ class TotemInputHandler(private val vm: BattleViewModel) {
     vm.totemDragState = null
     vm.hoveredTarget = null
   }
-  
+
   private fun findTotemTarget(dragPosition: Offset): EntityViewModel? {
     return vm.cardBounds.entries.firstOrNull { (entity, rect) ->
       val isTargetAlive = entity.isAlive
@@ -56,10 +54,6 @@ class TotemInputHandler(private val vm: BattleViewModel) {
       if (isEnemy && entity.effectManager.effects.any { it is Vanish }) {
         return@firstOrNull false
       }
-      
-      // Totems ignore Taunt for now? Or should they respect it?
-      // "Snaps onto a card"
-      // Let's assume basic valid target.
       true
     }?.key
   }

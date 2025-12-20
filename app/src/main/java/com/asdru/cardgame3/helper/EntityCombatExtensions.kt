@@ -22,9 +22,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
   }
 
   if (actualDamage > 0) {
-    if (source != null) {
-      hitAnimTrigger++
-    }
+    hitAnimTrigger++
 
     val wasAlive = isAlive
     val overkill = (actualDamage - health).coerceAtLeast(0f)

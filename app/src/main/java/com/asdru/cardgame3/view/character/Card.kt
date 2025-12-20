@@ -130,7 +130,7 @@ fun CharacterCard(
       }
       .pointerInput(Unit) {
         detectTapGestures(
-          onDoubleTap = { if (viewModel.isAlive) onDoubleTap(viewModel) },
+          onDoubleTap = { onDoubleTap(viewModel) },
         )
       }
       .pointerInput(Unit) {
@@ -269,15 +269,15 @@ fun CharacterCard(
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
         traitsWithCharges.forEachIndexed { index, trait ->
-           ChargeIndicator(
-             current = viewModel.traitCharges[trait.id] ?: 0,
-             max = trait.maxCharges,
-             activeColor = Color(0xFF9C27B0)
-           )
-           
-           if (index < traitsWithCharges.size - 1) {
-             Spacer(modifier = Modifier.height(4.dp))
-           }
+          ChargeIndicator(
+            current = viewModel.traitCharges[trait.id] ?: 0,
+            max = trait.maxCharges,
+            activeColor = Color(0xFF9C27B0)
+          )
+
+          if (index < traitsWithCharges.size - 1) {
+            Spacer(modifier = Modifier.height(4.dp))
+          }
         }
       }
     }

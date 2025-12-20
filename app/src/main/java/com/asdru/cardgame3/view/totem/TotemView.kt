@@ -1,7 +1,9 @@
-package com.asdru.cardgame3.view.battle
+package com.asdru.cardgame3.view.totem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,19 +18,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.ui.input.pointer.pointerInput
-import com.asdru.cardgame3.viewModel.TotemViewModel
-
-import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.asdru.cardgame3.viewModel.TotemViewModel
 
 @Composable
 fun TotemView(
@@ -112,7 +113,7 @@ fun TotemView(
   } else {
     val stroke = Stroke(
       width = 4f,
-      pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(
+      pathEffect = PathEffect.dashPathEffect(
         floatArrayOf(10f, 10f),
         0f
       )
@@ -127,7 +128,7 @@ fun TotemView(
           drawRoundRect(
             color = Color.Gray,
             style = stroke,
-            cornerRadius = androidx.compose.ui.geometry.CornerRadius(12.dp.toPx())
+            cornerRadius = CornerRadius(12.dp.toPx())
           )
         },
       contentAlignment = Alignment.Center

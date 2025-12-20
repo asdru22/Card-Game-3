@@ -1,10 +1,6 @@
 package com.asdru.cardgame3.logic
 
 import androidx.lifecycle.viewModelScope
-import com.asdru.cardgame3.R
-import com.asdru.cardgame3.data.Stats
-import com.asdru.cardgame3.data.TotemAbility
-import com.asdru.cardgame3.game.totem.Totem
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -161,7 +157,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     val activeTeam = if (vm.isLeftTeamTurn) vm.leftTeam else vm.rightTeam
     val activeTeamEntities = activeTeam.entities
     val capableEntities = activeTeamEntities.filter { it.isAlive && !it.effectManager.isStunned }
-    
+
     val totem = activeTeam.totem
     val canTotemAct = totem != null && totem.isAlive && !vm.totemActionsTaken.contains(totem)
 
@@ -245,29 +241,29 @@ class BattleGameLogic(private val vm: BattleViewModel) {
   }
 
   fun executeTotemInteraction(source: TotemViewModel, target: EntityViewModel) {
-      if (vm.isActionPlaying || vm.winner != null) return
-      vm.battleTimer.reset()
+    if (vm.isActionPlaying || vm.winner != null) return
+    vm.battleTimer.reset()
 
-      vm.viewModelScope.launch {
-        vm.isActionPlaying = true
+    vm.viewModelScope.launch {
+      vm.isActionPlaying = true
 
-        val isSourceLeft = vm.leftTeam.totem == source
-        val isTargetLeft = vm.leftTeam.entities.contains(target)
+      val isSourceLeft = vm.leftTeam.totem == source
+      val isTargetLeft = vm.leftTeam.entities.contains(target)
 
-        if (isSourceLeft == isTargetLeft) {
-          source.passiveAbility.effect(source, target)
-        } else {
-          source.activeAbility.effect(source, target)
-        }
-
-        if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
-        checkTurnAdvance()
-
-        checkWinCondition()
-        checkWeatherChange()
-        vm.isActionPlaying = false
+      if (isSourceLeft == isTargetLeft) {
+        source.passiveAbility.effect(source, target)
+      } else {
+        source.activeAbility.effect(source, target)
       }
+
+      if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
+      checkTurnAdvance()
+
+      checkWinCondition()
+      checkWeatherChange()
+      vm.isActionPlaying = false
     }
+  }
 
   private suspend fun checkWinCondition() {
     val isLeftAlive = vm.leftTeam.aliveEntities.isNotEmpty()

@@ -22,6 +22,7 @@ import androidx.compose.ui.zIndex
 import com.asdru.cardgame3.view.team.RageBar
 import com.asdru.cardgame3.view.team.Shop
 import com.asdru.cardgame3.view.team.TeamColumn
+import com.asdru.cardgame3.view.totem.TotemView
 import com.asdru.cardgame3.viewModel.BattleViewModel
 
 @Composable

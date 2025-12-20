@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.game.totem.Totem
 import com.asdru.cardgame3.viewModel.EntityViewModel
+import com.asdru.cardgame3.viewModel.TotemViewModel
 
 sealed class ShopItem(
   @get:StringRes override val nameRes: Int,
@@ -35,13 +37,13 @@ sealed class ShopItem(
     return context.getString(descriptionRes, *processedArgs.toTypedArray())
   }
 
-  class TotemItem(val totem: com.asdru.cardgame3.game.totem.Totem, cost: Int) : ShopItem(
+  class TotemItem(val totem: Totem, cost: Int) : ShopItem(
     nameRes = totem.name,
     descriptionRes = com.asdru.cardgame3.R.string.ui_shop_totem_purchase_desc,
     cost = cost,
     iconRes = totem.iconRes,
     onApply = { entity ->
-      entity.team.totem = com.asdru.cardgame3.viewModel.TotemViewModel(totem)
+      entity.team.totem = TotemViewModel(totem)
     }
   )
 }

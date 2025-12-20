@@ -1,4 +1,0 @@
-<resources>
-    <string name="totem_ability_magnet_pull_name">Magnet Pull</string>
-    <string name="totem_ability_magnet_pull_desc">Pulls a random enemy to the front.</string>
-</resources>

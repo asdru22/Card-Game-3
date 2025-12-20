@@ -4,17 +4,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.asdru.cardgame3.game.totem.Totem
 import com.asdru.cardgame3.data.TotemAbility
+import com.asdru.cardgame3.game.totem.Totem
 
 class TotemViewModel(
   val totem: Totem
 ) : ViewModel() {
-  var currentHealth by mutableFloatStateOf(totem.initialStats.maxHealth)
+  var currentHealth by mutableFloatStateOf(totem.initialHealth)
     internal set
 
-  val maxHealth: Float = totem.initialStats.maxHealth
-  val damage: Float = totem.initialStats.damage
+  val maxHealth: Float = totem.initialHealth
   val activeAbility: TotemAbility = totem.activeAbility
   val passiveAbility: TotemAbility = totem.passiveAbility
 

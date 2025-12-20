@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.view.battle
+package com.asdru.cardgame3.view.totem
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -65,7 +65,7 @@ fun TotemInfoCard(
   ) {
     Card(
       modifier = Modifier
-        .widthIn(max = 600.dp) // Match CharacterInfoCard width constraint
+        .widthIn(max = 600.dp)
         .fillMaxWidth()
         .padding(16.dp),
       shape = RoundedCornerShape(12.dp),
@@ -88,14 +88,14 @@ fun TotemInfoCard(
             context = LocalContext.current,
             label = "Active",
             ability = viewModel.activeAbility,
-            color = Color(0xFFE91E63) // Pink
+            color = Color(0xFFE91E63)
           )
           
           TotemAbilityDisplay(
             context = LocalContext.current,
             label = "Passive",
             ability = viewModel.passiveAbility,
-            color = Color(0xFF42A5F5) // Blue
+            color = Color(0xFF42A5F5)
           )
         }
       }
@@ -114,10 +114,6 @@ private fun TotemInfoHeader(
       .height(IntrinsicSize.Min),
     verticalAlignment = Alignment.CenterVertically
   ) {
-    
-    // Stats Pill (Left aligned or integrated?)
-    // CharacterInfoCard had Pill - Name - Close or Close - Name - Pill.
-    // Let's do: Pill - Spacer - Name (Centered weight) - Close Button
     
     TotemStatsPill(viewModel)
     
@@ -168,29 +164,6 @@ private fun TotemStatsPill(viewModel: TotemViewModel) {
       Spacer(modifier = Modifier.width(4.dp))
       Text(
         text = "${viewModel.currentHealth.toInt()}/${viewModel.maxHealth.toInt()}",
-        color = Color.White,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Bold
-      )
-
-      VerticalDivider(
-        modifier = Modifier
-          .padding(horizontal = 8.dp)
-          .fillMaxHeight(0.7f),
-        color = Color.Gray.copy(alpha = 0.3f),
-        thickness = 1.dp
-      )
-
-      // Damage
-      Icon(
-        painter = painterResource(id = R.drawable.icon_attack_damage),
-        contentDescription = "Damage",
-        tint = Color(0xFFFFCA28),
-        modifier = Modifier.size(16.dp)
-      )
-      Spacer(modifier = Modifier.width(4.dp))
-      Text(
-        text = "${viewModel.damage.toInt()}",
         color = Color.White,
         fontSize = 14.sp,
         fontWeight = FontWeight.Bold
