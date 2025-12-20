@@ -13,7 +13,7 @@ class ShopViewModel(
   val totemProvider: () -> TotemViewModel? = { null }
 ) {
 
-  var coins by mutableIntStateOf(50)
+  var coins by mutableIntStateOf(40)
     private set
 
   var isOpen by mutableStateOf(false)

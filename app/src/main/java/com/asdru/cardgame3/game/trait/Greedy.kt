@@ -15,6 +15,6 @@ class Greedy : Trait {
   }
 
   companion object {
-    const val COINS_GAINED = 2
+    const val COINS_GAINED = 3
   }
 }

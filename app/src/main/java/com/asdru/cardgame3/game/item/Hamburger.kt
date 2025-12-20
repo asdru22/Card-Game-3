@@ -8,7 +8,7 @@ private const val EFFECT_DURATION = 2
 object Hamburger : ShopItem(
   nameRes = R.string.item_hamburger,
   descriptionRes = R.string.item_hamburger_desc,
-  cost = 30,
+  cost = 40,
   iconRes = R.drawable.item_hamburger,
   formatArgs = listOf(WellFed.Spec, EFFECT_DURATION),
   onApply = {

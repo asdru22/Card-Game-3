@@ -13,11 +13,11 @@ class GoldenShower : WeatherEvent(
 ) {
 
   override suspend fun onEndTurn(viewModel: BattleViewModel) {
-    viewModel.rightTeam.increaseRage(COIN_AMOUNT)
-    viewModel.leftTeam.increaseRage(COIN_AMOUNT)
+    viewModel.rightTeam.shop.modifyCoins(COIN_AMOUNT)
+    viewModel.leftTeam.shop.modifyCoins(COIN_AMOUNT)
   }
 
   private companion object {
-    const val COIN_AMOUNT = 4f
+    const val COIN_AMOUNT = 7
   }
 }

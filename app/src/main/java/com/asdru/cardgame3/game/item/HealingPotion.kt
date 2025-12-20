@@ -8,7 +8,7 @@ private const val HEAL_AMOUNT = 15f
 object HealingPotion : ShopItem(
   nameRes = R.string.item_healing_potion,
   descriptionRes = R.string.item_healing_potion_desc,
-  cost = 20,
+  cost = 30,
   iconRes = R.drawable.item_healing_potion,
   formatArgs = listOf(HEAL_AMOUNT),
   onApply = {
