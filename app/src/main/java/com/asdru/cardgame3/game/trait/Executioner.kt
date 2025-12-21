@@ -17,16 +17,9 @@ class Executioner : Trait {
     amount: Float,
     overkill: Float
   ) {
-    if (target.isAlive && target.health <= THRESHOLD) {
-      target.popupManager.add(R.string.game_execute, Color.White)
-
-      delay(100)
-
-      target.receiveDamage(
-        amount = target.health,
-        source = owner
-      )
-    }
+    if (target.health > THRESHOLD) return
+    target.popupManager.add(R.string.game_execute, Color.White)
+    target.kill()
   }
 
   companion object {

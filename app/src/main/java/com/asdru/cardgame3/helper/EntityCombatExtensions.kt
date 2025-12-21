@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.helper
 
 import androidx.compose.ui.graphics.Color
+import com.asdru.cardgame3.data.DamageData
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
@@ -97,7 +98,7 @@ suspend fun EntityViewModel.applyDamage(
   delayTime: Long = 400,
   playAttackAnimation: Boolean = true,
   effects: List<StatusEffect> = emptyList(),
-  rageDecrease: Float = 0f
+  damageData: DamageData? = null
 ): Float {
   var totalDamage = 0f
 
@@ -112,7 +113,11 @@ suspend fun EntityViewModel.applyDamage(
     repeat(repeats) {
       if (!target.isAlive || !isAlive) return totalDamage
 
-      var calculatedDamage = amount
+      damageData?.let {
+        this.team.increaseRage(it.ownRageIncrease)
+      }
+
+      var calculatedDamage = amount * (1 + (damageData?.damageDecay ?: 0f) * it / 100)
       applyTraits { trait ->
         calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
       }
@@ -129,9 +134,11 @@ suspend fun EntityViewModel.applyDamage(
         it.postDamageDealt(this, target, totalDamage)
       }
 
-      if (rageDecrease > 0f) {
-        target.team.decreaseRage(rageDecrease)
+
+      damageData?.run {
+        target.team.decreaseRage(enemyRageDecrease)
       }
+
 
       if (repeats > 1) delay(delayTime)
     }
@@ -158,7 +165,7 @@ suspend fun EntityViewModel.applyDamageToTargets(
   delayTime: Long = 400,
   playAttackAnimation: Boolean = true,
   effects: List<StatusEffect> = emptyList(),
-  rageDecrease: Float = 0f
+  damageData: DamageData? = null
 ): Float {
   var totalDamage = 0f
 
@@ -181,7 +188,8 @@ suspend fun EntityViewModel.applyDamageToTargets(
           delayTime = 0,
           playAttackAnimation = false,
           effects = effects,
-          rageDecrease = rageDecrease
+          damageData
+
         )
       }
 

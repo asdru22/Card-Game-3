@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.effect
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.helper.applyDamageToTargets
+import com.asdru.cardgame3.helper.receiveDamage
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Bursting(duration: Int) : StatusEffect(
@@ -18,13 +19,10 @@ class Bursting(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    owner.effectManager.removeEffect<Bursting>(owner)
-
-    owner.applyDamageToTargets(
-      source?.team?.getAliveMembers() ?: emptyList(),
-      BURSTING_DAMAGE,
-      playAttackAnimation = false
-    )
+    owner.effectManager.removeEffect(this, owner)
+    source?.team?.getAliveMembers()?.forEach {
+      it.receiveDamage(BURSTING_DAMAGE)
+    }
     return currentDamage
   }
 

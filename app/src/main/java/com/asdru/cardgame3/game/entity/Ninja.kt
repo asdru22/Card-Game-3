@@ -16,7 +16,7 @@ class Ninja : Entity(
   iconRes = R.drawable.entity_ninja,
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFFFFB0C),
-  traits = listOf(Sidestep()),
+  traits = listOf(Sidestep(5f)),
   damageType = DamageType.Melee,
   radarStats = RadarStats(0.7f, 0.5f, 0.3f, 0.0f, 0.2f),
   activeAbility = Ability(

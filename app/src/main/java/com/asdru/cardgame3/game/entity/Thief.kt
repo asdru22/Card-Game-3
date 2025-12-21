@@ -17,7 +17,7 @@ class Thief : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFF009688),
   damageType = DamageType.Melee,
-  traits = listOf(Sidestep()),
+  traits = listOf(Sidestep(7f)),
   radarStats = RadarStats(0.4f, 0.3f, 0.6f, 0.5f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_pickpocket,

@@ -3,6 +3,7 @@ package com.asdru.cardgame3.game.entity
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
+import com.asdru.cardgame3.data.DamageData
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
@@ -32,7 +33,9 @@ class WitchDoctor : Entity(
       target,
       repeats = ACTIVE_REPEATS,
       delayTime = 200,
-      rageDecrease = RAGE_DECREASE
+      damageData = DamageData(
+        enemyRageDecrease = RAGE_DECREASE
+      )
     )
   },
   passiveAbility = Ability(

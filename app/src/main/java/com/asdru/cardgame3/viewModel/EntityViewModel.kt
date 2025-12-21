@@ -16,6 +16,7 @@ import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.helper.EntityEffectManager
 import com.asdru.cardgame3.helper.EntityPopupManager
+import com.asdru.cardgame3.helper.onDeath
 
 class EntityViewModel(
   val entity: Entity,
@@ -54,6 +55,11 @@ class EntityViewModel(
   val traits: List<Trait> get() = entity.traits
 
   var onGetWeather: (() -> WeatherEvent?)? = null
+
+  suspend fun kill() {
+    this.health = 0f
+    this.onDeath(null, 0f)
+  }
 
   fun recalculateStats() {
     var newDamage = baseDamage

@@ -14,8 +14,7 @@ class Expiration(duration: Int) : StatusEffect(
   formatArgs = formatArgs
 ) {
   override suspend fun onExpire(target: EntityViewModel) {
-    target.health = 0f
-    target.onDeath(null,0f)
+   target.kill()
   }
 
   companion object Spec : Translatable {
