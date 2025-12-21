@@ -2,9 +2,6 @@ package com.asdru.cardgame3.game.totem
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.TotemAbility
-import com.asdru.cardgame3.game.effect.Sick
-import com.asdru.cardgame3.game.effect.Vampirism
-import com.asdru.cardgame3.helper.receiveDamage
 
 private const val ACTIVE_DURATION = 2
 private const val ACTIVE_DAMAGE = 5f

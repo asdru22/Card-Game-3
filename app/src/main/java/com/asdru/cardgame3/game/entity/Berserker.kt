@@ -61,8 +61,8 @@ class Berserker : Entity(
     val strongestEnemy = source.team.getTargetableEnemies().maxByOrNull { it.health }
     strongestEnemy?.let {
       source.applyDamage(
-        strongestEnemy,
-        repeats = ACTIVE_REPEATS + 1,
+        target = strongestEnemy,
+        repeats = ACTIVE_REPEATS,
         delayTime = 200,
         damageData = DamageData(
           damageDecay = ULTIMATE_DECAY,

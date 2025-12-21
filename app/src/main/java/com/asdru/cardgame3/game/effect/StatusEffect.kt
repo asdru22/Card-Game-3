@@ -74,6 +74,14 @@ sealed class StatusEffect(
 
   companion object {
 
+    fun getRandom(
+      duration: Int,
+      applier: EntityViewModel? = null,
+      target: EntityViewModel
+    ): StatusEffect? {
+      return getRandomEffect(duration, applier, target, checkPositive = null)
+    }
+
     fun getRandomPositive(
       duration: Int,
       applier: EntityViewModel? = null,
@@ -94,43 +102,36 @@ sealed class StatusEffect(
       duration: Int,
       applier: EntityViewModel?,
       target: EntityViewModel,
-      checkPositive: Boolean
+      checkPositive: Boolean?
     ): StatusEffect? {
       val subclasses = StatusEffect::class.sealedSubclasses
       if (subclasses.isEmpty()) return null
 
-      // Shuffle to ensure randomness
       val shuffledClasses = subclasses.shuffled()
 
       for (kClass in shuffledClasses) {
 
-        // 1. Check if the target already has an effect of this class type
-        // Assumption: 'target.effects' is the list of active StatusEffects on the entity
         val alreadyHasEffect = target.effectManager.effects.any { it::class == kClass }
 
         if (alreadyHasEffect) {
-          continue // Skip this effect and try the next one
+          continue
         }
 
         try {
           val constructor = kClass.primaryConstructor ?: continue
           val params = constructor.parameters
 
-          // Attempt to match constructor signature
           val instance = when {
-            // Case 1: Standard constructor (duration: Int)
             params.size == 1 && params[0].type.classifier == Int::class -> {
               constructor.call(duration)
             }
 
-            // Case 2: Constructor with Applier (duration: Int, applier: EntityViewModel)
             params.size == 2 &&
                 params[0].type.classifier == Int::class &&
                 params[1].type.classifier == EntityViewModel::class -> {
               if (applier != null) constructor.call(duration, applier) else null
             }
 
-            // Fallback for no-arg constructors
             params.isEmpty() -> {
               kClass.createInstance().apply { this.duration = duration }
             }
@@ -138,13 +139,15 @@ sealed class StatusEffect(
             else -> null
           }
 
-          // 2. Check if the instantiated effect matches the desired polarity (Positive/Negative)
-          if (instance != null && instance.isPositive == checkPositive) {
-            return instance
+          if (instance != null) {
+            val polarityMatches = checkPositive == null || instance.isPositive == checkPositive
+
+            if (polarityMatches) {
+              return instance
+            }
           }
 
         } catch (_: Exception) {
-          // If a specific class fails to instantiate, skip it and try the next one
           continue
         }
       }

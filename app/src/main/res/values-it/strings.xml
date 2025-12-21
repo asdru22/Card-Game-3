@@ -293,4 +293,15 @@
     <string name="ability_stash_desc">La squadra del bersaglio guadagna %s monete</string>
     <string name="ability_heist">Rapina</string>
     <string name="ability_heist_desc">Ruba un effetto positivo casuale da tutti i nemici. Se un nemico non ha effetti positivi, ruba %s monete invece</string>
+    <string name="trait_adrenaline">Adrenalina</string>
+    <string name="trait_adrenaline_desc">Il danno aumenta del %s%% quando la salute è inferiore al %s%%</string>
+    <string name="entity_berserker">Berserker</string>
+    <string name="ability_rampage">Furia</string>
+    <string name="ability_rampage_desc">Esegui %s colpi rapidi, ciascuno infliggendo il %s%% di danni in meno</string>
+    <string name="ability_battle_cry">Grido di Battaglia</string>
+    <string name="ability_battle_cry_desc">Rimuovi tutti gli effetti negativi e aumenta la rabbia della squadra di %s. Carica: %s turni</string>
+    <string name="ability_carnage">Carnificina</string>
+    <string name="ability_carnage_desc">Ottieni %s per %s turno ed esegui la tua abilità attiva con solo il %s%% di decadimento del danno sul nemico con più salute. Ottieni %s rabbia per colpo e ripeti per ogni alleato morto</string>
+    <string name="item_the_beverage">La Bevanda</string>
+    <string name="item_the_beverage_desc">Ottieni %s effetti causali che durano %s turni</string>
 </resources>

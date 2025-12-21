@@ -2,9 +2,7 @@ package com.asdru.cardgame3.game.trait
 
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.helper.receiveDamage
 import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlinx.coroutines.delay
 
 class Executioner : Trait {
   override val nameRes: Int = R.string.trait_executioner

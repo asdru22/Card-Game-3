@@ -297,12 +297,14 @@
     <string name="ability_heist">Heist</string>
     <string name="ability_heist_desc">Steal a random positive effect from all enemies. If an enemy doesn\'t have a positive effect, steal %s coins instead</string>
     <string name="trait_adrenaline">Adrenaline</string>
-    <string name="trait_adrenaline_desc">Gain %s%% damage when below %s%% health</string>
+    <string name="trait_adrenaline_desc">Damage increases by %s%% when below %s%% health</string>
     <string name="entity_berserker">Berserker</string>
     <string name="ability_rampage">Rampage</string>
     <string name="ability_rampage_desc">Perform %s rapid strikes, each dealing %s%% less damage</string>
     <string name="ability_battle_cry">Battle Cry</string>
     <string name="ability_battle_cry_desc">Clear all negative effects and increase team\'s rage by %s. Charge: %s turns</string>
     <string name="ability_carnage">Carnage</string>
-    <string name="ability_carnage_desc">Gain %s for %s turn and perform their active ability with one extra hit and only %s%% damage decay on the enemy with the most health. Gain %s rage per hit and repeat for every dead ally</string>
+    <string name="ability_carnage_desc">Gain %s for %s turn and perform their active ability with only %s%% damage decay on the enemy with the most health. Gain %s rage per hit and repeat for every dead ally</string>
+    <string name="item_the_beverage">The Beverage</string>
+    <string name="item_the_beverage_desc">Gain %s random effects that last %s turns</string>
 </resources>

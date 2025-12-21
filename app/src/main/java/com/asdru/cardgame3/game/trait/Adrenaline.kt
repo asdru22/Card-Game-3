@@ -1,10 +1,7 @@
 package com.asdru.cardgame3.game.trait
 
-import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
-import com.asdru.cardgame3.helper.receiveDamage
 import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlinx.coroutines.delay
 
 class Adrenaline : Trait {
   override val nameRes: Int = R.string.trait_adrenaline
@@ -20,7 +17,7 @@ class Adrenaline : Trait {
     if (healthPercentage > THRESHOLD) return amount
     return amount * (1 + DAMAGE / 100f)
   }
-  
+
   companion object {
     const val THRESHOLD = 25f
     const val DAMAGE = 30f

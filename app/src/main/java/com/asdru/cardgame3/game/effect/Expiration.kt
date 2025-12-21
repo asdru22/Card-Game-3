@@ -2,7 +2,6 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
-import com.asdru.cardgame3.helper.onDeath
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Expiration(duration: Int) : StatusEffect(

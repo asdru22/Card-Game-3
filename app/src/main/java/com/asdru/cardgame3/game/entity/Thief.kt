@@ -6,8 +6,6 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
-import com.asdru.cardgame3.game.effect.Burning
-import com.asdru.cardgame3.game.effect.PainLink
 import com.asdru.cardgame3.game.trait.Sidestep
 import com.asdru.cardgame3.helper.applyDamage
 
