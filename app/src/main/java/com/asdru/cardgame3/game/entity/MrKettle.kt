@@ -42,7 +42,6 @@ class MrKettle : Entity(
         applier = source,
         target = target
       )
-
       if (randomBuff != null) {
         target.addEffect(randomBuff, source)
       }

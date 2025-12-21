@@ -47,8 +47,8 @@ class Ghost : Entity(
       ULTIMATE_EFFECT_DURATION
     )
   ) { source, _ ->
-    val weakestEnemy = source.team.getTargetableEnemies().minBy { it.health }
-    weakestEnemy.addEffect(Expiration(ULTIMATE_EFFECT_DURATION), source)
+    val weakestEnemy = source.team.getTargetableEnemies().minByOrNull { it.health }
+    weakestEnemy?.addEffect(Expiration(ULTIMATE_EFFECT_DURATION), source)
   }
 ) {
   private companion object {

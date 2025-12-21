@@ -20,6 +20,6 @@ class QuickDraw : Trait {
   }
 
   companion object {
-    const val DAMAGE = 9f
+    const val DAMAGE = 7f
   }
 }

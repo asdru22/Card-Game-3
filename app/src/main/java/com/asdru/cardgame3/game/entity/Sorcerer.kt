@@ -68,6 +68,6 @@ class Sorcerer : Entity(
     const val PASSIVE_HEAL_AMOUNT = 20f
     const val PASSIVE_CHARGES = 2
     const val ULTIMATE_DURATION = 1
-    const val ULTIMATE_HEAL_AMOUNT = 10f
+    const val ULTIMATE_HEAL_AMOUNT = 6f
   }
 }

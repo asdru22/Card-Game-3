@@ -2,13 +2,13 @@ package com.asdru.cardgame3.game.item
 
 import com.asdru.cardgame3.R
 
-private const val RAGE_INCREASE = 15f
+private const val RAGE_INCREASE = 12f
 
 
 object Chili : ShopItem(
   nameRes = R.string.item_chili,
   descriptionRes = R.string.item_chili_desc,
-  cost = 35,
+  cost = 25,
   iconRes = R.drawable.item_chili,
   formatArgs = listOf(RAGE_INCREASE),
   onApply = {

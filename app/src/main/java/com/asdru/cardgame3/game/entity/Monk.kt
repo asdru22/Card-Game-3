@@ -23,7 +23,7 @@ class Monk : Entity(
     nameRes = R.string.ability_syphon,
     descriptionRes = R.string.ability_syphon_desc,
   ) { source, target ->
-    val healAmount = source.applyDamage(target) / 3
+    val healAmount = source.applyDamage(target) / target.team.getAliveEnemies().size
     source.team.getAliveMembers().forEach { it.heal(healAmount, source) }
   },
   passiveAbility = Ability(

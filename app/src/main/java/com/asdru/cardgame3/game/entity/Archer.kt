@@ -21,7 +21,8 @@ class Archer : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_arrow_rain,
     descriptionRes = R.string.ability_arrow_rain_desc,
-    formatArgs = listOf(ACTIVE_REPEATS)
+    formatArgs = listOf(ACTIVE_REPEATS,ACTIVE_CHARGES),
+    charges = ACTIVE_CHARGES
   ) { source, target ->
     source.applyDamageToTargets(
       target.team.getAliveMembers(),
@@ -51,7 +52,8 @@ class Archer : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 105f
-    const val DAMAGE = 7f
+    const val DAMAGE = 9f
+    const val ACTIVE_CHARGES = 2
     const val ACTIVE_REPEATS = 2
     const val PASSIVE_DURATION = 2
     const val ULTIMATE_REPEATS = 6

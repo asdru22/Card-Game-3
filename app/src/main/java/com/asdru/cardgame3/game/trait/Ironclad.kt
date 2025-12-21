@@ -21,6 +21,6 @@ class Ironclad : Trait {
   }
 
   companion object {
-    const val DAMAGE_IGNORED = 7f
+    const val DAMAGE_IGNORED = 5f
   }
 }

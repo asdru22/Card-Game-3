@@ -40,14 +40,12 @@ class Thief : Entity(
     descriptionRes = R.string.ability_heist_desc,
     formatArgs = listOf(ULTIMATE_COINS_STOLEN)
   ) { source, _ ->
-    println("POO")
     val enemies = source.team.getTargetableEnemies()
     enemies.forEach { enemy ->
       val effectToSteal = enemy.effectManager.getRandomPositiveEffect()
       if (effectToSteal != null) {
         val stolenEffect = enemy.effectManager.removeEffect(effectToSteal, enemy)
         if (stolenEffect != null) {
-          print("ADDEFFECT")
           source.addEffect(stolenEffect, source)
         }
       } else {

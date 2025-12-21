@@ -35,9 +35,8 @@ class TheMagnet : Entity(
   ) { source, target ->
 
     val randomEnemy = source.team.getRandomTargetableEnemy()
-    if (randomEnemy != null) {
+    randomEnemy?.let {
       source.entity.activeAbility.effect(target, randomEnemy)
-
     }
   },
   ultimateAbility = Ability(

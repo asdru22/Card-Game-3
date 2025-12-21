@@ -53,7 +53,7 @@ class Cannoneer : Entity(
       ULTIMATE_DAMAGE
     )
   ) { source, _ ->
-    val initialTarget = source.team.getTargetableEnemies().ifEmpty { null }?.random()
+    val initialTarget = source.team.getAliveEnemies().ifEmpty { null }?.random()
 
     if (initialTarget != null) {
       source.onGetAttackOffset?.invoke(initialTarget)?.let {
@@ -69,7 +69,6 @@ class Cannoneer : Entity(
           source.applyDamage(
             targets.random(),
             ULTIMATE_DAMAGE,
-            playAttackAnimation = false
           )
         }
         delay(150)

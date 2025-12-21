@@ -47,8 +47,7 @@ class Smithie : Entity(
     target.receiveDamage(damageAmount)
     source.applyDamageToTargets(
       source.team.getAliveEnemies(),
-      damageAmount,
-      playAttackAnimation = false
+      damageAmount
     )
   },
   ultimateAbility = Ability(
@@ -59,8 +58,8 @@ class Smithie : Entity(
       ULTIMATE_DURATION
     )
   ) { source, _ ->
-    val lowestHealthEntity = source.team.getAliveMembers().minBy { it.health }
-    lowestHealthEntity.addEffect(Defiance(ULTIMATE_DURATION), source)
+    val lowestHealthEntity = source.team.getAliveMembers().minByOrNull { it.health }
+    lowestHealthEntity?.addEffect(Defiance(ULTIMATE_DURATION), source)
   }
 ) {
   private companion object {

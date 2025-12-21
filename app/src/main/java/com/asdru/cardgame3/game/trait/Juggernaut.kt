@@ -22,6 +22,6 @@ class Juggernaut : Trait {
   }
 
   companion object {
-    const val MAX_DAMAGE_RECEIVED = 25f
+    const val MAX_DAMAGE_RECEIVED = 28f
   }
 }

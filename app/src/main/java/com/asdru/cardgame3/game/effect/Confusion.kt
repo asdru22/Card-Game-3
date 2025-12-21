@@ -15,12 +15,15 @@ class Confusion(duration: Int) : StatusEffect(
   formatArgs = formatArgs
 ) {
 
-  override fun modifyActiveTarget(owner: EntityViewModel, target: EntityViewModel): EntityViewModel {
+  override fun modifyActiveTarget(
+    owner: EntityViewModel,
+    target: EntityViewModel
+  ): EntityViewModel {
     if (Random.nextFloat() >= (CHANGE_TARGET_CHANCE / 100f)) return target
 
-    val potentialTargets = target.team.enemyTeam.getTargetableEnemies().filter { it != target }
+    val potentialTargets = target.team.getTargetableEnemies().filter { it != target }
 
-    if (!potentialTargets.isNotEmpty()) return target
+    if (potentialTargets.isEmpty()) return target
 
     owner.popupManager.add("?", Color.Magenta)
     return potentialTargets.random()

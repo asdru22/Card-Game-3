@@ -15,7 +15,7 @@
     <string name="ability_vanish_desc">Applies %s to themselves for %s turns</string>
     <string name="entity_archer">Archer</string>
     <string name="ability_arrow_rain">Arrow Rain</string>
-    <string name="ability_arrow_rain_desc">%s arrows hit all enemies</string>
+    <string name="ability_arrow_rain_desc">%s arrows hit all enemies. Charge: %s turns</string>
     <string name="ability_cover">Cover</string>
     <string name="ability_cover_desc">Form a %s with the target for %s turns</string>
     <string name="ability_rain_fire">Rain Fire</string>

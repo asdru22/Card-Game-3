@@ -68,6 +68,6 @@ class Wizard : Entity(
     const val DAMAGE = 32f
     const val ACTIVE_CHARGES = 2
     const val PASSIVE_DAMAGE_PERCENTAGE = 50
-    const val ULTIMATE_HEAL_AMOUNT = 11f
+    const val ULTIMATE_HEAL_AMOUNT = 18f
   }
 }

@@ -14,7 +14,7 @@
     <string name="ability_vanish_desc">Applica %s su se stesso per %s turni</string>
     <string name="entity_archer">Arciere</string>
     <string name="ability_arrow_rain">Pioggia di Frecce</string>
-    <string name="ability_arrow_rain_desc">%s frecce colpiscono tutti i nemici</string>
+    <string name="ability_arrow_rain_desc">%s frecce colpiscono tutti i nemici. Carica: %s turni</string>
     <string name="ability_cover">Copertura</string>
     <string name="ability_cover_desc">Forma un %s con il bersaglio per %s turni</string>
     <string name="ability_rain_fire">Pioggia di Fuoco</string>

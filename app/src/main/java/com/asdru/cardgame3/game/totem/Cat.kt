@@ -13,7 +13,7 @@ private const val HEAL_AMOUNT = 9f
 object Cat : Totem(
   name = R.string.totem_cat,
   iconRes = R.drawable.totem_cat,
-  initialHealth = 210f,
+  initialHealth = 190f,
   cost = 40,
   activeAbility = TotemAbility(
     nameRes = R.string.tability_scratch,
