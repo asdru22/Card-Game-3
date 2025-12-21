@@ -63,7 +63,7 @@ class Rouge : Entity(
   }
 ) {
   private companion object {
-    const val MAX_HEALTH = 140f
+    const val MAX_HEALTH = 120f
     const val DAMAGE = 22f
     const val PASSIVE_DURATION = 2
     const val ULTIMATE_ACTIVE_TIMES = 2

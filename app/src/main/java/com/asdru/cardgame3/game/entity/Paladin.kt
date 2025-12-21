@@ -60,7 +60,7 @@ class Paladin : Entity(
     const val MAX_HEALTH = 230f
     const val DAMAGE = 12f
     const val ACTIVE_DURATION = 2
-    const val PASSIVE_DURATION = 4
+    const val PASSIVE_DURATION = 3
     const val ULTIMATE_TAUNT_DURATION = 2
     const val ULTIMATE_SHIELD_DURATION = 3
   }
