@@ -15,7 +15,6 @@ class PainLink(
   initialDuration = duration,
   formatArgs = formatArgs,
   isPositive = isPositive
-
 ) {
   override suspend fun modifyIncomingDamage(
     owner: EntityViewModel,

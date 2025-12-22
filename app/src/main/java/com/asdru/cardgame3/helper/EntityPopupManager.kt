@@ -9,7 +9,6 @@ class EntityPopupManager {
   val popups = mutableStateListOf<Popup>()
   private var popupIdCounter = 0L
 
-
   private var stackIndex = 0
 
   fun add(text: String, color: Color = Color.Red, isStatus: Boolean = true) {

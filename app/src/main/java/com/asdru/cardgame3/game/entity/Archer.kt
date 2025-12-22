@@ -9,6 +9,7 @@ import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Burning
 import com.asdru.cardgame3.game.effect.Overheal
 import com.asdru.cardgame3.game.effect.PainLink
+import com.asdru.cardgame3.game.effect.Shielded
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 
@@ -37,7 +38,6 @@ class Archer : Entity(
     formatArgs = listOf(PainLink.Spec, PASSIVE_DURATION)
   ) { source, target ->
     source.addEffect(PainLink(PASSIVE_DURATION, target), source = source)
-    source.addEffect(Overheal(PASSIVE_DURATION), source = source)
   },
   ultimateAbility = Ability(
     nameRes = R.string.ability_rain_fire,

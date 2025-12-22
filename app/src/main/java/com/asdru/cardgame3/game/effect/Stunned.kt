@@ -2,6 +2,7 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
+import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Stunned(duration: Int) : StatusEffect(
   nameRes = nameRes,
@@ -11,6 +12,10 @@ class Stunned(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
+  override fun onApply(target: EntityViewModel) {
+    target.resetCharges()
+  }
+
   companion object Spec : Translatable {
     val iconRes = R.drawable.effect_stunned
     override val nameRes = R.string.effect_stunned

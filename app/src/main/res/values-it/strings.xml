@@ -310,4 +310,18 @@
     <string name="ui_player_wins">%s vittorie</string>
     <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s scelte</string>
+    <string name="effect_overheal">Sovracura</string>
+    <string name="effect_overheal_desc">Quando la salute è al massimo, conferisce fino a %s salute massima extra</string>
+    <string name="effect_shielded">Scudato</string>
+    <string name="effect_shielded_desc">Il %s del danno in arrivo viene assorbito da questo scudo</string>
+    <string name="trait_relentless">Implacabile</string>
+    <string name="trait_relentless_desc">Ogni abilità attiva usata contro lo stesso bersaglio aumenta i danni del %s%%, fino a un massimo del %s%%</string>
+    <string name="game_relentless">Implacabile!</string>
+    <string name="entity_lead_cube">Cubo di Piombo</string>
+    <string name="ability_neutralize">Neutralizza</string>
+    <string name="ability_neutralize_desc">Attacca il bersaglio e azzera le cariche delle sue abilità. Carica: %s turni</string>
+    <string name="ability_density">Densità</string>
+    <string name="ability_density_desc">Applica %s %s al bersaglio per %s turni. Carica: %s turni</string>
+    <string name="ability_lockdown">Blocco</string>
+    <string name="ability_lockdown_desc">Applica %s pari al %s%% della tua salute massima all'alleato con meno salute per %s turni</string>
 </resources>
