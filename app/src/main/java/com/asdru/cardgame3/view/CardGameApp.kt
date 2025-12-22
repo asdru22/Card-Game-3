@@ -13,16 +13,20 @@ import com.asdru.cardgame3.view.characterSelection.CharacterSelectionScreen
 import com.asdru.cardgame3.view.characterSelection.StrategicSelectionScreen
 import com.asdru.cardgame3.view.mainMenu.MainMenuScreen
 import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.PlayerViewModel
 import com.asdru.cardgame3.viewModel.TeamViewModel
 
 @Composable
 fun CardGameApp(
   battleViewModel: BattleViewModel,
+  playerViewModel: PlayerViewModel,
   gameContent: @Composable () -> Unit
 ) {
   var currentScreen by remember { mutableStateOf(AppScreen.MENU) }
   var p1Name by remember { mutableStateOf("Player 1") }
   var p2Name by remember { mutableStateOf("Player 2") }
+  var p1Id by remember { mutableStateOf<Long?>(null) }
+  var p2Id by remember { mutableStateOf<Long?>(null) }
 
   LaunchedEffect(battleViewModel.navigateToSelection) {
     if (battleViewModel.navigateToSelection) {
@@ -31,9 +35,11 @@ fun CardGameApp(
     }
   }
 
-  fun navigateToSelection(targetScreen: AppScreen, name1: String, name2: String) {
+  fun navigateToSelection(targetScreen: AppScreen, name1: String, name2: String, id1: Long?, id2: Long?) {
     p1Name = name1.ifBlank { "Player 1" }
     p2Name = name2.ifBlank { "Player 2" }
+    p1Id = id1
+    p2Id = id2
     currentScreen = targetScreen
   }
 
@@ -43,8 +49,8 @@ fun CardGameApp(
     weatherEnabled: Boolean,
     turnTimer: Int
   ) {
-    val p1Team = Team(p1Name, p1Entities, true)
-    val p2Team = Team(p2Name, p2Entities, false)
+    val p1Team = Team(p1Name, p1Entities, true, p1Id)
+    val p2Team = Team(p2Name, p2Entities, false, p2Id)
 
     val leftTeamVM = TeamViewModel(p1Team)
     val rightTeamVM = TeamViewModel(p2Team)
@@ -56,12 +62,13 @@ fun CardGameApp(
   when (currentScreen) {
     AppScreen.MENU -> {
       MainMenuScreen(
-        onCasualGame = { n1, n2 ->
-          navigateToSelection(AppScreen.SELECTION, n1, n2)
+        playerViewModel = playerViewModel,
+        onCasualGame = { n1, n2, id1, id2 ->
+          navigateToSelection(AppScreen.SELECTION, n1, n2, id1, id2)
         },
 
-        onStrategicGame = { n1, n2 ->
-          navigateToSelection(AppScreen.STRATEGIC_SELECTION, n1, n2)
+        onStrategicGame = { n1, n2, id1, id2 ->
+          navigateToSelection(AppScreen.STRATEGIC_SELECTION, n1, n2, id1, id2)
         }
       )
     }

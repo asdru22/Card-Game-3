@@ -12,6 +12,7 @@ class TeamViewModel(
   val team: Team
 ) {
   val name: String = team.name
+  val playerId: Long? = team.playerId
   val entities: List<EntityViewModel> = team.entities.map { EntityViewModel(it, team.left) }
   lateinit var enemyTeam: TeamViewModel
 

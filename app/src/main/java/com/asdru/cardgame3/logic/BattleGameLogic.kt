@@ -276,7 +276,13 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     if (!isLeftAlive || !isRightAlive) {
       delay(1000)
-      vm.winner = if (!isLeftAlive) vm.rightTeam.name else vm.leftTeam.name
+      if (vm.winner == null) {
+        val winningTeam = if (!isLeftAlive) vm.rightTeam else vm.leftTeam
+        vm.winner = winningTeam.name
+        winningTeam.playerId?.let { pid ->
+          vm.playerRepository?.incrementWins(pid)
+        }
+      }
     }
   }
 

@@ -27,7 +27,8 @@ import com.asdru.cardgame3.logic.inputHandler.UltimateInputHandler
 
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
-  initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false))
+  initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false)),
+  var playerRepository: com.asdru.cardgame3.data.repository.PlayerRepository? = null
 ) : ViewModel() {
 
   // --- Components ---

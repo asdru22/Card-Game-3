@@ -3,6 +3,7 @@ package com.asdru.cardgame3.view.mainMenu
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,15 +17,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,15 +49,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.entity.Player
+import com.asdru.cardgame3.viewModel.PlayerViewModel
 
 @Composable
 fun MainMenuScreen(
-  onCasualGame: (String, String) -> Unit,
-  onStrategicGame: (String, String) -> Unit
+  playerViewModel: PlayerViewModel,
+  onCasualGame: (String, String, Long?, Long?) -> Unit,
+  onStrategicGame: (String, String, Long?, Long?) -> Unit
 ) {
-  var player1Name by remember { mutableStateOf("Player 1") }
-  var player2Name by remember { mutableStateOf("Player 2") }
+  val players by playerViewModel.players.collectAsState()
+
+  var player1 by remember { mutableStateOf<Player?>(null) }
+  var player2 by remember { mutableStateOf<Player?>(null) }
+
   var showRules by remember { mutableStateOf(false) }
+  var showAddPlayerDialog by remember { mutableStateOf(false) }
+  var showLeaderboard by remember { mutableStateOf(false) }
 
   Box(
     modifier = Modifier
@@ -88,40 +105,29 @@ fun MainMenuScreen(
 
       Row(
         modifier = Modifier.fillMaxWidth(0.7f),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
       ) {
-        OutlinedTextField(
-          value = player1Name,
-          onValueChange = { player1Name = it },
-          label = { Text(stringResource(R.string.ui_player_name, 1), color = Color.Gray) },
-          singleLine = true,
-          colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Color.White,
-            unfocusedTextColor = Color.White,
-            focusedBorderColor = Color.White,
-            unfocusedBorderColor = Color.Gray,
-            cursorColor = Color.White,
-            focusedLabelColor = Color.White
-          ),
+        // Player 1 Dropdown
+        PlayerDropdown(
+          label = stringResource(R.string.ui_player_name, 1),
+          players = players.filter { it.id != player2?.id },
+          selectedPlayer = player1,
+          onPlayerSelected = { player1 = it },
           modifier = Modifier.weight(1f)
         )
 
-        OutlinedTextField(
-          value = player2Name,
-          onValueChange = { player2Name = it },
-          label = { Text(stringResource(R.string.ui_player_name, 2), color = Color.Gray) },
-          singleLine = true,
-          colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Color.White,
-            unfocusedTextColor = Color.White,
-            focusedBorderColor = Color.White,
-            unfocusedBorderColor = Color.Gray,
-            cursorColor = Color.White,
-            focusedLabelColor = Color.White
-          ),
+        // Player 2 Dropdown
+        PlayerDropdown(
+          label = stringResource(R.string.ui_player_name, 2),
+          players = players.filter { it.id != player1?.id },
+          selectedPlayer = player2,
+          onPlayerSelected = { player2 = it },
           modifier = Modifier.weight(1f)
         )
       }
+
+
 
       Spacer(modifier = Modifier.height(32.dp))
 
@@ -130,7 +136,14 @@ fun MainMenuScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
       ) {
         Button(
-          onClick = { onCasualGame(player1Name, player2Name) },
+          onClick = {
+            onCasualGame(
+              player1?.name ?: "Player 1",
+              player2?.name ?: "Player 2",
+              player1?.id,
+              player2?.id
+            )
+          },
           colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
           shape = RoundedCornerShape(8.dp),
           modifier = Modifier
@@ -146,7 +159,14 @@ fun MainMenuScreen(
         }
 
         Button(
-          onClick = { onStrategicGame(player1Name, player2Name) },
+          onClick = {
+            onStrategicGame(
+              player1?.name ?: "Player 1",
+              player2?.name ?: "Player 2",
+              player1?.id,
+              player2?.id
+            )
+          },
           colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5)),
           shape = RoundedCornerShape(8.dp),
           modifier = Modifier
@@ -158,6 +178,44 @@ fun MainMenuScreen(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White
+          )
+        }
+      }
+
+
+
+      Spacer(modifier = Modifier.height(24.dp))
+
+      Row(
+        modifier = Modifier.fillMaxWidth(0.7f),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+        // Add Player Button
+        IconButton(
+          onClick = { showAddPlayerDialog = true },
+          modifier = Modifier
+            .background(Color(0xFF2E7D32), RoundedCornerShape(8.dp))
+        ) {
+          Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add Player",
+            tint = Color.White
+          )
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        // Leaderboard Button
+        IconButton(
+          onClick = { showLeaderboard = true },
+          modifier = Modifier
+            .background(Color(0xFFFFA000), RoundedCornerShape(8.dp))
+        ) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.List,
+            contentDescription = "Leaderboard",
+            tint = Color.White
           )
         }
       }
@@ -181,7 +239,171 @@ fun MainMenuScreen(
       visible = showRules,
       onClose = { showRules = false }
     )
+
+    if (showAddPlayerDialog) {
+      AddPlayerDialog(
+        onDismiss = { showAddPlayerDialog = false },
+        onAdd = { name ->
+          playerViewModel.addPlayer(
+            name = name,
+            onSuccess = { showAddPlayerDialog = false },
+            onError = { /* Handle error, potentially show toast or error state in dialog */ }
+          )
+        }
+      )
+    }
+
+    if (showLeaderboard) {
+      LeaderboardDialog(
+        players = players,
+        onDismiss = { showLeaderboard = false }
+      )
+    }
   }
+}
+
+@Composable
+fun LeaderboardDialog(
+  players: List<Player>,
+  onDismiss: () -> Unit
+) {
+  AlertDialog(
+    onDismissRequest = onDismiss,
+    title = { Text("Leaderboard") },
+    text = {
+      Column {
+        val sortedPlayers = remember(players) { players.sortedByDescending { it.wins } }
+        
+        if (sortedPlayers.isEmpty()) {
+            Text("No players yet.")
+        } else {
+            // Using a Column inside a Scrollable container would be better if list is long, 
+            // but AlertDialog text area handles scrolling automatically if content is large.
+            // For many players, LazyColumn inside a custom Dialog would be better, but keeping it simple for now.
+             sortedPlayers.forEachIndexed { index, player ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "${index + 1}. ${player.name}")
+                    Text(text = "${player.wins} wins", fontWeight = FontWeight.Bold)
+                }
+             }
+        }
+      }
+    },
+    confirmButton = {
+      TextButton(onClick = onDismiss) {
+        Text("Close")
+      }
+    }
+  )
+}
+
+@Composable
+fun PlayerDropdown(
+  label: String,
+  players: List<Player>,
+  selectedPlayer: Player?,
+  onPlayerSelected: (Player) -> Unit,
+  modifier: Modifier = Modifier
+) {
+  var expanded by remember { mutableStateOf(false) }
+
+  Box(modifier = modifier) {
+    OutlinedTextField(
+      value = selectedPlayer?.name ?: "",
+      onValueChange = {},
+      label = { Text(label, color = Color.Gray) },
+      readOnly = true,
+      trailingIcon = {
+        Icon(
+          imageVector = Icons.Default.ArrowDropDown,
+          contentDescription = null,
+          tint = Color.White
+        )
+      },
+      singleLine = true,
+      colors = OutlinedTextFieldDefaults.colors(
+        focusedTextColor = Color.White,
+        unfocusedTextColor = Color.White,
+        focusedBorderColor = Color.White,
+        unfocusedBorderColor = Color.Gray,
+        cursorColor = Color.White,
+        focusedLabelColor = Color.White
+      ),
+      modifier = Modifier
+        .fillMaxWidth()
+        .clickable { expanded = true }
+    )
+
+    // Overlay transparent button to capture clicks if TextField eats them (depends on version, usually readOnly consumes clicks differently)
+    // Better: use Box with onClick on modifier of Box, but TextField needs to be disabled?
+    // Actually, creating a transparent box over it is reliable.
+    Box(
+      modifier = Modifier
+        .matchParentSize()
+        .clickable { expanded = true }
+    )
+
+    DropdownMenu(
+      expanded = expanded,
+      onDismissRequest = { expanded = false },
+      modifier = Modifier.background(Color(0xFF2C2C2C))
+    ) {
+      players.forEach { player ->
+        DropdownMenuItem(
+          text = {
+            Text(
+              player.name,
+              color = Color.White
+            )
+          },
+          onClick = {
+            onPlayerSelected(player)
+            expanded = false
+          }
+        )
+      }
+    }
+  }
+}
+
+@Composable
+fun AddPlayerDialog(
+  onDismiss: () -> Unit,
+  onAdd: (String) -> Unit
+) {
+  var name by remember { mutableStateOf("") }
+
+  AlertDialog(
+    onDismissRequest = onDismiss,
+    title = { Text("Add New Player") },
+    text = {
+      OutlinedTextField(
+        value = name,
+        onValueChange = { name = it },
+        label = { Text("Player Name") },
+        singleLine = true
+      )
+    },
+    confirmButton = {
+      TextButton(
+        onClick = {
+          if (name.isNotBlank()) onAdd(name)
+        }
+      ) {
+        Text("Add")
+      }
+    },
+    dismissButton = {
+      TextButton(onClick = onDismiss) {
+        Text("Cancel")
+      }
+    }
+  )
 }
 
 @Composable
