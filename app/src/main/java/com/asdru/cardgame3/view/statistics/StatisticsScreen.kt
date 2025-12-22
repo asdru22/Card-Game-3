@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.view.statistics
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -96,7 +98,7 @@ fun LeaderboardScreen(
               width = Dp.Unspecified
             )
           }
-        ){
+        ) {
           tabs.forEachIndexed { index, title ->
             Tab(
               selected = selectedTabIndex == index,
@@ -172,7 +174,7 @@ fun PlayerRow(rank: Int, player: Player) {
 @Composable
 fun PickRatesView(viewModel: StatisticsViewModel) {
   val pickRates by viewModel.pickRates.collectAsState()
-  
+
   if (pickRates.isEmpty()) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
       Text("No pick data available.", color = Color.Gray)
@@ -202,28 +204,34 @@ fun PickRateRow(rank: Int, stats: CharacterStats) {
   ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
       Text(
-        text = "$rank.",
+        text = stringResource(R.string.ui_card_rank, rank),
         color = Color(0xFFFFA000),
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         modifier = Modifier.padding(end = 16.dp)
       )
-      // Note: stats.characterName is the resource entry name. 
-      // Ideally we would map this back to a localized string, but for now we display what we have.
-      // If the resourceResolver stored the localized string this would be fine. 
-      // But we stored the entry name. 
-      // Since we don't have easy context access here to reverse lookup id from name, we display the name.
-      // A future improvement would be to store the display name or have a lookup map.
-      // However, usually the entry name is somewhat readable e.g. "char_warrior".
-      // We can format it nicely.
+
+      val context = LocalContext.current
+
+      val resId = remember(stats.characterName) {
+        val snakeCaseName = camelToSnakeCase(stats.characterName)
+        val resourceName = "entity_$snakeCaseName"
+        context.run { resources.getIdentifier(resourceName, "string", packageName) }
+      }
+      val displayName = if (resId != 0) {
+        stringResource(resId)
+      } else {
+        stats.characterName
+      }
+
       Text(
-        text = formatCharName(stats.characterName),
+        text = displayName,
         color = Color.White,
         fontSize = 18.sp
       )
     }
     Text(
-      text = "${stats.pickCount} picks",
+      text = stringResource(R.string.ui_card_pick,stats.pickCount),
       color = Color.LightGray,
       fontSize = 16.sp,
       fontWeight = FontWeight.Bold
@@ -231,9 +239,13 @@ fun PickRateRow(rank: Int, stats: CharacterStats) {
   }
 }
 
-fun formatCharName(name: String): String {
-    // Remove "char_" prefix if present and capitalize
-    return name.removePrefix("char_")
-        .replace("_", " ")
-        .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+fun camelToSnakeCase(str: String): String {
+  return str.fold(StringBuilder()) { acc, c ->
+    if (c.isUpperCase()) {
+      if (acc.isNotEmpty()) acc.append('_')
+      acc.append(c.lowercaseChar())
+    } else {
+      acc.append(c)
+    }
+  }.toString()
 }

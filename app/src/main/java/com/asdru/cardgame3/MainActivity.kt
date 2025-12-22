@@ -18,6 +18,8 @@ import com.asdru.cardgame3.view.battle.BattleScreen
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.PlayerViewModel
 import com.asdru.cardgame3.viewModel.PlayerViewModelFactory
+import com.asdru.cardgame3.viewModel.StatisticsViewModel
+import com.asdru.cardgame3.viewModel.StatisticsViewModelFactory
 
 
 class MainActivity : ComponentActivity() {
@@ -44,8 +46,9 @@ class MainActivity : ComponentActivity() {
     val playerViewModelFactory = PlayerViewModelFactory(repository)
     val playerViewModel: PlayerViewModel by viewModels { playerViewModelFactory }
 
-    val statisticsViewModelFactory = com.asdru.cardgame3.viewModel.StatisticsViewModelFactory(charStatsRepository)
-    val statisticsViewModel: com.asdru.cardgame3.viewModel.StatisticsViewModel by viewModels { statisticsViewModelFactory }
+    val statisticsViewModelFactory =
+      StatisticsViewModelFactory(charStatsRepository)
+    val statisticsViewModel: StatisticsViewModel by viewModels { statisticsViewModelFactory }
 
     battleViewModel.playerRepository = repository
     battleViewModel.characterStatsRepository = charStatsRepository

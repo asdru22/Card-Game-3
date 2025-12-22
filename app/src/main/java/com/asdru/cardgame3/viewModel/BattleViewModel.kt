@@ -16,6 +16,8 @@ import com.asdru.cardgame3.data.ShopDragState
 import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.TotemDragState
 import com.asdru.cardgame3.data.UltimateDragState
+import com.asdru.cardgame3.data.repository.CharacterStatsRepository
+import com.asdru.cardgame3.data.repository.PlayerRepository
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.logic.BattleGameLogic
@@ -29,8 +31,8 @@ import kotlinx.coroutines.launch
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
   initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false)),
-  var playerRepository: com.asdru.cardgame3.data.repository.PlayerRepository? = null,
-  var characterStatsRepository: com.asdru.cardgame3.data.repository.CharacterStatsRepository? = null
+  var playerRepository: PlayerRepository? = null,
+  var characterStatsRepository: CharacterStatsRepository? = null
 ) : ViewModel() {
 
   var resourceResolver: ((Int) -> String)? = null
@@ -114,12 +116,11 @@ class BattleViewModel(
 
     // Increment pick rates
     viewModelScope.launch {
-      val resolver = resourceResolver
       val statsRepo = characterStatsRepository
-      if (resolver != null && statsRepo != null) {
+      if (statsRepo != null) {
         val allCharacters = newLeftTeam.team.entities + newRightTeam.team.entities
-        allCharacters.forEach { charVM ->
-          val nameKey = resolver(charVM.name)
+        allCharacters.forEach { entity ->
+          val nameKey = entity::class.simpleName ?: "Unknown"
           statsRepo.incrementPickCount(nameKey)
         }
       }
