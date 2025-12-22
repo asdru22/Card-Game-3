@@ -14,8 +14,7 @@ object TheBeverage : ShopItem(
   formatArgs = listOf(EFFECT_NUMBER, EFFECT_DURATION),
   onApply = {
     repeat(EFFECT_NUMBER) { _ ->
-      val randomEffect = StatusEffect.getRandom(EFFECT_DURATION, null, it)
-      randomEffect?.let{effect ->
+      StatusEffect.getRandom(EFFECT_DURATION, null, it)?.let { effect ->
         it.addEffect(effect)
       }
     }
