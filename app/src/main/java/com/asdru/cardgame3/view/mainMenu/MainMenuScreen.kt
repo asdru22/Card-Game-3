@@ -56,7 +56,8 @@ import com.asdru.cardgame3.viewModel.PlayerViewModel
 fun MainMenuScreen(
   playerViewModel: PlayerViewModel,
   onCasualGame: (String, String, Long?, Long?) -> Unit,
-  onStrategicGame: (String, String, Long?, Long?) -> Unit
+  onStrategicGame: (String, String, Long?, Long?) -> Unit,
+  onLeaderboard: () -> Unit
 ) {
   val players by playerViewModel.players.collectAsState()
 
@@ -65,7 +66,7 @@ fun MainMenuScreen(
 
   var showRules by remember { mutableStateOf(false) }
   var showAddPlayerDialog by remember { mutableStateOf(false) }
-  var showLeaderboard by remember { mutableStateOf(false) }
+
 
   Box(
     modifier = Modifier
@@ -208,7 +209,7 @@ fun MainMenuScreen(
 
         // Leaderboard Button
         IconButton(
-          onClick = { showLeaderboard = true },
+          onClick = onLeaderboard,
           modifier = Modifier
             .background(Color(0xFFFFA000), RoundedCornerShape(8.dp))
         ) {
@@ -253,54 +254,11 @@ fun MainMenuScreen(
       )
     }
 
-    if (showLeaderboard) {
-      LeaderboardDialog(
-        players = players,
-        onDismiss = { showLeaderboard = false }
-      )
-    }
+
   }
 }
 
-@Composable
-fun LeaderboardDialog(
-  players: List<Player>,
-  onDismiss: () -> Unit
-) {
-  AlertDialog(
-    onDismissRequest = onDismiss,
-    title = { Text("Leaderboard") },
-    text = {
-      Column {
-        val sortedPlayers = remember(players) { players.sortedByDescending { it.wins } }
-        
-        if (sortedPlayers.isEmpty()) {
-            Text("No players yet.")
-        } else {
-            // Using a Column inside a Scrollable container would be better if list is long, 
-            // but AlertDialog text area handles scrolling automatically if content is large.
-            // For many players, LazyColumn inside a custom Dialog would be better, but keeping it simple for now.
-             sortedPlayers.forEachIndexed { index, player ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(text = "${index + 1}. ${player.name}")
-                    Text(text = "${player.wins} wins", fontWeight = FontWeight.Bold)
-                }
-             }
-        }
-      }
-    },
-    confirmButton = {
-      TextButton(onClick = onDismiss) {
-        Text("Close")
-      }
-    }
-  )
-}
+
 
 @Composable
 fun PlayerDropdown(

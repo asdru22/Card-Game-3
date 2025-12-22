@@ -11,6 +11,7 @@ import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.characterSelection.CharacterSelectionScreen
 import com.asdru.cardgame3.view.characterSelection.StrategicSelectionScreen
+import com.asdru.cardgame3.view.leaderboard.LeaderboardScreen
 import com.asdru.cardgame3.view.mainMenu.MainMenuScreen
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.PlayerViewModel
@@ -69,8 +70,18 @@ fun CardGameApp(
 
         onStrategicGame = { n1, n2, id1, id2 ->
           navigateToSelection(AppScreen.STRATEGIC_SELECTION, n1, n2, id1, id2)
+        },
+        onLeaderboard = {
+          currentScreen = AppScreen.LEADERBOARD
         }
       )
+    }
+
+    AppScreen.LEADERBOARD -> {
+        LeaderboardScreen(
+            playerViewModel = playerViewModel,
+            onBack = { currentScreen = AppScreen.MENU }
+        )
     }
 
     AppScreen.SELECTION -> {

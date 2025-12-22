@@ -307,4 +307,8 @@
     <string name="ability_carnage_desc">Gain %s for %s turn and perform their active ability with only %s%% damage decay on the enemy with the most health. Gain %s rage per hit and repeat for every dead ally</string>
     <string name="item_the_beverage">The Beverage</string>
     <string name="item_the_beverage_desc">Gain %s random effects that last %s turns</string>
+    <string name="ui_wins">Leaderboard</string>
+    <string name="ui_card_picks">Card Pick Rates</string>
+    <string name="ui_statistics">Statistics</string>
+    <string name="ui_player_wins">%s wins</string>
 </resources>
