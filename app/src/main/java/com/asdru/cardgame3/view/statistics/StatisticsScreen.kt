@@ -1,4 +1,4 @@
-package com.asdru.cardgame3.view.leaderboard
+package com.asdru.cardgame3.view.statistics
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,12 +34,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.entity.CharacterStats
 import com.asdru.cardgame3.data.entity.Player
 import com.asdru.cardgame3.viewModel.PlayerViewModel
+import com.asdru.cardgame3.viewModel.StatisticsViewModel
 
 @Composable
 fun LeaderboardScreen(
   playerViewModel: PlayerViewModel,
+  statisticsViewModel: com.asdru.cardgame3.viewModel.StatisticsViewModel,
   onBack: () -> Unit
 ) {
   val players by playerViewModel.players.collectAsState()
@@ -106,7 +109,7 @@ fun LeaderboardScreen(
 
       when (selectedTabIndex) {
         0 -> WinsList(players)
-        1 -> PickRatesView()
+        1 -> PickRatesView(statisticsViewModel)
       }
     }
   }
@@ -167,15 +170,70 @@ fun PlayerRow(rank: Int, player: Player) {
 }
 
 @Composable
-fun PickRatesView() {
-  Box(
-    modifier = Modifier.fillMaxSize(),
-    contentAlignment = Alignment.Center
+fun PickRatesView(viewModel: StatisticsViewModel) {
+  val pickRates by viewModel.pickRates.collectAsState()
+  
+  if (pickRates.isEmpty()) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+      Text("No pick data available.", color = Color.Gray)
+    }
+  } else {
+    LazyColumn(
+      modifier = Modifier.fillMaxSize(),
+      verticalArrangement = Arrangement.spacedBy(1.dp)
+    ) {
+      itemsIndexed(pickRates) { index, stats ->
+        PickRateRow(index + 1, stats)
+        HorizontalDivider(color = Color(0xFF333333))
+      }
+    }
+  }
+}
+
+@Composable
+fun PickRateRow(rank: Int, stats: CharacterStats) {
+  Row(
+    modifier = Modifier
+      .fillMaxWidth()
+      .background(Color(0xFF1E1E1E))
+      .padding(start = 64.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
+    horizontalArrangement = Arrangement.SpaceBetween,
+    verticalAlignment = Alignment.CenterVertically
   ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Text(
+        text = "$rank.",
+        color = Color(0xFFFFA000),
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp,
+        modifier = Modifier.padding(end = 16.dp)
+      )
+      // Note: stats.characterName is the resource entry name. 
+      // Ideally we would map this back to a localized string, but for now we display what we have.
+      // If the resourceResolver stored the localized string this would be fine. 
+      // But we stored the entry name. 
+      // Since we don't have easy context access here to reverse lookup id from name, we display the name.
+      // A future improvement would be to store the display name or have a lookup map.
+      // However, usually the entry name is somewhat readable e.g. "char_warrior".
+      // We can format it nicely.
+      Text(
+        text = formatCharName(stats.characterName),
+        color = Color.White,
+        fontSize = 18.sp
+      )
+    }
     Text(
-      text = "Coming Soon",
-      color = Color.Gray,
-      fontSize = 18.sp
+      text = "${stats.pickCount} picks",
+      color = Color.LightGray,
+      fontSize = 16.sp,
+      fontWeight = FontWeight.Bold
     )
   }
+}
+
+fun formatCharName(name: String): String {
+    // Remove "char_" prefix if present and capitalize
+    return name.removePrefix("char_")
+        .replace("_", " ")
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
 }

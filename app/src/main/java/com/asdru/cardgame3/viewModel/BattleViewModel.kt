@@ -24,12 +24,16 @@ import com.asdru.cardgame3.logic.inputHandler.CardInputHandler
 import com.asdru.cardgame3.logic.inputHandler.ShopInputHandler
 import com.asdru.cardgame3.logic.inputHandler.TotemInputHandler
 import com.asdru.cardgame3.logic.inputHandler.UltimateInputHandler
+import kotlinx.coroutines.launch
 
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
   initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false)),
-  var playerRepository: com.asdru.cardgame3.data.repository.PlayerRepository? = null
+  var playerRepository: com.asdru.cardgame3.data.repository.PlayerRepository? = null,
+  var characterStatsRepository: com.asdru.cardgame3.data.repository.CharacterStatsRepository? = null
 ) : ViewModel() {
+
+  var resourceResolver: ((Int) -> String)? = null
 
   // --- Components ---
 
@@ -107,6 +111,19 @@ class BattleViewModel(
     turnTimer: Int
   ) {
     gameLogic.startGame(newLeftTeam, newRightTeam, weatherEnabled, turnTimer)
+
+    // Increment pick rates
+    viewModelScope.launch {
+      val resolver = resourceResolver
+      val statsRepo = characterStatsRepository
+      if (resolver != null && statsRepo != null) {
+        val allCharacters = newLeftTeam.team.entities + newRightTeam.team.entities
+        allCharacters.forEach { charVM ->
+          val nameKey = resolver(charVM.name)
+          statsRepo.incrementPickCount(nameKey)
+        }
+      }
+    }
   }
 
   // --- Card Events

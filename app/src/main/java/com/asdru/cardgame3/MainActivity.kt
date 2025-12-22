@@ -39,16 +39,24 @@ class MainActivity : ComponentActivity() {
 
     val database = AppDatabase.getDatabase(applicationContext)
     val repository = PlayerRepository(database.playerDao())
+    val charStatsRepository = com.asdru.cardgame3.data.repository.CharacterStatsRepository(database)
+
     val playerViewModelFactory = PlayerViewModelFactory(repository)
     val playerViewModel: PlayerViewModel by viewModels { playerViewModelFactory }
 
+    val statisticsViewModelFactory = com.asdru.cardgame3.viewModel.StatisticsViewModelFactory(charStatsRepository)
+    val statisticsViewModel: com.asdru.cardgame3.viewModel.StatisticsViewModel by viewModels { statisticsViewModelFactory }
+
     battleViewModel.playerRepository = repository
+    battleViewModel.characterStatsRepository = charStatsRepository
+    battleViewModel.resourceResolver = { id -> resources.getResourceEntryName(id) }
 
     setContent {
       CardGame3Theme {
         CardGameApp(
           battleViewModel = battleViewModel,
           playerViewModel = playerViewModel,
+          statisticsViewModel = statisticsViewModel,
           gameContent = { BattleScreen(battleViewModel) }
         )
       }
