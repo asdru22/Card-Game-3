@@ -15,11 +15,15 @@ sealed class StatusEffect(
   @field:StringRes override val descriptionRes: Int,
   @field:DrawableRes val iconRes: Int,
   initialDuration: Int,
+  initialMultiplier: Int = 1,
   override val isPositive: Boolean,
   override val formatArgs: List<Any> = emptyList()
 ) : Translatable {
   var duration by mutableIntStateOf(initialDuration)
+  var multiplier by mutableIntStateOf(initialMultiplier)
   var source: EntityViewModel? = null
+
+  open fun overheal(): Float = 0f
 
   open fun onApply(target: EntityViewModel) {}
   open fun onRemove(target: EntityViewModel) {}

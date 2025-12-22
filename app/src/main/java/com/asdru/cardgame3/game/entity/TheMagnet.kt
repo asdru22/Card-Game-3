@@ -50,7 +50,7 @@ class TheMagnet : Entity(
 
     enemies.forEach { enemy ->
       // remove all positive effects and get the count of how many were removed
-      val buffsRemovedCount = enemy.effectManager.clearPositive(enemy)
+      val buffsRemovedCount = enemy.effectManager.clearPositive(enemy,ignoreMultipliers = false)
 
       // for each removed buff, add a random debuff
       repeat(buffsRemovedCount) {

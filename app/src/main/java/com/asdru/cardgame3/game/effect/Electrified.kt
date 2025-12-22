@@ -22,7 +22,7 @@ class Electrified(
       target.effectManager.effects.find { it is Electrified }?.duration?.minus(
         1
       )
-    target.effectManager.removeEffect<Electrified>(target)
+    target.effectManager.removeEffect<Electrified>(owner = target, ignoreMultipliers = true)
 
     val potentialTargets = target.team.getAliveMembers().filter { it != target }
     val newTarget = potentialTargets.randomOrNull()

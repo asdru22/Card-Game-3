@@ -26,9 +26,18 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
     hitAnimTrigger++
 
     val wasAlive = isAlive
-    val overkill = (actualDamage - health).coerceAtLeast(0f)
 
-    health = (health - actualDamage).coerceAtLeast(0f)
+    // consume overheal first
+    var damageRemaining = actualDamage
+    if (overhealAmount > 0) {
+      val absorbed = damageRemaining.coerceAtMost(overhealAmount)
+      overhealAmount -= absorbed
+      damageRemaining -= absorbed
+    }
+
+    val overkill = (damageRemaining - health).coerceAtLeast(0f)
+
+    health = (health - damageRemaining).coerceAtLeast(0f)
     popupManager.add(actualDamage, Color.Red)
     team.onTeamDamage(actualDamage)
 
@@ -53,7 +62,7 @@ suspend fun EntityViewModel.onDeath(
   applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
   onEntityDeathTrait(this)
   applyTraits { it.onDeath(this) }
-  effectManager.clearAll(this)
+  effectManager.clearAll(this, ignoreMultipliers = true)
   resetCharges()
 }
 
@@ -82,10 +91,25 @@ suspend fun EntityViewModel.heal(
       actualHeal = it.modifyIncomingHealing(this, actualHeal, source)
     }
 
-    val newHealth = (health + actualHeal).coerceAtMost(maxHealth)
-    val healDiff = newHealth - health
-    this.team.totalHealing += healDiff
-    health = newHealth
+    // Overheal Logic
+    val overhealAllowed = effectManager.effects.sumOf { it.overheal().toDouble() }.toFloat()
+
+    // First fill health
+    val missingHealth = maxHealth - health
+    val healToHealth = actualHeal.coerceAtMost(missingHealth)
+    health = (health + healToHealth).coerceAtMost(maxHealth)
+    this.team.totalHealing += healToHealth // Restored metric
+
+    val remainingHeal = actualHeal - healToHealth
+
+    // Then fill overheal
+    if (remainingHeal > 0 && overhealAllowed > 0) {
+      val currentOverheal = overhealAmount
+      val spaceForOverheal = overhealAllowed - currentOverheal
+      val healToOverheal = remainingHeal.coerceAtMost(spaceForOverheal)
+      overhealAmount += healToOverheal
+    }
+
     if (actualHeal > 0) popupManager.add(actualHeal, Color.Green)
     if (repeats > 1) delay(delayTime)
   }

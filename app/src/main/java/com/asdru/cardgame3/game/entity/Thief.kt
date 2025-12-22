@@ -42,7 +42,7 @@ class Thief : Entity(
     enemies.forEach { enemy ->
       val effectToSteal = enemy.effectManager.getRandomPositiveEffect()
       if (effectToSteal != null) {
-        val stolenEffect = enemy.effectManager.removeEffect(effectToSteal, enemy)
+        val stolenEffect = enemy.effectManager.removeEffect(effectToSteal, enemy, true)
         if (stolenEffect != null) {
           source.addEffect(stolenEffect, source)
         }

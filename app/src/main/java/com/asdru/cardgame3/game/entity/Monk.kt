@@ -44,7 +44,8 @@ class Monk : Entity(
     )
   ) { source, randomEnemy ->
     var effectsCleared = 0
-    source.team.getAliveMembers().forEach { effectsCleared += it.effectManager.clearAll(it) }
+    source.team.getAliveMembers()
+      .forEach { effectsCleared += it.effectManager.clearAll(it, ignoreMultipliers = false) }
     source.applyDamage(randomEnemy, effectsCleared * ULTIMATE_DAMAGE_MULTIPLIER)
   }
 ) {

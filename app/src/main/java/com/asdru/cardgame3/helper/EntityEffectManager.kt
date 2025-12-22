@@ -37,6 +37,7 @@ class EntityEffectManager(
     if (existingEffect != null) {
       existingEffect.duration = finalEffect.duration
       existingEffect.source = source
+      existingEffect.multiplier++
     } else {
       finalEffect.source = source
       effects.add(finalEffect)
@@ -63,24 +64,37 @@ class EntityEffectManager(
 
   suspend fun expireEffect(effect: StatusEffect, owner: EntityViewModel) {
     effect.onExpire(owner)
-    removeEffect(effect, owner)
+    removeEffect(effect = effect, owner = owner, ignoreMultipliers = true)
   }
 
   fun getRandomPositiveEffect(): StatusEffect? {
     return effects.filter { it.isPositive }.randomOrNull()
   }
 
-  fun removeEffect(effect: StatusEffect, owner: EntityViewModel): StatusEffect? {
-    if (effects.contains(effect)) {
-      effect.onRemove(owner)
-      effects.remove(effect)
+  fun removeEffect(
+    effect: StatusEffect,
+    owner: EntityViewModel,
+    ignoreMultipliers: Boolean
+  ): StatusEffect? {
+    if (!effects.contains(effect)) return null
+
+    if (!ignoreMultipliers && effect.multiplier > 1) {
+      effect.multiplier--
       onEffectsChanged()
       return effect
     }
-    return null
+
+    effect.onRemove(owner)
+    effects.remove(effect)
+    onEffectsChanged()
+    return effect
+
   }
 
-  inline fun <reified T : StatusEffect> removeEffect(owner: EntityViewModel) {
+  inline fun <reified T : StatusEffect> removeEffect(
+    owner: EntityViewModel,
+    ignoreMultipliers: Boolean
+  ) {
     val iterator = effects.iterator()
     while (iterator.hasNext()) {
       val effect = iterator.next()
@@ -92,22 +106,25 @@ class EntityEffectManager(
     onEffectsChanged()
   }
 
-  fun clearAll(owner: EntityViewModel): Int {
-    return clearNegative(owner) + clearPositive(owner)
+  fun clearAll(
+    owner: EntityViewModel,
+    ignoreMultipliers: Boolean
+  ): Int {
+    return clearNegative(owner, ignoreMultipliers) + clearPositive(owner, ignoreMultipliers)
   }
 
-  fun clearNegative(owner: EntityViewModel): Int {
+  fun clearNegative(owner: EntityViewModel, ignoreMultipliers: Boolean): Int {
     val effectsToRemove = effects.filter { !it.isPositive }
     effectsToRemove.forEach { effect ->
-      removeEffect(effect, owner)
+      removeEffect(effect, owner, ignoreMultipliers)
     }
     return effectsToRemove.size
   }
 
-  fun clearPositive(owner: EntityViewModel): Int {
+  fun clearPositive(owner: EntityViewModel, ignoreMultipliers: Boolean): Int {
     val effectsToRemove = effects.filter { it.isPositive }
     effectsToRemove.forEach { effect ->
-      removeEffect(effect, owner)
+      removeEffect(effect, owner, ignoreMultipliers)
     }
     return effectsToRemove.size
   }

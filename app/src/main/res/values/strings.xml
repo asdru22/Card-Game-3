@@ -313,4 +313,6 @@
     <string name="ui_player_wins">%s wins</string>
     <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s picks</string>
+    <string name="effect_overheal">Overheal</string>
+    <string name="effect_overheal_desc">Allows overhealing up to %s health per stack</string>
 </resources>

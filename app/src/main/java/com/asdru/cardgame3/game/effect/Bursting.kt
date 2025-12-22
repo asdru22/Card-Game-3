@@ -18,7 +18,7 @@ class Bursting(duration: Int) : StatusEffect(
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
-    owner.effectManager.removeEffect(this, owner)
+    owner.effectManager.removeEffect(this, owner, true)
     source?.team?.getAliveMembers()?.forEach {
       it.receiveDamage(BURSTING_DAMAGE)
     }

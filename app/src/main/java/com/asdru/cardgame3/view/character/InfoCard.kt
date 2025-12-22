@@ -52,6 +52,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Trait
+import com.asdru.cardgame3.helper.toRoman
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 @Composable
@@ -107,6 +108,7 @@ fun CharacterInfoCard(
     }
   }
 }
+
 @Composable
 private fun CharacterInfoHeader(
   viewModel: EntityViewModel,
@@ -132,13 +134,21 @@ private fun CharacterInfoHeader(
       closeBtn()
       Spacer(modifier = Modifier.width(8.dp))
 
-      nameTxt(Modifier.weight(1f).padding(horizontal = 8.dp))
+      nameTxt(
+        Modifier
+          .weight(1f)
+          .padding(horizontal = 8.dp)
+      )
 
       statsPill()
     } else {
       statsPill()
 
-      nameTxt(Modifier.weight(1f).padding(horizontal = 8.dp))
+      nameTxt(
+        Modifier
+          .weight(1f)
+          .padding(horizontal = 8.dp)
+      )
 
       Spacer(modifier = Modifier.width(8.dp))
       closeBtn()
@@ -198,6 +208,16 @@ private fun CharacterStatsPill(
         fontSize = 14.sp,
         fontWeight = FontWeight.Bold
       )
+
+      if (viewModel.overhealAmount > 0) {
+        Text(
+          text = "+${viewModel.overhealAmount.toInt()}",
+          color = Color(0xFFFFD700),
+          fontSize = 14.sp,
+          fontWeight = FontWeight.Bold,
+          modifier = Modifier.padding(start = 4.dp)
+        )
+      }
 
       StatDivider()
 
@@ -390,7 +410,7 @@ fun Effect(effect: StatusEffect, context: Context) {
       )
       Spacer(modifier = Modifier.width(6.dp))
       Text(
-        text = effect.getName(context),
+        text = effect.getName(context) + if (effect.multiplier > 1) " " + effect.multiplier.toRoman() else "",
         color = if (effect.isPositive) Color(0xFF00D471) else Color(0xFFBD3BF5),
         fontSize = 12.sp,
         fontWeight = FontWeight.Bold

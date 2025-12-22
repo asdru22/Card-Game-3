@@ -44,7 +44,7 @@ class Berserker : Entity(
       PASSIVE_CHARGES
     )
   ) { source, target ->
-    target.effectManager.clearNegative(target)
+    target.effectManager.clearNegative(target,ignoreMultipliers = false)
     target.team.increaseRage(PASSIVE_RAGE_INCREASE)
   },
   ultimateAbility = Ability(

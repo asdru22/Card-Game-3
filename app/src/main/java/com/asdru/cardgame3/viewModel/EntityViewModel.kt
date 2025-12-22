@@ -35,6 +35,7 @@ class EntityViewModel(
 
   var health by mutableFloatStateOf(entity.initialStats.maxHealth)
   var maxHealth by mutableFloatStateOf(entity.initialStats.maxHealth)
+  var overhealAmount by mutableFloatStateOf(0f)
 
   var currentActiveCharges by mutableIntStateOf(0)
   var currentPassiveCharges by mutableIntStateOf(0)

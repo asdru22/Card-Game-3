@@ -318,10 +318,10 @@ fun StatsBar(viewModel: EntityViewModel) {
     val hpPercent = (hp / viewModel.maxHealth).coerceIn(0f, 1f)
 
     val barColor = when {
-      hpPercent > 0.5f -> Color(0xFF4CAF50)
-      hpPercent > 0.2f -> Color(0xFFFFC107)
+      hpPercent > 0.2f -> Color(0xFF4CAF50)
       else -> Color(0xFFF44336)
     }
+
 
     Box(
       modifier = Modifier
@@ -330,12 +330,25 @@ fun StatsBar(viewModel: EntityViewModel) {
         .clip(RoundedCornerShape(4.dp))
         .background(Color.DarkGray)
     ) {
+
       Box(
         modifier = Modifier
           .fillMaxWidth(hpPercent)
           .fillMaxHeight()
           .background(barColor)
       )
+
+      if (viewModel.overhealAmount > 0) {
+        val totalHealthAndOverheal = viewModel.maxHealth
+        val overhealPercent = (viewModel.overhealAmount / totalHealthAndOverheal).coerceIn(0f, 1f)
+
+        Box(
+          modifier = Modifier
+            .fillMaxWidth(overhealPercent)
+            .fillMaxHeight()
+            .background(Color(0xFFFFD700))
+        )
+      }
     }
   }
 }
