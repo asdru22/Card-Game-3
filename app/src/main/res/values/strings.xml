@@ -311,6 +311,6 @@
     <string name="ui_card_picks">Card Pick Rates</string>
     <string name="ui_statistics">Statistics</string>
     <string name="ui_player_wins">%s wins</string>
-    <string name="ui_card_rank">%s.</string>
+    <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s picks</string>
 </resources>

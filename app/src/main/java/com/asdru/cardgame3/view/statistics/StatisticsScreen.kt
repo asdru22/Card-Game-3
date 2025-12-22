@@ -150,7 +150,7 @@ fun PlayerRow(rank: Int, player: Player) {
   ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
       Text(
-        text = "$rank.",
+        text = stringResource(R.string.ui_rank, rank),
         color = Color(0xFFFFA000), // Gold color for rank
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
@@ -204,7 +204,7 @@ fun PickRateRow(rank: Int, stats: CharacterStats) {
   ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
       Text(
-        text = stringResource(R.string.ui_card_rank, rank),
+        text = stringResource(R.string.ui_rank, rank),
         color = Color(0xFFFFA000),
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
@@ -231,7 +231,7 @@ fun PickRateRow(rank: Int, stats: CharacterStats) {
       )
     }
     Text(
-      text = stringResource(R.string.ui_card_pick,stats.pickCount),
+      text = stringResource(R.string.ui_card_pick, stats.pickCount),
       color = Color.LightGray,
       fontSize = 16.sp,
       fontWeight = FontWeight.Bold
