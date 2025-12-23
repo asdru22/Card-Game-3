@@ -16,6 +16,7 @@ import com.asdru.cardgame3.ui.theme.CardGame3Theme
 import com.asdru.cardgame3.view.CardGameApp
 import com.asdru.cardgame3.view.battle.BattleScreen
 import com.asdru.cardgame3.viewModel.BattleViewModel
+import com.asdru.cardgame3.viewModel.BattleViewModelFactory
 import com.asdru.cardgame3.viewModel.PlayerViewModel
 import com.asdru.cardgame3.viewModel.PlayerViewModelFactory
 import com.asdru.cardgame3.viewModel.StatisticsViewModel
@@ -23,8 +24,6 @@ import com.asdru.cardgame3.viewModel.StatisticsViewModelFactory
 
 
 class MainActivity : ComponentActivity() {
-
-  private val battleViewModel: BattleViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -50,9 +49,12 @@ class MainActivity : ComponentActivity() {
       StatisticsViewModelFactory(charStatsRepository)
     val statisticsViewModel: StatisticsViewModel by viewModels { statisticsViewModelFactory }
 
-    battleViewModel.playerRepository = repository
-    battleViewModel.characterStatsRepository = charStatsRepository
-    battleViewModel.resourceResolver = { id -> resources.getResourceEntryName(id) }
+    val battleViewModelFactory = BattleViewModelFactory(
+      playerRepository = repository,
+      characterStatsRepository = charStatsRepository,
+      resourceResolver = { id -> resources.getResourceEntryName(id) }
+    )
+    val battleViewModel: BattleViewModel by viewModels { battleViewModelFactory }
 
     setContent {
       CardGame3Theme {

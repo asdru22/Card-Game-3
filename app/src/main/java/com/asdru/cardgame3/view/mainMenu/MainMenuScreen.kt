@@ -17,8 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
@@ -28,6 +26,8 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -67,28 +67,11 @@ fun MainMenuScreen(
   var showRules by remember { mutableStateOf(false) }
   var showAddPlayerDialog by remember { mutableStateOf(false) }
 
-
   Box(
     modifier = Modifier
       .fillMaxSize()
-      .background(Color(0xFF121212))
+      .background(MaterialTheme.colorScheme.background)
   ) {
-    // Existing Bottom Left Icons
-    IconRow(
-      Modifier
-        .align(Alignment.BottomStart)
-        .padding(16.dp),
-      LocalContext.current
-    )
-
-    // NEW: Share Button at Bottom Right
-    ShareButton(
-      modifier = Modifier
-        .align(Alignment.BottomEnd)
-        .padding(16.dp),
-      context = LocalContext.current
-    )
-
     Column(
       modifier = Modifier
         .fillMaxSize()
@@ -96,147 +79,50 @@ fun MainMenuScreen(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
     ) {
-      Text(
-        text = stringResource(R.string.ui_main_menu),
-        fontSize = 48.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.White,
-        modifier = Modifier.padding(bottom = 48.dp)
+      MenuHeader()
+
+      PlayerSelectionSection(
+        players = players,
+        player1 = player1,
+        player2 = player2,
+        onPlayer1Selected = { player1 = it },
+        onPlayer2Selected = { player2 = it }
       )
-
-      Row(
-        modifier = Modifier.fillMaxWidth(0.7f),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        // Player 1 Dropdown
-        PlayerDropdown(
-          label = stringResource(R.string.ui_player_name, 1),
-          players = players.filter { it.id != player2?.id },
-          selectedPlayer = player1,
-          onPlayerSelected = { player1 = it },
-          modifier = Modifier.weight(1f)
-        )
-
-        // Player 2 Dropdown
-        PlayerDropdown(
-          label = stringResource(R.string.ui_player_name, 2),
-          players = players.filter { it.id != player1?.id },
-          selectedPlayer = player2,
-          onPlayerSelected = { player2 = it },
-          modifier = Modifier.weight(1f)
-        )
-      }
-
-
 
       Spacer(modifier = Modifier.height(32.dp))
 
-      Row(
-        modifier = Modifier.fillMaxWidth(0.7f),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-      ) {
-        Button(
-          onClick = {
-            onCasualGame(
-              player1?.name ?: "Player 1",
-              player2?.name ?: "Player 2",
-              player1?.id,
-              player2?.id
-            )
-          },
-          colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
-          shape = RoundedCornerShape(8.dp),
-          modifier = Modifier
-            .height(60.dp)
-            .weight(1f)
-        ) {
-          Text(
-            text = stringResource(R.string.ui_casual_game),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-          )
-        }
-
-        Button(
-          onClick = {
-            onStrategicGame(
-              player1?.name ?: "Player 1",
-              player2?.name ?: "Player 2",
-              player1?.id,
-              player2?.id
-            )
-          },
-          colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5)),
-          shape = RoundedCornerShape(8.dp),
-          modifier = Modifier
-            .height(60.dp)
-            .weight(1f)
-        ) {
-          Text(
-            text = stringResource(R.string.ui_strategic_game),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-          )
-        }
-      }
-
-
+      GameModeSelectionSection(
+        player1 = player1,
+        player2 = player2,
+        onCasualGame = onCasualGame,
+        onStrategicGame = onStrategicGame
+      )
 
       Spacer(modifier = Modifier.height(24.dp))
 
-      Row(
-        modifier = Modifier.fillMaxWidth(0.8f),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        // Add Player Button
-        IconButton(
-          onClick = { showAddPlayerDialog = true },
-          modifier = Modifier
-            .background(Color(0xFF2E7D32), RoundedCornerShape(8.dp))
-        ) {
-          Icon(
-            painter = painterResource(R.drawable.icon_add_player),
-            contentDescription = "Add Player",
-            tint = Color.White
-          )
-        }
-
-        Spacer(modifier = Modifier.size(16.dp))
-
-        // Leaderboard Button
-        IconButton(
-          onClick = onLeaderboard,
-          modifier = Modifier
-            .background(Color(0xFFFFA000), RoundedCornerShape(8.dp))
-        ) {
-          Icon(
-            painter = painterResource(R.drawable.icon_statistics),
-            contentDescription = "Leaderboard",
-            tint = Color.White
-          )
-        }
-
-        Spacer(modifier = Modifier.size(16.dp))
-
-        // How to Play Button
-        IconButton(
-          onClick = { showRules = true },
-          modifier = Modifier
-            .background(Color(0xFF757575), RoundedCornerShape(8.dp))
-        ) {
-          Icon(
-            imageVector = Icons.AutoMirrored.Filled.Help,
-            contentDescription = "How to play",
-            tint = Color.White
-          )
-        }
-      }
+      FooterActions(
+        onAddPlayer = { showAddPlayerDialog = true },
+        onLeaderboard = onLeaderboard,
+        onRules = { showRules = true }
+      )
     }
 
+    // --- Corner Actions ---
+    SocialLinks(
+      modifier = Modifier
+        .align(Alignment.BottomStart)
+        .padding(16.dp),
+      context = LocalContext.current
+    )
+
+    ShareButton(
+      modifier = Modifier
+        .align(Alignment.BottomEnd)
+        .padding(16.dp),
+      context = LocalContext.current
+    )
+
+    // --- Overlays ---
     HowToPlayOverlay(
       visible = showRules,
       onClose = { showRules = false }
@@ -257,6 +143,182 @@ fun MainMenuScreen(
   }
 }
 
+// --- Components ---
+
+@Composable
+private fun MenuHeader() {
+  Text(
+    text = stringResource(R.string.ui_main_menu),
+    fontSize = 48.sp,
+    fontWeight = FontWeight.Bold,
+    color = MaterialTheme.colorScheme.onBackground,
+    modifier = Modifier.padding(bottom = 48.dp)
+  )
+}
+
+@Composable
+private fun PlayerSelectionSection(
+  players: List<Player>,
+  player1: Player?,
+  player2: Player?,
+  onPlayer1Selected: (Player) -> Unit,
+  onPlayer2Selected: (Player) -> Unit
+) {
+  Row(
+    modifier = Modifier.fillMaxWidth(0.7f),
+    horizontalArrangement = Arrangement.spacedBy(16.dp),
+    verticalAlignment = Alignment.CenterVertically
+  ) {
+    PlayerDropdown(
+      label = stringResource(R.string.ui_player_name, 1),
+      players = players.filter { it.id != player2?.id },
+      selectedPlayer = player1,
+      onPlayerSelected = onPlayer1Selected,
+      modifier = Modifier.weight(1f)
+    )
+
+    PlayerDropdown(
+      label = stringResource(R.string.ui_player_name, 2),
+      players = players.filter { it.id != player1?.id },
+      selectedPlayer = player2,
+      onPlayerSelected = onPlayer2Selected,
+      modifier = Modifier.weight(1f)
+    )
+  }
+}
+
+@Composable
+private fun GameModeSelectionSection(
+  player1: Player?,
+  player2: Player?,
+  onCasualGame: (String, String, Long?, Long?) -> Unit,
+  onStrategicGame: (String, String, Long?, Long?) -> Unit
+) {
+  Row(
+    modifier = Modifier.fillMaxWidth(0.7f),
+    horizontalArrangement = Arrangement.spacedBy(16.dp)
+  ) {
+    MenuButton(
+      text = stringResource(R.string.ui_casual_game),
+      color = Color(0xFF4CAF50),
+      onClick = {
+        onCasualGame(
+          player1?.name ?: "Player 1",
+          player2?.name ?: "Player 2",
+          player1?.id,
+          player2?.id
+        )
+      },
+      modifier = Modifier.weight(1f)
+    )
+
+    MenuButton(
+      text = stringResource(R.string.ui_strategic_game),
+      color = Color(0xFF1E88E5),
+      onClick = {
+        onStrategicGame(
+          player1?.name ?: "Player 1",
+          player2?.name ?: "Player 2",
+          player1?.id,
+          player2?.id
+        )
+      },
+      modifier = Modifier.weight(1f)
+    )
+  }
+}
+
+@Composable
+private fun MenuButton(
+  text: String,
+  color: Color,
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier
+) {
+  Button(
+    onClick = onClick,
+    colors = ButtonDefaults.buttonColors(containerColor = color),
+    shape = RoundedCornerShape(8.dp),
+    modifier = modifier.height(60.dp)
+  ) {
+    Text(
+      text = text,
+      fontSize = 18.sp,
+      fontWeight = FontWeight.Bold,
+      color = Color.White
+    )
+  }
+}
+
+@Composable
+private fun FooterActions(
+  onAddPlayer: () -> Unit,
+  onLeaderboard: () -> Unit,
+  onRules: () -> Unit
+) {
+  Row(
+    modifier = Modifier.fillMaxWidth(0.8f),
+    horizontalArrangement = Arrangement.Center,
+    verticalAlignment = Alignment.CenterVertically
+  ) {
+    FooterIconButton(
+      iconRes = R.drawable.icon_add_player,
+      contentDescription = "Add Player",
+      containerColor = Color(0xFF2E7D32),
+      onClick = onAddPlayer
+    )
+
+    Spacer(modifier = Modifier.size(16.dp))
+
+    FooterIconButton(
+      iconRes = R.drawable.icon_statistics,
+      contentDescription = "Leaderboard",
+      containerColor = Color(0xFFFFA000),
+      onClick = onLeaderboard
+    )
+
+    Spacer(modifier = Modifier.size(16.dp))
+
+    FooterIconButton(
+      imageVector = Icons.AutoMirrored.Filled.Help,
+      contentDescription = "How to play",
+      containerColor = Color(0xFF757575),
+      onClick = onRules
+    )
+  }
+}
+
+@Composable
+private fun FooterIconButton(
+  iconRes: Int? = null,
+  imageVector: androidx.compose.ui.graphics.vector.ImageVector? = null,
+  contentDescription: String,
+  containerColor: Color,
+  onClick: () -> Unit
+) {
+  IconButton(
+    onClick = onClick,
+    colors = IconButtonDefaults.iconButtonColors(containerColor = containerColor),
+    modifier = Modifier.background(
+      containerColor,
+      RoundedCornerShape(8.dp)
+    )
+  ) {
+    if (iconRes != null) {
+      Icon(
+        painter = painterResource(iconRes),
+        contentDescription = contentDescription,
+        tint = Color.White
+      )
+    } else if (imageVector != null) {
+      Icon(
+        imageVector = imageVector,
+        contentDescription = contentDescription,
+        tint = Color.White
+      )
+    }
+  }
+}
 
 @Composable
 fun PlayerDropdown(
@@ -272,32 +334,29 @@ fun PlayerDropdown(
     OutlinedTextField(
       value = selectedPlayer?.name ?: "",
       onValueChange = {},
-      label = { Text(label, color = Color.Gray) },
+      label = { Text(label) },
       readOnly = true,
       trailingIcon = {
         Icon(
           imageVector = Icons.Default.ArrowDropDown,
-          contentDescription = null,
-          tint = Color.White
+          contentDescription = null
         )
       },
       singleLine = true,
       colors = OutlinedTextFieldDefaults.colors(
-        focusedTextColor = Color.White,
-        unfocusedTextColor = Color.White,
-        focusedBorderColor = Color.White,
-        unfocusedBorderColor = Color.Gray,
-        cursorColor = Color.White,
-        focusedLabelColor = Color.White
+        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+        focusedBorderColor = MaterialTheme.colorScheme.primary,
+        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+        cursorColor = MaterialTheme.colorScheme.primary,
+        focusedLabelColor = MaterialTheme.colorScheme.primary,
+        unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
       ),
       modifier = Modifier
         .fillMaxWidth()
         .clickable { expanded = true }
     )
 
-    // Overlay transparent button to capture clicks if TextField eats them (depends on version, usually readOnly consumes clicks differently)
-    // Better: use Box with onClick on modifier of Box, but TextField needs to be disabled?
-    // Actually, creating a transparent box over it is reliable.
     Box(
       modifier = Modifier
         .matchParentSize()
@@ -307,14 +366,14 @@ fun PlayerDropdown(
     DropdownMenu(
       expanded = expanded,
       onDismissRequest = { expanded = false },
-      modifier = Modifier.background(Color(0xFF2C2C2C))
+      modifier = Modifier.background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
       players.forEach { player ->
         DropdownMenuItem(
           text = {
             Text(
               player.name,
-              color = Color.White
+              color = MaterialTheme.colorScheme.onSurface
             )
           },
           onClick = {
@@ -363,7 +422,7 @@ fun AddPlayerDialog(
 }
 
 @Composable
-fun IconRow(modifier: Modifier = Modifier, context: Context) {
+fun SocialLinks(modifier: Modifier = Modifier, context: Context) {
   Row(
     modifier = modifier,
     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -378,7 +437,7 @@ fun IconRow(modifier: Modifier = Modifier, context: Context) {
       Icon(
         painter = painterResource(id = R.drawable.icon_github),
         contentDescription = "GitHub",
-        tint = Color.White,
+        tint = MaterialTheme.colorScheme.onBackground,
         modifier = Modifier.fillMaxSize()
       )
     }
@@ -420,7 +479,7 @@ fun ShareButton(modifier: Modifier = Modifier, context: Context) {
     Icon(
       imageVector = Icons.Default.Share,
       contentDescription = "Share Game",
-      tint = Color.White,
+      tint = MaterialTheme.colorScheme.onBackground,
       modifier = Modifier.fillMaxSize()
     )
   }

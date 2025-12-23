@@ -31,11 +31,10 @@ import kotlinx.coroutines.launch
 class BattleViewModel(
   initialLeftTeam: TeamViewModel = TeamViewModel(Team("Blue", emptyList(), true)),
   initialRightTeam: TeamViewModel = TeamViewModel(Team("Red", emptyList(), false)),
-  var playerRepository: PlayerRepository? = null,
-  var characterStatsRepository: CharacterStatsRepository? = null
+  val playerRepository: PlayerRepository,
+  val characterStatsRepository: CharacterStatsRepository,
+  val resourceResolver: (Int) -> String
 ) : ViewModel() {
-
-  var resourceResolver: ((Int) -> String)? = null
 
   // --- Components ---
 
@@ -116,13 +115,10 @@ class BattleViewModel(
 
     // Increment pick rates
     viewModelScope.launch {
-      val statsRepo = characterStatsRepository
-      if (statsRepo != null) {
-        val allCharacters = newLeftTeam.team.entities + newRightTeam.team.entities
-        allCharacters.forEach { entity ->
-          val nameKey = entity::class.simpleName ?: "Unknown"
-          statsRepo.incrementPickCount(nameKey)
-        }
+      val allCharacters = newLeftTeam.team.entities + newRightTeam.team.entities
+      allCharacters.forEach { entity ->
+        val nameKey = entity::class.simpleName ?: "Unknown"
+        characterStatsRepository.incrementPickCount(nameKey)
       }
     }
   }
