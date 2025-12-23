@@ -12,7 +12,7 @@ object Flask : Totem(
   name = R.string.totem_flask,
   iconRes = R.drawable.totem_flask,
   initialHealth = 105f,
-  cost = 75,
+  cost = 60,
   activeAbility = TotemAbility(
     nameRes = R.string.tability_dispel,
     descriptionRes = R.string.tability_dispel_desc,
