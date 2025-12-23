@@ -314,7 +314,7 @@
     <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s picks</string>
     <string name="effect_overheal">Overheal</string>
-    <string name="effect_overheal_desc">Heals for and permits up to %s extra max health</string>
+    <string name="effect_overheal_desc">Permits up to %s extra max health</string>
     <string name="effect_shielded">Shielded</string>
     <string name="effect_shielded_desc">%s of the icoming damage is absorbed by this shield</string>
     <string name="trait_relentless">Relentless</string>
@@ -324,7 +324,7 @@
     <string name="ability_neutralize">Neutralize</string>
     <string name="ability_neutralize_desc">Attack the target and reset their ability charges. Charge: %s turns</string>
     <string name="ability_density">Density</string>
-    <string name="ability_density_desc">Apply %s %s to the target for %s turns. Charge: %s turns</string>
+    <string name="ability_density_desc">Apply %s %s to the target for %s turns and heal them for %s health. Charge: %s turns</string>
     <string name="ability_lockdown">Lockdown</string>
     <string name="ability_lockdown_desc">Apply %s for %s%% of your max health to the ally with the least health for %s turns</string>
     <string name="ui_htp_tab_traits">Traits</string>

@@ -20,12 +20,6 @@ class Overheal(duration: Int, multiplier: Int = 1) : StatusEffect(
     return OVERHEAL_AMOUNT
   }
 
-  override fun onApply(target: EntityViewModel) {
-    target.viewModelScope.launch {
-      target.heal(OVERHEAL_AMOUNT)
-    }
-  }
-
   companion object Spec : Translatable {
     val iconRes = R.drawable.effect_overheal
     override val formatArgs = listOf(OVERHEAL_AMOUNT)

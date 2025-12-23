@@ -21,7 +21,7 @@ class Confusion(duration: Int) : StatusEffect(
   ): EntityViewModel {
     if (Random.nextFloat() >= (CHANGE_TARGET_CHANCE / 100f)) return target
 
-    val potentialTargets = target.team.getTargetableEnemies().filter { it != target }
+    val potentialTargets = owner.team.getTargetableEnemies().filter { it != target }
 
     if (potentialTargets.isEmpty()) return target
 
@@ -36,6 +36,6 @@ class Confusion(duration: Int) : StatusEffect(
     override val descriptionRes = R.string.effect_confusion_desc
     override val isPositive = false
 
-    private const val CHANGE_TARGET_CHANCE = 33
+    private const val CHANGE_TARGET_CHANCE = 50f
   }
 }

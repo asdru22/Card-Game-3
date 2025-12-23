@@ -41,6 +41,7 @@ class LeadCube : Entity(
       Overheal.Spec,
       PASSIVE_OVERHEAL_MULTIPLIER.toRoman(),
       PASSIVE_DURATION,
+      PASSIVE_HEAL,
       PASSIVE_CHARGE
     )
   ) { source, target ->
@@ -50,6 +51,7 @@ class LeadCube : Entity(
         multiplier = PASSIVE_OVERHEAL_MULTIPLIER
       ), source
     )
+    target.heal(PASSIVE_HEAL, source)
   },
   ultimateAbility = Ability(
     nameRes = R.string.ability_lockdown,
@@ -72,6 +74,7 @@ class LeadCube : Entity(
     const val ACTIVE_CHARGE = 2
     const val PASSIVE_OVERHEAL_MULTIPLIER = 2
     const val PASSIVE_DURATION = 7
+    const val PASSIVE_HEAL = 25f
     const val PASSIVE_CHARGE = 2
     const val ULTIMATE_SHIELDED_MULTIPLIER = 27f
     const val ULTIMATE_EFFECT_DURATION = 5
