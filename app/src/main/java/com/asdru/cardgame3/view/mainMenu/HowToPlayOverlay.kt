@@ -38,6 +38,8 @@ import com.asdru.cardgame3.R
 
 enum class HowToPlayTab(@param:StringRes val titleRes: Int) {
   General(R.string.ui_htp_tab_general),
+  Traits(R.string.ui_htp_tab_traits),
+  Effects(R.string.ui_htp_tab_effects),
   Shop(R.string.ui_htp_tab_shop),
   Weather(R.string.ui_htp_tab_weather),
   TimedMode(R.string.ui_htp_tab_timed),
@@ -111,20 +113,30 @@ fun HowToPlayOverlay(
               TextSection(R.string.ui_htp_overview, R.string.ui_htp_overview_desc)
               TextSection(R.string.ui_htp_abilities, R.string.ui_htp_abilities_desc)
               TextSection(R.string.ui_htp_rage, R.string.ui_htp_rage_desc)
-              TextSection(R.string.ui_htp_effects, R.string.ui_htp_effects_desc)
-              TextSection(R.string.ui_htp_traits, R.string.ui_htp_traits_desc)
               TextSection(R.string.ui_htp_charges, R.string.ui_htp_charges_desc)
               TextSection(R.string.ui_htp_character_info, R.string.ui_htp_character_info_desc)
             }
+
+            HowToPlayTab.Effects -> {
+              TextSection(R.string.ui_htp_tab_effects, R.string.ui_htp_effects_desc)
+            }
+
+            HowToPlayTab.Traits -> {
+              TextSection(R.string.ui_htp_tab_traits, R.string.ui_htp_traits_desc)
+            }
+
             HowToPlayTab.Shop -> {
               TextSection(R.string.ui_htp_tab_shop, R.string.ui_htp_shop_desc)
             }
+
             HowToPlayTab.Weather -> {
               TextSection(R.string.ui_htp_tab_weather, R.string.ui_htp_weather_desc)
             }
+
             HowToPlayTab.TimedMode -> {
               TextSection(R.string.ui_htp_tab_timed, R.string.ui_htp_timed_desc)
             }
+
             HowToPlayTab.Totems -> {
               TextSection(R.string.ui_htp_tab_totems, R.string.ui_htp_totems_desc)
             }

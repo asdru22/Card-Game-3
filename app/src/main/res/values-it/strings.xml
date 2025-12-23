@@ -198,7 +198,7 @@
     <string name="ui_effects_applied">Effetti Applicati</string>
     <string name="ui_coins_spent">Soldi Spesi</string>
     <string name="item_antidote">Antidoto</string>
-    <string name="item_antidote_desc">Rimuove tutti gli effetti negativi</string>
+    <string name="item_antidote_desc">Rimuove tutti gli effetti negativi, ignorando i moltiplicatori</string>
     <string name="item_hamburger">Hamburger</string>
     <string name="item_hamburger_desc">Applica %s per %s turni</string>
     <string name="trait_furious">Furioso</string>
@@ -241,9 +241,9 @@
     <string name="ui_htp_rage">Furia</string>
     <string name="ui_htp_rage_desc">Ogni squadra ha una barra della furia che aumenta del 5%% dopo che un giocatore esegue un\'abilità attiva o passiva.\nLa furia può essere influenzata da altri fattori come eventi meteorologici o tratti.\nQuando la barra della furia è piena inizierà a pulsare e apparirà l\'icona della fiamma usata per eseguire le abilità supreme.</string>
     <string name="ui_htp_effects">Effetti</string>
-    <string name="ui_htp_effects_desc">Gli effetti influenzano il comportamento di un personaggio e durano un certo numero di turni.\nGli effetti positivi sono mostrati in verde, quelli negativi in viola.</string>
+    <string name="ui_htp_effects_desc">Gli effetti influenzano il comportamento di un personaggio e durano un certo numero di turni.\nGli effetti positivi sono mostrati in verde, quelli negativi in viola.\nCerti effetti hanno moltiplicatori. Indicano quante volte un\'abilità \"rimuovi effetto\" deve essere usata su di essi affinché vengano rimossi del tutto. Rubare effetti e la loro scadenza ignora i moltiplicatori</string>
     <string name="ui_htp_traits">Tratti</string>
-    <string name="ui_htp_traits_desc">I tratti sono simili agli effetti, tranne per il fatto che sono legati a specifici personaggi e non possono essere applicati o rimossi.\nPossono essere benefici o limitare il potere di un personaggio.</string>
+    <string name="ui_htp_traits_desc">I tratti sono simili agli effetti, tranne per il fatto che sono legati a specifici personaggi e non possono essere applicati o rimossi.\nPossono essere benefici o limitare il potere di un personaggio.\nAlcuni tratti hanno cariche. Questo significa che richiedono più turni per avere effetto.</string>
     <string name="ui_htp_character_info">Dettagli Personaggio</string>
     <string name="ui_htp_character_info_desc">"Tocca due volte una carta per vedere i suoi dettagli.\nCliccare sul nome o sulle statistiche aprirà un menu radar che visualizza i punti di forza e debolezza del personaggio.\nLa scheda informativa mostra anche abilità, tratti ed effetti attivi correnti del personaggio.\nSe la descrizione dell\'abilità di un personaggio contiene un effetto, tocca il testo per vedere cosa fa l\'effetto. "</string>
     <string name="ui_htp_charges">Cariche</string>
@@ -311,7 +311,7 @@
     <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s scelte</string>
     <string name="effect_overheal">Sovracura</string>
-    <string name="effect_overheal_desc">Quando la salute è al massimo, conferisce fino a %s salute massima extra</string>
+    <string name="effect_overheal_desc">Cura e conferisce fino a %s salute massima extra</string>
     <string name="effect_shielded">Scudato</string>
     <string name="effect_shielded_desc">Il %s del danno in arrivo viene assorbito da questo scudo</string>
     <string name="trait_relentless">Implacabile</string>
@@ -323,5 +323,6 @@
     <string name="ability_density">Densità</string>
     <string name="ability_density_desc">Applica %s %s al bersaglio per %s turni. Carica: %s turni</string>
     <string name="ability_lockdown">Blocco</string>
-    <string name="ability_lockdown_desc">Applica %s pari al %s%% della tua salute massima all'alleato con meno salute per %s turni</string>
+    <string name="ability_lockdown_desc">Applica %s pari al %s%% della tua salute massima all\'alleato con meno salute per %s turni</string>
+    <string name="ui_htp_tab_traits">Tratti</string>
 </resources>

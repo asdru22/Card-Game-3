@@ -200,7 +200,7 @@
     <string name="ui_effects_applied">Effects Applied</string>
     <string name="ui_coins_spent">Coins Spent</string>
     <string name="item_antidote">Antidote</string>
-    <string name="item_antidote_desc">Removes all negative effects</string>
+    <string name="item_antidote_desc">Removes all negative effects, ignoring multipliers</string>
     <string name="item_hamburger">Hamburger</string>
     <string name="item_hamburger_desc">Apply %s for %s turns</string>
     <string name="trait_furious">Furious</string>
@@ -243,9 +243,9 @@
     <string name="ui_htp_rage">Rage</string>
     <string name="ui_htp_rage_desc">Every team has a rage bar that increases by 5% after a player performs an active or passive ability.\nRage can be influenced by other factors such as weather events or traits.\nWhen the rage bar is full it will begin pulsating and the flame icon used to perform ultimate abilities appear.</string>
     <string name="ui_htp_effects">Effects</string>
-    <string name="ui_htp_effects_desc">Effects influence how a character behave, and last a certain number of turns.\nPositive effects are shown in green, and negative ones in purple.</string>
+    <string name="ui_htp_effects_desc">"Effects influence how a character behave, and last a certain number of turns.\nPositive effects are shown in green, and negative ones in purple.\nSome effects have multipliers. They indicate how many times a \"remove effect\" ability has to be used on them in order to be completely removed. Effect stealing and expiring ingore multipliers. "</string>
     <string name="ui_htp_traits">Traits</string>
-    <string name="ui_htp_traits_desc">Traits are similar to effects, except they are tied to specific characters and cannot be applied or removed.\nThey can either be beneficial or limit a character\'s power.</string>
+    <string name="ui_htp_traits_desc">Traits are similar to effects, except they are tied to specific characters and cannot be applied or removed.\nThey can either be beneficial or limit a character\'s power.\nSome traits have charges, meaning that it takes multiple turns for their ability to take effect.</string>
     <string name="ui_htp_character_info">Character Details</string>
     <string name="ui_htp_character_info_desc">"Double tap a card to view its details.\nClicking on its name or stats will open a radar menu that visualizes the character's strengths and weaknesses.\nThe info card also displays the character's abilities, traits and current active effects.\nIf a character's ability description contains an effect, tap the text to see what the effect does. "</string>
     <string name="ui_htp_charges">Charges</string>
@@ -254,7 +254,7 @@
     <string name="ui_htp_tab_shop">Shop</string>
     <string name="ui_htp_tab_weather">Weather</string>
     <string name="ui_htp_tab_timed">Timed Mode</string>
-    <string name="ui_htp_shop_desc">When a character performs an ability, their team gains 3 coins. Additional coins can be obtained from other game events like traits and effects.\nCoins can be spent at the shop during only in your turn. Buy an item by dragging it and releasing it onto the character you want to use it on.</string>
+    <string name="ui_htp_shop_desc">When a character performs an ability, their team gains 3 coins. Additional coins can be obtained from other game events like traits and effects.\nCoins can be spent at the shop only during your turn. Buy an item by dragging it and releasing it onto the character you want to use it on.</string>
     <string name="ui_htp_weather_desc">By enabling weather, a random weather modifier occurs during battle, granting a team with equal positive or negative effects.</string>
     <string name="ui_htp_timed_desc">In Timed Mode, you have a limited amount of time to make your moves each turn.\nIf you don\'t do anything, a random character will use its active or passive ability on a random character.</string>
     <string name="tability_purr">Purr</string>
@@ -314,7 +314,7 @@
     <string name="ui_rank">%s.</string>
     <string name="ui_card_pick">%s picks</string>
     <string name="effect_overheal">Overheal</string>
-    <string name="effect_overheal_desc">When at full health, permits up to %s extra max health</string>
+    <string name="effect_overheal_desc">Heals for and permits up to %s extra max health</string>
     <string name="effect_shielded">Shielded</string>
     <string name="effect_shielded_desc">%s of the icoming damage is absorbed by this shield</string>
     <string name="trait_relentless">Relentless</string>
@@ -327,4 +327,6 @@
     <string name="ability_density_desc">Apply %s %s to the target for %s turns. Charge: %s turns</string>
     <string name="ability_lockdown">Lockdown</string>
     <string name="ability_lockdown_desc">Apply %s for %s%% of your max health to the ally with the least health for %s turns</string>
+    <string name="ui_htp_tab_traits">Traits</string>
+    <string name="ui_htp_tab_effects">Effects</string>
 </resources>

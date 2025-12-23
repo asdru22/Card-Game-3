@@ -188,7 +188,7 @@ fun MainMenuScreen(
       Spacer(modifier = Modifier.height(24.dp))
 
       Row(
-        modifier = Modifier.fillMaxWidth(0.7f),
+        modifier = Modifier.fillMaxWidth(0.8f),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
       ) {
@@ -199,7 +199,7 @@ fun MainMenuScreen(
             .background(Color(0xFF2E7D32), RoundedCornerShape(8.dp))
         ) {
           Icon(
-            imageVector = Icons.Default.Add,
+            painter = painterResource(R.drawable.icon_add_player),
             contentDescription = "Add Player",
             tint = Color.White
           )
@@ -214,25 +214,26 @@ fun MainMenuScreen(
             .background(Color(0xFFFFA000), RoundedCornerShape(8.dp))
         ) {
           Icon(
-            imageVector = Icons.AutoMirrored.Filled.List,
+            painter = painterResource(R.drawable.icon_statistics),
             contentDescription = "Leaderboard",
             tint = Color.White
           )
         }
-      }
 
-      Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-      IconButton(
-        onClick = { showRules = true },
-        modifier = Modifier.size(48.dp)
-      ) {
-        Icon(
-          imageVector = Icons.AutoMirrored.Filled.Help,
-          contentDescription = "How to play",
-          tint = Color.Gray,
-          modifier = Modifier.fillMaxSize()
-        )
+        // How to Play Button
+        IconButton(
+          onClick = { showRules = true },
+          modifier = Modifier
+            .background(Color(0xFF757575), RoundedCornerShape(8.dp))
+        ) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.Help,
+            contentDescription = "How to play",
+            tint = Color.White
+          )
+        }
       }
     }
 
@@ -248,16 +249,13 @@ fun MainMenuScreen(
           playerViewModel.addPlayer(
             name = name,
             onSuccess = { showAddPlayerDialog = false },
-            onError = { /* Handle error, potentially show toast or error state in dialog */ }
+            onError = {}
           )
         }
       )
     }
-
-
   }
 }
-
 
 
 @Composable
