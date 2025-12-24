@@ -141,7 +141,8 @@ fun StrategicSelectionScreen(
 
           CharacterInfoCard(
             viewModel = tempViewModel,
-            onClose = { infoCharacter = null }
+            onClose = { infoCharacter = null },
+            showAlternates = true
           )
         }
       }

@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.entity.Entity
@@ -54,6 +55,33 @@ class EntityViewModel(
   val damageType: DamageType = entity.damageType
   val iconRes: Int = entity.iconRes
   val traits: List<Trait> get() = entity.traits
+
+  private var activeAbilityOverride by mutableStateOf<Ability?>(null)
+  private var ultimateAbilityOverride by mutableStateOf<Ability?>(null)
+
+  val activeAbility: Ability
+    get() = activeAbilityOverride ?: entity.activeAbility
+
+  val ultimateAbility: Ability
+    get() = ultimateAbilityOverride ?: entity.ultimateAbility
+
+  fun swapAbilities() {
+    if (entity.alternateActiveAbilities.isNotEmpty()) {
+      activeAbilityOverride = if (activeAbilityOverride == null) {
+        entity.alternateActiveAbilities.firstOrNull()
+      } else {
+        null
+      }
+    }
+
+    if (entity.alternateUltimateAbilities.isNotEmpty()) {
+      ultimateAbilityOverride = if (ultimateAbilityOverride == null) {
+        entity.alternateUltimateAbilities.firstOrNull()
+      } else {
+        null
+      }
+    }
+  }
 
   var onGetWeather: (() -> WeatherEvent?)? = null
 

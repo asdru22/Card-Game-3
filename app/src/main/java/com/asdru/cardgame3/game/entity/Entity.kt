@@ -19,5 +19,7 @@ sealed class Entity(
   val passiveAbility: Ability,
   val activeAbility: Ability,
   val ultimateAbility: Ability,
+  val alternateActiveAbilities: List<Ability> = emptyList(),
+  val alternateUltimateAbilities: List<Ability> = emptyList(),
   val traits: List<Trait> = emptyList()
 )

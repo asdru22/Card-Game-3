@@ -234,7 +234,7 @@ fun CharacterCard(
         if (hasActiveCharges) {
           ChargeIndicator(
             current = viewModel.currentActiveCharges,
-            max = viewModel.entity.activeAbility.charges,
+            max = viewModel.activeAbility.charges,
             activeColor = Color(0xFF66BB6A)
           )
         }

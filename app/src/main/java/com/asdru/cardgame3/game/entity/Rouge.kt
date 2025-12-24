@@ -54,7 +54,7 @@ class Rouge : Entity(
           if (ranger.isAlive) {
             val target = randomEnemy.team.getAliveMembers().randomOrNull()
             if (target != null) {
-              ranger.entity.activeAbility.effect(ranger, target)
+              ranger.activeAbility.effect(ranger, target)
             }
           }
         }

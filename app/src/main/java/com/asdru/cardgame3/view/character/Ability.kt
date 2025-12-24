@@ -54,7 +54,6 @@ fun CharacterAbility(
       )
     }
 
-    // This is now much cleaner
     SmartDescriptionText(
       translatable = ability,
       textColor = Color.LightGray

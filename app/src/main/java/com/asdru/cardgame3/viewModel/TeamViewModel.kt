@@ -63,8 +63,8 @@ class TeamViewModel(
     return getAllMembers().filter { it.isAlive }
   }
 
-  fun getOtherAliveMembers(entity: EntityViewModel): List<EntityViewModel> {
-    return getAliveMembers().filter { it != entity }
+  fun getOtherAliveMembers(filter: EntityViewModel): List<EntityViewModel> {
+    return getAliveMembers().filter { it != filter }
   }
 
   fun getRandomAliveMember(): EntityViewModel? {

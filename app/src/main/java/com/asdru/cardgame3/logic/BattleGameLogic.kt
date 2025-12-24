@@ -111,7 +111,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
       if (validTargets.isNotEmpty()) {
         val randomEnemy = validTargets.random()
-        caster.entity.ultimateAbility.effect(caster, randomEnemy)
+        caster.ultimateAbility.effect(caster, randomEnemy)
       }
       checkWinCondition()
       checkWeatherChange()

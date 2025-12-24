@@ -24,5 +24,6 @@ class Fuse(duration: Int) : StatusEffect(
     override val descriptionRes = R.string.effect_fuse_desc
     override val isPositive = false
     public const val DAMAGE_AMOUNT = 18f
+    override val formatArgs = listOf(DAMAGE_AMOUNT)
   }
 }

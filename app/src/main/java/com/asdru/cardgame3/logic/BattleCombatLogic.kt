@@ -22,7 +22,7 @@ object BattleCombatLogic {
     val finalTarget = source.effectManager.modifyActiveTarget(source, target)
 
     source.currentPassiveCharges = 0
-    val ability = source.entity.activeAbility
+    val ability = source.activeAbility
 
     if (ability.charges > 1) {
       source.currentActiveCharges++

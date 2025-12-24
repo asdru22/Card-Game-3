@@ -332,4 +332,14 @@
     <string name="effect_fuse">Fuse</string>
     <string name="effect_fuse_desc">Receive %s damage when the effect expires</string>
     <string name="entity_jester">Jester</string>
+    <string name="ability_surprise_gift">Surprise Gift</string>
+    <string name="ability_surprise_gift_desc">Deal %s%% damage and apply %s to the target for %s turns</string>
+    <string name="ability_sleight_of_hand">Sleight of Hand</string>
+    <string name="ability_sleight_of_hand_desc">Heal %s health and switch abilities</string>
+    <string name="ability_the_punchline">The Punchline</string>
+    <string name="ability_the_punchline_desc">Trigger all %s effects immediately. The explosion deals %s%% of the effect\'s damage to all other enemies</string>
+    <string name="ability_juggling_act">Juggling Act</string>
+    <string name="ability_juggling_act_desc">Throw %s knifes at random targets, if they hit the same enemy, deal %s extra damage.</string>
+    <string name="ability_curtain_call">Curtain Call</string>
+    <string name="ability_curtain_call_desc">Throw %s knives at random targets. Enemies hit %s or more times are %s for %s turns</string>
 </resources>

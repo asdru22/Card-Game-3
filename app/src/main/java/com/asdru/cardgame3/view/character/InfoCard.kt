@@ -59,7 +59,8 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 fun CharacterInfoCard(
   viewModel: EntityViewModel,
   onClose: () -> Unit,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
+  showAlternates: Boolean = false
 ) {
   var showRadarGraph by remember { mutableStateOf(false) }
 
@@ -98,7 +99,7 @@ fun CharacterInfoCard(
           HorizontalDivider(thickness = 1.dp, color = Color.Gray.copy(alpha = 0.2f))
           Spacer(modifier = Modifier.height(12.dp))
 
-          CharacterDetailsBody(viewModel)
+          CharacterDetailsBody(viewModel, showAlternates)
         }
 
         if (showRadarGraph) {
@@ -244,7 +245,10 @@ private fun CharacterStatsPill(
 }
 
 @Composable
-private fun CharacterDetailsBody(viewModel: EntityViewModel) {
+private fun CharacterDetailsBody(
+  viewModel: EntityViewModel,
+  showAlternates: Boolean
+) {
   val context = LocalContext.current
 
   Row(
@@ -260,24 +264,51 @@ private fun CharacterDetailsBody(viewModel: EntityViewModel) {
         .heightIn(max = 250.dp)
         .verticalScroll(rememberScrollState())
     ) {
+      // Active Ability
       CharacterAbility(
         context = context,
         label = stringResource(R.string.ui_active),
-        ability = viewModel.entity.activeAbility,
+        ability = viewModel.activeAbility,
         color = Color(0xFF66BB6A),
       )
+      if (showAlternates && viewModel.entity.alternateActiveAbilities.isNotEmpty()) {
+         viewModel.entity.alternateActiveAbilities.forEach { altAbility ->
+             Spacer(modifier = Modifier.height(4.dp))
+             CharacterAbility(
+                context = context,
+                label = stringResource(R.string.ui_active),
+                ability = altAbility,
+                color = Color(0xFF66BB6A).copy(alpha = 0.7f),
+             )
+         }
+      }
+
+      // Passive Ability
       CharacterAbility(
         context = context,
         label = stringResource(R.string.ui_passive),
         ability = viewModel.entity.passiveAbility,
         color = Color(0xFF42A5F5)
       )
+
+      // Ultimate Ability
       CharacterAbility(
         context = context,
         label = stringResource(R.string.ui_ultimate),
-        ability = viewModel.entity.ultimateAbility,
+        ability = viewModel.ultimateAbility,
         color = Color(0xFFE91E63)
       )
+      if (showAlternates && viewModel.entity.alternateUltimateAbilities.isNotEmpty()) {
+         viewModel.entity.alternateUltimateAbilities.forEach { altAbility ->
+             Spacer(modifier = Modifier.height(4.dp))
+             CharacterAbility(
+                context = context,
+                label = stringResource(R.string.ui_ultimate),
+                ability = altAbility,
+                color = Color(0xFFE91E63).copy(alpha = 0.7f),
+             )
+         }
+      }
     }
 
     if (viewModel.traits.isNotEmpty()) {
