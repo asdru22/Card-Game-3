@@ -1,5 +1,6 @@
 package com.asdru.cardgame3
 
+import ForceDefaultSystemSettings
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
@@ -57,13 +58,15 @@ class MainActivity : ComponentActivity() {
     val battleViewModel: BattleViewModel by viewModels { battleViewModelFactory }
 
     setContent {
-      CardGame3Theme {
-        CardGameApp(
-          battleViewModel = battleViewModel,
-          playerViewModel = playerViewModel,
-          statisticsViewModel = statisticsViewModel,
-          gameContent = { BattleScreen(battleViewModel) }
-        )
+      ForceDefaultSystemSettings {
+        CardGame3Theme {
+          CardGameApp(
+            battleViewModel = battleViewModel,
+            playerViewModel = playerViewModel,
+            statisticsViewModel = statisticsViewModel,
+            gameContent = { BattleScreen(battleViewModel) }
+          )
+        }
       }
     }
   }
