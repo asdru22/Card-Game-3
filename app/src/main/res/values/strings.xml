@@ -329,4 +329,7 @@
     <string name="ability_lockdown_desc">Apply %s for %s%% of your max health to the ally with the least health for %s turns</string>
     <string name="ui_htp_tab_traits">Traits</string>
     <string name="ui_htp_tab_effects">Effects</string>
+    <string name="effect_fuse">Fuse</string>
+    <string name="effect_fuse_desc">Receive %s damage when the effect expires</string>
+    <string name="entity_jester">Jester</string>
 </resources>
