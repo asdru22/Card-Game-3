@@ -23,8 +23,8 @@ class Jester : Entity(
   iconRes = R.drawable.entity_jester,
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFBBFC79),
-  damageType = DamageType.Melee,
-  radarStats = RadarStats(0.7f, 0.5f, 0.3f, 0.0f, 0.2f),
+  damageType = DamageType.Ranged,
+  radarStats = RadarStats(0.7f, 0.2f, 0.0f, 0.8f, 0.8f),
   activeAbility = Ability(
     nameRes = R.string.ability_surprise_gift,
     descriptionRes = R.string.ability_surprise_gift_desc,
@@ -34,7 +34,7 @@ class Jester : Entity(
       FUSE_DURATION
     ),
   ) { source, target ->
-    source.applyDamage(target, amount = ACTIVE_A_DAMAGE_PERCENT / 100f)
+    source.applyDamage(target, amount = DAMAGE * ACTIVE_A_DAMAGE_PERCENT / 100f)
     target.addEffect(Fuse(FUSE_DURATION), source = source)
   },
   passiveAbility = Ability(
@@ -128,14 +128,14 @@ class Jester : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 120f
-    const val DAMAGE = 12f
+    const val DAMAGE = 13f
 
-    const val ACTIVE_A_DAMAGE_PERCENT = 20
+    const val ACTIVE_A_DAMAGE_PERCENT = 20f
     const val FUSE_DURATION = 2
     const val ACTIVE_B_KNIVES = 2
-    const val ACTIVE_B_EXTRA_DAMAGE = 8f
+    const val ACTIVE_B_EXTRA_DAMAGE = 7f
     const val PASSIVE_HEAL = 8f
-    const val ULTIMATE_A_DAMAGE_PERCENT = 30
+    const val ULTIMATE_A_DAMAGE_PERCENT = 30f
     const val ULTIMATE_B_KNIVES = 4
     const val ULTIMATE_B_HITS_FOR_STUN = 2
     const val ULTIMATE_B_STUN_DURATION = 2

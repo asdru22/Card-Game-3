@@ -325,4 +325,19 @@
     <string name="ability_lockdown">Blocco</string>
     <string name="ability_lockdown_desc">Applica %s pari al %s%% della tua salute massima all\'alleato con meno salute per %s turni</string>
     <string name="ui_htp_tab_traits">Tratti</string>
+    <string name="ui_htp_tab_effects">Effetti</string>
+    <string name="effect_fuse">Miccia</string>
+    <string name="effect_fuse_desc">Subisci %s danni quando l\'effetto scade</string>
+    <string name="entity_jester">Giullare</string>
+    <string name="ability_surprise_gift">Regalo a Sorpresa</string>
+    <string name="ability_surprise_gift_desc">Infligge il %s%% di danni e applica %s al bersaglio per %s turni</string>
+    <string name="ability_sleight_of_hand">Gioco di Prestigio</string>
+    <string name="ability_sleight_of_hand_desc">Cura %s salute e cambia abilità</string>
+    <string name="ability_the_punchline">Battuta Finale</string>
+    <string name="ability_the_punchline_desc">Attiva immediatamente tutti gli effetti %s. L\'esplosione infligge il %s%% dei danni dell\'effetto a tutti gli altri nemici</string>
+    <string name="ability_juggling_act">Numero di Giocoleria</string>
+    <string name="ability_juggling_act_desc">Lancia %s coltelli a bersagli casuali; se colpiscono lo stesso nemico, infliggi %s danni extra.</string>
+    <string name="ability_curtain_call">Cala il Sipario</string>
+    <string name="ability_curtain_call_desc">Lancia %s coltelli a bersagli casuali. I nemici colpiti %s o più volte vengono %s per %s turni</string>
+
 </resources>
