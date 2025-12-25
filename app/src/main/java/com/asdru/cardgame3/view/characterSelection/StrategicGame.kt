@@ -32,6 +32,11 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.random.Random
 import kotlin.reflect.full.createInstance
 
+private enum class SelectionPhase {
+  BANNING,
+  PICKING
+}
+
 @Composable
 fun StrategicSelectionScreen(
   player1Name: String,
@@ -41,6 +46,8 @@ fun StrategicSelectionScreen(
 ) {
   val p1Team = remember { mutableStateListOf<Entity>() }
   val p2Team = remember { mutableStateListOf<Entity>() }
+  val bannedEntities = remember { mutableStateListOf<Entity>() }
+  var phase by remember { mutableStateOf(SelectionPhase.BANNING) }
   var isP1Turn by remember { mutableStateOf(Random.nextBoolean()) }
   var infoCharacter by remember { mutableStateOf<Entity?>(null) }
   var isWeatherMode by remember { mutableStateOf(false) }
@@ -52,6 +59,7 @@ fun StrategicSelectionScreen(
 
   val p1Color = Color(0xFF4CAF50)
   val p2Color = Color(0xFFE53935)
+
   val canStart = p1Team.size == 3 && p2Team.size == 3
 
   Box(
@@ -64,14 +72,28 @@ fun StrategicSelectionScreen(
       modifier = Modifier.fillMaxSize(),
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
+      val subtitle = if (phase == SelectionPhase.BANNING) {
+        stringResource(R.string.ui_ban_card)
+      } else {
+        stringResource(R.string.ui_choose_card)
+      }
+
       SelectionHeader(
         p1Name = player1Name,
         p2Name = player2Name,
-        p1Color = if (isP1Turn) p1Color else Color.Gray,
-        p2Color = if (!isP1Turn) p2Color else Color.Gray,
-        p1Subtitle = if (isP1Turn) stringResource(R.string.ui_choose_card) else null,
-        p2Subtitle = if (!isP1Turn) stringResource(R.string.ui_choose_card) else null,
+        p1Color = if (canStart) Color.White else if (isP1Turn) p1Color else Color.Gray,
+        p2Color = if (canStart) Color.White else if (!isP1Turn) p2Color else Color.Gray,
+        p1Subtitle = if (canStart) null else if (isP1Turn) subtitle else null,
+        p2Subtitle = if (canStart) null else if (!isP1Turn) subtitle else null,
         controls = {
+          val buttonText = if (canStart) {
+            stringResource(R.string.ui_start)
+          } else if (phase == SelectionPhase.BANNING) {
+            stringResource(R.string.ui_ban_turn)
+          } else {
+            stringResource(R.string.ui_pick_turn)
+          }
+
           GameSetupControls(
             onBack = onBack,
             onStart = { onStartGame(p1Team, p2Team, isWeatherMode, timerSeconds) },
@@ -86,7 +108,8 @@ fun StrategicSelectionScreen(
                 30 -> 60
                 else -> 0
               }
-            }
+            },
+            buttonText = buttonText
           )
         }
       )
@@ -102,16 +125,28 @@ fun StrategicSelectionScreen(
         items(availableCharacters) { entity ->
           val isTakenByP1 = p1Team.any { it::class == entity::class }
           val isTakenByP2 = p2Team.any { it::class == entity::class }
+          val isBanned = bannedEntities.any { it::class == entity::class }
           val isSelected = isTakenByP1 || isTakenByP2
 
           CharacterGridItem(
             entity = entity,
             isSelected = isSelected,
+            isBanned = isBanned,
             activeColor = if (isTakenByP1) p1Color else if (isTakenByP2) p2Color else Color.White,
             onSelect = {
-              if (!isSelected && !canStart) {
-                if (isP1Turn) p1Team.add(entity) else p2Team.add(entity)
-                isP1Turn = !isP1Turn
+              if (phase == SelectionPhase.BANNING) {
+                if (!isBanned) {
+                  bannedEntities.add(entity)
+                  isP1Turn = !isP1Turn
+                  if (bannedEntities.size >= 2) {
+                    phase = SelectionPhase.PICKING
+                  }
+                }
+              } else {
+                if (!isSelected && !isBanned && !canStart) {
+                  if (isP1Turn) p1Team.add(entity) else p2Team.add(entity)
+                  isP1Turn = !isP1Turn
+                }
               }
             },
             onInfo = { infoCharacter = entity }

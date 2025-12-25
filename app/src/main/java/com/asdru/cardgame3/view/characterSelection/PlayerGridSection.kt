@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.draw.rotate
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.character.CharacterInfoCard
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -115,6 +117,7 @@ fun PlayerGridSection(
 fun CharacterGridItem(
   entity: Entity,
   isSelected: Boolean,
+  isBanned: Boolean = false,
   activeColor: Color,
   onSelect: () -> Unit,
   onInfo: () -> Unit
@@ -127,7 +130,7 @@ fun CharacterGridItem(
     modifier = Modifier
       .fillMaxWidth()
       .aspectRatio(0.85f)
-      .clickable { onSelect() }
+      .clickable(enabled = !isBanned) { onSelect() }
   ) {
     Box(modifier = Modifier.fillMaxSize()) {
       Column(
@@ -139,7 +142,7 @@ fun CharacterGridItem(
       ) {
         Icon(
           painter = painterResource(id = entity.iconRes),
-          tint = entity.color,
+          tint = if (isBanned) Color.DarkGray else entity.color,
           contentDescription = stringResource(id = entity.name),
           modifier = Modifier.size(90.dp),
         )
@@ -158,6 +161,30 @@ fun CharacterGridItem(
             }
           }
         )
+      }
+
+      if (isBanned) {
+        Box(
+          modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black.copy(alpha = 0.7f)),
+          contentAlignment = Alignment.Center
+        ) {
+          Box(
+            modifier = Modifier
+              .rotate(-15f)
+              .padding(horizontal = 8.dp, vertical = 4.dp)
+          ) {
+            Text(
+              text = stringResource(
+                R.string.ui_banned
+              ),
+              color = Color.Red,
+              fontWeight = FontWeight.Bold,
+              fontSize = 20.sp
+            )
+          }
+        }
       }
 
       IconButton(

@@ -97,7 +97,8 @@ fun GameSetupControls(
   isWeatherMode: Boolean,
   onToggleWeather: () -> Unit,
   timerSeconds: Int,
-  onToggleTimer: () -> Unit
+  onToggleTimer: () -> Unit,
+  buttonText: String = stringResource(R.string.ui_start)
 ) {
   Row(
     modifier = Modifier.fillMaxWidth(),
@@ -128,7 +129,7 @@ fun GameSetupControls(
       modifier = Modifier.height(48.dp)
     ) {
       Text(
-        text = stringResource(R.string.ui_start),
+        text = buttonText,
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
         color = if (canStart) Color.White else Color.Gray

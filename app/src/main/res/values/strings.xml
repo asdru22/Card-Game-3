@@ -107,6 +107,9 @@
     <string name="ui_casual_game">Casual Game</string>
     <string name="ui_strategic_game">Strategic Game</string>
     <string name="ui_choose_card">CHOOSE YOUR CARD</string>
+    <string name="ui_ban_card">BAN A CARD</string>
+    <string name="ui_ban_turn">BAN TURN</string>
+    <string name="ui_pick_turn">PICK TURN</string>
     <string name="entity_cannoneer">Cannoneer</string>
     <string name="ability_scattershot">Scattershot</string>
     <string name="ability_scattershot_desc">Blast the target for %s%% damage and hit all other enemies for %s%% damage</string>
@@ -346,4 +349,5 @@
     <string name="ui_no_progress">Any progress in this in this battle will be lost!</string>
     <string name="ui_yes">Yes</string>
     <string name="ui_no">No</string>
+    <string name="ui_banned">BANNED</string>
 </resources>

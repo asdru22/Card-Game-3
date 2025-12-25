@@ -106,6 +106,9 @@
     <string name="ui_casual_game">Partita Semplice</string>
     <string name="ui_strategic_game">Partita Strategica</string>
     <string name="ui_choose_card">SCEGLI LA TUA CARTA</string>
+    <string name="ui_ban_card">BANNA UNA CARTA</string>
+    <string name="ui_ban_turn">TURNO BAN</string>
+    <string name="ui_pick_turn">TURNO SCELTA</string>
     <string name="entity_cannoneer">Cannoniere</string>
     <string name="ability_scattershot">Tiro a Dispersione</string>
     <string name="ability_scattershot_desc">Colpisci il bersaglio per il %s%% dei danni e tutti gli altri nemici per il %s%% dei danni</string>
@@ -343,5 +346,6 @@
     <string name="ui_no_progress">I progressi di questa partita verranno persi</string>
     <string name="ui_yes">Si</string>
     <string name="ui_no">No</string>
+    <string name="ui_banned">BANNATO</string>
 
 </resources>
