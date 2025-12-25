@@ -206,7 +206,7 @@
     <string name="effect_blinded">Accecato</string>
     <string name="effect_blinded_desc">%s di probabilità che le abilità attive falliscano</string>
     <string name="effect_gilded">Dorato</string>
-    <string name="effect_gilded_desc">Ottieni %s moneta quando subisci danni</string>
+    <string name="effect_gilded_desc">Il danno è ridotto del %s%%, ottieni %s monete quando subisci danni</string>
     <string name="entity_unicorn">Unicorno</string>
     <string name="ability_light_beam">Raggio di Luce</string>
     <string name="ability_light_beam_desc">Infliggi danni e applica %s al bersaglio per %s turno. Carica: %s turni</string>
@@ -339,5 +339,9 @@
     <string name="ability_juggling_act_desc">Lancia %s coltelli a bersagli casuali; se colpiscono lo stesso nemico, infliggi %s danni extra.</string>
     <string name="ability_curtain_call">Cala il Sipario</string>
     <string name="ability_curtain_call_desc">Lancia %s coltelli a bersagli casuali. I nemici colpiti %s o più volte vengono %s per %s turni</string>
+    <string name="ui_return_to_main_menu">Ritorna al Menu Principale</string>
+    <string name="ui_no_progress">I progressi di questa partita verranno persi</string>
+    <string name="ui_yes">Si</string>
+    <string name="ui_no">No</string>
 
 </resources>

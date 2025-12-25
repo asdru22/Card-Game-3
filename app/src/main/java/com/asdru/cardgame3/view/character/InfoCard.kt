@@ -163,13 +163,22 @@ private fun CharacterName(
   onClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
+  var textSize by remember { mutableStateOf(20.sp) }
+
   Text(
     text = stringResource(nameResId),
     color = Color.White,
-    fontSize = 20.sp,
+    fontSize = textSize,
     fontWeight = FontWeight.Bold,
     textAlign = TextAlign.Center,
     lineHeight = 22.sp,
+    maxLines = 1,
+    softWrap = false,
+    onTextLayout = { textLayoutResult ->
+      if (textLayoutResult.didOverflowWidth) {
+        textSize *= 0.9f
+      }
+    },
     modifier = modifier
       .clip(RoundedCornerShape(8.dp))
       .clickable { onClick() }
@@ -272,15 +281,15 @@ private fun CharacterDetailsBody(
         color = Color(0xFF66BB6A),
       )
       if (showAlternates && viewModel.entity.alternateActiveAbilities.isNotEmpty()) {
-         viewModel.entity.alternateActiveAbilities.forEach { altAbility ->
-             Spacer(modifier = Modifier.height(4.dp))
-             CharacterAbility(
-                context = context,
-                label = stringResource(R.string.ui_active),
-                ability = altAbility,
-                color = Color(0xFF66BB6A).copy(alpha = 0.7f),
-             )
-         }
+        viewModel.entity.alternateActiveAbilities.forEach { altAbility ->
+          Spacer(modifier = Modifier.height(4.dp))
+          CharacterAbility(
+            context = context,
+            label = stringResource(R.string.ui_active),
+            ability = altAbility,
+            color = Color(0xFF66BB6A).copy(alpha = 0.7f),
+          )
+        }
       }
 
       // Passive Ability
@@ -299,15 +308,15 @@ private fun CharacterDetailsBody(
         color = Color(0xFFE91E63)
       )
       if (showAlternates && viewModel.entity.alternateUltimateAbilities.isNotEmpty()) {
-         viewModel.entity.alternateUltimateAbilities.forEach { altAbility ->
-             Spacer(modifier = Modifier.height(4.dp))
-             CharacterAbility(
-                context = context,
-                label = stringResource(R.string.ui_ultimate),
-                ability = altAbility,
-                color = Color(0xFFE91E63).copy(alpha = 0.7f),
-             )
-         }
+        viewModel.entity.alternateUltimateAbilities.forEach { altAbility ->
+          Spacer(modifier = Modifier.height(4.dp))
+          CharacterAbility(
+            context = context,
+            label = stringResource(R.string.ui_ultimate),
+            ability = altAbility,
+            color = Color(0xFFE91E63).copy(alpha = 0.7f),
+          )
+        }
       }
     }
 

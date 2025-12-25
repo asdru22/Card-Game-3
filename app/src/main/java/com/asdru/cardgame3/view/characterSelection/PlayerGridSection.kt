@@ -119,6 +119,8 @@ fun CharacterGridItem(
   onSelect: () -> Unit,
   onInfo: () -> Unit
 ) {
+  var textSize by remember { mutableStateOf(16.sp) }
+
   Card(
     colors = CardDefaults.cardColors(containerColor = Color(0xFF2D2D2D)),
     border = if (isSelected) BorderStroke(2.dp, activeColor) else null,
@@ -142,12 +144,19 @@ fun CharacterGridItem(
           modifier = Modifier.size(90.dp),
         )
         Spacer(modifier = Modifier.height(12.dp))
+
         Text(
           text = stringResource(entity.name),
           color = if (isSelected) Color.White else Color.Gray,
-          fontSize = 16.sp,
+          fontSize = textSize,
           fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-          maxLines = 1
+          maxLines = 1,
+          softWrap = false,
+          onTextLayout = { textLayoutResult ->
+            if (textLayoutResult.didOverflowWidth) {
+              textSize *= 0.9f
+            }
+          }
         )
       }
 

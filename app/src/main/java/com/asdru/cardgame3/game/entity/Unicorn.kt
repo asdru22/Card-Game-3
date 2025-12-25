@@ -71,7 +71,7 @@ class Unicorn : Entity(
     const val DAMAGE = 18f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGES = 2
-    const val PASSIVE_EFFECT_DURATION = 1
+    const val PASSIVE_EFFECT_DURATION = 3
     const val ULTIMATE_EFFECT_DURATION = 2
     const val ULTIMATE_RAGE_GAIN = 10f
     const val ULTIMATE_EXTRA_DAMAGE = 15f

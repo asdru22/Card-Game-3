@@ -27,6 +27,6 @@ class Protection(duration: Int) : StatusEffect(
     override val descriptionRes = R.string.effect_protection_desc
     override val isPositive = true
 
-    private const val DAMAGE_REDUCTION_PERCENTAGE = 25f
+    private const val DAMAGE_REDUCTION_PERCENTAGE = 20f
   }
 }

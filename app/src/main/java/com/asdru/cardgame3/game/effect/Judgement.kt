@@ -34,6 +34,6 @@ class Judgement(
     override val descriptionRes = R.string.effect_judgement_desc
     override val isPositive = false
 
-    private const val DAMAGE_MULTIPLIER = 30
+    private const val DAMAGE_MULTIPLIER = 30f
   }
 }

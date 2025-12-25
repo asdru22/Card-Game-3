@@ -12,22 +12,24 @@ class Gilded(duration: Int) : StatusEffect(
   isPositive = isPositive,
   formatArgs = formatArgs
 ) {
+
   override suspend fun modifyIncomingDamage(
     owner: EntityViewModel,
     currentDamage: Float,
     source: EntityViewModel?
   ): Float {
     owner.team.shop.addCoins(COINS_GAINED)
-    return currentDamage
+    return currentDamage * (1 - DAMAGE_REDUCTION_PERCENTAGE / 100f)
   }
 
   companion object Spec : Translatable {
     val iconRes = R.drawable.effect_gilded
-    override val formatArgs = listOf(COINS_GAINED)
+    override val formatArgs = listOf(DAMAGE_REDUCTION_PERCENTAGE, COINS_GAINED)
     override val nameRes = R.string.effect_gilded
     override val descriptionRes = R.string.effect_gilded_desc
     override val isPositive = true
 
-    private const val COINS_GAINED = 5
+    private const val COINS_GAINED = 6
+    private const val DAMAGE_REDUCTION_PERCENTAGE = 10f
   }
 }

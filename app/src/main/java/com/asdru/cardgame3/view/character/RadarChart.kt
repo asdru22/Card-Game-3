@@ -115,7 +115,7 @@ fun RadarCard(viewModel: EntityViewModel, onClick: () -> Unit) {
           stats = viewModel.entity.radarStats,
           color = viewModel.color,
           modifier = Modifier
-            .fillMaxWidth(0.9f)
+            .fillMaxWidth(0.8f)
             .aspectRatio(1f)
         )
       }

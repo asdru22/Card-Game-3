@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -347,14 +348,14 @@ fun ExitConfirmationDialog(
     containerColor = Color(0xFF2C2C2C),
     title = {
       Text(
-        text = "Return to Main Menu?",
+        text = stringResource(R.string.ui_return_to_main_menu),
         color = Color.White,
         fontWeight = FontWeight.Bold
       )
     },
     text = {
       Text(
-        text = "Any progress in this battle will be lost.",
+        text = stringResource(R.string.ui_no_progress),
         color = Color.LightGray
       )
     },
@@ -363,12 +364,18 @@ fun ExitConfirmationDialog(
         onClick = onConfirm,
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB71C1C))
       ) {
-        Text("Yes", color = Color.White)
+        Text(
+          text = stringResource(R.string.ui_yes),
+          color = Color.White
+        )
       }
     },
     dismissButton = {
       TextButton(onClick = onDismiss) {
-        Text("No", color = Color.White)
+        Text(
+          text = stringResource(R.string.ui_no),
+          color = Color.White
+        )
       }
     }
   )

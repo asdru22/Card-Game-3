@@ -208,7 +208,7 @@
     <string name="effect_blinded">Blinded</string>
     <string name="effect_blinded_desc">%s chance for active abilities to miss</string>
     <string name="effect_gilded">Gilded</string>
-    <string name="effect_gilded_desc">Gain %s coin when damaged</string>
+    <string name="effect_gilded_desc">Reduce incoming damage by %s%%, and gain %s coins when damaged</string>
     <string name="entity_unicorn">Unicorn</string>
     <string name="ability_light_beam">Light Beam</string>
     <string name="ability_light_beam_desc">Deal damage and apply %s to the target for %s turn. Charge: %s turns</string>
@@ -342,4 +342,8 @@
     <string name="ability_juggling_act_desc">Throw %s knifes at random targets, if they hit the same enemy, deal %s extra damage.</string>
     <string name="ability_curtain_call">Curtain Call</string>
     <string name="ability_curtain_call_desc">Throw %s knives at random targets. Enemies hit %s or more times are %s for %s turns</string>
+    <string name="ui_return_to_main_menu">Return to Main Menu?</string>
+    <string name="ui_no_progress">Any progress in this in this battle will be lost!</string>
+    <string name="ui_yes">Yes</string>
+    <string name="ui_no">No</string>
 </resources>
