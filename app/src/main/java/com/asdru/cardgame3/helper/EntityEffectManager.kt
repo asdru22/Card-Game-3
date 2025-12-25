@@ -37,7 +37,6 @@ class EntityEffectManager(
     if (existingEffect != null) {
       existingEffect.duration = finalEffect.duration
       existingEffect.source = source
-      existingEffect.multiplier++
     } else {
       finalEffect.source = source
       effects.add(finalEffect)

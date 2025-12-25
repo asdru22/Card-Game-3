@@ -134,6 +134,12 @@ suspend fun EntityViewModel.applyDamage(
       }
     }
 
+    if (target.isAlive && isAlive && effects.isNotEmpty()) {
+      effects.forEach { effect ->
+        target.addEffect(effect, this)
+      }
+    }
+
     repeat(repeats) {
       if (!target.isAlive || !isAlive) return totalDamage
 
@@ -167,11 +173,7 @@ suspend fun EntityViewModel.applyDamage(
       if (repeats > 1) delay(delayTime)
     }
 
-    if (target.isAlive && isAlive && effects.isNotEmpty()) {
-      effects.forEach { effect ->
-        target.addEffect(effect, this)
-      }
-    }
+
   } finally {
     if (playAttackAnimation && attackAnimOffset != null) {
       attackAnimOffset = null
