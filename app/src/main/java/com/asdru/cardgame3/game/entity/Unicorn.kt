@@ -68,7 +68,7 @@ class Unicorn : Entity(
 ) {
   companion object {
     const val MAX_HEALTH = 160f
-    const val DAMAGE = 18f
+    const val DAMAGE = 25f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGES = 2
     const val PASSIVE_EFFECT_DURATION = 3

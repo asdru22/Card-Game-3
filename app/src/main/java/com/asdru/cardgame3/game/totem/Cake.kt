@@ -5,8 +5,8 @@ import com.asdru.cardgame3.data.TotemAbility
 import com.asdru.cardgame3.game.effect.Burning
 import com.asdru.cardgame3.game.effect.WellFed
 
-private const val ACTIVE_DURATION = 1
-private const val PASSIVE_DURATION = 1
+private const val ACTIVE_DURATION = 2
+private const val PASSIVE_DURATION = 2
 
 object Cake : Totem(
   name = R.string.totem_cake,

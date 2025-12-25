@@ -60,8 +60,8 @@ class MrKettle : Entity(
   }
 ) {
   companion object {
-    const val MAX_HEALTH = 190f
-    const val DAMAGE = 16f
+    const val MAX_HEALTH = 180f
+    const val DAMAGE = 12f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_EFFECT_NUMBER = 2
     const val PASSIVE_EFFECT_DURATION = 1

@@ -76,7 +76,7 @@ class LeadCube : Entity(
     const val PASSIVE_DURATION = 7
     const val PASSIVE_HEAL = 25f
     const val PASSIVE_CHARGE = 2
-    const val ULTIMATE_SHIELDED_MULTIPLIER = 27f
+    const val ULTIMATE_SHIELDED_MULTIPLIER = 30f
     const val ULTIMATE_EFFECT_DURATION = 5
   }
 }
