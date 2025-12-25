@@ -57,7 +57,7 @@ class Paladin : Entity(
   }
 ) {
   private companion object {
-    const val MAX_HEALTH = 220f
+    const val MAX_HEALTH = 205f
     const val DAMAGE = 13f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_DURATION = 3

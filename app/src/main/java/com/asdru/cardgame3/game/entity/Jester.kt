@@ -134,7 +134,7 @@ class Jester : Entity(
     const val FUSE_DURATION = 2
     const val ACTIVE_B_KNIVES = 2
     const val ACTIVE_B_EXTRA_DAMAGE = 7f
-    const val PASSIVE_HEAL = 8f
+    const val PASSIVE_HEAL = 11f
     const val ULTIMATE_A_DAMAGE_PERCENT = 30f
     const val ULTIMATE_B_KNIVES = 4
     const val ULTIMATE_B_HITS_FOR_STUN = 2

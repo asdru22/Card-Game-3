@@ -65,7 +65,7 @@ class Wizard : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 150f
-    const val DAMAGE = 32f
+    const val DAMAGE = 34f
     const val ACTIVE_CHARGES = 2
     const val PASSIVE_DAMAGE_PERCENTAGE = 50
     const val ULTIMATE_HEAL_AMOUNT = 18f

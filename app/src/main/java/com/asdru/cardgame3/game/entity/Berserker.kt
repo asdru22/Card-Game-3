@@ -76,7 +76,7 @@ class Berserker : Entity(
     const val MAX_HEALTH = 180f
     const val DAMAGE = 8f
     const val ACTIVE_REPEATS = 4
-    const val ACTIVE_DECAY = 20f
+    const val ACTIVE_DECAY = 30f
     const val PASSIVE_CHARGES = 2
     const val PASSIVE_RAGE_INCREASE = 12f
     const val ULTIMATE_DURATION = 1

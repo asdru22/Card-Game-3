@@ -4,8 +4,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.TotemAbility
 
 private const val ACTIVE_DURATION = 2
-private const val ACTIVE_DAMAGE = 5f
-
+private const val ACTIVE_DAMAGE = 3f
 private const val PASSIVE_DURATION = 1
 
 object Flask : Totem(

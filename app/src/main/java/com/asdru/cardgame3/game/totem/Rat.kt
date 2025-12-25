@@ -4,7 +4,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.TotemAbility
 import com.asdru.cardgame3.helper.receiveDamage
 
-private const val ACTIVE_DAMAGE = 10f
+private const val ACTIVE_DAMAGE = 12f
 private const val PASSIVE_INCREASE = 7f
 
 object Rat : Totem(

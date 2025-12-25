@@ -51,7 +51,7 @@ class Monk : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 190f
-    const val DAMAGE = 20f
+    const val DAMAGE = 14f
     const val PASSIVE_DURATION = 1
     const val ULTIMATE_DAMAGE_MULTIPLIER = 10f
 
