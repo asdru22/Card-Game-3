@@ -350,4 +350,15 @@
     <string name="ui_yes">Yes</string>
     <string name="ui_no">No</string>
     <string name="ui_banned">BANNED</string>
+    <string name="trait_artist">Artist</string>
+    <string name="trait_artist_desc">Can store notes. Current: %s</string>
+    <string name="effect_inspired">Inspired</string>
+    <string name="effect_inspired_desc">Gain %s extra notes</string>
+    <string name="entity_bard">Bard</string>
+    <string name="ability_power_chord">Power Chord</string>
+    <string name="ability_power_chord_desc">Attack the target and gain %s notes</string>
+    <string name="ability_serenade">Serenade</string>
+    <string name="ability_serenade_desc">Heal the target %s health per note. If the notes are more than %s, also remove all negative effects</string>
+    <string name="ability_magnum_opus" translatable="false">Magnum Opus</string>
+    <string name="ability_magnum_opus_desc">Gain %s notes and apply %s to self for %s turns</string>
 </resources>

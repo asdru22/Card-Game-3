@@ -347,5 +347,14 @@
     <string name="ui_yes">Si</string>
     <string name="ui_no">No</string>
     <string name="ui_banned">BANNATO</string>
-
+    <string name="trait_artist">Artista</string>
+    <string name="trait_artist_desc">Può accumulare note. Attuali: %s</string>
+    <string name="effect_inspired">Ispirato</string>
+    <string name="effect_inspired_desc">Ottieni %s note extra</string>
+    <string name="entity_bard">Bardo</string>
+    <string name="ability_power_chord">Accordo di Potenza</string>
+    <string name="ability_power_chord_desc">Attacca l\'obiettivo e ottieni %s note</string>
+    <string name="ability_serenade">Serenata</string>
+    <string name="ability_serenade_desc">Cura l\'obiettivo di %s salute per nota. Se le note sono più di %s, rimuovi anche tutti gli effetti negativi</string>
+    <string name="ability_magnum_opus_desc">Ottieni %s note e applica %s su te stesso per %s turni</string>
 </resources>
