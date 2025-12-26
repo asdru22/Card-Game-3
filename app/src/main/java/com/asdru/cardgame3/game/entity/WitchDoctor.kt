@@ -68,8 +68,8 @@ class WitchDoctor : Entity(
   private companion object {
     const val MAX_HEALTH = 160f
     const val DAMAGE = 4f
-    const val ACTIVE_REPEATS = 6
-    const val RAGE_DECREASE = 0.6f
+    const val ACTIVE_REPEATS = 5
+    const val RAGE_DECREASE = 0.5f
     const val PASSIVE_RAGE_INCREASE = 4f
     const val PASSIVE_HEAL_AMOUNT = 10f
     const val ULTIMATE_DURATION = 2

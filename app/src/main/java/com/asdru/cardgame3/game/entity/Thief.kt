@@ -56,7 +56,7 @@ class Thief : Entity(
   private companion object {
     const val MAX_HEALTH = 160f
     const val DAMAGE = 16f
-    const val ACTIVE_STEAL = 3
+    const val ACTIVE_STEAL = 4
     const val PASSIVE_COINS = 8
     const val ULTIMATE_COINS_STOLEN = 12
   }

@@ -54,6 +54,5 @@ class Monk : Entity(
     const val DAMAGE = 14f
     const val PASSIVE_DURATION = 1
     const val ULTIMATE_DAMAGE_MULTIPLIER = 10f
-
   }
 }

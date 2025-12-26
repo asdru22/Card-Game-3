@@ -100,7 +100,7 @@
     <string name="entity_rouge">Furfante</string>
     <string name="ability_take_aim_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_barrage">Raffica</string>
-    <string name="ability_barrage_desc">Tutti gli alleati a distanza eseguono la loro abilità attiva %s volte su nemici casuali</string>
+    <string name="ability_barrage_desc">Tutti gli alleati a distanza eseguono la loro abilità attiva su nemici casuali, ignorando le cariche</string>
     <string name="ui_htp_overview_desc">In questo gioco di combattimento a turni, il tuo obiettivo è sconfiggere tutte le carte del tuo avversario. Scegli carte che si combinano bene tra loro o che sono forti contro quelle scelte dal tuo avversario. Il giocatore che inizia viene deciso casualmente e potrà usare le abilità del proprio personaggio. Una volta eseguite tutte le azioni possibili, inizierà il turno dell\'altro giocatore.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Partita Semplice</string>

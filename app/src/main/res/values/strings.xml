@@ -101,7 +101,7 @@
     <string name="ability_take_aim">Take Aim</string>
     <string name="ability_take_aim_desc">Apply %s to the target for %s turns</string>
     <string name="ability_barrage">Barrage</string>
-    <string name="ability_barrage_desc">All ranged teammates perform their active ability %s times on random enemies</string>
+    <string name="ability_barrage_desc">All ranged teammates perform their active ability on random enemies, regardless of the charge</string>
     <string name="ui_htp_overview_desc">In this turn based fighting game, your goal is to defeat all of your opponent\'s  cards. Pick cards that synergize together or are strong agaisnt the ones your opponent picked. The starting player is decided randomy and will be able to use their character\'s abilities. Once all possible actions have been performed, the other player\'s turn will start.</string>
     <string name="ui_main_menu">Card Game 3</string>
     <string name="ui_casual_game">Casual Game</string>

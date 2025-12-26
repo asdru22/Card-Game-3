@@ -65,7 +65,7 @@ class Smithie : Entity(
   private companion object {
     const val MAX_HEALTH = 175f
     const val DAMAGE = 41f
-    const val ACTIVE_DURATION = 1
+    const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGE = 3
     const val PASSIVE_CHARGE = 2
     const val PASSIVE_HEALTH_PERCENTAGE = 7

@@ -41,24 +41,20 @@ class Rouge : Entity(
   ultimateAbility = Ability(
     nameRes = R.string.ability_barrage,
     descriptionRes = R.string.ability_barrage_desc,
-    formatArgs = listOf(
-      ULTIMATE_ACTIVE_TIMES
-    )
   ) { source, randomEnemy ->
     val rangers = source.team.getAliveMembers().filter { it.damageType == DamageType.Ranged }
 
     CoroutineScope(Dispatchers.Main).launch {
-      repeat(ULTIMATE_ACTIVE_TIMES) {
-        rangers.forEach { ranger ->
-          delay(200)
-          if (ranger.isAlive) {
-            val target = randomEnemy.team.getAliveMembers().randomOrNull()
-            if (target != null) {
-              ranger.activeAbility.effect(ranger, target)
-            }
+      rangers.forEach { ranger ->
+        delay(200)
+        if (ranger.isAlive) {
+          val target = randomEnemy.team.getAliveMembers().randomOrNull()
+          if (target != null) {
+            ranger.activeAbility.effect(ranger, target)
           }
         }
       }
+
     }
   }
 ) {
@@ -66,6 +62,5 @@ class Rouge : Entity(
     const val MAX_HEALTH = 120f
     const val DAMAGE = 22f
     const val PASSIVE_DURATION = 2
-    const val ULTIMATE_ACTIVE_TIMES = 2
   }
 }
