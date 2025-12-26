@@ -1,17 +1,13 @@
 package com.asdru.cardgame3.game.entity
 
-import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
-import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.game.effect.Fuse
-import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.effect.Stunned
-import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.heal
 import com.asdru.cardgame3.helper.receiveDamage

@@ -8,9 +8,7 @@ import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Overheal
 import com.asdru.cardgame3.game.effect.Shielded
-import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.game.trait.Firewall
-import com.asdru.cardgame3.game.trait.Ironclad
 import com.asdru.cardgame3.game.trait.Relentless
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.heal

@@ -2,8 +2,6 @@ package com.asdru.cardgame3.game.effect
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
-import com.asdru.cardgame3.helper.receiveDamage
-import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Inspired(duration: Int) : StatusEffect(
   nameRes = nameRes,

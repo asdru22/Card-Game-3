@@ -1,11 +1,7 @@
 package com.asdru.cardgame3.game.effect
 
-import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.Translatable
-import com.asdru.cardgame3.helper.heal
-import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlinx.coroutines.launch
 
 class Overheal(duration: Int, multiplier: Int = 1) : StatusEffect(
   nameRes = nameRes,

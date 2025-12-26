@@ -11,8 +11,8 @@ import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.characterSelection.CharacterSelectionScreen
 import com.asdru.cardgame3.view.characterSelection.StrategicSelectionScreen
-import com.asdru.cardgame3.view.statistics.LeaderboardScreen
 import com.asdru.cardgame3.view.mainMenu.MainMenuScreen
+import com.asdru.cardgame3.view.statistics.LeaderboardScreen
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.PlayerViewModel
 import com.asdru.cardgame3.viewModel.StatisticsViewModel

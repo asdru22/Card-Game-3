@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.ShopDragState
 import com.asdru.cardgame3.game.item.ShopItem
-import com.asdru.cardgame3.helper.BattleTargetingHelper
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.launch

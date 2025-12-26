@@ -2,7 +2,6 @@ package com.asdru.cardgame3.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.asdru.cardgame3.data.Team
 import com.asdru.cardgame3.data.repository.CharacterStatsRepository
 import com.asdru.cardgame3.data.repository.PlayerRepository
 

@@ -1,6 +1,5 @@
 package com.asdru.cardgame3.view.statistics
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

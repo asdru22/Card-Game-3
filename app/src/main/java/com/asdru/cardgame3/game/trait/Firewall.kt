@@ -1,6 +1,5 @@
 package com.asdru.cardgame3.game.trait
 
-import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel

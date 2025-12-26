@@ -181,6 +181,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.battleTimer.reset()
 
     val nextTeam = if (vm.isLeftTeamTurn) vm.leftTeam else vm.rightTeam
+    tickTeamEffects(nextTeam)
     processStartOfTurnEffects(nextTeam)
     checkWinCondition()
 
@@ -201,10 +202,20 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         val activeEffects = entity.effectManager.effects.toList()
         activeEffects.forEach { effect ->
           effect.onStartTurn(entity)
-          if (effect.tick()) entity.effectManager.expireEffect(effect, entity)
         }
       } else {
         entity.traits.forEach { it.onStartTurnDead(entity) }
+      }
+    }
+  }
+
+  private suspend fun tickTeamEffects(team: TeamViewModel) {
+    team.getAllMembers().forEach { entity ->
+      if (entity.isAlive) {
+        val activeEffects = entity.effectManager.effects.toList()
+        activeEffects.forEach { effect ->
+          if (effect.tick()) entity.effectManager.expireEffect(effect, entity)
+        }
       }
     }
   }
@@ -280,7 +291,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         val winningTeam = if (!isLeftAlive) vm.rightTeam else vm.leftTeam
         vm.winner = winningTeam.name
         winningTeam.playerId?.let { pid ->
-          vm.playerRepository?.incrementWins(pid)
+          vm.playerRepository.incrementWins(pid)
         }
       }
     }

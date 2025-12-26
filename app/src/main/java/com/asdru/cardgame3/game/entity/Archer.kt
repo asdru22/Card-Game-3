@@ -7,9 +7,7 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Burning
-import com.asdru.cardgame3.game.effect.Overheal
 import com.asdru.cardgame3.game.effect.PainLink
-import com.asdru.cardgame3.game.effect.Shielded
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.applyDamageToTargets
 
