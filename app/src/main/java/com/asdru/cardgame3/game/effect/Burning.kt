@@ -14,7 +14,7 @@ class Burning(duration: Int) : StatusEffect(
   formatArgs = formatArgs
 ) {
   override suspend fun onStartTurn(target: EntityViewModel) {
-    val damage = target.maxHealth / HEALTH_PERCENTAGE
+    val damage = target.maxHealth * (HEALTH_PERCENTAGE / 100f)
     target.receiveDamage(damage)
   }
 
@@ -25,6 +25,6 @@ class Burning(duration: Int) : StatusEffect(
     override val descriptionRes = R.string.effect_burning_desc
     override val isPositive = false
 
-    private const val HEALTH_PERCENTAGE = 6
+    private const val HEALTH_PERCENTAGE = 8
   }
 }

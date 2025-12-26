@@ -18,7 +18,7 @@ class Inspired(duration: Int) : StatusEffect(
     override val formatArgs = listOf(EXTRA_NOTES)
     override val nameRes = R.string.effect_inspired
     override val descriptionRes = R.string.effect_inspired_desc
-    override val isPositive = false
+    override val isPositive = true
     public fun getExtraNotes(): Int {
       return EXTRA_NOTES
     }

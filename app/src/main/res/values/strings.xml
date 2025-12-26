@@ -358,7 +358,7 @@
     <string name="ability_power_chord">Power Chord</string>
     <string name="ability_power_chord_desc">Attack the target and gain %s notes</string>
     <string name="ability_serenade">Serenade</string>
-    <string name="ability_serenade_desc">Heal the target %s health per note. If the notes are more than %s, also remove all negative effects</string>
+    <string name="ability_serenade_desc">Remove all notes and heal the target %s health per note removed. If the notes are more than %s, also remove all negative effects</string>
     <string name="ability_magnum_opus" translatable="false">Magnum Opus</string>
     <string name="ability_magnum_opus_desc">Gain %s notes and apply %s to self for %s turns</string>
 </resources>

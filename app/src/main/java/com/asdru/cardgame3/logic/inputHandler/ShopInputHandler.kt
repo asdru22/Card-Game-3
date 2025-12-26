@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.logic.inputHandler
 
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import com.asdru.cardgame3.data.ShopDragState
@@ -30,14 +31,28 @@ class ShopInputHandler(private val vm: BattleViewModel) {
     }
   }
 
+  fun findShopTarget(
+    newPos: Offset,
+    teamEntities: List<EntityViewModel>,
+    cardBounds: Map<EntityViewModel, Rect>
+  ): EntityViewModel? {
+    return cardBounds.entries.firstOrNull { (entity, rect) ->
+      entity.isAlive &&
+          !entity.effectManager.isStunned &&
+          rect.contains(newPos) &&
+          teamEntities.contains(entity)
+    }?.key
+  }
+
   fun onShopDrag(change: Offset) {
     vm.shopDragState?.let { current ->
       val newPos = current.current + change
       vm.shopDragState = current.copy(current = newPos)
 
-      val friendlyEntities = if (current.teamIsLeft) vm.leftTeam.entities else vm.rightTeam.entities
+      val friendlyEntities = if (current.teamIsLeft) vm.leftTeam.entities
+      else vm.rightTeam.entities
 
-      vm.hoveredTarget = BattleTargetingHelper.findUltimateTarget(
+      vm.hoveredTarget = findShopTarget(
         newPos,
         friendlyEntities,
         vm.cardBounds

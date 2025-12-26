@@ -10,6 +10,7 @@ import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.Overloaded
 import com.asdru.cardgame3.game.trait.Adrenaline
 import com.asdru.cardgame3.helper.applyDamage
+import kotlinx.coroutines.delay
 
 class Berserker : Entity(
   name = R.string.entity_berserker,
@@ -44,7 +45,7 @@ class Berserker : Entity(
       PASSIVE_CHARGES
     )
   ) { source, target ->
-    target.effectManager.clearNegative(target,ignoreMultipliers = false)
+    target.effectManager.clearNegative(target, ignoreMultipliers = false)
     target.team.increaseRage(PASSIVE_RAGE_INCREASE)
   },
   ultimateAbility = Ability(
@@ -58,17 +59,20 @@ class Berserker : Entity(
     )
   ) { source, _ ->
     source.addEffect(Overloaded(ULTIMATE_DURATION))
-    val strongestEnemy = source.team.getTargetableEnemies().maxByOrNull { it.health }
-    strongestEnemy?.let {
-      source.applyDamage(
-        target = strongestEnemy,
-        repeats = ACTIVE_REPEATS,
-        delayTime = 200,
-        damageData = DamageData(
-          damageDecay = ULTIMATE_DECAY,
-          ownRageIncrease = ULTIMATE_RAGE_GAIN
+    repeat(source.team.getAllMembers().size - source.team.getAliveMembers().size + 1) {
+      val strongestEnemy = source.team.getTargetableEnemies().maxByOrNull { it.health }
+      strongestEnemy?.let {
+        source.applyDamage(
+          target = strongestEnemy,
+          repeats = ACTIVE_REPEATS,
+          delayTime = 200,
+          damageData = DamageData(
+            damageDecay = ULTIMATE_DECAY,
+            ownRageIncrease = ULTIMATE_RAGE_GAIN
+          )
         )
-      )
+      }
+      delay(100)
     }
   }
 ) {

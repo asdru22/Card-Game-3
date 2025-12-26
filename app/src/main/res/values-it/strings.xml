@@ -355,6 +355,6 @@
     <string name="ability_power_chord">Accordo di Potenza</string>
     <string name="ability_power_chord_desc">Attacca l\'obiettivo e ottieni %s note</string>
     <string name="ability_serenade">Serenata</string>
-    <string name="ability_serenade_desc">Cura l\'obiettivo di %s salute per nota. Se le note sono più di %s, rimuovi anche tutti gli effetti negativi</string>
+    <string name="ability_serenade_desc">Rimuovi tutte le note e cura l\'alleato di %s salute per nota. Se le note sono più di %s, rimuovi anche tutti gli effetti negativi</string>
     <string name="ability_magnum_opus_desc">Ottieni %s note e applica %s su te stesso per %s turni</string>
 </resources>
