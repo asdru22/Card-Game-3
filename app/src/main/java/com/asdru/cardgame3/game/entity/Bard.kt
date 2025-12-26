@@ -24,7 +24,7 @@ class Bard : Entity(
   color = Color(0xFFF708FF),
   damageType = DamageType.Magic,
   traits = listOf(Artist()),
-  radarStats = RadarStats(0.8f, 0.3f, 0f, 0.5f, 0.3f),
+  radarStats = RadarStats(0.2f, 0.7f, 0.8f, 0.4f, 0.6f),
   activeAbility = Ability(
     nameRes = R.string.ability_power_chord,
     descriptionRes = R.string.ability_power_chord_desc,
@@ -54,19 +54,16 @@ class Bard : Entity(
     source.addEffect(Inspired(ULTIMATE_EFFECT_DURATION), source)
   }
 ) {
-
-
   private companion object {
     private fun getArtistTrait(source: EntityViewModel): Artist {
       return source.traits.get(0) as Artist
     }
-
     const val MAX_HEALTH = 150f
-    const val DAMAGE = 12f
-    const val ACTIVE_NOTES = 4
-    const val HEAL_PER_NOTE = 2.9f
-    const val EFFECT_CLEAR_TRESHOLD = 13
-    const val ULTIMATE_NOTES_GAINED = 7
-    const val ULTIMATE_EFFECT_DURATION = 3
+    const val DAMAGE = 8f
+    const val ACTIVE_NOTES = 5
+    const val HEAL_PER_NOTE = 2f
+    const val EFFECT_CLEAR_TRESHOLD = 16
+    const val ULTIMATE_NOTES_GAINED = 15
+    const val ULTIMATE_EFFECT_DURATION = 2
   }
 }
