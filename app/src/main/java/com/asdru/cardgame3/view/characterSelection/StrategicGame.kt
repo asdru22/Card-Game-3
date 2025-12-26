@@ -66,10 +66,11 @@ fun StrategicSelectionScreen(
     modifier = Modifier
       .fillMaxSize()
       .background(Color(0xFF121212))
-      .padding(16.dp)
   ) {
     Column(
-      modifier = Modifier.fillMaxSize(),
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp),
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
       val subtitle = if (phase == SelectionPhase.BANNING) {
@@ -166,8 +167,7 @@ fun StrategicSelectionScreen(
         Box(
           modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.8f))
-            .padding(32.dp),
+            .background(Color.Black.copy(alpha = 0.8f)),
           contentAlignment = Alignment.Center
         ) {
           val tempViewModel = remember(entity, isP1Turn) {
