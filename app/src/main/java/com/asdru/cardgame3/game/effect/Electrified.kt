@@ -16,19 +16,25 @@ class Electrified(
   formatArgs = formatArgs
 ) {
 
+  private var skipNextStartTurn = false
+
   override suspend fun onStartTurn(target: EntityViewModel) {
+    if (skipNextStartTurn) {
+      skipNextStartTurn = false
+      return
+    }
     target.applyDamage(target, amount = DAMAGE_AMOUNT)
     val electrifiedDuration =
-      target.effectManager.effects.find { it is Electrified }?.duration?.minus(
-        1
-      )
+      target.effectManager.effects.find { it is Electrified }?.duration
     target.effectManager.removeEffect<Electrified>(owner = target, ignoreMultipliers = true)
 
     val potentialTargets = target.team.getAliveMembers().filter { it != target }
     val newTarget = potentialTargets.randomOrNull()
 
     if (newTarget != null && electrifiedDuration != null && electrifiedDuration > 0) {
-      newTarget.addEffect(Electrified(electrifiedDuration, applier), applier)
+      val newEffect = Electrified(electrifiedDuration, applier)
+      newEffect.skipNextStartTurn = true
+      newTarget.addEffect(newEffect, applier)
     }
   }
 

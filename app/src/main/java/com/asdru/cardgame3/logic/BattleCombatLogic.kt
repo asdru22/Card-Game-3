@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.logic
 
+import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
 
@@ -32,12 +33,18 @@ object BattleCombatLogic {
       if (source.currentActiveCharges >= ability.charges) {
         delay(400)
         source.currentActiveCharges = 0
-        ability.effect(source, finalTarget)
-        delay(200)
+        performActive(source,finalTarget,ability)
       }
     } else {
-      ability.effect(source, finalTarget)
-      delay(200)
+      performActive(source,finalTarget,ability)
+    }
+  }
+
+  private suspend fun performActive(source: EntityViewModel, target: EntityViewModel,ability: Ability){
+    ability.effect(source, target)
+    delay(200)
+    source.applyTraits {
+      it.onUsedActiveAbility(owner = source, target = target)
     }
   }
 
@@ -57,16 +64,24 @@ object BattleCombatLogic {
       if (source.currentPassiveCharges >= ability.charges) {
         delay(400)
         source.currentPassiveCharges = 0
-        source.passiveAnimTrigger++
-        delay(150)
-        ability.effect(source, finalTarget)
-        delay(150)
+        performPassive(source, finalTarget, ability)
       }
     } else {
-      source.passiveAnimTrigger++
-      delay(150)
-      ability.effect(source, finalTarget)
-      delay(150)
+      performPassive(source, finalTarget, ability)
+    }
+  }
+
+  private suspend fun performPassive(
+    source: EntityViewModel,
+    target: EntityViewModel,
+    ability: Ability
+  ) {
+    source.passiveAnimTrigger++
+    delay(150)
+    ability.effect(source, target)
+    delay(150)
+    source.applyTraits {
+      it.onUsedPassiveAbility(owner = source, target = target)
     }
   }
 

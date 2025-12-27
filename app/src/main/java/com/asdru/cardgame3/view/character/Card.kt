@@ -253,8 +253,9 @@ fun CharacterCard(
       }
     }
 
-    val traitsWithCharges = viewModel.traits.filter { it.maxCharges > 0 }
-    if (traitsWithCharges.isNotEmpty() && !viewModel.isAlive) {
+    val traitsWithCharges =
+      viewModel.traits.filter { it.maxCharges > 0 && it.getCharge(viewModel) >= 1 }
+    if (traitsWithCharges.isNotEmpty()) {
       val oppositeAlignment = if (isLeftTeam) Alignment.CenterStart else Alignment.CenterEnd
       val xOffsetTrait = if (isLeftTeam) (-10).dp else 10.dp
 
@@ -272,7 +273,7 @@ fun CharacterCard(
           ChargeIndicator(
             current = viewModel.traitCharges[trait.id] ?: 0,
             max = trait.maxCharges,
-            activeColor = Color(0xFF9C27B0)
+            activeColor = Color(0xFFFF9800)
           )
 
           if (index < traitsWithCharges.size - 1) {

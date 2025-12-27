@@ -13,7 +13,6 @@ class Adrenaline : Trait {
     amount: Float
   ): Float {
     val healthPercentage = owner.health / owner.maxHealth * 100f
-    println(healthPercentage)
     if (healthPercentage > THRESHOLD) return amount
     return amount * (1 + DAMAGE / 100f)
   }

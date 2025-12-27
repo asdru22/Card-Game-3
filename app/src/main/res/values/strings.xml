@@ -361,4 +361,16 @@
     <string name="ability_serenade_desc">Remove all notes and heal the target %s health per note removed. If the notes are more than %s, also remove all negative effects</string>
     <string name="ability_magnum_opus" translatable="false">Magnum Opus</string>
     <string name="ability_magnum_opus_desc">Gain %s notes and apply %s to self for %s turns</string>
+    <string name="trait_resilience">Resilience</string>
+    <string name="trait_resilience_desc">Increase charge each turn where damage received is less than %s. At %s charges, the active ability damage per effect is increased by %s, and the passive ability also grants %s for %s turns. After using ability, the charge resets</string>
+    <string name="entity_sage">Sage</string>
+    <string name="ability_affliction">Affliction</string>
+    <string name="ability_affliction_desc">Cast a spell on the target and deal %s extra damage per active effect the enemy has</string>
+    <string name="trait_old">Old</string>
+    <string name="trait_old_desc">Cannot be harmed by magic damage, but receives %s%% extra damage from melee and ranged damage</string>
+    <string name="game_old">Old!</string>
+    <string name="ability_mend">Mend</string>
+    <string name="ability_mend_desc">Heal the target for %s%% of their max health</string>
+    <string name="ability_guidance">Guidance</string>
+    <string name="ability_guidance_desc">Every ally uses their passive ability on the target with the least health</string>
 </resources>

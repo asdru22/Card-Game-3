@@ -357,4 +357,16 @@
     <string name="ability_serenade">Serenata</string>
     <string name="ability_serenade_desc">Rimuovi tutte le note e cura l\'alleato di %s salute per nota. Se le note sono più di %s, rimuovi anche tutti gli effetti negativi</string>
     <string name="ability_magnum_opus_desc">Ottieni %s note e applica %s su te stesso per %s turni</string>
+    <string name="trait_resilience">Resilienza</string>
+    <string name="trait_resilience_desc">Aumenta la carica ogni turno in cui il danno ricevuto è inferiore a %s. A %s cariche, il danno dell\'abilità attiva per effetto aumenta di %s, e l\'abilità passiva garantisce anche %s per %s turni. Dopo aver usato l\'abilità, la carica si azzera</string>
+    <string name="entity_sage">Saggio</string>
+    <string name="ability_affliction">Afflizione</string>
+    <string name="ability_affliction_desc">Lancia un incantesimo sul bersaglio e infliggi %s danni extra per ogni effetto attivo che il nemico possiede</string>
+    <string name="trait_old">Anziano</string>
+    <string name="trait_old_desc">Non può essere danneggiato dalla magia, ma riceve il %s%% di danni extra da attacchi corpo a corpo e a distanza</string>
+    <string name="game_old">Anziano!</string>
+    <string name="ability_mend">Cura</string>
+    <string name="ability_mend_desc">Cura il bersaglio del %s%% della sua salute massima</string>
+    <string name="ability_guidance">Guida</string>
+    <string name="ability_guidance_desc">Ogni alleato usa la propria abilità passiva sul bersaglio con meno salute</string>
 </resources>

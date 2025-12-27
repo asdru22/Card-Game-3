@@ -62,6 +62,9 @@ class EntityViewModel(
   val activeAbility: Ability
     get() = activeAbilityOverride ?: entity.activeAbility
 
+  val passiveAbility: Ability
+    get() = entity.passiveAbility
+
   val ultimateAbility: Ability
     get() = ultimateAbilityOverride ?: entity.ultimateAbility
 

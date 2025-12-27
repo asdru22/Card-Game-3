@@ -43,8 +43,6 @@ class Rouge : Entity(
     descriptionRes = R.string.ability_barrage_desc,
   ) { source, randomEnemy ->
     val rangers = source.team.getAliveMembers().filter { it.damageType == DamageType.Ranged }
-
-    CoroutineScope(Dispatchers.Main).launch {
       rangers.forEach { ranger ->
         delay(200)
         if (ranger.isAlive) {
@@ -54,8 +52,6 @@ class Rouge : Entity(
           }
         }
       }
-
-    }
   }
 ) {
   private companion object {

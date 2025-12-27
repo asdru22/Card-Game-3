@@ -19,7 +19,7 @@ class Bard : Entity(
   color = Color(0xFFF708FF),
   damageType = DamageType.Magic,
   traits = listOf(Artist()),
-  radarStats = RadarStats(0.2f, 0.7f, 0.8f, 0.4f, 0.6f),
+  radarStats = RadarStats(0.2f, 0.7f, 0.8f, 0.4f, 0.7f),
   activeAbility = Ability(
     nameRes = R.string.ability_power_chord,
     descriptionRes = R.string.ability_power_chord_desc,

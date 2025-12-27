@@ -53,6 +53,7 @@ import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.helper.toRoman
+import com.asdru.cardgame3.view.common.SmartDescriptionText
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 @Composable
@@ -425,12 +426,9 @@ fun Trait(trait: Trait, context: Context) {
       fontSize = 12.sp,
       fontWeight = FontWeight.Bold
     )
-    Text(
-      text = trait.getDescription(context),
-      color = Color.LightGray,
-      fontSize = 11.sp,
-      lineHeight = 13.sp,
-      modifier = Modifier.padding(start = 8.dp)
+    SmartDescriptionText(
+      translatable = trait,
+      textColor = Color.LightGray
     )
   }
 }
