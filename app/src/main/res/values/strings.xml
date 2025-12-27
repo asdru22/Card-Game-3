@@ -373,4 +373,15 @@
     <string name="ability_mend_desc">Heal the target for %s%% of their max health</string>
     <string name="ability_guidance">Guidance</string>
     <string name="ability_guidance_desc">Every ally uses their passive ability on the target with the least health</string>
+    <string name="trait_retaliate">Retaliate</string>
+    <string name="trait_retaliate_desc">Deals %s damage to the attacker when attacked</string>
+    <string name="trait_ugly">Ugly</string>
+    <string name="trait_ugly_desc">Allies cannot perform their passive abilities on this character</string>
+    <string name="entity_mabel">Mabel</string>
+    <string name="ability_bark">Bark</string>
+    <string name="ability_bark_desc">Deal no damage and apply %s to the target for %s turns</string>
+    <string name="ability_good_girl">Good Girl</string>
+    <string name="ability_good_girl_desc">Apply %s to the target for %s turns</string>
+    <string name="ability_level">Level</string>
+    <string name="ability_level_desc">Set the health of all allies to be the avarage of the team. Apply %s to all allies for %s turns</string>
 </resources>

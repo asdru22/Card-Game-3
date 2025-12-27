@@ -19,7 +19,7 @@ import com.asdru.cardgame3.helper.EntityEffectManager
 import com.asdru.cardgame3.helper.EntityPopupManager
 import com.asdru.cardgame3.helper.onDeath
 
-class EntityViewModel(
+open class EntityViewModel(
   val entity: Entity,
   val isLeftTeam: Boolean
 ) : ViewModel() {
@@ -54,7 +54,7 @@ class EntityViewModel(
   val color: Color = entity.color
   val damageType: DamageType = entity.damageType
   val iconRes: Int = entity.iconRes
-  val traits: List<Trait> get() = entity.traits
+  open val traits: List<Trait> get() = entity.traits
 
   private var activeAbilityOverride by mutableStateOf<Ability?>(null)
   private var ultimateAbilityOverride by mutableStateOf<Ability?>(null)

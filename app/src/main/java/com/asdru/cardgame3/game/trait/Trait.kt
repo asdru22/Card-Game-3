@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.game.trait
 
+import com.asdru.cardgame3.data.DamageData
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -28,7 +29,14 @@ interface Trait : Translatable {
   suspend fun onUsedActiveAbility(owner: EntityViewModel, target: EntityViewModel) {}
   suspend fun onUsedPassiveAbility(owner: EntityViewModel, target: EntityViewModel) {}
 
-  fun onDidReceiveDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float) {}
+  suspend fun onDidReceiveDamage(
+    owner: EntityViewModel,
+    source: EntityViewModel?,
+    amount: Float,
+    damageData: DamageData? = null
+  ) {
+  }
+
   suspend fun onDeath(owner: EntityViewModel) {}
   fun modifyIncomingEffect(
     owner: EntityViewModel,

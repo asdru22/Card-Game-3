@@ -7,7 +7,11 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlinx.coroutines.delay
 
 
-suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel? = null): Float {
+suspend fun EntityViewModel.receiveDamage(
+  amount: Float,
+  source: EntityViewModel? = null,
+  damageData: DamageData? = null
+): Float {
   var actualDamage = amount
 
   onGetWeather?.invoke()?.let { weather ->
@@ -44,7 +48,7 @@ suspend fun EntityViewModel.receiveDamage(amount: Float, source: EntityViewModel
     if (wasAlive && !isAlive) {
       onDeath(source, actualDamage)
     } else if (isAlive) {
-      applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
+      applyTraits { it.onDidReceiveDamage(this, source, actualDamage, damageData) }
     }
 
     source?.applyTraits { trait ->
@@ -59,7 +63,6 @@ suspend fun EntityViewModel.onDeath(
   source: EntityViewModel?,
   actualDamage: Float
 ) {
-  applyTraits { it.onDidReceiveDamage(this, source, actualDamage) }
   onEntityDeathTrait(this)
   applyTraits { it.onDeath(this) }
   effectManager.clearAll(this, ignoreMultipliers = true)
@@ -91,27 +94,30 @@ suspend fun EntityViewModel.heal(
       actualHeal = it.modifyIncomingHealing(this, actualHeal, source)
     }
 
-    // Overheal Logic
-    val overhealAllowed = effectManager.effects.sumOf { it.overheal().toDouble() }.toFloat()
-
-    // First fill health
-    val missingHealth = maxHealth - health
-    val healToHealth = actualHeal.coerceAtMost(missingHealth)
-    health = (health + healToHealth).coerceAtMost(maxHealth)
-    this.team.totalHealing += healToHealth // Restored metric
-
-    val remainingHeal = actualHeal - healToHealth
-
-    // Then fill overheal
-    if (remainingHeal > 0 && overhealAllowed > 0) {
-      val currentOverheal = overhealAmount
-      val spaceForOverheal = overhealAllowed - currentOverheal
-      val healToOverheal = remainingHeal.coerceAtMost(spaceForOverheal)
-      overhealAmount += healToOverheal
-    }
+    changeHealth(actualHeal)
 
     if (actualHeal > 0) popupManager.add(actualHeal, Color.Green)
     if (repeats > 1) delay(delayTime)
+  }
+}
+
+fun EntityViewModel.changeHealth(amount: Float) {
+  val overhealAllowed = effectManager.effects.sumOf { it.overheal().toDouble() }.toFloat()
+
+  // First fill health
+  val missingHealth = maxHealth - health
+  val healToHealth = amount.coerceAtMost(missingHealth)
+  health = (health + healToHealth).coerceAtMost(maxHealth)
+  this.team.totalHealing += healToHealth
+
+  val remainingHeal = amount - healToHealth
+
+  // Then fill overheal
+  if (remainingHeal > 0 && overhealAllowed > 0) {
+    val currentOverheal = overhealAmount
+    val spaceForOverheal = overhealAllowed - currentOverheal
+    val healToOverheal = remainingHeal.coerceAtMost(spaceForOverheal)
+    overhealAmount += healToOverheal
   }
 }
 
@@ -160,7 +166,7 @@ suspend fun EntityViewModel.applyDamage(
       }
 
 
-      totalDamage += target.receiveDamage(calculatedDamage, source = this)
+      totalDamage += target.receiveDamage(calculatedDamage, source = this, damageData = damageData)
 
       effectManager.effects.forEach {
         it.postDamageDealt(this, target, totalDamage)

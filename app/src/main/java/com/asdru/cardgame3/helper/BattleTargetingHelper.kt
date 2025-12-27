@@ -5,6 +5,7 @@ import androidx.compose.ui.geometry.Rect
 import com.asdru.cardgame3.data.DragState
 import com.asdru.cardgame3.game.effect.Taunt
 import com.asdru.cardgame3.game.effect.Vanish
+import com.asdru.cardgame3.game.trait.Ugly
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 object BattleTargetingHelper {
@@ -27,6 +28,10 @@ object BattleTargetingHelper {
       val isEnemy = isSourceLeft != isTargetLeft
 
       if (isEnemy && entity.effectManager.effects.any { it is Vanish }) {
+        return@firstOrNull false
+      }
+
+      if (!isEnemy && dragState.source != entity && entity.traits.any { it is Ugly }) {
         return@firstOrNull false
       }
 

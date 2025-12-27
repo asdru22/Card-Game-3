@@ -369,4 +369,15 @@
     <string name="ability_mend_desc">Cura il bersaglio del %s%% della sua salute massima</string>
     <string name="ability_guidance">Guida</string>
     <string name="ability_guidance_desc">Ogni alleato usa la propria abilità passiva sul bersaglio con meno salute</string>
+    <string name="trait_retaliate">Rappresaglia</string>
+    <string name="trait_retaliate_desc">Infligge %s danni all\'attaccante quando viene attaccato</string>
+    <string name="trait_ugly">Brutto</string>
+    <string name="trait_ugly_desc">Gli alleati non possono usare le loro abilità passive su questo personaggio</string>
+    <string name="entity_mabel">Mabel</string>
+    <string name="ability_bark">Abbaio</string>
+    <string name="ability_bark_desc">Non infligge danni e applica %s al bersaglio per %s turni</string>
+    <string name="ability_good_girl">Brava Bimba</string>
+    <string name="ability_good_girl_desc">Applica %s al bersaglio per %s turni</string>
+    <string name="ability_level">Livellamento</string>
+    <string name="ability_level_desc">Porta la salute di tutti gli alleati alla media della squadra. Applica %s a tutti gli alleati per %s turni</string>
 </resources>

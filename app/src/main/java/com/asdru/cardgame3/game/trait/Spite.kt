@@ -8,7 +8,12 @@ class Spite : Trait {
   override val descriptionRes: Int = R.string.trait_spite_desc
   override val formatArgs: List<Any> = listOf(RAGE_GAIN)
 
-  override fun onDidReceiveDamage(owner: EntityViewModel, source: EntityViewModel?, amount: Float) {
+  override suspend fun onDidReceiveDamage(
+    owner: EntityViewModel,
+    source: EntityViewModel?,
+    amount: Float,
+    damageData: com.asdru.cardgame3.data.DamageData?
+  ) {
     owner.team.increaseRage(RAGE_GAIN)
   }
 

@@ -4,24 +4,22 @@ import androidx.compose.ui.graphics.Color
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
-class Juggernaut : Trait {
+class Juggernaut(
+  val maxDamageAllowed: Float = 28f
+) : Trait {
   override val nameRes: Int = R.string.trait_juggernaut
   override val descriptionRes: Int = R.string.trait_juggernaut_desc
-  override val formatArgs: List<Any> = listOf(MAX_DAMAGE_RECEIVED)
+  override val formatArgs: List<Any> = listOf(maxDamageAllowed)
 
   override fun modifyIncomingDamage(
     owner: EntityViewModel,
     source: EntityViewModel?,
     amount: Float
   ): Float {
-    if (amount > MAX_DAMAGE_RECEIVED) {
+    if (amount > maxDamageAllowed) {
       owner.popupManager.add(R.string.game_juggernaut, Color.White)
-      return MAX_DAMAGE_RECEIVED
+      return maxDamageAllowed
     }
     return amount
-  }
-
-  companion object {
-    const val MAX_DAMAGE_RECEIVED = 28f
   }
 }

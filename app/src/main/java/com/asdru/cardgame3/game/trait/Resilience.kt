@@ -37,10 +37,11 @@ class Resilience(
     resetCharge(owner)
   }
 
-  override fun onDidReceiveDamage(
+  override suspend fun onDidReceiveDamage(
     owner: EntityViewModel,
     source: EntityViewModel?,
-    amount: Float
+    amount: Float,
+    damageData: com.asdru.cardgame3.data.DamageData?
   ) {
     damageReceived += amount
   }
