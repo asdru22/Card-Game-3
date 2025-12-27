@@ -17,14 +17,15 @@ import kotlinx.coroutines.launch
 class Rouge : Entity(
   name = R.string.entity_rouge,
   iconRes = R.drawable.entity_rouge,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFFF5722),
   damageType = DamageType.Ranged,
   traits = listOf(QuickDraw()),
   radarStats = RadarStats(0.9f, 0.1f, 0.4f, 0.0f, 0.3f),
   activeAbility = Ability(
     nameRes = R.string.ability_bullseye,
-    descriptionRes = R.string.ability_bullseye_desc
+    descriptionRes = R.string.ability_bullseye_desc,
+    formatArgs = listOf(DMG_MULT)
   ) { source, target ->
     source.applyDamage(target)
   },
@@ -43,20 +44,21 @@ class Rouge : Entity(
     descriptionRes = R.string.ability_barrage_desc,
   ) { source, randomEnemy ->
     val rangers = source.team.getAliveMembers().filter { it.damageType == DamageType.Ranged }
-      rangers.forEach { ranger ->
-        delay(200)
-        if (ranger.isAlive) {
-          val target = randomEnemy.team.getAliveMembers().randomOrNull()
-          if (target != null) {
-            ranger.activeAbility.effect(ranger, target)
-          }
+    rangers.forEach { ranger ->
+      delay(200)
+      if (ranger.isAlive) {
+        val target = randomEnemy.team.getAliveMembers().randomOrNull()
+        if (target != null) {
+          ranger.activeAbility.effect(ranger, target)
         }
       }
+    }
   }
 ) {
   private companion object {
     const val MAX_HEALTH = 120f
     const val DAMAGE = 22f
+    const val DMG_MULT = 100f
     const val PASSIVE_DURATION = 2
   }
 }

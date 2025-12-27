@@ -147,7 +147,9 @@ suspend fun EntityViewModel.applyDamage(
         this.team.increaseRage(it.ownRageIncrease)
       }
 
-      var calculatedDamage = amount * (1 + (damageData?.damageDecay ?: 0f) * it / 100)
+      var calculatedDamage =
+        (amount * this.entity.initialStats.damageMultiplier / 100f) * (1 + (damageData?.damageDecay
+          ?: 0f) * it / 100)
       applyTraits { trait ->
         calculatedDamage = trait.modifyOutgoingDamage(this, target, calculatedDamage)
       }

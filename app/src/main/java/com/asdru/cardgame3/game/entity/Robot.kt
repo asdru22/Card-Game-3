@@ -15,7 +15,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class Robot : Entity(
   name = R.string.entity_robot,
   iconRes = R.drawable.entity_robot,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF44F7FD),
   damageType = DamageType.Magic,
   traits = listOf(Meltdown()),
@@ -23,7 +23,11 @@ class Robot : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_shock_attack,
     descriptionRes = R.string.ability_shock_attack_desc,
-    formatArgs = listOf(Electrified.Spec, ACTIVE_DURATION)
+    formatArgs = listOf(
+      DMG_MULT,
+      Electrified.Spec,
+      ACTIVE_DURATION
+    )
   ) { source, target ->
     source.applyDamage(target, effects = listOf(Electrified(ACTIVE_DURATION, source)))
   },
@@ -47,6 +51,7 @@ class Robot : Entity(
   private companion object {
     const val MAX_HEALTH = 180f
     const val DAMAGE = 6f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 3
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_STUNNED_DURATION = 3

@@ -16,7 +16,7 @@ import com.asdru.cardgame3.helper.heal
 class WitchDoctor : Entity(
   name = R.string.entity_witch_doctor,
   iconRes = R.drawable.entity_witch_doctor,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFA27E3A),
   damageType = DamageType.Melee,
   traits = listOf(Greedy()),
@@ -25,6 +25,7 @@ class WitchDoctor : Entity(
     nameRes = R.string.ability_shots,
     descriptionRes = R.string.ability_shots_desc,
     formatArgs = listOf(
+      DMG_MULT,
       ACTIVE_REPEATS,
       RAGE_DECREASE
     )
@@ -68,6 +69,7 @@ class WitchDoctor : Entity(
   private companion object {
     const val MAX_HEALTH = 160f
     const val DAMAGE = 4f
+    const val DMG_MULT = 100f
     const val ACTIVE_REPEATS = 5
     const val RAGE_DECREASE = 0.5f
     const val PASSIVE_RAGE_INCREASE = 4f

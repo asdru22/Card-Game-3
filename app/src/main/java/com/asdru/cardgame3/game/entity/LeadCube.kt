@@ -17,7 +17,7 @@ import com.asdru.cardgame3.helper.toRoman
 class LeadCube : Entity(
   name = R.string.entity_lead_cube,
   iconRes = R.drawable.entity_lead_cube,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFDAC55D),
   damageType = DamageType.Magic,
   traits = listOf(Relentless(), Firewall()),
@@ -26,7 +26,7 @@ class LeadCube : Entity(
     nameRes = R.string.ability_neutralize,
     descriptionRes = R.string.ability_neutralize_desc,
     charges = ACTIVE_CHARGE,
-    formatArgs = listOf(ACTIVE_CHARGE)
+    formatArgs = listOf(DMG_MULT, ACTIVE_CHARGE)
   ) { source, target ->
     source.applyDamage(target)
     target.resetCharges()
@@ -69,6 +69,7 @@ class LeadCube : Entity(
   private companion object {
     const val MAX_HEALTH = 190f
     const val DAMAGE = 20f
+    const val DMG_MULT = 100f
     const val ACTIVE_CHARGE = 2
     const val PASSIVE_OVERHEAL_MULTIPLIER = 2
     const val PASSIVE_DURATION = 7

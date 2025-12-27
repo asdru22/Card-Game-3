@@ -16,7 +16,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class Unicorn : Entity(
   name = R.string.entity_unicorn,
   iconRes = R.drawable.entity_unicorn,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF0065FF),
   damageType = DamageType.Ranged,
   traits = listOf(Executioner(), Furious()),
@@ -26,6 +26,7 @@ class Unicorn : Entity(
     descriptionRes = R.string.ability_light_beam_desc,
     charges = ACTIVE_CHARGES,
     formatArgs = listOf(
+      DMG_MULT,
       Blinded.Spec,
       ACTIVE_DURATION,
       ACTIVE_CHARGES
@@ -69,6 +70,7 @@ class Unicorn : Entity(
   companion object {
     const val MAX_HEALTH = 145f
     const val DAMAGE = 21f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGES = 2
     const val PASSIVE_EFFECT_DURATION = 3

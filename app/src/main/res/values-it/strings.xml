@@ -1,7 +1,7 @@
 <resources>
     <string name="entity_ninja">Ninja</string>
     <string name="ability_slash">Fendente</string>
-    <string name="ability_slash_desc">Esegue %s colpi rapidi</string>
+    <string name="ability_slash_desc">Esegue %s colpi rapidi, infliggendo il %s%% danno ciascuno</string>
     <string name="effect_strength">Forza</string>
     <string name="effect_strength_desc">Il danno in mischia è aumentato del %s%%</string>
     <string name="ability_warriors_blessing">Benedizione del Guerriero</string>
@@ -14,18 +14,18 @@
     <string name="ability_vanish_desc">Applica %s su se stesso per %s turni</string>
     <string name="entity_archer">Arciere</string>
     <string name="ability_arrow_rain">Pioggia di Frecce</string>
-    <string name="ability_arrow_rain_desc">%s frecce colpiscono tutti i nemici. Carica: %s turni</string>
+    <string name="ability_arrow_rain_desc">%s frecce colpiscono tutti i nemici, infliggendo ognuna il %s%% del danno. Carica: %s turni</string>
     <string name="ability_cover">Copertura</string>
     <string name="ability_cover_desc">Forma un %s con il bersaglio per %s turni</string>
     <string name="ability_rain_fire">Pioggia di Fuoco</string>
-    <string name="ability_rain_fire_desc">Un nemico casuale viene colpito da %s frecce e subisce %s per %s turni</string>
+    <string name="ability_rain_fire_desc">Un nemico casuale viene colpito da %s frecce che infliggono il %s%% del danno e subisce %s per %s turni</string>
     <string name="effect_pain_link">Legame del Dolore</string>
     <string name="effect_pain_link_desc">Il %s%% del danno in arrivo viene riflesso sul bersaglio con cui è stato avviato il legame</string>
     <string name="effect_burning">Ustione</string>
     <string name="effect_burning_desc">Subisce il %s%% della salute massima come danno</string>
     <string name="entity_wizard">Mago</string>
     <string name="ability_zap">Scossa</string>
-    <string name="ability_zap_desc">Un fulmine colpisce il bersaglio. Carica: %s turni</string>
+    <string name="ability_zap_desc">Un fulmine colpisce il bersaglio, infliggendo il %s%% del danno. Carica: %s turni</string>
     <string name="ability_override">Dominio</string>
     <string name="ability_override_desc">Costringe il bersaglio a usare la sua abilità attiva contro un nemico casuale, infliggendo il %s%% del suo danno base</string>
     <string name="ability_blessing">Benedizione</string>
@@ -36,7 +36,7 @@
     <string name="effect_taunt_desc">Le abilità attive possono essere usate solo sul personaggio che ha applicato la provocazione</string>
     <string name="entity_paladin">Paladino</string>
     <string name="ability_challenge">Sfida</string>
-    <string name="ability_challenge_desc">Attacca il bersaglio e applica %s per %s turni</string>
+    <string name="ability_challenge_desc">Attacca il bersaglio infliggendo il %s%% del danno e applica %s per %s turni</string>
     <string name="ability_guard">Guardia</string>
     <string name="ability_guard_desc">Applica %s al bersaglio per %s turni</string>
     <string name="effect_protection">Protezione</string>
@@ -53,7 +53,7 @@
     <string name="trait_forsaken">Reietto</string>
     <string name="trait_forsaken_desc">Non può essere curato dagli alleati</string>
     <string name="ability_bewitched">Malocchio</string>
-    <string name="ability_bewitched_desc">Lancia un incantesimo sul nemico, applicando %s per %s turni</string>
+    <string name="ability_bewitched_desc">Lancia un incantesimo sul nemico, infliggendo il %s%% del danno, applicando %s per %s turni</string>
     <string name="ability_reckoning">Giudizio</string>
     <string name="ability_reckoning_desc">Cura il bersaglio di %s salute per ogni nemico Osservato, poi infligge %s danni a tutti i nemici Osservati</string>
     <string name="ability_harvest">Mietitura</string>
@@ -62,7 +62,7 @@
     <string name="trait_ironclad">Corazzato</string>
     <string name="trait_ironclad_desc">Ignora tutti i danni inferiori a %s</string>
     <string name="ability_syphon">Prosciugamento</string>
-    <string name="ability_syphon_desc">Colpisce un nemico e distribuisce il danno inflitto come cura tra tutti i membri della squadra</string>
+    <string name="ability_syphon_desc">Colpisce un nemico per il %s%% del danno, e distribuisce il danno inflitto come cura tra tutti i membri della squadra</string>
     <string name="ability_iron_will">Volontà di Ferro</string>
     <string name="ability_iron_will_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_liberation">Liberazione</string>
@@ -77,7 +77,7 @@
     <string name="ui_player_name">Nome Giocatore %s</string>
     <string name="entity_robot">Robot</string>
     <string name="ability_shock_attack">Attacco Shock</string>
-    <string name="ability_shock_attack_desc">Applica %s al bersaglio per %s turni</string>
+    <string name="ability_shock_attack_desc">Infiggi il %s%% del danno e applica %s al bersaglio per %s turni</string>
     <string name="effect_electrified">Elettrificato</string>
     <string name="effect_electrified_desc">Subisce %s danni, poi l\'effetto rimbalza su un altro alleato</string>
     <string name="effect_overloaded">Sovraccarico</string>
@@ -93,7 +93,7 @@
     <string name="effect_precision">Precisione</string>
     <string name="effect_precision_desc">Danno a distanza aumentato del %s%%</string>
     <string name="ability_bullseye">Centro</string>
-    <string name="ability_bullseye_desc">Colpisci il bersaglio</string>
+    <string name="ability_bullseye_desc">Colpisci il bersaglio, infliggendo il %s%% del danno</string>
     <string name="ability_take_aim">Prendi mira</string>
     <string name="trait_quick_draw_desc">Infliggi %s danno ad un nemico casuale al termine di ogni turno</string>
     <string name="trait_quick_draw">Sentinella</string>
@@ -136,7 +136,7 @@
     <string name="ability_copy_my_code_desc">Forza il bersaglio a eseguire la tua abilità attiva su un nemico casuale</string>
     <string name="ability_refactoring">Refactoring</string>
     <string name="ability_refactoring_desc">Converte tutti i potenziamenti nemici in depotenziamenti casuali che durano %s turni</string>
-    <string name="ability_code_review_desc">Attacca il bersaglio e applica %s per %s turni</string>
+    <string name="ability_code_review_desc">Attacca il bersaglio per il %s%% del danno e applica %s per %s turni</string>
     <string name="weather_eruption">Eruzione</string>
     <string name="weather_eruption_desc">Ogni squadra guadagna %s furia alla fine di un turno</string>
     <string name="trait_juggernaut">Titano</string>
@@ -144,7 +144,7 @@
     <string name="effect_defiance">Sfida</string>
     <string name="effect_defiance_desc">Sopravvive con 1 salute quando riceve danni fatali</string>
     <string name="ability_slam">Schianto</string>
-    <string name="ability_slam_desc">Danneggia e applica %s al bersaglio per %s turni. Carica: %s turni</string>
+    <string name="ability_slam_desc">Infliggi il %s%% del danno e applica %s al bersaglio per %s turni. Carica: %s turni</string>
     <string name="ability_distribution">Distribuzione</string>
     <string name="ability_distribution_desc">Il bersaglio subisce il %s%% della sua salute massima come danno, ma tutti i nemici ricevono lo stesso danno. Carica: %s turni</string>
     <string name="ability_salvation">Salvezza</string>
@@ -168,11 +168,11 @@
     <string name="ability_fortification_desc">Aumenta la salute massima del bersaglio del %s%% e curalo di %s. Carica: %s turni</string>
     <string name="ability_phase_shift">Spostamento di Fase</string>
     <string name="ability_phase_shift_desc">Applica %s a tutti i compagni di squadra per %s turni e curali del %s%% della loro salute massima</string>
-    <string name="ability_delirium_desc">Lancia un incantesimo sul bersaglio e applica %s per %s turni</string>
+    <string name="ability_delirium_desc">Lancia un incantesimo sul bersaglio per il %s%% del danno e applica %s per %s turni</string>
     <string name="effect_silenced">Silenziato</string>
     <string name="effect_silenced_desc">Non può usare la propria abilità suprema</string>
     <string name="ability_heckle">Scherno</string>
-    <string name="ability_heckle_desc">Lancia un pomodoro marcio sul bersaglio e applica %s per %s turni</string>
+    <string name="ability_heckle_desc">Lancia un pomodoro marcio che infligge il %s%% del danno al bersaglio e applica %s per %s turni</string>
     <string name="ability_chefs_surprise">Sorpresa dello Chef</string>
     <string name="ability_chefs_surprise_desc">Applica al bersaglio %s effetti positivi casuali che durano %s turni</string>
     <string name="effect_well_fed">Ben Nutrito</string>
@@ -185,7 +185,7 @@
     <string name="effect_sick_desc">Cura ricevuta ridotta del %s%%</string>
     <string name="entity_witch_doctor">Sciamano</string>
     <string name="ability_shots">Iniezioni</string>
-    <string name="ability_shots_desc">Infliggi danno al nemico, ogni iniezione diminuisce la furia della squadra nemica di %s</string>
+    <string name="ability_shots_desc">Infliggi il %s%% del danno al nemico, ogni iniezione diminuisce la furia della squadra nemica di %s</string>
     <string name="ability_vitamins">Vitamine</string>
     <string name="ability_vitamins_desc">Aumenta la rabbia della propria squadra di %s e cura l\'alleato per %s</string>
     <string name="ability_the_cure">La cura</string>
@@ -205,14 +205,14 @@
     <string name="item_hamburger">Hamburger</string>
     <string name="item_hamburger_desc">Applica %s per %s turni</string>
     <string name="trait_furious">Furioso</string>
-    <string name="trait_furious_desc">Il danno aumenta fino al +100% in base alla rabbia attuale della squadra</string>
+    <string name="trait_furious_desc">Il danno aumenta fino al 200%% in base alla rabbia attuale della squadra</string>
     <string name="effect_blinded">Accecato</string>
     <string name="effect_blinded_desc">%s di probabilità che le abilità attive falliscano</string>
     <string name="effect_gilded">Dorato</string>
     <string name="effect_gilded_desc">Il danno è ridotto del %s%%, ottieni %s monete quando subisci danni</string>
     <string name="entity_unicorn">Unicorno</string>
     <string name="ability_light_beam">Raggio di Luce</string>
-    <string name="ability_light_beam_desc">Infliggi danni e applica %s al bersaglio per %s turno. Carica: %s turni</string>
+    <string name="ability_light_beam_desc">Infliggi il %s%% del danno e applica %s al bersaglio per %s turno. Carica: %s turni</string>
     <string name="ability_golden_touch">Tocco Dorato</string>
     <string name="ability_golden_touch_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_horn_of_retribution">Corno della Retribuzione</string>
@@ -233,7 +233,7 @@
     <string name="effect_expiration_desc">Muori quando l\'effetto scade</string>
     <string name="entity_ghost">Fantasma</string>
     <string name="ability_spook">Spavento</string>
-    <string name="ability_spook_desc">Infligge danni a tutti i nemici</string>
+    <string name="ability_spook_desc">Infligge il %s%% del danno a tutti i nemici</string>
     <string name="ability_dissolve">Dissolvimento</string>
     <string name="ability_dissolve_desc">Applica %s al bersaglio per %s turno. Carica: %s turni</string>
     <string name="ability_death_mark">Marchio della Morte</string>
@@ -290,7 +290,7 @@
     <string name="tability_dispel_desc">Rimuove tutti gli effetti positivi del bersaglio</string>
     <string name="tability_purify_desc">Rimuove tutti gli effetti negativi dal bersaglio</string>
     <string name="ability_pickpocket">Borseggio</string>
-    <string name="ability_pickpocket_desc">Ruba fino a %s monete alla squadra nemica</string>
+    <string name="ability_pickpocket_desc">Infliggi il %s%% del danno e ruba fino a %s monete alla squadra nemica</string>
     <string name="ability_stash">Nascondiglio</string>
     <string name="entity_thief">Ladro</string>
     <string name="ability_stash_desc">La squadra del bersaglio guadagna %s monete</string>
@@ -322,7 +322,7 @@
     <string name="game_relentless">Implacabile!</string>
     <string name="entity_lead_cube">Cubo di Piombo</string>
     <string name="ability_neutralize">Neutralizza</string>
-    <string name="ability_neutralize_desc">Attacca il bersaglio e azzera le cariche delle sue abilità. Carica: %s turni</string>
+    <string name="ability_neutralize_desc">Attacca il bersaglio per il %s%% del danno e azzera le cariche delle sue abilità. Carica: %s turni</string>
     <string name="ability_density">Densità</string>
     <string name="ability_density_desc">Applica %s %s al bersaglio per %s turni e curalo per %s vita. Carica: %s turni</string>
     <string name="ability_lockdown">Blocco</string>
@@ -339,9 +339,9 @@
     <string name="ability_the_punchline">Battuta Finale</string>
     <string name="ability_the_punchline_desc">Attiva immediatamente tutti gli effetti %s. L\'esplosione infligge il %s%% dei danni dell\'effetto a tutti gli altri nemici</string>
     <string name="ability_juggling_act">Numero di Giocoleria</string>
-    <string name="ability_juggling_act_desc">Lancia %s coltelli a bersagli casuali; se colpiscono lo stesso nemico, infliggi %s danni extra.</string>
+    <string name="ability_juggling_act_desc">Lancia %s coltelli a bersagli casuali, ognuno infliggendo il %s%% del danno. Se colpiscono lo stesso nemico, infliggi %s danni extra.</string>
     <string name="ability_curtain_call">Cala il Sipario</string>
-    <string name="ability_curtain_call_desc">Lancia %s coltelli a bersagli casuali. I nemici colpiti %s o più volte vengono %s per %s turni</string>
+    <string name="ability_curtain_call_desc">Lancia %s coltelli a bersagli casuali, ognuno infliggendo il %s%% del danno. I nemici colpiti %s o più volte vengono %s per %s turni</string>
     <string name="ui_return_to_main_menu">Ritorna al Menu Principale</string>
     <string name="ui_no_progress">I progressi di questa partita verranno persi</string>
     <string name="ui_yes">Si</string>
@@ -353,7 +353,7 @@
     <string name="effect_inspired_desc">Ottieni %s note extra</string>
     <string name="entity_bard">Bardo</string>
     <string name="ability_power_chord">Accordo di Potenza</string>
-    <string name="ability_power_chord_desc">Attacca l\'obiettivo e ottieni %s note</string>
+    <string name="ability_power_chord_desc">Attacca l\'obiettivo per il %s%% del danno e ottieni %s note</string>
     <string name="ability_serenade">Serenata</string>
     <string name="ability_serenade_desc">Rimuovi tutte le note e cura l\'alleato di %s salute per nota. Se le note sono più di %s, rimuovi anche tutti gli effetti negativi</string>
     <string name="ability_magnum_opus_desc">Ottieni %s note e applica %s su te stesso per %s turni</string>
@@ -361,7 +361,7 @@
     <string name="trait_resilience_desc">Aumenta la carica ogni turno in cui il danno ricevuto è inferiore a %s. A %s cariche, il danno dell\'abilità attiva per effetto aumenta di %s, e l\'abilità passiva garantisce anche %s per %s turni. Dopo aver usato l\'abilità, la carica si azzera</string>
     <string name="entity_sage">Saggio</string>
     <string name="ability_affliction">Afflizione</string>
-    <string name="ability_affliction_desc">Lancia un incantesimo sul bersaglio e infliggi %s danni extra per ogni effetto attivo che il nemico possiede</string>
+    <string name="ability_affliction_desc">Lancia un incantesimo sul bersaglio e infliggi il %s%% dei danni, aumentati di %s per ogni effetto attivo che il nemico possiede</string>
     <string name="trait_old">Anziano</string>
     <string name="trait_old_desc">Non può essere danneggiato dalla magia, ma riceve il %s%% di danni extra da attacchi corpo a corpo e a distanza</string>
     <string name="game_old">Anziano!</string>

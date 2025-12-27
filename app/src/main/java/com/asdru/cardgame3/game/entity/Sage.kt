@@ -23,15 +23,15 @@ import kotlinx.coroutines.launch
 class Sage : Entity(
   name = R.string.entity_sage,
   iconRes = R.drawable.entity_sage,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFA85C52),
   damageType = DamageType.Magic,
   traits = listOf(Resilience(), Old()),
-  radarStats = RadarStats(0.4f, 0.4f, 0.7f, 0.6f, 0.6f),
+  radarStats = RadarStats(0.6f, 0.4f, 0.7f, 0.5f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_affliction,
     descriptionRes = R.string.ability_affliction_desc,
-    formatArgs = listOf(EFFECT_EXTRA_DMG),
+    formatArgs = listOf(DMG_MULT, EFFECT_EXTRA_DMG),
   ) { source, target ->
     val effects = target.effectManager.effects.size
     var effectMult = EFFECT_EXTRA_DMG
@@ -42,7 +42,7 @@ class Sage : Entity(
       }
     }
     val damage = source.damage + effects * effectMult
-    source.applyDamage(target,damage)
+    source.applyDamage(target, damage)
   },
   passiveAbility = Ability(
     nameRes = R.string.ability_mend,
@@ -69,6 +69,7 @@ class Sage : Entity(
   private companion object {
     const val MAX_HEALTH = 120f
     const val DAMAGE = 21f
+    const val DMG_MULT = 100f
     const val EFFECT_EXTRA_DMG = 3f
     const val HEAL_PERCENTAGE = 7f
     const val EFFECT_CLEAR_TRESHOLD = 16

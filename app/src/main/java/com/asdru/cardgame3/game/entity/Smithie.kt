@@ -17,7 +17,7 @@ import com.asdru.cardgame3.helper.receiveDamage
 class Smithie : Entity(
   name = R.string.entity_smithie,
   iconRes = R.drawable.entity_smithie,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF107AD7),
   damageType = DamageType.Melee,
   traits = listOf(Juggernaut(), Firewall()),
@@ -27,6 +27,7 @@ class Smithie : Entity(
     descriptionRes = R.string.ability_slam_desc,
     charges = ACTIVE_CHARGE,
     formatArgs = listOf(
+      DMG_MULT,
       Stunned.Spec,
       ACTIVE_DURATION,
       ACTIVE_CHARGE
@@ -65,6 +66,7 @@ class Smithie : Entity(
   private companion object {
     const val MAX_HEALTH = 175f
     const val DAMAGE = 41f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGE = 3
     const val PASSIVE_CHARGE = 2

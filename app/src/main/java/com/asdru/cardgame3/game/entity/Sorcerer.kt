@@ -15,7 +15,7 @@ import com.asdru.cardgame3.helper.increaseMaxHealth
 class Sorcerer : Entity(
   name = R.string.entity_sorcerer,
   iconRes = R.drawable.entity_sorcerer,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFEE90FF),
   damageType = DamageType.Magic,
   radarStats = RadarStats(0.3f, 0.6f, 0.5f, 0.6f, 0.3f),
@@ -23,6 +23,7 @@ class Sorcerer : Entity(
     nameRes = R.string.ability_delirium,
     descriptionRes = R.string.ability_delirium_desc,
     formatArgs = listOf(
+      DMG_MULT,
       Confusion.Spec,
       ACTIVE_DURATION
     )
@@ -63,6 +64,7 @@ class Sorcerer : Entity(
   private companion object {
     const val MAX_HEALTH = 180f
     const val DAMAGE = 13f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_HEALTH_INCREASE = 7
     const val PASSIVE_HEAL_AMOUNT = 20f

@@ -14,7 +14,7 @@ import com.asdru.cardgame3.helper.heal
 class Monk : Entity(
   name = R.string.entity_monk,
   iconRes = R.drawable.entity_monk,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFDA855D),
   damageType = DamageType.Magic,
   traits = listOf(Ironclad()),
@@ -22,6 +22,7 @@ class Monk : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_syphon,
     descriptionRes = R.string.ability_syphon_desc,
+    formatArgs = listOf(DMG_MULT)
   ) { source, target ->
     val healAmount = source.applyDamage(target) / target.team.getAliveEnemies().size
     source.team.getAliveMembers().forEach { it.heal(healAmount, source) }
@@ -52,6 +53,7 @@ class Monk : Entity(
   private companion object {
     const val MAX_HEALTH = 190f
     const val DAMAGE = 14f
+    const val DMG_MULT = 100f
     const val PASSIVE_DURATION = 1
     const val ULTIMATE_DAMAGE_MULTIPLIER = 10f
   }

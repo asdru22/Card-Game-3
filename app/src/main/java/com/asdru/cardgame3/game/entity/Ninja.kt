@@ -14,7 +14,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class Ninja : Entity(
   name = R.string.entity_ninja,
   iconRes = R.drawable.entity_ninja,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFFFFB0C),
   traits = listOf(Sidestep(5f)),
   damageType = DamageType.Melee,
@@ -23,7 +23,8 @@ class Ninja : Entity(
     nameRes = R.string.ability_slash,
     descriptionRes = R.string.ability_slash_desc,
     formatArgs = listOf(
-      ACTIVE_REPEATS
+      ACTIVE_REPEATS,
+      DMG_MULT
     )
   ) { source, target ->
     source.applyDamage(target, repeats = ACTIVE_REPEATS, delayTime = 300)
@@ -52,6 +53,7 @@ class Ninja : Entity(
   private companion object {
     const val MAX_HEALTH = 180f
     const val DAMAGE = 8f
+    const val DMG_MULT = 100f
     const val ACTIVE_REPEATS = 3
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_DURATION = 2

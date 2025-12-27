@@ -15,7 +15,7 @@ import com.asdru.cardgame3.logic.BattleCombatLogic
 class Wizard : Entity(
   name = R.string.entity_wizard,
   iconRes = R.drawable.entity_wizard,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF9C27B0),
   damageType = DamageType.Magic,
   traits = listOf(Overkill()),
@@ -24,6 +24,7 @@ class Wizard : Entity(
     nameRes = R.string.ability_zap,
     descriptionRes = R.string.ability_zap_desc,
     formatArgs = listOf(
+      DMG_MULT,
       ACTIVE_CHARGES
     ),
     charges = ACTIVE_CHARGES,
@@ -66,6 +67,7 @@ class Wizard : Entity(
   private companion object {
     const val MAX_HEALTH = 150f
     const val DAMAGE = 32f
+    const val DMG_MULT = 100f
     const val ACTIVE_CHARGES = 2
     const val PASSIVE_DAMAGE_PERCENTAGE = 50
     const val ULTIMATE_HEAL_AMOUNT = 18f

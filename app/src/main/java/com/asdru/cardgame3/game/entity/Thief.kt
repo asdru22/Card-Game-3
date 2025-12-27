@@ -12,7 +12,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class Thief : Entity(
   name = R.string.entity_thief,
   iconRes = R.drawable.entity_thief,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF009688),
   damageType = DamageType.Melee,
   traits = listOf(Sidestep(7f)),
@@ -20,7 +20,7 @@ class Thief : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_pickpocket,
     descriptionRes = R.string.ability_pickpocket_desc,
-    formatArgs = listOf(ACTIVE_STEAL)
+    formatArgs = listOf(DMG_MULT, ACTIVE_STEAL)
   ) { source, target ->
     source.applyDamage(target)
     val coinsStolen = target.team.shop.removeCoins(ACTIVE_STEAL)
@@ -56,6 +56,7 @@ class Thief : Entity(
   private companion object {
     const val MAX_HEALTH = 160f
     const val DAMAGE = 16f
+    const val DMG_MULT = 100f
     const val ACTIVE_STEAL = 3
     const val PASSIVE_COINS = 8
     const val ULTIMATE_COINS_STOLEN = 12

@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Card Game 3</string>
     <string name="entity_ninja">Ninja</string>
     <string name="ability_slash">Slash</string>
-    <string name="ability_slash_desc">Performs %s rapid strikes</string>
+    <string name="ability_slash_desc">Performs %s rapid strikes, each dealing %s%% damage</string>
     <string name="effect_strength">Strength</string>
     <string name="effect_strength_desc">Melee damage is increased by %s%%</string>
     <string name="ability_warriors_blessing">Warrior\'s Blessing</string>
@@ -15,18 +15,18 @@
     <string name="ability_vanish_desc">Applies %s to themselves for %s turns</string>
     <string name="entity_archer">Archer</string>
     <string name="ability_arrow_rain">Arrow Rain</string>
-    <string name="ability_arrow_rain_desc">%s arrows hit all enemies. Charge: %s turns</string>
+    <string name="ability_arrow_rain_desc">%s arrows hit all enemies for %s%% damage each. Charge: %s turns</string>
     <string name="ability_cover">Cover</string>
     <string name="ability_cover_desc">Form a %s with the target for %s turns</string>
     <string name="ability_rain_fire">Rain Fire</string>
-    <string name="ability_rain_fire_desc">A random enemy is hit by %s arrows and receives %s for %s turns</string>
+    <string name="ability_rain_fire_desc">A random enemy is hit by %s arrows for %s%% damage and receives %s for %s turns</string>
     <string name="effect_pain_link">Pain Link</string>
     <string name="effect_pain_link_desc">%s%% of incoming damage is reflected to the target with which the link was initiated</string>
     <string name="effect_burning">Burning</string>
     <string name="effect_burning_desc">Take %s%% of max health as damage</string>
     <string name="entity_wizard">Wizard</string>
     <string name="ability_zap">Zap</string>
-    <string name="ability_zap_desc">Lightning strikes the target. Charge: %s turns</string>
+    <string name="ability_zap_desc">Lightning strikes the target for %s%% damage. Charge: %s turns</string>
     <string name="ability_override">Override</string>
     <string name="ability_override_desc">Make the target use their active ability against a random enemy, dealing %s%% of their base damage</string>
     <string name="ability_blessing">Blessing</string>
@@ -37,7 +37,7 @@
     <string name="effect_taunt_desc">Active abilities can be used only on the character that applied the taunt</string>
     <string name="entity_paladin">Paladin</string>
     <string name="ability_challenge">Challenge</string>
-    <string name="ability_challenge_desc">Attack the target and apply %s for %s turns</string>
+    <string name="ability_challenge_desc">Attack the target for %s%% damage and apply %s for %s turns</string>
     <string name="ability_guard">Guard</string>
     <string name="ability_guard_desc">Apply %s to the target for %s turns</string>
     <string name="effect_protection">Protection</string>
@@ -54,7 +54,7 @@
     <string name="trait_forsaken">Forsaken</string>
     <string name="trait_forsaken_desc">Cannot be healed by allies</string>
     <string name="ability_bewitched">Bewitched</string>
-    <string name="ability_bewitched_desc">Cast a spell on the enemy, applying %s for %s turns</string>
+    <string name="ability_bewitched_desc">Cast a spell on the enemy, dealing %s%% damage and applying %s for %s turns</string>
     <string name="ability_reckoning">Reckoning</string>
     <string name="ability_reckoning_desc">Heals the target by %s health for each Watched enemy, then deals %s damage to all Watched enemies</string>
     <string name="ability_harvest">Harvest</string>
@@ -63,7 +63,7 @@
     <string name="trait_ironclad">Ironclad</string>
     <string name="trait_ironclad_desc">Ignores all damage below %s</string>
     <string name="ability_syphon">Syphon</string>
-    <string name="ability_syphon_desc">Strike an enemy and distribute the damage dealt as healing across all team members</string>
+    <string name="ability_syphon_desc">Strike an enemy for %s%% damage and distribute the damage dealt as healing across all team members</string>
     <string name="ability_iron_will">Iron Will</string>
     <string name="ability_iron_will_desc">Apply %s to the target for %s turns</string>
     <string name="ability_liberation">Liberation</string>
@@ -78,7 +78,7 @@
     <string name="ui_player_name">Player %s Name</string>
     <string name="entity_robot">Robot</string>
     <string name="ability_shock_attack">Shock Attack</string>
-    <string name="ability_shock_attack_desc">Apply %s to the target for %s turns</string>
+    <string name="ability_shock_attack_desc">Shock the target, dealing %s%% damage and applying %s for %s turns</string>
     <string name="effect_electrified">Electrified</string>
     <string name="effect_electrified_desc">Receive %s damage, then the effect bounces to another teammate</string>
     <string name="effect_overloaded">Overloaded</string>
@@ -97,7 +97,7 @@
     <string name="trait_quick_draw_desc">Deal %s damage to a random enemy at the end of each turn</string>
     <string name="entity_rouge">Rouge</string>
     <string name="ability_bullseye">Bullseye</string>
-    <string name="ability_bullseye_desc">Shoot the target</string>
+    <string name="ability_bullseye_desc">Shoot the target, dealing %s%% damage</string>
     <string name="ability_take_aim">Take Aim</string>
     <string name="ability_take_aim_desc">Apply %s to the target for %s turns</string>
     <string name="ability_barrage">Barrage</string>
@@ -137,7 +137,7 @@
     <string name="ability_copy_my_code_desc">Force the target to perform your active ability on a random enemy</string>
     <string name="ability_refactoring">Refactoring</string>
     <string name="ability_refactoring_desc">Convert all enemy buffs into random debuffs that last %s turns</string>
-    <string name="ability_code_review_desc">Attack the target and apply %s for %s turns</string>
+    <string name="ability_code_review_desc">Attack the target for %s%% damage and apply %s for %s turns</string>
     <string name="weather_eruption">Eruption</string>
     <string name="weather_eruption_desc">Every team gains %s rage at the end of a turn</string>
     <string name="trait_juggernaut">Juggernaut</string>
@@ -145,7 +145,7 @@
     <string name="effect_defiance">Defiance</string>
     <string name="effect_defiance_desc">Survives with 1 health when receiving fatal damage</string>
     <string name="ability_slam">Slam</string>
-    <string name="ability_slam_desc">Damage and apply %s to the target for %s turns. Charge: %s turns</string>
+    <string name="ability_slam_desc">Deal %s%% damage and apply %s to the target for %s turns. Charge: %s turns</string>
     <string name="ability_distribution">Distribution</string>
     <string name="ability_distribution_desc">Target takes %s%% of their max health as damage, but all enemies receive the same damage. Charge: %s turns</string>
     <string name="ability_salvation">Salvation</string>
@@ -170,11 +170,11 @@
     <string name="ability_fortification_desc">Increase the target\'s max health by %s%% and heal them for %s. Charge: %s turns</string>
     <string name="ability_phase_shift">Phase Shift</string>
     <string name="ability_phase_shift_desc">Apply %s to all teammates for %s turn and heal them for %s%% of their max health</string>
-    <string name="ability_delirium_desc">Cast a spell on the target and apply %s for %s turns</string>
+    <string name="ability_delirium_desc">Cast a spell on the target that deals %s%% damage and applies %s for %s turns</string>
     <string name="effect_silenced">Silenced</string>
     <string name="effect_silenced_desc">Cannot use their ultimate ability</string>
     <string name="ability_heckle">Heckle</string>
-    <string name="ability_heckle_desc">Throw a rotten tomato at the target and apply %s for %s turns</string>
+    <string name="ability_heckle_desc">Throw a rotten tomato that deals %s%% damage at the target and apply %s for %s turns</string>
     <string name="ability_chefs_surprise">Chef\'s Surprise</string>
     <string name="ability_chefs_surprise_desc">Apply %s random positive effects to the target that last %s turns</string>
     <string name="effect_well_fed">Well Fed</string>
@@ -187,7 +187,7 @@
     <string name="effect_sick_desc">Incoming healing is reduced by %s%%</string>
     <string name="entity_witch_doctor">Witch Doctor</string>
     <string name="ability_shots">Shots</string>
-    <string name="ability_shots_desc">Deal damage %s times, each shot decreases the enemy\'s team rage by %s</string>
+    <string name="ability_shots_desc">Deal %s%% damage %s times, each shot decreases the enemy\'s team rage by %s</string>
     <string name="ability_vitamins">Vitamins</string>
     <string name="ability_vitamins_desc">Increase team\'s rage by %s and heal the target for %s health</string>
     <string name="ability_the_cure">The Cure</string>
@@ -207,14 +207,14 @@
     <string name="item_hamburger">Hamburger</string>
     <string name="item_hamburger_desc">Apply %s for %s turns</string>
     <string name="trait_furious">Furious</string>
-    <string name="trait_furious_desc">Damage scales up to +100% based on the team\'s current rage</string>
+    <string name="trait_furious_desc">Damage scales up to 200%% based on the team\'s current rage</string>
     <string name="effect_blinded">Blinded</string>
     <string name="effect_blinded_desc">%s chance for active abilities to miss</string>
     <string name="effect_gilded">Gilded</string>
     <string name="effect_gilded_desc">Reduce incoming damage by %s%%, and gain %s coins when damaged</string>
     <string name="entity_unicorn">Unicorn</string>
     <string name="ability_light_beam">Light Beam</string>
-    <string name="ability_light_beam_desc">Deal damage and apply %s to the target for %s turn. Charge: %s turns</string>
+    <string name="ability_light_beam_desc">Deal %s%% damage and apply %s to the target for %s turn. Charge: %s turns</string>
     <string name="ability_golden_touch">Golden Touch</string>
     <string name="ability_golden_touch_desc">Apply %s to the target for %s turns</string>
     <string name="ability_horn_of_retribution">Horn of Retribution</string>
@@ -235,7 +235,7 @@
     <string name="effect_expiration_desc">Die when the effect expires</string>
     <string name="entity_ghost">Ghost</string>
     <string name="ability_spook">Spook</string>
-    <string name="ability_spook_desc">Deal damage to all enemies</string>
+    <string name="ability_spook_desc">Scare all enemies, dealing %s damage</string>
     <string name="ability_dissolve">Dissolve</string>
     <string name="ability_dissolve_desc">Apply %s to the target for %s turn. Charge: %s turns</string>
     <string name="ability_death_mark">Death Mark</string>
@@ -293,7 +293,7 @@
     <string name="tability_dispel_desc">Remove all of the target\'s positive effects</string>
     <string name="tability_purify_desc">Clear all negative effects from the target</string>
     <string name="ability_pickpocket">Pickpocket</string>
-    <string name="ability_pickpocket_desc">Steal up to %s coins from the enemy team</string>
+    <string name="ability_pickpocket_desc">Deal %s%% damage and steal up to %s coins from the enemy team</string>
     <string name="ability_stash">Stash</string>
     <string name="entity_thief">Thief</string>
     <string name="ability_stash_desc">Target\'s team gains %s coins</string>
@@ -325,7 +325,7 @@
     <string name="game_relentless">Relentless!</string>
     <string name="entity_lead_cube">Lead Cube</string>
     <string name="ability_neutralize">Neutralize</string>
-    <string name="ability_neutralize_desc">Attack the target and reset their ability charges. Charge: %s turns</string>
+    <string name="ability_neutralize_desc">Attack the target for %s%% damage and reset their ability charges. Charge: %s turns</string>
     <string name="ability_density">Density</string>
     <string name="ability_density_desc">Apply %s %s to the target for %s turns and heal them for %s health. Charge: %s turns</string>
     <string name="ability_lockdown">Lockdown</string>
@@ -342,9 +342,9 @@
     <string name="ability_the_punchline">The Punchline</string>
     <string name="ability_the_punchline_desc">Trigger all %s effects immediately. The explosion deals %s%% of the effect\'s damage to all other enemies</string>
     <string name="ability_juggling_act">Juggling Act</string>
-    <string name="ability_juggling_act_desc">Throw %s knifes at random targets, if they hit the same enemy, deal %s extra damage.</string>
+    <string name="ability_juggling_act_desc">Throw %s knifes at random targets, dealing %s%% damage. If they hit the same enemy, deal %s extra damage.</string>
     <string name="ability_curtain_call">Curtain Call</string>
-    <string name="ability_curtain_call_desc">Throw %s knives at random targets. Enemies hit %s or more times are %s for %s turns</string>
+    <string name="ability_curtain_call_desc">Throw %s knives at random targets, each dealing %s%% damage. Enemies hit %s or more times are %s for %s turns</string>
     <string name="ui_return_to_main_menu">Return to Main Menu?</string>
     <string name="ui_no_progress">Any progress in this in this battle will be lost!</string>
     <string name="ui_yes">Yes</string>
@@ -356,7 +356,7 @@
     <string name="effect_inspired_desc">Gain %s extra notes</string>
     <string name="entity_bard">Bard</string>
     <string name="ability_power_chord">Power Chord</string>
-    <string name="ability_power_chord_desc">Attack the target and gain %s notes</string>
+    <string name="ability_power_chord_desc">Play a melody that deals %s%% damage and gain %s notes</string>
     <string name="ability_serenade">Serenade</string>
     <string name="ability_serenade_desc">Remove all notes and heal the target %s health per note removed. If the notes are more than %s, also remove all negative effects</string>
     <string name="ability_magnum_opus" translatable="false">Magnum Opus</string>
@@ -365,7 +365,7 @@
     <string name="trait_resilience_desc">Increase charge each turn where damage received is less than %s. At %s charges, the active ability damage per effect is increased by %s, and the passive ability also grants %s for %s turns. After using ability, the charge resets</string>
     <string name="entity_sage">Sage</string>
     <string name="ability_affliction">Affliction</string>
-    <string name="ability_affliction_desc">Cast a spell on the target and deal %s extra damage per active effect the enemy has</string>
+    <string name="ability_affliction_desc">Cast a spell on the target, dealing %s damage, increased by %s for each active effect the enemy has</string>
     <string name="trait_old">Old</string>
     <string name="trait_old_desc">Cannot be harmed by magic damage, but receives %s%% extra damage from melee and ranged damage</string>
     <string name="game_old">Old!</string>

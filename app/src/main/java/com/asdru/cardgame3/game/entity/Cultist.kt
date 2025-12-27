@@ -15,7 +15,7 @@ import com.asdru.cardgame3.helper.heal
 class Cultist : Entity(
   name = R.string.entity_cultist,
   iconRes = R.drawable.entity_cultist,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFE91E63),
   damageType = DamageType.Magic,
   radarStats = RadarStats(0.6f, 0.6f, 0.0f, 0.5f, 0.7f),
@@ -23,7 +23,7 @@ class Cultist : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_bewitched,
     descriptionRes = R.string.ability_bewitched_desc,
-    formatArgs = listOf(Watched.Spec, ACTIVE_REPEATS)
+    formatArgs = listOf(DMG_MULT, Watched.Spec, ACTIVE_REPEATS)
   ) { source, target ->
     source.applyDamage(target, effects = listOf(Watched(ACTIVE_REPEATS)))
   },
@@ -55,6 +55,7 @@ class Cultist : Entity(
   private companion object {
     const val MAX_HEALTH = 200f
     const val DAMAGE = 8f
+    const val DMG_MULT = 100f
     const val ACTIVE_REPEATS = 3
     const val PASSIVE_HEAL = 13f
     const val PASSIVE_DAMAGE = 21f

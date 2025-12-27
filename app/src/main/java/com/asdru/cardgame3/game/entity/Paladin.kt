@@ -15,7 +15,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class Paladin : Entity(
   name = R.string.entity_paladin,
   iconRes = R.drawable.entity_paladin,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF8BC34A),
   damageType = DamageType.Melee,
   traits = listOf(Spite()),
@@ -24,6 +24,7 @@ class Paladin : Entity(
     nameRes = R.string.ability_challenge,
     descriptionRes = R.string.ability_challenge_desc,
     formatArgs = listOf(
+      DMG_MULT,
       Taunt.Spec,
       ACTIVE_DURATION
     )
@@ -59,6 +60,7 @@ class Paladin : Entity(
   private companion object {
     const val MAX_HEALTH = 205f
     const val DAMAGE = 13f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_TAUNT_DURATION = 2

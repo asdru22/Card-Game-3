@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 class Cannoneer : Entity(
   name = R.string.entity_cannoneer,
   iconRes = R.drawable.entity_cannoneer,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF49BE00),
   damageType = DamageType.Ranged,
   radarStats = RadarStats(0.9f, 0.2f, 0.3f, 0.1f, 0.3f),
@@ -22,12 +22,12 @@ class Cannoneer : Entity(
     nameRes = R.string.ability_scattershot,
     descriptionRes = R.string.ability_scattershot_desc,
     formatArgs = listOf(
-      ACTIVE_TARGET_MULTIPLIER,
+      DMG_MULT,
       ACTIVE_OTHER_MULTIPLIER
     )
   ) { source, target ->
     source.applyDamage(
-      target, DAMAGE * ACTIVE_TARGET_MULTIPLIER / 100
+      target
     )
     source.applyDamageToTargets(
       target.team.getOtherAliveMembers(target),
@@ -84,7 +84,7 @@ class Cannoneer : Entity(
   private companion object {
     const val MAX_HEALTH = 100f
     const val DAMAGE = 24f
-    const val ACTIVE_TARGET_MULTIPLIER = 100
+    const val DMG_MULT = 100f
     const val ACTIVE_OTHER_MULTIPLIER = 20
     const val PASSIVE_DURATION = 3
     const val ULTIMATE_TIMES = 6

@@ -17,7 +17,7 @@ import kotlinx.coroutines.delay
 class Jester : Entity(
   name = R.string.entity_jester,
   iconRes = R.drawable.entity_jester,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFBBFC79),
   damageType = DamageType.Ranged,
   radarStats = RadarStats(0.7f, 0.2f, 0.0f, 0.8f, 0.8f),
@@ -67,6 +67,7 @@ class Jester : Entity(
       nameRes = R.string.ability_juggling_act,
       descriptionRes = R.string.ability_juggling_act_desc,
       formatArgs = listOf(
+        DMG_MULT,
         ACTIVE_B_KNIVES,
         ACTIVE_B_EXTRA_DAMAGE
       ),
@@ -97,6 +98,7 @@ class Jester : Entity(
       descriptionRes = R.string.ability_curtain_call_desc,
       formatArgs = listOf(
         ULTIMATE_B_KNIVES,
+        DMG_MULT,
         ULTIMATE_B_HITS_FOR_STUN,
         Stunned.Spec,
         ULTIMATE_B_STUN_DURATION
@@ -125,13 +127,13 @@ class Jester : Entity(
   private companion object {
     const val MAX_HEALTH = 120f
     const val DAMAGE = 13f
-
+    const val DMG_MULT = 100f
     const val ACTIVE_A_DAMAGE_PERCENT = 20f
     const val FUSE_DURATION = 2
     const val ACTIVE_B_KNIVES = 2
     const val ACTIVE_B_EXTRA_DAMAGE = 7f
     const val PASSIVE_HEAL = 11f
-    const val ULTIMATE_A_DAMAGE_PERCENT = 30f
+    const val ULTIMATE_A_DAMAGE_PERCENT = 100f
     const val ULTIMATE_B_KNIVES = 4
     const val ULTIMATE_B_HITS_FOR_STUN = 2
     const val ULTIMATE_B_STUN_DURATION = 2

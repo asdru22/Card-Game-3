@@ -14,7 +14,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class TheMagnet : Entity(
   name = R.string.entity_the_magnet,
   iconRes = R.drawable.entity_the_magnet,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF416C0E),
   damageType = DamageType.Melee,
   traits = listOf(Executioner()),
@@ -23,6 +23,7 @@ class TheMagnet : Entity(
     nameRes = R.string.ability_code_review,
     descriptionRes = R.string.ability_code_review_desc,
     formatArgs = listOf(
+      DMG_MULT,
       Judgement.Spec,
       ACTIVE_DURATION
     )
@@ -50,7 +51,7 @@ class TheMagnet : Entity(
 
     enemies.forEach { enemy ->
       // remove all positive effects and get the count of how many were removed
-      val buffsRemovedCount = enemy.effectManager.clearPositive(enemy,ignoreMultipliers = false)
+      val buffsRemovedCount = enemy.effectManager.clearPositive(enemy, ignoreMultipliers = false)
 
       // for each removed buff, add a random debuff
       repeat(buffsRemovedCount) {
@@ -70,6 +71,7 @@ class TheMagnet : Entity(
   private companion object {
     const val MAX_HEALTH = 190f
     const val DAMAGE = 19f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val ULTIMATE_EFFECT_DURATION = 2
   }

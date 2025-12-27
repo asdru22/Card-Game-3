@@ -15,7 +15,7 @@ import com.asdru.cardgame3.viewModel.EntityViewModel
 class Bard : Entity(
   name = R.string.entity_bard,
   iconRes = R.drawable.entity_bard,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFF708FF),
   damageType = DamageType.Magic,
   traits = listOf(Artist()),
@@ -23,7 +23,7 @@ class Bard : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_power_chord,
     descriptionRes = R.string.ability_power_chord_desc,
-    formatArgs = listOf(ACTIVE_NOTES),
+    formatArgs = listOf(DMG_MULT,ACTIVE_NOTES),
   ) { source, target ->
     source.applyDamage(target)
     val trait = getArtistTrait(source)
@@ -55,6 +55,8 @@ class Bard : Entity(
     }
     const val MAX_HEALTH = 150f
     const val DAMAGE = 8f
+    const val DMG_MULT = 100f
+
     const val ACTIVE_NOTES = 5
     const val HEAL_PER_NOTE = 2f
     const val EFFECT_CLEAR_TRESHOLD = 16

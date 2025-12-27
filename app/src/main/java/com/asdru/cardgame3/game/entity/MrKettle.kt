@@ -14,7 +14,7 @@ import com.asdru.cardgame3.helper.applyDamage
 class MrKettle : Entity(
   name = R.string.entity_mr_kettle,
   iconRes = R.drawable.entity_mr_kettle,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFFFFB700),
   damageType = DamageType.Ranged,
   radarStats = RadarStats(0.4f, 0.5f, 0.8f, 0.8f, 0.4f),
@@ -22,6 +22,7 @@ class MrKettle : Entity(
     nameRes = R.string.ability_heckle,
     descriptionRes = R.string.ability_heckle_desc,
     formatArgs = listOf(
+      DMG_MULT,
       Silenced.Spec,
       ACTIVE_DURATION
     )
@@ -62,6 +63,7 @@ class MrKettle : Entity(
   companion object {
     const val MAX_HEALTH = 180f
     const val DAMAGE = 12f
+    const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_EFFECT_NUMBER = 2
     const val PASSIVE_EFFECT_DURATION = 1

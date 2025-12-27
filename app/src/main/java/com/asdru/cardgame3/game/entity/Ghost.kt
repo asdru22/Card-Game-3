@@ -16,7 +16,7 @@ import com.asdru.cardgame3.helper.applyDamageToTargets
 class Ghost : Entity(
   name = R.string.entity_ghost,
   iconRes = R.drawable.entity_ghost,
-  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
+  initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF82A9B9),
   damageType = DamageType.Magic,
   traits = listOf(Forsaken(), Reaper(), Undead()),
@@ -24,6 +24,7 @@ class Ghost : Entity(
   activeAbility = Ability(
     nameRes = R.string.ability_spook,
     descriptionRes = R.string.ability_spook_desc,
+    formatArgs = listOf(DMG_MULT)
   ) { source, _ ->
     source.applyDamageToTargets(source.team.getTargetableEnemies())
   },
@@ -54,6 +55,7 @@ class Ghost : Entity(
   private companion object {
     const val MAX_HEALTH = 140f
     const val DAMAGE = 9f
+    const val DMG_MULT = 100f
     const val PASSIVE_DURATION = 1
     const val PASSIVE_CHARGES = 2
     const val ULTIMATE_EFFECT_DURATION = 3
