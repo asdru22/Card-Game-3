@@ -94,21 +94,22 @@ suspend fun EntityViewModel.heal(
       actualHeal = it.modifyIncomingHealing(this, actualHeal, source)
     }
 
-    changeHealth(actualHeal)
+    changeHealth(actualHeal, true)
 
     if (actualHeal > 0) popupManager.add(actualHeal, Color.Green)
     if (repeats > 1) delay(delayTime)
   }
 }
 
-fun EntityViewModel.changeHealth(amount: Float) {
+fun EntityViewModel.changeHealth(amount: Float, register: Boolean) {
   val overhealAllowed = effectManager.effects.sumOf { it.overheal().toDouble() }.toFloat()
 
   // First fill health
   val missingHealth = maxHealth - health
   val healToHealth = amount.coerceAtMost(missingHealth)
   health = (health + healToHealth).coerceAtMost(maxHealth)
-  this.team.totalHealing += healToHealth
+
+  if (register) this.team.totalHealing += healToHealth
 
   val remainingHeal = amount - healToHealth
 
@@ -118,6 +119,7 @@ fun EntityViewModel.changeHealth(amount: Float) {
     val spaceForOverheal = overhealAllowed - currentOverheal
     val healToOverheal = remainingHeal.coerceAtMost(spaceForOverheal)
     overhealAmount += healToOverheal
+    if (register) this.team.totalHealing += healToOverheal
   }
 }
 

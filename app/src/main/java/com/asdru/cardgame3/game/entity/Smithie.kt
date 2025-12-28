@@ -20,7 +20,7 @@ class Smithie : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE, damageMultiplier = DMG_MULT),
   color = Color(0xFF107AD7),
   damageType = DamageType.Melee,
-  traits = listOf(Juggernaut(), Firewall()),
+  traits = listOf(Juggernaut(29f), Firewall()),
   radarStats = RadarStats(0.6f, 0.9f, 0.4f, 0.7f, 0.4f),
   activeAbility = Ability(
     nameRes = R.string.ability_slam,
@@ -65,7 +65,7 @@ class Smithie : Entity(
 ) {
   private companion object {
     const val MAX_HEALTH = 175f
-    const val DAMAGE = 41f
+    const val DAMAGE = 54f
     const val DMG_MULT = 100f
     const val ACTIVE_DURATION = 2
     const val ACTIVE_CHARGE = 3

@@ -23,8 +23,8 @@ class Mabel : Entity(
   initialStats = Stats(maxHealth = MAX_HEALTH, damage = DAMAGE),
   color = Color(0xFFF17BF6),
   damageType = DamageType.Melee,
-  traits = listOf(Ugly(), Juggernaut(23f), Retaliate()),
-  radarStats = RadarStats(0.1f, 0.8f, 0.3f, 0.8f, 0.35f),
+  traits = listOf(Ugly(), Juggernaut(32f), Retaliate()),
+  radarStats = RadarStats(0.1f, 0.8f, 0.3f, 0.8f, 0.5f),
   activeAbility = Ability(
     nameRes = R.string.ability_bark,
     descriptionRes = R.string.ability_bark_desc,
@@ -59,14 +59,13 @@ class Mabel : Entity(
     val finalHealth = totalHealth / members.size
     members.forEach {
       it.health = 0.1f
-      it.changeHealth(finalHealth)
-
+      it.changeHealth(finalHealth, false)
       it.addEffect(Protection(ULTIMATE_EFFECT_DURATION), source)
     }
   }
 ) {
   private companion object {
-    const val MAX_HEALTH = 205f
+    const val MAX_HEALTH = 190f
     const val DAMAGE = 0f
     const val ACTIVE_DURATION = 2
     const val PASSIVE_DURATION = 2

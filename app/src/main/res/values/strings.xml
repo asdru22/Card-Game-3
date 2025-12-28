@@ -365,7 +365,7 @@
     <string name="trait_resilience_desc">Increase charge each turn where damage received is less than %s. At %s charges, the active ability damage per effect is increased by %s, and the passive ability also grants %s for %s turns. After using ability, the charge resets</string>
     <string name="entity_sage">Sage</string>
     <string name="ability_affliction">Affliction</string>
-    <string name="ability_affliction_desc">Cast a spell on the target, dealing %s damage, increased by %s for each active effect the enemy has</string>
+    <string name="ability_affliction_desc">Cast a spell on the target, dealing %s%% damage, increased by %s for each active effect the enemy has</string>
     <string name="trait_old">Old</string>
     <string name="trait_old_desc">Cannot be harmed by magic damage, but receives %s%% extra damage from melee and ranged damage</string>
     <string name="game_old">Old!</string>

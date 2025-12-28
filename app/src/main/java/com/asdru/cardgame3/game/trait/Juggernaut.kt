@@ -5,7 +5,7 @@ import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
 class Juggernaut(
-  val maxDamageAllowed: Float = 28f
+  val maxDamageAllowed: Float
 ) : Trait {
   override val nameRes: Int = R.string.trait_juggernaut
   override val descriptionRes: Int = R.string.trait_juggernaut_desc
