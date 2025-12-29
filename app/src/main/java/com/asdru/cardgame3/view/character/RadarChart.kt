@@ -43,6 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.viewModel.EntityViewModel
 import kotlin.math.cos
@@ -129,7 +130,13 @@ fun RadarChart(
   color: Color,
   modifier: Modifier = Modifier
 ) {
-  val labels = listOf("DMG", "SURV", "SUP", "CTRL", "CMPLX")
+  val labels = listOf(
+    R.string.ui_radar_damage,
+    R.string.ui_radar_survivability,
+    R.string.ui_radar_support,
+    R.string.ui_radar_control,
+    R.string.ui_radar_complexity
+  )
   val values = listOf(
     stats.damage,
     stats.survivability,
@@ -235,7 +242,7 @@ fun RadarChart(
 
     labels.forEachIndexed { index, label ->
       Text(
-        text = label,
+        text = stringResource(label),
         color = Color.White,
         fontSize = 10.sp,
         fontWeight = FontWeight.Bold,

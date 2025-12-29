@@ -384,4 +384,9 @@
     <string name="ability_good_girl_desc">Apply %s to the target for %s turns</string>
     <string name="ability_level">Level</string>
     <string name="ability_level_desc">Set the health of all allies to be the avarage of the team. Apply %s to all allies for %s turns</string>
+    <string name="ui_radar_damage">DMG</string>
+    <string name="ui_radar_survivability">SURV</string>
+    <string name="ui_radar_support">SUP</string>
+    <string name="ui_radar_control">CTRL</string>
+    <string name="ui_radar_complexity">CMPL</string>
 </resources>

@@ -4,16 +4,22 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
@@ -22,10 +28,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.game.entity.Entity
 import com.asdru.cardgame3.view.character.CharacterInfoCard
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -35,6 +45,14 @@ import kotlin.reflect.full.createInstance
 private enum class SelectionPhase {
   BANNING,
   PICKING
+}
+
+private enum class SortOption(val labelRes: Int, val selector: (RadarStats) -> Float) {
+  DAMAGE(R.string.ui_radar_damage, { it.damage }),
+  SURVIVABILITY(R.string.ui_radar_survivability, { it.survivability }),
+  SUPPORT(R.string.ui_radar_support, { it.support }),
+  CONTROL(R.string.ui_radar_control, { it.control }),
+  COMPLEXITY(R.string.ui_radar_complexity, { it.complexity })
 }
 
 @Composable
@@ -52,9 +70,21 @@ fun StrategicSelectionScreen(
   var infoCharacter by remember { mutableStateOf<Entity?>(null) }
   var isWeatherMode by remember { mutableStateOf(false) }
   var timerSeconds by remember { mutableIntStateOf(0) }
+  var sortOption by remember { mutableStateOf<SortOption?>(null) }
 
-  val availableCharacters = remember {
+  val allCharacters = remember {
     Entity::class.sealedSubclasses.map { it.createInstance() }
+  }
+
+  // Derived state for sorted characters
+  val displayedCharacters = remember(sortOption) {
+    if (sortOption == null) {
+      allCharacters
+    } else {
+      allCharacters.sortedByDescending { entity ->
+        sortOption!!.selector(entity.radarStats)
+      }
+    }
   }
 
   val p1Color = Color(0xFF4CAF50)
@@ -115,6 +145,32 @@ fun StrategicSelectionScreen(
         }
       )
 
+      // Sorting Row
+      Row(
+        modifier = Modifier
+          .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+      ) {
+        SortOption.entries.forEach { option ->
+          val isSelected = sortOption == option
+          Box(
+            modifier = Modifier
+              .clip(RoundedCornerShape(16.dp))
+              .background(if (isSelected) Color.White else Color.White.copy(alpha = 0.1f))
+              .clickable { 
+                sortOption = if (isSelected) null else option 
+              }
+              .padding(horizontal = 12.dp, vertical = 6.dp)
+          ) {
+            Text(
+              text = stringResource(option.labelRes),
+              color = if (isSelected) Color.Black else Color.White,
+              fontSize = 12.sp,
+              fontWeight = FontWeight.Bold
+            )
+          }
+        }
+      }
 
       LazyVerticalGrid(
         columns = GridCells.Fixed(6),
@@ -123,35 +179,40 @@ fun StrategicSelectionScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.weight(1f)
       ) {
-        items(availableCharacters) { entity ->
+        items(
+          items = displayedCharacters,
+          key = { it::class.qualifiedName ?: it.toString() }
+        ) { entity ->
           val isTakenByP1 = p1Team.any { it::class == entity::class }
           val isTakenByP2 = p2Team.any { it::class == entity::class }
           val isBanned = bannedEntities.any { it::class == entity::class }
           val isSelected = isTakenByP1 || isTakenByP2
 
-          CharacterGridItem(
-            entity = entity,
-            isSelected = isSelected,
-            isBanned = isBanned,
-            activeColor = if (isTakenByP1) p1Color else if (isTakenByP2) p2Color else Color.White,
-            onSelect = {
-              if (phase == SelectionPhase.BANNING) {
-                if (!isBanned) {
-                  bannedEntities.add(entity)
-                  isP1Turn = !isP1Turn
-                  if (bannedEntities.size >= 2) {
-                    phase = SelectionPhase.PICKING
+          Box(modifier = Modifier.animateItem()) {
+              CharacterGridItem(
+                entity = entity,
+                isSelected = isSelected,
+                isBanned = isBanned,
+                activeColor = if (isTakenByP1) p1Color else if (isTakenByP2) p2Color else Color.White,
+                onSelect = {
+                  if (phase == SelectionPhase.BANNING) {
+                    if (!isBanned) {
+                      bannedEntities.add(entity)
+                      isP1Turn = !isP1Turn
+                      if (bannedEntities.size >= 6) {
+                        phase = SelectionPhase.PICKING
+                      }
+                    }
+                  } else {
+                    if (!isSelected && !isBanned && !canStart) {
+                      if (isP1Turn) p1Team.add(entity) else p2Team.add(entity)
+                      isP1Turn = !isP1Turn
+                    }
                   }
-                }
-              } else {
-                if (!isSelected && !isBanned && !canStart) {
-                  if (isP1Turn) p1Team.add(entity) else p2Team.add(entity)
-                  isP1Turn = !isP1Turn
-                }
-              }
-            },
-            onInfo = { infoCharacter = entity }
-          )
+                },
+                onInfo = { infoCharacter = entity }
+              )
+          }
         }
       }
     }
