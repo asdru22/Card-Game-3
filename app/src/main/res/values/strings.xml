@@ -389,4 +389,15 @@
     <string name="ui_radar_support">SUP</string>
     <string name="ui_radar_control">CTRL</string>
     <string name="ui_radar_complexity">CMPL</string>
+    <string name="trait_revving">Revving</string>
+    <string name="trait_revving_desc">Increase charges after using an active ability. At %s charges, damage dealt that was blocked is increased by %s%% and reapplied. Charges reset every time a passive ability is used</string>
+    <string name="trait_clutch_burn">Clutch Burn</string>
+    <string name="trait_clutch_burn_desc">Increase charges after using a passive ability. At %s charges, apply %s to self for %s turns and reset charges</string>
+    <string name="entity_biker">Biker</string>
+    <string name="ability_chain_whip">Chain Whip</string>
+    <string name="ability_chain_whip_desc">Deal damage equal to %s%% of the targets currebnt health. Minimum: %s</string>
+    <string name="ability_pit_stop">Pit Stop</string>
+    <string name="ability_pit_stop_desc">Heal the target for %s health. If used on self, heal for %s instad</string>
+    <string name="ability_collision_course">Collision Course</string>
+    <string name="ability_collision_course_desc">Deal damage to the target with most health equal to %s%% of your current health difference (max %s)</string>
 </resources>

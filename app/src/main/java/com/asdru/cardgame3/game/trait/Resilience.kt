@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.game.trait
 
 import com.asdru.cardgame3.R
+import com.asdru.cardgame3.data.DamageData
 import com.asdru.cardgame3.game.effect.Defiance
 import com.asdru.cardgame3.viewModel.EntityViewModel
 
@@ -41,7 +42,7 @@ class Resilience(
     owner: EntityViewModel,
     source: EntityViewModel?,
     amount: Float,
-    damageData: com.asdru.cardgame3.data.DamageData?
+    damageData: DamageData?
   ) {
     damageReceived += amount
   }

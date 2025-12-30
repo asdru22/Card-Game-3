@@ -28,7 +28,7 @@ interface Trait : Translatable {
 
   suspend fun onUsedActiveAbility(owner: EntityViewModel, target: EntityViewModel) {}
   suspend fun onUsedPassiveAbility(owner: EntityViewModel, target: EntityViewModel) {}
-
+  suspend fun onDamageBlocked(owner: EntityViewModel, target: EntityViewModel, amount: Float) {}
   suspend fun onDidReceiveDamage(
     owner: EntityViewModel,
     source: EntityViewModel?,
@@ -75,6 +75,10 @@ interface Trait : Translatable {
 
   fun getCharge(owner: EntityViewModel): Int {
     return owner.traitCharges[id] ?: 0
+  }
+
+  fun charged(owner: EntityViewModel): Boolean {
+    return getCharge(owner) >= maxCharges
   }
 
   fun resetCharge(owner: EntityViewModel) {

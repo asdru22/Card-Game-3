@@ -18,12 +18,14 @@ suspend fun EntityViewModel.receiveDamage(
     actualDamage = weather.modifyIncomingDamage(this, source, actualDamage)
   }
 
-  effectManager.effects.toList().forEach { effect ->
-    actualDamage = effect.modifyIncomingDamage(this, actualDamage, source)
-  }
+  if (damageData?.ignoreReceiverEffects != true) {
+    effectManager.effects.toList().forEach { effect ->
+      actualDamage = effect.modifyIncomingDamage(this, actualDamage, source)
+    }
 
-  applyTraits { trait ->
-    actualDamage = trait.modifyIncomingDamage(this, source, actualDamage)
+    applyTraits { trait ->
+      actualDamage = trait.modifyIncomingDamage(this, source, actualDamage)
+    }
   }
 
   if (actualDamage > 0) {
@@ -164,9 +166,7 @@ suspend fun EntityViewModel.applyDamage(
 
       effectManager.effects.forEach {
         calculatedDamage = it.modifyOutgoingDamage(this, calculatedDamage, target)
-
       }
-
 
       totalDamage += target.receiveDamage(calculatedDamage, source = this, damageData = damageData)
 
@@ -174,21 +174,22 @@ suspend fun EntityViewModel.applyDamage(
         it.postDamageDealt(this, target, totalDamage)
       }
 
-
       damageData?.run {
         target.team.decreaseRage(enemyRageDecrease)
       }
 
-
       if (repeats > 1) delay(delayTime)
     }
-
-
   } finally {
     if (playAttackAnimation && attackAnimOffset != null) {
       attackAnimOffset = null
       delay(200)
     }
+  }
+  val damageBlocked = (amount - totalDamage).coerceAtLeast(0f)
+
+  if (damageBlocked > 0f) {
+    applyTraits { it.onDamageBlocked(this, target, damageBlocked) }
   }
   this.team.totalDamageDealt += totalDamage
   return totalDamage
