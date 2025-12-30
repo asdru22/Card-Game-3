@@ -1,5 +1,6 @@
 package com.asdru.cardgame3.view.characterSelection
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -176,6 +177,104 @@ fun GameSetupControls(
           }
         }
       }
+    }
+  }
+}
+
+@Composable
+fun StrategicGameSetupControls(
+  onBack: () -> Unit,
+  onStart: () -> Unit,
+  canStart: Boolean,
+  isWeatherMode: Boolean,
+  onToggleWeather: () -> Unit,
+  timerSeconds: Int,
+  onToggleTimer: () -> Unit,
+  buttonText: String = stringResource(R.string.ui_start),
+  sortButtons: @Composable () -> Unit
+) {
+  Row(
+    modifier = Modifier.fillMaxWidth(),
+    verticalAlignment = Alignment.CenterVertically
+  ) {
+    // Left side controls
+    Row(
+      modifier = Modifier.weight(1f),
+      verticalAlignment = Alignment.CenterVertically,
+      horizontalArrangement = Arrangement.End
+    ) {
+      // Back arrow
+      IconButton(onClick = onBack) {
+        Icon(
+          imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+          contentDescription = "Back",
+          tint = Color.White
+        )
+      }
+
+      Spacer(modifier = Modifier.width(4.dp))
+
+      // Weather
+      IconButton(onClick = onToggleWeather) {
+        Icon(
+          painter = painterResource(id = R.drawable.icon_weather_mode),
+          contentDescription = "Toggle Weather",
+          tint = if (isWeatherMode) Color(0xFF2196F3) else Color.Gray,
+          modifier = Modifier.size(24.dp)
+        )
+      }
+
+      // Timer
+      Button(
+        onClick = onToggleTimer,
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+        contentPadding = PaddingValues(0.dp)
+      ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+          val isActive = timerSeconds > 0
+          val color = if (isActive) Color(0xFFFF9800) else Color.Gray
+          Icon(
+            painter = painterResource(id = R.drawable.icon_timer),
+            contentDescription = "Timer",
+            tint = color,
+            modifier = Modifier.size(20.dp)
+          )
+          Text(
+            text = if (isActive) "${timerSeconds}s" else "OFF",
+            color = color,
+            fontSize = 10.sp
+          )
+        }
+      }
+
+      Spacer(modifier = Modifier.width(8.dp))
+    }
+
+    // Center button
+    Button(
+      onClick = onStart,
+      enabled = canStart,
+      colors = ButtonDefaults.buttonColors(
+        containerColor = Color(0xFF4CAF50),
+        disabledContainerColor = Color.DarkGray
+      ),
+      shape = RoundedCornerShape(8.dp),
+      modifier = Modifier.height(48.dp)
+    ) {
+      Text(
+        text = buttonText,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = if (canStart) Color.White else Color.Gray
+      )
+    }
+
+    // Right side - sort buttons
+    Box(
+      modifier = Modifier.weight(1f),
+      contentAlignment = Alignment.CenterStart
+    ) {
+      sortButtons()
     }
   }
 }
