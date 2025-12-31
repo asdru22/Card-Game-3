@@ -267,7 +267,6 @@
     <string name="tability_scratch_desc">Attack the target %s times and deal %s damage</string>
     <string name="ui_turn">%s\'s turn</string>
     <string name="ui_round">Round %s</string>
-    <string name="empty" translatable="false" />
     <string name="ui_htp_tab_totems">Totems</string>
     <string name="ui_htp_totems_desc">Totems are simpler character cards that can be purchased at the shop.\nYour team can only have one totem at a time. If a totem is destroyed, you can buy another one at the shop.\nTotems can perform active and passive abilities, but cannot perform ultimates, have effects or traits.\nTotems cannot be targeted by abilities, but loose health when any team member takes damage. They do not regenerate health if a team member is healed.</string>
     <string name="totem_cake">Cake</string>
@@ -400,4 +399,5 @@
     <string name="ability_pit_stop_desc">Heal the target for %s health. If used on self, heal for %s instad</string>
     <string name="ability_collision_course">Collision Course</string>
     <string name="ability_collision_course_desc">Deal damage to the target with most health equal to %s%% of your current health difference (max %s)</string>
+    <string name="empty" translatable="false" />
 </resources>

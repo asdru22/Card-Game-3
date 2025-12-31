@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Card Game 3</string>
     <string name="entity_ninja">Ninja</string>
     <string name="ability_slash">Corte</string>
     <string name="ability_slash_desc">Realizza %s golpes rápidos, infligiendo %s%% de daño cada uno</string>
@@ -151,7 +150,6 @@
     <string name="ability_distribution_desc">El objetivo recibe %s%% de su salud máxima como daño, pero todos los enemigos reciben el mismo daño. Carga: %s turnos</string>
     <string name="ability_salvation">Salvación</string>
     <string name="ability_salvation_desc">Aplica %s durante %s turnos al aliado con menos salud</string>
-    <string name="entity_smithie" translatable="false">Smithie</string>
     <string name="trait_firewall">Cortafuegos</string>
     <string name="trait_firewall_desc">No puede recibir ningún efecto positivo o negativo</string>
     <string name="game_firewall">¡Cortafuegos!</string>
@@ -268,7 +266,6 @@
     <string name="tability_scratch_desc">Ataca al objetivo %s veces e inflige %s de daño</string>
     <string name="ui_turn">Turno de %s</string>
     <string name="ui_round">Ronda %s</string>
-    <string name="empty" translatable="false" />
     <string name="ui_htp_tab_totems">Tótems</string>
     <string name="ui_htp_totems_desc">Los tótems son cartas de personaje más simples que se pueden comprar en la tienda.\nTu equipo solo puede tener un tótem a la vez. Si un tótem es destruido, puedes comprar otro en la tienda.\nLos tótems pueden realizar habilidades activas y pasivas, pero no pueden realizar definitivas, tener efectos o rasgos.\nLos tótems no pueden ser objetivo de habilidades, pero pierden salud cuando cualquier miembro del equipo recibe daño. No regeneran salud si un miembro del equipo es curado.</string>
     <string name="totem_cake">Pastel</string>
@@ -360,7 +357,6 @@
     <string name="ability_power_chord_desc">Toca una melodía que inflige %s%% de daño y gana %s notas</string>
     <string name="ability_serenade">Serenata</string>
     <string name="ability_serenade_desc">Elimina todas las notas y cura al objetivo %s de salud por nota eliminada. Si las notas son más de %s, también elimina todos los efectos negativos</string>
-    <string name="ability_magnum_opus" translatable="false">Magnum Opus</string>
     <string name="ability_magnum_opus_desc">Gana %s notas y aplica %s a sí mismo durante %s turnos</string>
     <string name="trait_resilience">Resiliencia</string>
     <string name="trait_resilience_desc">Aumenta la carga cada turno donde el daño recibido es menor a %s. A las %s cargas, el daño de la habilidad activa por efecto aumenta en %s, y la habilidad pasiva también otorga %s durante %s turnos. Después de usar la habilidad, la carga se reinicia</string>
