@@ -380,4 +380,20 @@
     <string name="ability_good_girl_desc">Applica %s al bersaglio per %s turni</string>
     <string name="ability_level">Livellamento</string>
     <string name="ability_level_desc">Porta la salute di tutti gli alleati alla media della squadra. Applica %s a tutti gli alleati per %s turni</string>
+    <string name="ui_radar_damage">DAN</string>
+    <string name="ui_radar_survivability">SOP</string>
+    <string name="ui_radar_support">SUP</string>
+    <string name="ui_radar_control">CONT</string>
+    <string name="ui_radar_complexity">COMP</string>
+    <string name="trait_revving">Sgasata</string>
+    <string name="trait_revving_desc">Aumenta le cariche dopo aver usato un\'abilità attiva. A %s cariche, il danno inflitto che era stato bloccato aumenta del %s%% e viene riapplicato. Le cariche si resettano ogni volta che si usa un\'abilità passiva.</string>
+    <string name="trait_clutch_burn">Frizione Bruciata</string>
+    <string name="trait_clutch_burn_desc">Aumenta le cariche dopo aver usato un\'abilità passiva. A %s cariche, applica %s su se stesso per %s turni e azzera le cariche.</string>
+    <string name="entity_biker">Motociclista</string>
+    <string name="ability_chain_whip">Frustata a Catena</string>
+    <string name="ability_chain_whip_desc">Infliggi danni pari al %s%% della salute attuale del bersaglio. Minimo: %s</string>
+    <string name="ability_pit_stop">Pit Stop</string>
+    <string name="ability_pit_stop_desc">Cura il bersaglio di %s salute. Se usato su se stessi, cura invece di %s.</string>
+    <string name="ability_collision_course">Rotta di Collisione</string>
+    <string name="ability_collision_course_desc">Infliggi danni al bersaglio con più salute pari al %s%% della differenza di salute attuale (max %s)</string>
 </resources>
