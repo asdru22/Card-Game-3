@@ -38,7 +38,13 @@ fun CardGameApp(
     }
   }
 
-  fun navigateToSelection(targetScreen: AppScreen, name1: String, name2: String, id1: Long?, id2: Long?) {
+  fun navigateToSelection(
+    targetScreen: AppScreen,
+    name1: String,
+    name2: String,
+    id1: Long?,
+    id2: Long?
+  ) {
     p1Name = name1.ifBlank { "Player 1" }
     p2Name = name2.ifBlank { "Player 2" }
     p1Id = id1
@@ -80,11 +86,11 @@ fun CardGameApp(
     }
 
     AppScreen.LEADERBOARD -> {
-        LeaderboardScreen(
-            playerViewModel = playerViewModel,
-            statisticsViewModel = statisticsViewModel,
-            onBack = { currentScreen = AppScreen.MENU }
-        )
+      LeaderboardScreen(
+        playerViewModel = playerViewModel,
+        statisticsViewModel = statisticsViewModel,
+        onBack = { currentScreen = AppScreen.MENU }
+      )
     }
 
     AppScreen.SELECTION -> {

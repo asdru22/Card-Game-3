@@ -23,8 +23,8 @@ android {
     applicationId = "com.asdru.cardgame3"
     minSdk = 30
     targetSdk = 36
-    versionCode = 5
-    versionName = "0.1.10"
+    versionCode = 6
+    versionName = "0.1.11"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }

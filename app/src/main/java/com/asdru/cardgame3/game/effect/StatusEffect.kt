@@ -109,9 +109,12 @@ sealed class StatusEffect(
       checkPositive: Boolean?
     ): StatusEffect? {
       val subclasses = StatusEffect::class.sealedSubclasses
-      if (subclasses.isEmpty()) return null
 
-      val shuffledClasses = subclasses.shuffled()
+      val shuffledClasses = subclasses
+        .filter { it != Inspired::class }
+        .shuffled()
+
+      if (shuffledClasses.isEmpty()) return null
 
       for (kClass in shuffledClasses) {
 

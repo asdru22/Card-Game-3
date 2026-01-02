@@ -22,8 +22,8 @@ class BattleTimer(
   }
 
   fun start(checkPauseConditions: () -> Boolean) {
-    if (maxTimeSeconds <= 0) return
     timerJob?.cancel()
+    if (maxTimeSeconds <= 0) return
     currentTimeSeconds = maxTimeSeconds
 
     timerJob = scope.launch {
