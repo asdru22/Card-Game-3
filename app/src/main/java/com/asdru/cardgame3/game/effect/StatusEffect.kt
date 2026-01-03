@@ -76,6 +76,10 @@ sealed class StatusEffect(
     return duration <= 0
   }
 
+  override fun toString(): String {
+    return "StatusEffect(nameRes=$nameRes, descriptionRes=$descriptionRes)"
+  }
+
   companion object {
 
     fun getRandom(
