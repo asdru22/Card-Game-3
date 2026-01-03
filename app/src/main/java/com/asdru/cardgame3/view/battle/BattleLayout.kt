@@ -3,6 +3,7 @@ package com.asdru.cardgame3.view.battle
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -47,6 +49,55 @@ fun BattleLayout(
   finalCardWidth: Dp
 ) {
   Box(modifier = Modifier.fillMaxSize()) {
+    
+    // LAYER 1: Center Deck (Background)
+    Box(
+      modifier = Modifier.fillMaxSize(),
+      contentAlignment = Alignment.Center
+    ) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+      ) {
+        Text(
+          text = stringResource(R.string.ui_round, viewModel.roundCount),
+          color = Color.White,
+          fontSize = 18.sp,
+          fontWeight = FontWeight.Bold,
+          modifier = Modifier
+            .padding(bottom = 8.dp)
+            .alpha(0.8f)
+        )
+
+        CenterDeckView(
+          viewModel = viewModel,
+          modifier = Modifier.padding(vertical = 8.dp)
+        )
+      }
+    }
+
+    // LAYER 2: Selection Line (Middle)
+    viewModel.dragState?.let { dragState ->
+      val lineEnd =
+        if (viewModel.hoveredTarget != null && viewModel.cardBounds.contains(viewModel.hoveredTarget)) {
+          viewModel.cardBounds[viewModel.hoveredTarget]!!.center
+        } else {
+          dragState.current
+        }
+      LineCanvas(dragState.start, lineEnd, Color.White)
+    }
+
+    viewModel.totemDragState?.let { totemState ->
+      val lineEnd =
+        if (viewModel.hoveredTarget != null && viewModel.cardBounds.contains(viewModel.hoveredTarget)) {
+          viewModel.cardBounds[viewModel.hoveredTarget]!!.center
+        } else {
+          totemState.current
+        }
+      LineCanvas(totemState.start, lineEnd, Color.White)
+    }
+
+    // LAYER 3: Main Layout (Teams + Rage Bars)
     Row(
       modifier = Modifier.fillMaxSize(),
       horizontalArrangement = Arrangement.SpaceBetween,
@@ -124,28 +175,12 @@ fun BattleLayout(
           }
         }
 
-        // --- CENTER DECK ---
-        Column(
-          horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.Center
-        ) {
-          Text(
-            text = stringResource(R.string.ui_round, viewModel.roundCount),
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+        Box(
             modifier = Modifier
-              .padding(bottom = 8.dp)
-              .alpha(0.8f)
-          )
+                .width(160.dp)
+                .fillMaxHeight()
+        )
 
-          CenterDeckView(
-            viewModel = viewModel,
-            modifier = Modifier.padding(vertical = 8.dp)
-          )
-        }
-
-        // --- RIGHT GROUP (Totem + Shop + Team) ---
         Row(modifier = Modifier.fillMaxHeight()) {
           Box(
             modifier = Modifier
@@ -216,6 +251,18 @@ fun BattleLayout(
       modifier = Modifier
         .align(Alignment.TopCenter)
         .padding(top = 80.dp)
+    )
+  }
+}
+
+@Composable
+fun LineCanvas(dragStart: Offset, dragCurrent: Offset, color: Color) {
+  Canvas(modifier = Modifier.fillMaxSize()) {
+    drawLine(
+      color = color,
+      start = dragStart,
+      end = dragCurrent,
+      strokeWidth = 8f
     )
   }
 }

@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.view.battle
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,6 +41,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.asdru.cardgame3.R
@@ -64,7 +66,7 @@ fun CenterDeckView(
 
   val cardWidth = 80.dp
   val cardHeight = 112.dp
-  val density = androidx.compose.ui.platform.LocalDensity.current
+  val density = LocalDensity.current
   val cardWidthPx = with(density) { cardWidth.toPx() }
 
   LaunchedEffect(revealedCard) {
@@ -170,18 +172,33 @@ fun CenterDeckView(
         }
       } else Modifier
 
+
+      val rotation by animateFloatAsState(
+        targetValue = if (revealedCard != null) 180f else 0f,
+        animationSpec = if (revealedCard != null) tween(500) else snap(),
+        label = "CardFlip"
+      )
+
       Box(
         modifier = Modifier
           .offset { IntOffset(offsetX.roundToInt(), 0) }
           .size(cardWidth, cardHeight)
-          .then(dragModifier),
+          .then(dragModifier)
+          .graphicsLayer {
+            rotationY = rotation
+            cameraDistance = 12f * density.density
+          },
         contentAlignment = Alignment.Center
       ) {
-        if (isFaceUp) {
+        if (rotation <= 90f) {
+          // Back Face
+          CardBack(modifier = Modifier.fillMaxSize())
+        } else {
           // Front Face
           Box(
             modifier = Modifier
               .fillMaxSize()
+              .graphicsLayer { rotationY = 180f }
               .background(
                 brush = Brush.linearGradient(
                   listOf(
@@ -208,9 +225,6 @@ fun CenterDeckView(
               )
             }
           }
-        } else {
-          // Back Face
-          CardBack(modifier = Modifier.fillMaxSize())
         }
       }
     }

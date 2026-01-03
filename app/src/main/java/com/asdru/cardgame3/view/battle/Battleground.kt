@@ -72,26 +72,6 @@ fun BattleScreen(viewModel: BattleViewModel) {
     )
     val finalCardWidth = finalCardHeight * 0.7f
 
-    viewModel.dragState?.let { dragState ->
-      val lineEnd =
-        if (viewModel.hoveredTarget != null && viewModel.cardBounds.contains(viewModel.hoveredTarget)) {
-          viewModel.cardBounds[viewModel.hoveredTarget]!!.center
-        } else {
-          dragState.current
-        }
-      LineCanvas(dragState.start, lineEnd, Color.White)
-    }
-
-    viewModel.totemDragState?.let { totemState ->
-      val lineEnd =
-        if (viewModel.hoveredTarget != null && viewModel.cardBounds.contains(viewModel.hoveredTarget)) {
-          viewModel.cardBounds[viewModel.hoveredTarget]!!.center
-        } else {
-          totemState.current
-        }
-      LineCanvas(totemState.start, lineEnd, Color.White)
-    }
-
     BattleLayout(viewModel, finalCardHeight, finalCardWidth)
 
     ModifiersRow(
@@ -396,14 +376,3 @@ fun WeatherIcon(modifier: Modifier = Modifier, viewModel: BattleViewModel) {
   }
 }
 
-@Composable
-fun LineCanvas(dragStart: Offset, dragCurrent: Offset, color: Color) {
-  Canvas(modifier = Modifier.fillMaxSize()) {
-    drawLine(
-      color = color,
-      start = dragStart,
-      end = dragCurrent,
-      strokeWidth = 8f
-    )
-  }
-}
