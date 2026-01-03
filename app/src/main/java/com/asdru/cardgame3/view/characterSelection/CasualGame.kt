@@ -27,11 +27,12 @@ fun CharacterSelectionScreen(
   player1Name: String,
   player2Name: String,
   onBack: () -> Unit,
-  onStartGame: (List<Entity>, List<Entity>, Boolean, Int) -> Unit
+  onStartGame: (List<Entity>, List<Entity>, Boolean, Boolean, Int) -> Unit
 ) {
   val p1Team = remember { mutableStateListOf<Entity>() }
   val p2Team = remember { mutableStateListOf<Entity>() }
   var isWeatherMode by remember { mutableStateOf(false) }
+  var isMysteryMode by remember { mutableStateOf(true) }
   var timerSeconds by remember { mutableIntStateOf(0) }
 
   val availableCharacters = remember {
@@ -53,10 +54,12 @@ fun CharacterSelectionScreen(
       controls = {
         GameSetupControls(
           onBack = onBack,
-          onStart = { onStartGame(p1Team, p2Team, isWeatherMode, timerSeconds) },
+          onStart = { onStartGame(p1Team, p2Team, isWeatherMode, isMysteryMode, timerSeconds) },
           canStart = canStart,
           isWeatherMode = isWeatherMode,
           onToggleWeather = { isWeatherMode = !isWeatherMode },
+          isMysteryMode = isMysteryMode,
+          onToggleMystery = { isMysteryMode = !isMysteryMode },
           timerSeconds = timerSeconds,
           onToggleTimer = {
             timerSeconds = when (timerSeconds) {

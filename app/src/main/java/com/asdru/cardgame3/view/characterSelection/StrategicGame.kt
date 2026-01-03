@@ -66,7 +66,7 @@ fun StrategicSelectionScreen(
   player1Name: String,
   player2Name: String,
   onBack: () -> Unit,
-  onStartGame: (List<Entity>, List<Entity>, Boolean, Int) -> Unit
+  onStartGame: (List<Entity>, List<Entity>, Boolean, Boolean, Int) -> Unit
 ) {
   val p1Team = remember { mutableStateListOf<Entity>() }
   val p2Team = remember { mutableStateListOf<Entity>() }
@@ -75,6 +75,7 @@ fun StrategicSelectionScreen(
   var isP1Turn by remember { mutableStateOf(Random.nextBoolean()) }
   var infoCharacter by remember { mutableStateOf<Entity?>(null) }
   var isWeatherMode by remember { mutableStateOf(false) }
+  var isMysteryMode by remember { mutableStateOf(true) }
   var timerSeconds by remember { mutableIntStateOf(0) }
   var sortOption by remember { mutableStateOf<SortOption?>(null) }
 
@@ -140,10 +141,12 @@ fun StrategicSelectionScreen(
 
           StrategicGameSetupControls(
             onBack = onBack,
-            onStart = { onStartGame(p1Team, p2Team, isWeatherMode, timerSeconds) },
+            onStart = { onStartGame(p1Team, p2Team, isWeatherMode, isMysteryMode, timerSeconds) },
             canStart = canStart,
             isWeatherMode = isWeatherMode,
             onToggleWeather = { isWeatherMode = !isWeatherMode },
+            isMysteryMode = isMysteryMode,
+            onToggleMystery = { isMysteryMode = !isMysteryMode },
             timerSeconds = timerSeconds,
             onToggleTimer = {
               timerSeconds = when (timerSeconds) {

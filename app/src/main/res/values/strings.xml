@@ -400,4 +400,7 @@
     <string name="ability_collision_course">Collision Course</string>
     <string name="ability_collision_course_desc">Deal damage to the target with most health equal to %s%% of your current health difference (max %s)</string>
     <string name="empty" translatable="false" />
+    <string name="card_desc_rage_10">+10 Rage</string>
+    <string name="card_desc_heal_10">Heal all members by 10</string>
+    <string name="card_desc_cleanse">Remove negative effects from all members</string>
 </resources>

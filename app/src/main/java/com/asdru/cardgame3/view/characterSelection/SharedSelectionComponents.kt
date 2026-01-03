@@ -97,6 +97,8 @@ fun GameSetupControls(
   canStart: Boolean,
   isWeatherMode: Boolean,
   onToggleWeather: () -> Unit,
+  isMysteryMode: Boolean,
+  onToggleMystery: () -> Unit,
   timerSeconds: Int,
   onToggleTimer: () -> Unit,
   buttonText: String = stringResource(R.string.ui_start)
@@ -154,6 +156,21 @@ fun GameSetupControls(
           )
         }
 
+        // Mystery Mode
+        IconButton(onClick = onToggleMystery) {
+          Box(
+            modifier = Modifier.size(24.dp),
+            contentAlignment = Alignment.Center
+          ) {
+            Text(
+              text = "?",
+              color = if (isMysteryMode) Color(0xFF9C27B0) else Color.Gray,
+              fontWeight = FontWeight.Bold,
+              fontSize = 20.sp
+            )
+          }
+        }
+
         // Timer
         Button(
           onClick = onToggleTimer,
@@ -188,6 +205,8 @@ fun StrategicGameSetupControls(
   canStart: Boolean,
   isWeatherMode: Boolean,
   onToggleWeather: () -> Unit,
+  isMysteryMode: Boolean,
+  onToggleMystery: () -> Unit,
   timerSeconds: Int,
   onToggleTimer: () -> Unit,
   buttonText: String = stringResource(R.string.ui_start),
@@ -222,6 +241,21 @@ fun StrategicGameSetupControls(
           tint = if (isWeatherMode) Color(0xFF2196F3) else Color.Gray,
           modifier = Modifier.size(24.dp)
         )
+      }
+
+      // Mystery Mode
+      IconButton(onClick = onToggleMystery) {
+        Box(
+          modifier = Modifier.size(24.dp),
+          contentAlignment = Alignment.Center
+        ) {
+          Text(
+            text = "?",
+            color = if (isMysteryMode) Color(0xFF9C27B0) else Color.Gray,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp
+          )
+        }
       }
 
       // Timer

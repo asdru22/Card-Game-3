@@ -56,6 +56,7 @@ fun CardGameApp(
     p1Entities: List<Entity>,
     p2Entities: List<Entity>,
     weatherEnabled: Boolean,
+    mysteryEnabled: Boolean,
     turnTimer: Int
   ) {
     val p1Team = Team(p1Name, p1Entities, true, p1Id)
@@ -64,7 +65,7 @@ fun CardGameApp(
     val leftTeamVM = TeamViewModel(p1Team)
     val rightTeamVM = TeamViewModel(p2Team)
 
-    battleViewModel.startGame(leftTeamVM, rightTeamVM, weatherEnabled, turnTimer)
+    battleViewModel.startGame(leftTeamVM, rightTeamVM, weatherEnabled, mysteryEnabled, turnTimer)
     currentScreen = AppScreen.GAME
   }
 
@@ -98,8 +99,8 @@ fun CardGameApp(
         player1Name = p1Name,
         player2Name = p2Name,
         onBack = { currentScreen = AppScreen.MENU },
-        onStartGame = { p1, p2, weather, timer ->
-          startGame(p1, p2, weather, timer)
+        onStartGame = { p1, p2, weather, mystery, timer ->
+          startGame(p1, p2, weather, mystery, timer)
         }
       )
     }
@@ -110,8 +111,8 @@ fun CardGameApp(
         player2Name = p2Name,
         onBack = { currentScreen = AppScreen.MENU },
         // Updated to accept timer
-        onStartGame = { p1, p2, weather, timer ->
-          startGame(p1, p2, weather, timer)
+        onStartGame = { p1, p2, weather, mystery, timer ->
+          startGame(p1, p2, weather, mystery, timer)
         }
       )
     }

@@ -1,7 +1,7 @@
 package com.asdru.cardgame3.logic
 
 import androidx.lifecycle.viewModelScope
-import com.asdru.cardgame3.game.centerdeck.CenterDeckRepository
+import com.asdru.cardgame3.game.MysteryDeckRepository
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -19,6 +19,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     newLeftTeam: TeamViewModel,
     newRightTeam: TeamViewModel,
     weatherEnabled: Boolean,
+    mysteryEnabled: Boolean,
     turnTimer: Int
   ) {
     vm.leftTeam = newLeftTeam
@@ -54,6 +55,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     vm.battleTimer.start(checkPauseConditions = {
       vm.isActionPlaying || vm.showInfoDialog || vm.showExitDialog || vm.showWeatherInfo || vm.winner != null
     })
+
+    vm.centerDeckCard = if (mysteryEnabled) MysteryDeckRepository.drawCard() else null
   }
 
   private fun setupEntityCallbacks(entities: List<EntityViewModel>) {
@@ -183,14 +186,14 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     val effectAction: suspend () -> Unit = {
       vm.hasUsedCenterCard = true
 
-      vm.revealedCenterCard = card
+      vm.revealedMysteryCard = card
 
       delay(1500)
 
       card.onApply(targetTeam)
 
-      vm.revealedCenterCard = null
-      vm.centerDeckCard = CenterDeckRepository.drawCard()
+      vm.revealedMysteryCard = null
+      vm.centerDeckCard = MysteryDeckRepository.drawCard()
     }
 
     if (vm.isActionPlaying) {

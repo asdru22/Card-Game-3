@@ -69,7 +69,7 @@ fun BattleLayout(
             .alpha(0.8f)
         )
 
-        CenterDeckView(
+        MysteryDeckView(
           viewModel = viewModel,
           modifier = Modifier.padding(vertical = 8.dp)
         )

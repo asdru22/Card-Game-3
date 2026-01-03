@@ -18,8 +18,8 @@ import com.asdru.cardgame3.data.TotemDragState
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.data.repository.CharacterStatsRepository
 import com.asdru.cardgame3.data.repository.PlayerRepository
-import com.asdru.cardgame3.game.centerdeck.CenterCard
-import com.asdru.cardgame3.game.centerdeck.CenterDeckRepository
+import com.asdru.cardgame3.data.MysteryCard
+import com.asdru.cardgame3.game.MysteryDeckRepository
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.logic.BattleGameLogic
@@ -78,9 +78,9 @@ class BattleViewModel(
   var winner by mutableStateOf<String?>(null)
     internal set
 
-  var centerDeckCard by mutableStateOf<CenterCard?>(CenterDeckRepository.drawCard())
+  var centerDeckCard by mutableStateOf<MysteryCard?>(MysteryDeckRepository.drawCard())
     internal set
-  var revealedCenterCard by mutableStateOf<CenterCard?>(null)
+  var revealedMysteryCard by mutableStateOf<MysteryCard?>(null)
     internal set
   var hasUsedCenterCard by mutableStateOf(false)
     internal set
@@ -119,9 +119,10 @@ class BattleViewModel(
     newLeftTeam: TeamViewModel,
     newRightTeam: TeamViewModel,
     weatherEnabled: Boolean,
+    mysteryEnabled: Boolean,
     turnTimer: Int
   ) {
-    gameLogic.startGame(newLeftTeam, newRightTeam, weatherEnabled, turnTimer)
+    gameLogic.startGame(newLeftTeam, newRightTeam, weatherEnabled, mysteryEnabled, turnTimer)
 
     // Increment pick rates
     viewModelScope.launch {

@@ -16,15 +16,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -42,24 +38,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import com.asdru.cardgame3.R
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 @Composable
-fun CenterDeckView(
+fun MysteryDeckView(
   viewModel: BattleViewModel,
   modifier: Modifier = Modifier
 ) {
   val centerCard = viewModel.centerDeckCard
-  val revealedCard = viewModel.revealedCenterCard
+  val revealedCard = viewModel.revealedMysteryCard
   val hasUsed = viewModel.hasUsedCenterCard
 
-  val showLeftArrow = !viewModel.isLeftTeamTurn && !hasUsed
-  val showRightArrow = viewModel.isLeftTeamTurn && !hasUsed
+  val showLeftArrow = !viewModel.isLeftTeamTurn && !hasUsed && centerCard != null
+  val showRightArrow = viewModel.isLeftTeamTurn && !hasUsed && centerCard != null
 
   var offsetX by remember { mutableFloatStateOf(0f) }
   val scope = rememberCoroutineScope()
@@ -79,6 +74,16 @@ fun CenterDeckView(
     modifier = modifier.size(160.dp),
     contentAlignment = Alignment.Center
   ) {
+
+    if (centerCard == null && revealedCard == null) {
+      Text(
+        text = "VS",
+        color = Color.White.copy(alpha = 0.3f),
+        fontSize = 48.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+      )
+    }
 
     if (centerCard != null) {
       CardBack(
@@ -202,8 +207,8 @@ fun CenterDeckView(
               .background(
                 brush = Brush.linearGradient(
                   listOf(
-                    Color(0xFFFFFFFF),
-                    Color(0xFFE8E8E8)
+                    Color(0xFF000000),
+                    Color(0xFF1E1E1E)
                   )
                 ),
                 shape = RoundedCornerShape(8.dp)
@@ -217,8 +222,8 @@ fun CenterDeckView(
               modifier = Modifier.padding(4.dp)
             ) {
               Text(
-                text = currentCardData.description,
-                color = Color.Black,
+                text = stringResource(currentCardData.descriptionRes),
+                color = Color.White,
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
                 lineHeight = 14.sp
@@ -237,7 +242,7 @@ fun CardBack(modifier: Modifier = Modifier) {
     modifier = modifier
       .background(
         brush = Brush.verticalGradient(
-          colors = listOf(Color(0xFF4A148C), Color(0xFF1F1F1F))
+          colors = listOf(Color(0xFF4A148C), Color(0xFF1E1E1E))
         ),
         shape = RoundedCornerShape(8.dp)
       )
