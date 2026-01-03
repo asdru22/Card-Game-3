@@ -18,6 +18,8 @@ import com.asdru.cardgame3.data.TotemDragState
 import com.asdru.cardgame3.data.UltimateDragState
 import com.asdru.cardgame3.data.repository.CharacterStatsRepository
 import com.asdru.cardgame3.data.repository.PlayerRepository
+import com.asdru.cardgame3.game.centerdeck.CenterCard
+import com.asdru.cardgame3.game.centerdeck.CenterDeckRepository
 import com.asdru.cardgame3.game.item.ShopItem
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.logic.BattleGameLogic
@@ -75,6 +77,14 @@ class BattleViewModel(
     internal set
   var winner by mutableStateOf<String?>(null)
     internal set
+
+  var centerDeckCard by mutableStateOf<CenterCard?>(CenterDeckRepository.drawCard())
+    internal set
+  var revealedCenterCard by mutableStateOf<CenterCard?>(null)
+    internal set
+  var hasUsedCenterCard by mutableStateOf(false)
+    internal set
+  internal var pendingCenterCardEffect: (suspend () -> Unit)? = null
 
   var navigateToSelection by mutableStateOf(false)
     internal set
@@ -153,6 +163,12 @@ class BattleViewModel(
 
   fun onUltimateDragEnd() {
     ultimateInputHandler.onUltimateDragEnd()
+  }
+
+
+  fun onCenterDeckSwipe(isSwipeToRight: Boolean) {
+    val targetTeam = if (isSwipeToRight) rightTeam else leftTeam
+    gameLogic.tryPickCenterCard(targetTeam)
   }
 
   // --- Shop Events (Delegated to ShopInputHandler) ---

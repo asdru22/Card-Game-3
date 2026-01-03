@@ -1,6 +1,7 @@
 package com.asdru.cardgame3.logic
 
 import androidx.lifecycle.viewModelScope
+import com.asdru.cardgame3.game.centerdeck.CenterDeckRepository
 import com.asdru.cardgame3.game.weather.WeatherEvent
 import com.asdru.cardgame3.viewModel.BattleViewModel
 import com.asdru.cardgame3.viewModel.EntityViewModel
@@ -98,6 +99,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         checkWeatherChange()
       } finally {
         vm.isActionPlaying = false
+        vm.pendingCenterCardEffect?.invoke()
+        vm.pendingCenterCardEffect = null
       }
     }
   }
@@ -124,6 +127,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         checkWeatherChange()
       } finally {
         vm.isActionPlaying = false
+        vm.pendingCenterCardEffect?.invoke()
+        vm.pendingCenterCardEffect = null
       }
     }
   }
@@ -162,6 +167,41 @@ class BattleGameLogic(private val vm: BattleViewModel) {
     }
   }
 
+  // --- Center Deck Logic ---
+
+  fun tryPickCenterCard(targetTeam: TeamViewModel) {
+    if (vm.winner != null) return
+
+    val isTargetLeft = targetTeam == vm.leftTeam
+    val isTargetTurn = (isTargetLeft && vm.isLeftTeamTurn) || (!isTargetLeft && !vm.isLeftTeamTurn)
+
+    if (isTargetTurn) return
+    if (vm.hasUsedCenterCard) return
+
+    val card = vm.centerDeckCard ?: return
+
+    val effectAction: suspend () -> Unit = {
+      vm.hasUsedCenterCard = true
+
+      vm.revealedCenterCard = card
+
+      delay(1500)
+
+      card.onApply(targetTeam)
+
+      vm.revealedCenterCard = null
+      vm.centerDeckCard = CenterDeckRepository.drawCard()
+    }
+
+    if (vm.isActionPlaying) {
+      vm.pendingCenterCardEffect = effectAction
+    } else {
+      vm.viewModelScope.launch {
+        effectAction()
+      }
+    }
+  }
+
   // --- Turn Management ---
 
   private suspend fun checkTurnAdvance() {
@@ -183,6 +223,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     vm.actionsTaken.clear()
     vm.totemActionsTaken.clear()
+    vm.hasUsedCenterCard = false
     vm.isLeftTeamTurn = !vm.isLeftTeamTurn
     if (vm.isLeftTeamTurn == vm.startingTeamIsLeft) {
       vm.roundCount++
@@ -277,6 +318,8 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         checkWeatherChange()
       } finally {
         vm.isActionPlaying = false
+        vm.pendingCenterCardEffect?.invoke()
+        vm.pendingCenterCardEffect = null
       }
     }
   }

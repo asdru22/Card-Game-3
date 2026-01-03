@@ -124,7 +124,7 @@ fun BattleLayout(
           }
         }
 
-        // --- VS TEXT & ROUND ---
+        // --- CENTER DECK ---
         Column(
           horizontalAlignment = Alignment.CenterHorizontally,
           verticalArrangement = Arrangement.Center
@@ -139,12 +139,9 @@ fun BattleLayout(
               .alpha(0.8f)
           )
 
-          Text(
-            text = "VS",
-            color = Color.Gray,
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.alpha(0.5f)
+          CenterDeckView(
+            viewModel = viewModel,
+            modifier = Modifier.padding(vertical = 8.dp)
           )
         }
 
