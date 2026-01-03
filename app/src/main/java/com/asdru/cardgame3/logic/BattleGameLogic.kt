@@ -76,27 +76,29 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     vm.viewModelScope.launch {
       vm.isActionPlaying = true
+      try {
+        val sourceLeft = vm.leftTeam.entities.contains(source)
+        val targetLeft = vm.leftTeam.entities.contains(target)
 
-      val sourceLeft = vm.leftTeam.entities.contains(source)
-      val targetLeft = vm.leftTeam.entities.contains(target)
 
+        BattleCombatLogic.executeCardInteraction(
+          source,
+          target,
+          isSameTeam = (sourceLeft == targetLeft)
+        )
 
-      BattleCombatLogic.executeCardInteraction(
-        source,
-        target,
-        isSameTeam = (sourceLeft == targetLeft)
-      )
+        val sourceTeam = if (sourceLeft) vm.leftTeam else vm.rightTeam
+        sourceTeam.increaseRage(10f)
 
-      val sourceTeam = if (sourceLeft) vm.leftTeam else vm.rightTeam
-      sourceTeam.increaseRage(10f)
-
-      checkWinCondition()
-      if (vm.winner == null) {
-        if (!vm.actionsTaken.contains(source)) vm.actionsTaken.add(source)
-        checkTurnAdvance()
+        checkWinCondition()
+        if (vm.winner == null) {
+          if (!vm.actionsTaken.contains(source)) vm.actionsTaken.add(source)
+          checkTurnAdvance()
+        }
+        checkWeatherChange()
+      } finally {
+        vm.isActionPlaying = false
       }
-      checkWeatherChange()
-      vm.isActionPlaying = false
     }
   }
 
@@ -105,21 +107,24 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     vm.viewModelScope.launch {
       vm.isActionPlaying = true
-      team.rage = 0f
-      val enemies = if (team == vm.leftTeam) vm.rightTeam else vm.leftTeam
-      val validTargets = enemies.aliveEntities
+      try {
+        team.rage = 0f
+        val enemies = if (team == vm.leftTeam) vm.rightTeam else vm.leftTeam
+        val validTargets = enemies.aliveEntities
 
-      if (validTargets.isNotEmpty()) {
-        val randomEnemy = validTargets.random()
-        caster.ultimateAbility.effect(caster, randomEnemy)
+        if (validTargets.isNotEmpty()) {
+          val randomEnemy = validTargets.random()
+          caster.ultimateAbility.effect(caster, randomEnemy)
+        }
+
+        if (!vm.actionsTaken.contains(caster)) vm.actionsTaken.add(caster)
+        checkTurnAdvance()
+
+        checkWinCondition()
+        checkWeatherChange()
+      } finally {
+        vm.isActionPlaying = false
       }
-      
-      if (!vm.actionsTaken.contains(caster)) vm.actionsTaken.add(caster)
-      checkTurnAdvance()
-      
-      checkWinCondition()
-      checkWeatherChange()
-      vm.isActionPlaying = false
     }
   }
 
@@ -255,22 +260,24 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     vm.viewModelScope.launch {
       vm.isActionPlaying = true
+      try {
+        val isSourceLeft = vm.leftTeam.totem == source
+        val isTargetLeft = vm.leftTeam.entities.contains(target)
 
-      val isSourceLeft = vm.leftTeam.totem == source
-      val isTargetLeft = vm.leftTeam.entities.contains(target)
+        if (isSourceLeft == isTargetLeft) {
+          source.passiveAbility.effect(source, target)
+        } else {
+          source.activeAbility.effect(source, target)
+        }
 
-      if (isSourceLeft == isTargetLeft) {
-        source.passiveAbility.effect(source, target)
-      } else {
-        source.activeAbility.effect(source, target)
+        if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
+        checkTurnAdvance()
+
+        checkWinCondition()
+        checkWeatherChange()
+      } finally {
+        vm.isActionPlaying = false
       }
-
-      if (!vm.totemActionsTaken.contains(source)) vm.totemActionsTaken.add(source)
-      checkTurnAdvance()
-
-      checkWinCondition()
-      checkWeatherChange()
-      vm.isActionPlaying = false
     }
   }
 
