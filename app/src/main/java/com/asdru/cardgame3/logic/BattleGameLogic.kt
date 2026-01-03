@@ -113,6 +113,10 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         val randomEnemy = validTargets.random()
         caster.ultimateAbility.effect(caster, randomEnemy)
       }
+      
+      if (!vm.actionsTaken.contains(caster)) vm.actionsTaken.add(caster)
+      checkTurnAdvance()
+      
       checkWinCondition()
       checkWeatherChange()
       vm.isActionPlaying = false
