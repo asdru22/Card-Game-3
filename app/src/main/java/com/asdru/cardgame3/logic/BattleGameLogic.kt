@@ -51,7 +51,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
 
     vm.battleTimer.init(turnTimer)
     vm.battleTimer.start(checkPauseConditions = {
-      vm.isActionPlaying || vm.showInfoDialog || vm.showExitDialog || vm.showWeatherInfo
+      vm.isActionPlaying || vm.showInfoDialog || vm.showExitDialog || vm.showWeatherInfo || vm.winner != null
     })
   }
 
@@ -290,6 +290,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
       if (vm.winner == null) {
         val winningTeam = if (!isLeftAlive) vm.rightTeam else vm.leftTeam
         vm.winner = winningTeam.name
+        vm.battleTimer.stop()
         winningTeam.playerId?.let { pid ->
           vm.playerRepository.incrementWins(pid)
         }

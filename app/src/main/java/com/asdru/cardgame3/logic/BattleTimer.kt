@@ -19,6 +19,7 @@ class BattleTimer(
   fun init(seconds: Int) {
     maxTimeSeconds = seconds
     currentTimeSeconds = seconds
+    onTick(seconds)
   }
 
   fun start(checkPauseConditions: () -> Boolean) {
