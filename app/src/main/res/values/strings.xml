@@ -407,4 +407,8 @@
     <string name="mc_desc_remove_effects">Remove all effects from the ally that has the most</string>
     <string name="mc_desc_remove_coins_e">Remove %s coins from the enemy team</string>
     <string name="mc_desc_decrease_rage_e">Decrease opposing team\'s rage by %s</string>
+    <string name="mc_desc_deal_damage_e">Deal %s damage to all enemies</string>
+    <string name="mc_desc_use_active">Make a random character perform their active ability on a random enemy</string>
+    <string name="mc_desc_increase_effect_duration">Increases the duration of all ally effects by %s</string>
+    <string name="mc_desc_increase_effect_duration_e">Increase the duration of all enemies\' effects by %s</string>
 </resources>
