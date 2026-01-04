@@ -405,4 +405,6 @@
     <string name="mc_desc_increase_rage">Team rage is increased by %s</string>
     <string name="mc_desc_heal">Heal all characters for %s health</string>
     <string name="mc_desc_remove_effects">Remove all effects from the ally that has the most</string>
+    <string name="mc_desc_remove_coins_e">Remove %s coins from the enemy team</string>
+    <string name="mc_desc_decrease_rage_e">Decrease opposing team\'s rage by %s</string>
 </resources>

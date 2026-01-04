@@ -396,4 +396,11 @@
     <string name="ability_pit_stop_desc">Cura il bersaglio di %s salute. Se usato su se stessi, cura invece di %s.</string>
     <string name="ability_collision_course">Rotta di Collisione</string>
     <string name="ability_collision_course_desc">Infliggi danni al bersaglio con più salute pari al %s%% della differenza di salute attuale (max %s)</string>
+    <string name="ui_htp_tab_mystery_cards">Carte Misteriose</string>
+    <string name="ui_htp_mystery_cards_desc">Quando è il turno dell\'altro giocatore, in qualsiasi momento puoi pescare una carta dal mazzo delle carte misteriose (solo una volta).\nLe carte misteriose possono essere vantaggiose per te o dannose per il tuo avversario. Ma c\'è una piccola possibilità che possano danneggiare anche te inaspettatamente!</string>
+    <string name="mc_desc_increase_rage">La furia della squadra aumenta di %s</string>
+    <string name="mc_desc_heal">Cura tutti i personaggi di %s salute</string>
+    <string name="mc_desc_remove_effects">Rimuovi tutti gli effetti dall\'alleato che ne ha di più</string>
+    <string name="mc_desc_remove_coins_e">Rimuovi %s monete alla squadra nemica</string>
+    <string name="mc_desc_decrease_rage_e">Diminuisci la furia della squadra avversaria di %s</string>
 </resources>

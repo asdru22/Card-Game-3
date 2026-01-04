@@ -29,16 +29,32 @@ object MysteryDeckRepository {
         val target = team.aliveEntities.maxByOrNull { it.effectManager.effects.size }
         target?.effectManager?.clearAll(target, false)
       }
+    ),
+    MysteryCard(
+      descriptionRes = R.string.mc_desc_remove_coins_e,
+      formatArgs = listOf(10),
+      weight = 15,
+      onApply = { team ->
+        team.enemyTeam.shop.removeCoins(10)
+      }
+    ),
+    MysteryCard(
+      descriptionRes = R.string.mc_desc_decrease_rage_e,
+      formatArgs = listOf(13f),
+      weight = 10,
+      onApply = { team ->
+        team.enemyTeam.decreaseRage(13f)
+      }
     )
   )
 
   fun drawCard(): MysteryCard {
     val totalWeight = cards.sumOf { it.weight }
     var randomValue = Random.Default.nextInt(totalWeight)
-    for (card in cards) {
-      randomValue -= card.weight
+    cards.forEach {
+      randomValue -= it.weight
       if (randomValue < 0) {
-        return card
+        return it
       }
     }
     return cards.last()

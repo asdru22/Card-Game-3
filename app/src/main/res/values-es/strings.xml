@@ -397,4 +397,11 @@
     <string name="ability_pit_stop_desc">Cura al objetivo por %s de salud. Si se usa en sí mismo, cura por %s en su lugar</string>
     <string name="ability_collision_course">Curso de Colisión</string>
     <string name="ability_collision_course_desc">Inflige daño al objetivo con más salud igual al %s%% de la diferencia de salud actual (máx %s)</string>
+    <string name="ui_htp_tab_mystery_cards">Cartas Misteriosas</string>
+    <string name="ui_htp_mystery_cards_desc">Cuando sea el turno del otro jugador, en cualquier momento puedes robar una carta del mazo de cartas misteriosas (solo una vez).\nLas cartas misteriosas pueden ser beneficiosas para ti o perjudiciales para tu oponente. ¡Pero hay una pequeña posibilidad de que te perjudiquen a ti también!</string>
+    <string name="mc_desc_increase_rage">La rabia del equipo aumenta un %s</string>
+    <string name="mc_desc_heal">Cura a todos los personajes por %s de salud</string>
+    <string name="mc_desc_remove_effects">Elimina todos los efectos del aliado que tenga más</string>
+    <string name="mc_desc_remove_coins_e">Elimina %s monedas del equipo enemigo</string>
+    <string name="mc_desc_decrease_rage_e">Disminuye la rabia del equipo contrario en %s</string>
 </resources>
