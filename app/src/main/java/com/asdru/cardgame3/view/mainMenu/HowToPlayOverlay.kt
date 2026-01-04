@@ -43,7 +43,8 @@ enum class HowToPlayTab(@param:StringRes val titleRes: Int) {
   Shop(R.string.ui_htp_tab_shop),
   Weather(R.string.ui_htp_tab_weather),
   TimedMode(R.string.ui_htp_tab_timed),
-  Totems(R.string.ui_htp_tab_totems)
+  Totems(R.string.ui_htp_tab_totems),
+  MysteryCards(R.string.ui_htp_tab_mystery_cards)
 }
 
 @Composable
@@ -139,6 +140,10 @@ fun HowToPlayOverlay(
 
             HowToPlayTab.Totems -> {
               TextSection(R.string.ui_htp_tab_totems, R.string.ui_htp_totems_desc)
+            }
+
+            HowToPlayTab.MysteryCards -> {
+              TextSection(R.string.ui_htp_tab_mystery_cards, R.string.ui_htp_mystery_cards_desc)
             }
           }
         }

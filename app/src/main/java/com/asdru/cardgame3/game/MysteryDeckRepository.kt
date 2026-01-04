@@ -9,24 +9,25 @@ object MysteryDeckRepository {
 
   private val cards = listOf(
     MysteryCard(
-      descriptionRes = R.string.card_desc_rage_10,
+      descriptionRes = R.string.mc_desc_increase_rage,
+      formatArgs = listOf(10f),
       weight = 50,
       onApply = { team -> team.increaseRage(10f) }
     ),
     MysteryCard(
-      descriptionRes = R.string.card_desc_heal_10,
+      descriptionRes = R.string.mc_desc_heal,
+      formatArgs = listOf(5f),
       weight = 30,
       onApply = { team ->
-        team.aliveEntities.forEach { it.heal(10f, it) }
+        team.aliveEntities.forEach { it.heal(5f, it) }
       }
     ),
     MysteryCard(
-      descriptionRes = R.string.card_desc_cleanse,
-      weight = 20,
+      descriptionRes = R.string.mc_desc_remove_effects,
+      weight = 8,
       onApply = { team ->
-        team.aliveEntities.forEach {
-          it.effectManager.clearNegative(it, true)
-        }
+        val target = team.aliveEntities.maxByOrNull { it.effectManager.effects.size }
+        target?.effectManager?.clearAll(target, false)
       }
     )
   )

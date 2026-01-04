@@ -4,6 +4,7 @@ import com.asdru.cardgame3.viewModel.TeamViewModel
 
 data class MysteryCard(
   val descriptionRes: Int,
+  val formatArgs: List<Any> = emptyList(),
   val weight: Int = 1,
   val onApply: suspend (TeamViewModel) -> Unit
 )

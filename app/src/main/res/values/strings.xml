@@ -400,7 +400,9 @@
     <string name="ability_collision_course">Collision Course</string>
     <string name="ability_collision_course_desc">Deal damage to the target with most health equal to %s%% of your current health difference (max %s)</string>
     <string name="empty" translatable="false" />
-    <string name="card_desc_rage_10">+10 Rage</string>
-    <string name="card_desc_heal_10">Heal all members by 10</string>
-    <string name="card_desc_cleanse">Remove negative effects from all members</string>
+    <string name="ui_htp_tab_mystery_cards">Mystery Cards</string>
+    <string name="ui_htp_mystery_cards_desc">When it\'s the other player\'s turn, at any time you can only once draw a card from the mystery card deck.\nMystery cards can be beneficial to you or harmful for your opponent. But there\'s a slight chance they can harm you too!</string>
+    <string name="mc_desc_increase_rage">Team rage is increased by %s</string>
+    <string name="mc_desc_heal">Heal all characters for %s health</string>
+    <string name="mc_desc_remove_effects">Remove all effects from the ally that has the most</string>
 </resources>

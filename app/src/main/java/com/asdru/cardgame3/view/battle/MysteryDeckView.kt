@@ -222,7 +222,7 @@ fun MysteryDeckView(
               modifier = Modifier.padding(4.dp)
             ) {
               Text(
-                text = stringResource(currentCardData.descriptionRes),
+                text = stringResource(currentCardData.descriptionRes, *currentCardData.formatArgs.toTypedArray()),
                 color = Color.White,
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
