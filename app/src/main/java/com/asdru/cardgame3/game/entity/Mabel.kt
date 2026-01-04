@@ -8,11 +8,9 @@ import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
 import com.asdru.cardgame3.game.effect.PainLink
 import com.asdru.cardgame3.game.effect.Protection
-import com.asdru.cardgame3.game.effect.SpikedShield
 import com.asdru.cardgame3.game.effect.Taunt
 import com.asdru.cardgame3.game.trait.Juggernaut
 import com.asdru.cardgame3.game.trait.Retaliate
-import com.asdru.cardgame3.game.trait.Spite
 import com.asdru.cardgame3.game.trait.Ugly
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.changeHealth

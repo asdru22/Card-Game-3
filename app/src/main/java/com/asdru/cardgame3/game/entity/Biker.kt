@@ -6,15 +6,11 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
-import com.asdru.cardgame3.game.effect.Inspired
-import com.asdru.cardgame3.game.trait.Artist
 import com.asdru.cardgame3.game.trait.ClutchBurn
 import com.asdru.cardgame3.game.trait.Forsaken
 import com.asdru.cardgame3.game.trait.Revving
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.heal
-import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlin.collections.maxByOrNull
 
 class Biker : Entity(
   name = R.string.entity_biker,

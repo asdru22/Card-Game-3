@@ -2,7 +2,6 @@ package com.asdru.cardgame3.game.trait
 
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.DamageData
-import com.asdru.cardgame3.game.effect.Defiance
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.viewModel.EntityViewModel
 

@@ -84,7 +84,6 @@ class BattleGameLogic(private val vm: BattleViewModel) {
         val sourceLeft = vm.leftTeam.entities.contains(source)
         val targetLeft = vm.leftTeam.entities.contains(target)
 
-
         BattleCombatLogic.executeCardInteraction(
           source,
           target,
@@ -122,10 +121,7 @@ class BattleGameLogic(private val vm: BattleViewModel) {
           val randomEnemy = validTargets.random()
           caster.ultimateAbility.effect(caster, randomEnemy)
         }
-
-        if (!vm.actionsTaken.contains(caster)) vm.actionsTaken.add(caster)
         checkTurnAdvance()
-
         checkWinCondition()
         checkWeatherChange()
       } finally {

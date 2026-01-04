@@ -4,7 +4,6 @@ import com.asdru.cardgame3.data.DamageData
 import com.asdru.cardgame3.data.Translatable
 import com.asdru.cardgame3.game.effect.StatusEffect
 import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlin.collections.remove
 
 interface Trait : Translatable {
   val id: String get() = this::class.java.simpleName

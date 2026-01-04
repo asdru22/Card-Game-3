@@ -6,19 +6,12 @@ import com.asdru.cardgame3.data.Ability
 import com.asdru.cardgame3.data.DamageType
 import com.asdru.cardgame3.data.RadarStats
 import com.asdru.cardgame3.data.Stats
-import com.asdru.cardgame3.game.effect.Defiance
 import com.asdru.cardgame3.game.effect.Inspired
-import com.asdru.cardgame3.game.trait.Artist
 import com.asdru.cardgame3.game.trait.Old
 import com.asdru.cardgame3.game.trait.Resilience
-import com.asdru.cardgame3.game.trait.Trait
 import com.asdru.cardgame3.helper.applyDamage
 import com.asdru.cardgame3.helper.heal
-import com.asdru.cardgame3.viewModel.EntityViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class Sage : Entity(
   name = R.string.entity_sage,
