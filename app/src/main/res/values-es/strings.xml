@@ -404,4 +404,17 @@
     <string name="mc_desc_remove_effects">Elimina todos los efectos del aliado que tenga más</string>
     <string name="mc_desc_remove_coins_e">Elimina %s monedas del equipo enemigo</string>
     <string name="mc_desc_decrease_rage_e">Disminuye la rabia del equipo contrario en %s</string>
+    <string name="mc_desc_deal_damage_e">Inflige %s de daño a todos los enemigos</string>
+    <string name="mc_desc_use_active">Hace que un personaje aleatorio realice su habilidad activa sobre un enemigo aleatorio</string>
+    <string name="mc_desc_increase_effect_duration">Aumenta la duración de todos los efectos aliados en %s</string>
+    <string name="mc_desc_increase_effect_duration_e">Aumenta la duración de todos los efectos enemigos en %s</string>
+    <string name="trait_vicious">Vicioso</string>
+    <string name="trait_vicious_desc">El daño infligido a enemigos con efectos negativos aumenta un %s%%</string>
+    <string name="entity_marauder">Merodeador</string>
+    <string name="ability_boomerang">Bumerán</string>
+    <string name="ability_boomerang_desc">Ataca al objetivo por %s%% de daño %s veces</string>
+    <string name="ability_scapegoat">Chivo Expiatorio</string>
+    <string name="ability_scapegoat_desc">Fuerza a todos los enemigos a atacar al objetivo aplicando %s a ellos durante %s turnos. Carga: %s turnos</string>
+    <string name="ability_mutiny">Motín</string>
+    <string name="ability_mutiny_desc">Hace que todos los enemigos usen sus habilidades activas entre ellos, ignorando cargas</string>
 </resources>

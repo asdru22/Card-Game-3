@@ -54,7 +54,7 @@ object MysteryDeckRepository {
       formatArgs = listOf(6f),
       weight = 40,
       onApply = { team ->
-        team.enemyTeam.getTargetableEnemies().forEach { it.receiveDamage(6f) }
+        team.getTargetableEnemies().forEach { it.receiveDamage(6f) }
       }
     ),
     MysteryCard(

@@ -403,4 +403,17 @@
     <string name="mc_desc_remove_effects">Rimuovi tutti gli effetti dall\'alleato che ne ha di più</string>
     <string name="mc_desc_remove_coins_e">Rimuovi %s monete alla squadra nemica</string>
     <string name="mc_desc_decrease_rage_e">Diminuisci la furia della squadra avversaria di %s</string>
+    <string name="mc_desc_deal_damage_e">Infligge %s danni a tutti i nemici</string>
+    <string name="mc_desc_use_active">Fa eseguire a un personaggio casuale la propria abilità attiva su un nemico casuale</string>
+    <string name="mc_desc_increase_effect_duration">Aumenta la durata di tutti gli effetti alleati di %s</string>
+    <string name="mc_desc_increase_effect_duration_e">Aumenta la durata di tutti gli effetti dei nemici di %s</string>
+    <string name="trait_vicious">Vizioso</string>
+    <string name="trait_vicious_desc">Il danno inflitto ai nemici con effetti negativi aumenta del %s%%</string>
+    <string name="entity_marauder">Predone</string>
+    <string name="ability_boomerang">Boomerang</string>
+    <string name="ability_boomerang_desc">Attacca il bersaglio per il %s%% del danno %s volte</string>
+    <string name="ability_scapegoat">Capro Espiatorio</string>
+    <string name="ability_scapegoat_desc">Costringe tutti i nemici ad attaccare il bersaglio applicando loro %s per %s turni. Carica: %s turni</string>
+    <string name="ability_mutiny">Ammutinamento</string>
+    <string name="ability_mutiny_desc">Fa usare a tutti i nemici le loro abilità attive l\'uno contro l\'altro, ignorando le cariche</string>
 </resources>

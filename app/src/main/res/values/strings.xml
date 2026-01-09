@@ -411,4 +411,13 @@
     <string name="mc_desc_use_active">Make a random character perform their active ability on a random enemy</string>
     <string name="mc_desc_increase_effect_duration">Increases the duration of all ally effects by %s</string>
     <string name="mc_desc_increase_effect_duration_e">Increase the duration of all enemies\' effects by %s</string>
+    <string name="trait_vicious">Vicious</string>
+    <string name="trait_vicious_desc">Damage dealt to enemies with negative effects is increased by %s%%</string>
+    <string name="entity_marauder">Marauder</string>
+    <string name="ability_boomerang">Boomerang</string>
+    <string name="ability_boomerang_desc">Attack the target for %s%% damage %s times</string>
+    <string name="ability_scapegoat">Scapegoat</string>
+    <string name="ability_scapegoat_desc">Force all enemies to attack the target by applying %s to them for %s turns. Charge: %s turns</string>
+    <string name="ability_mutiny">Mutiny</string>
+    <string name="ability_mutiny_desc">Make all enemies use their active abilities on eachother, ignoring charges</string>
 </resources>
