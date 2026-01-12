@@ -21,7 +21,7 @@ android {
 
   defaultConfig {
     applicationId = "com.asdru.cardgame3"
-    minSdk = 30
+    minSdk = 29
     targetSdk = 36
     versionCode = 9
     versionName = "1.0.1"
@@ -82,4 +82,5 @@ dependencies {
   implementation(libs.androidx.room.runtime)
   implementation(libs.androidx.room.ktx)
   ksp(libs.androidx.room.compiler)
+  implementation("com.google.zxing:core:3.5.2")
 }

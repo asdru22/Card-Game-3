@@ -12,6 +12,7 @@ composeBom = "2025.12.00"
 material = "1.13.0"
 materialIconsCore = "1.7.8"
 room = "2.6.1"
+androidCore = "3.3.0"
 
 [libraries]
 androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "materialIconsCore" }
@@ -35,6 +36,7 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler",  version.ref = "room" }
+android-core = { group = "com.google.zxing", name = "android-core", version.ref = "androidCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

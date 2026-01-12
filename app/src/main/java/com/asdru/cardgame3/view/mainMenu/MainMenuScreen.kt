@@ -2,6 +2,8 @@ package com.asdru.cardgame3.view.mainMenu
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,8 +24,12 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -41,16 +47,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.core.net.toUri
 import com.asdru.cardgame3.R
 import com.asdru.cardgame3.data.entity.Player
 import com.asdru.cardgame3.viewModel.PlayerViewModel
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.common.BitMatrix
 
 @Composable
 fun MainMenuScreen(
@@ -461,19 +473,17 @@ fun SocialLinks(modifier: Modifier = Modifier, context: Context) {
 
 @Composable
 fun ShareButton(modifier: Modifier = Modifier, context: Context) {
-  val gameUrl = "https://github.com/asdru22/Card-Game-3/releases"
+  // 1. State to control the Dialog visibility
+  var showDialog by remember { mutableStateOf(false) }
+
+  // Resources
+  val gameUrl = "https://play.google.com/store/apps/details?id=com.asdru.cardgame3&pli=1"
   val shareText = stringResource(R.string.ui_share_game, gameUrl)
   val shareTitle = stringResource(R.string.ui_share_via)
 
+  // 2. The Trigger Button (This remains on your main screen)
   IconButton(
-    onClick = {
-      val sendIntent = Intent(Intent.ACTION_SEND).apply {
-        putExtra(Intent.EXTRA_TEXT, shareText)
-        type = "text/plain"
-      }
-      val shareIntent = Intent.createChooser(sendIntent, shareTitle)
-      context.startActivity(shareIntent)
-    },
+    onClick = { showDialog = true },
     modifier = modifier.size(48.dp)
   ) {
     Icon(
@@ -482,5 +492,112 @@ fun ShareButton(modifier: Modifier = Modifier, context: Context) {
       tint = MaterialTheme.colorScheme.onBackground,
       modifier = Modifier.fillMaxSize()
     )
+  }
+
+  // 3. The Dialog Overlay
+  if (showDialog) {
+    Dialog(onDismissRequest = { showDialog = false }) {
+      Card(
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+      ) {
+        Column(
+          modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+          // Header Title
+          Text(
+            text = "Share this game",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurface
+          )
+
+          // --- ROW: Text Field + Share Button ---
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+          ) {
+            OutlinedTextField(
+              value = shareText,
+              onValueChange = {}, // Read-only
+              readOnly = true,
+              modifier = Modifier.weight(1f),
+              textStyle = MaterialTheme.typography.bodySmall,
+              maxLines = 2
+            )
+
+            // The actual System Share Trigger
+            FilledTonalIconButton(
+              onClick = {
+                val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                  putExtra(Intent.EXTRA_TEXT, shareText)
+                  type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, shareTitle)
+                context.startActivity(shareIntent)
+              }
+            ) {
+              Icon(
+                imageVector = Icons.Default.Share,
+                contentDescription = "Share via system"
+              )
+            }
+          }
+
+          HorizontalDivider()
+
+          // --- QR CODE Section ---
+          Text(
+            text = "Scan to download",
+            style = MaterialTheme.typography.labelMedium
+          )
+
+          // Generate and display the QR Code
+          val qrBitmap = remember(gameUrl) { generateQrBitmap(gameUrl) }
+
+          if (qrBitmap != null) {
+            Image(
+              painter = BitmapPainter(qrBitmap.asImageBitmap()),
+              contentDescription = "QR Code for Game URL",
+              modifier = Modifier.size(200.dp)
+            )
+          }
+        }
+      }
+    }
+  }
+}
+
+private fun generateQrBitmap(content: String): Bitmap? {
+  return try {
+    val width = 512
+    val height = 512
+    val bitMatrix: BitMatrix = MultiFormatWriter().encode(
+      content,
+      BarcodeFormat.QR_CODE,
+      width,
+      height
+    )
+
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+    for (x in 0 until width) {
+      for (y in 0 until height) {
+        // Set pixel color: Black for data, White for background
+        bitmap.setPixel(
+          x,
+          y,
+          if (bitMatrix[x, y]) 0xFF000000.toInt() else 0xFFFFFFFF.toInt()
+        )
+      }
+    }
+    bitmap
+  } catch (e: Exception) {
+    e.printStackTrace()
+    null
   }
 }
